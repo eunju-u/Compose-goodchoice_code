@@ -1,9 +1,9 @@
-package com.example.goodchoice
+package com.example.goodchoice.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
+import com.example.goodchoice.ui.theme.TestTheme
 
 class MainActivity : ComponentActivity() {
     companion object {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            TestTheme {
                 MainContent()
             }
         }
