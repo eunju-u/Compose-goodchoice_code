@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">goodchoice</string>
+    <string name="app_name">My Application</string>
+    <string name="navi_home">홈</string>
+    <string name="navi_search">검색</string>
+    <string name="navi_like">찜</string>
+    <string name="navi_my_Info">내 정보</string>
 </resources>
