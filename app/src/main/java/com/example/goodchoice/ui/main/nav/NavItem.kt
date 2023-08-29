@@ -27,8 +27,8 @@ sealed class NavItem(
 
     object Like : NavItem(
         title = R.string.navi_like,
-        icon = R.drawable.ic_nav_search,
-        route = Const.SEARCH,
+        icon = R.drawable.ic_nav_like,
+        route = Const.LIKE,
         idx = 3
     )
 

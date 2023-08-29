@@ -4,7 +4,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.ui.main.nav.NavItem
+ import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -14,7 +14,7 @@ fun rememberMainState(
     navController: NavHostController = rememberNavController(),
     bottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden),
     bottomMenus: MutableState<List<NavItem>> = remember {
-        mutableStateOf(listOf(NavItem.Home, NavItem.CHAT,  NavItem.MyPage))
+        mutableStateOf(listOf(NavItem.Home, NavItem.Search,  NavItem.Like, NavItem.MyInfo))
     },
     scaffoldState: ScaffoldState = rememberScaffoldState()
 ): MainState = remember {

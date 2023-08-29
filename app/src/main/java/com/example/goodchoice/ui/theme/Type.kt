@@ -120,7 +120,7 @@ val Typography = Typography(
     labelSmall = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
+        fontSize = 10.sp,
         lineHeight = 20.sp
     )
 )

@@ -5,4 +5,8 @@ object Const {
     const val SEARCH = "Search"
     const val LIKE = "Like"
     const val MY_INFO = "MyInfo"
+
+    // 나라 타입
+    const val KOREA = "Korea"
+    const val OVERSEA = "Oversea"
 }
