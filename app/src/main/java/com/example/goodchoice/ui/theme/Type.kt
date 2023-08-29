@@ -18,15 +18,14 @@ val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 21.sp,
+        fontSize = 35.sp,
         lineHeight = 20.sp
-
     ),
 
     displayMedium = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
+        fontSize = 21.sp,
         lineHeight = 20.sp
 
     ),
@@ -34,7 +33,7 @@ val Typography = Typography(
     displaySmall = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
+        fontSize = 16.sp,
         lineHeight = 20.sp
 
     ),
@@ -78,7 +77,7 @@ val Typography = Typography(
     titleSmall = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
+        fontSize = 9.sp,
         lineHeight = 20.sp
     ),
 

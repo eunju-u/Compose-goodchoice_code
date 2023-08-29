@@ -1,11 +1,13 @@
 package com.example.goodchoice.ui.theme
 
 import android.app.Activity
+import android.content.res.Configuration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -38,6 +40,9 @@ fun TestTheme(
             ).isAppearanceLightStatusBars = !darkTheme
         }
     }
+
+//    val configuration = LocalConfiguration.current
+//    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     ProvideColors(colorScheme) {
         MaterialTheme(

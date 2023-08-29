@@ -1,9 +1,7 @@
 package com.example.goodchoice.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -19,10 +17,11 @@ import com.example.goodchoice.ui.theme.CategoryItemHeight
 fun CategoryItemWidget(item: CategoryItem) {
     Column(
         modifier = Modifier.height(CategoryItemHeight),
-        verticalArrangement = Arrangement.spacedBy(15.dp),
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
+            modifier = Modifier.size(40.dp).padding(bottom = 1.dp),
             painter = painterResource(id = item.icon),
             contentDescription = item.name,
             alpha = LocalContentAlpha.current
