@@ -1,7 +1,6 @@
 package com.example.goodchoice.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,12 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.data.StayItem
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.utils.StringUtil
 
 @Composable
 fun HotelItemWidget(stayItem: StayItem) {
@@ -34,8 +35,9 @@ fun HotelItemWidget(stayItem: StayItem) {
         val label = stayItem.label ?: ""
         val name = stayItem.name ?: ""
         val discountPer = stayItem.discountPer ?: 0
-        val defaultPrice = stayItem.defaultPrice ?: 0
-        val discountPrice = stayItem.discountPrice ?: 0
+        val discountPrice = stayItem.defaultPrice ?: 0
+        val convertDefaultPrice = StringUtil.convertCommaString(stayItem.defaultPrice ?: 0)
+        val convertDiscountPrice = StringUtil.convertCommaString(stayItem.discountPrice ?: 0)
         val painter = rememberAsyncImagePainter(
             model = stayItem.imageUrl,
             error = painterResource(id = R.drawable.shape_yellow)
@@ -71,29 +73,35 @@ fun HotelItemWidget(stayItem: StayItem) {
                 painter = painterResource(id = R.drawable.ic_star),
                 contentDescription = "별점"
             )
+            Text(text = "${stayItem.star ?: 0}")
             Text(text = "(${stayItem.commentCount ?: 0})")
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = stayItem.location ?: "", maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                text = stayItem.location ?: "",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                color = Theme.colorScheme.gray
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         Row(modifier = Modifier.padding(padding), verticalAlignment = Alignment.CenterVertically) {
             if (discountPer > 0) {
-                Text(text = "${discountPer}%")
+                Text(text = "${discountPer}%", color = Theme.colorScheme.red)
                 Spacer(modifier = Modifier.width(10.dp))
             }
             if (discountPrice > 0) {
-                //줄
-                Text(text = (defaultPrice).toString())
+                Text(
+                    text = "$convertDefaultPrice ",
+                    color = Theme.colorScheme.gray,
+                    textDecoration = TextDecoration.LineThrough
+                )
             } else {
-                Text(text = (defaultPrice).toString())
+                Text(text = "$convertDefaultPrice ")
             }
         }
         if (discountPrice > 0) {
-            Text(modifier = Modifier.padding(padding), text = (discountPrice).toString())
+            Text(modifier = Modifier.padding(padding), text = convertDiscountPrice)
         }
         Spacer(modifier = Modifier.height(15.dp))
     }

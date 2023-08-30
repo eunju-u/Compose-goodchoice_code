@@ -11,7 +11,7 @@ class MainViewModel : ViewModel() {
     val homeData = MutableStateFlow(HomeData())
 
     fun requestHomeData() {
-        homeData.value =  HomeData(
+        homeData.value = HomeData(
             categoryList = listOf(
                 CategoryData(
                     countryType = Const.KOREA,
@@ -46,7 +46,8 @@ class MainViewModel : ViewModel() {
             ),
             stayList = listOf(
                 StayData(
-                    "오늘 체크인 호텔 특가",
+                    type = Const.TODAY_HOTEL,
+                    title = "오늘 체크인 호텔 특가",
                     listOf(
                         StayItem(
                             label = "호텔.리조트",
@@ -88,9 +89,11 @@ class MainViewModel : ViewModel() {
                             defaultPrice = 250000,
                             discountPrice = 99000
                         ),
-                    )
+                    ),
+                    isMore = true
                 ),
                 StayData(
+                    type = Const.HOT_HOTEL,
                     "오늘 HOT 인기 펜션",
                     listOf(
                         StayItem(
@@ -123,7 +126,8 @@ class MainViewModel : ViewModel() {
                             defaultPrice = 179000,
                             discountPrice = 159847
                         ),
-                    )
+                    ),
+                    isMore = true
                 )
             )
         )

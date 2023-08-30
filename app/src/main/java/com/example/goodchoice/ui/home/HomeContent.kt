@@ -121,6 +121,10 @@ fun HomeContent(modifier: Modifier, homeData: HomeData) {
                 )
             }
         }
+
+        item {
+            Spacer(modifier = Modifier.height(30.dp))
+        }
     }
 }
 
@@ -164,8 +168,9 @@ fun previewHomeContent() {
             ),
             stayList = listOf(
                 StayData(
-                    "오늘 체크인 호텔 특가",
-                    listOf(
+                    type = Const.TODAY_HOTEL,
+                    title = "오늘 체크인 호텔 특가",
+                    stayList = listOf(
                         StayItem(
                             label = "호텔.리조트",
                             name = "양양 더 앤 리조트 호텔&스파",
@@ -186,11 +191,13 @@ fun previewHomeContent() {
                             defaultPrice = 59000,
                             discountPrice = 55460
                         )
-                    )
+                    ),
+                    isMore = true
                 ),
                 StayData(
-                    "오늘 HOT 인기 펜션",
-                    listOf(
+                    type = Const.HOT_HOTEL,
+                    title = "오늘 HOT 인기 펜션",
+                    stayList = listOf(
                         StayItem(
                             label = "호텔.리조트",
                             name = "양양 더 앤 리조트 호텔&스파",
@@ -211,7 +218,8 @@ fun previewHomeContent() {
                             defaultPrice = 59000,
                             discountPrice = 55460
                         )
-                    )
+                    ),
+                    isMore = true
                 )
             )
         )

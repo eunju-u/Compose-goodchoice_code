@@ -5,4 +5,9 @@
     <string name="navi_around">주변</string>
     <string name="navi_like">찜</string>
     <string name="navi_my_Info">내 정보</string>
+
+
+    <string name="str_today_hotel_more">호텔 특가 더보기</string>
+    <string name="str_hot_hotel_more">인기 호텔 특가</string>
+    <string name="str_more">더보기</string>
 </resources>
