@@ -5,13 +5,15 @@ import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.data.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import java.util.*
 
 class MainViewModel : ViewModel() {
 
     val homeData = MutableStateFlow(HomeData())
+    val allCategoryList = LinkedList<CategoryItem>()
 
     fun requestHomeData() {
-        homeData.value = HomeData(
+        val testHomeData = HomeData(
             categoryList = listOf(
                 CategoryData(
                     countryType = Const.KOREA,
@@ -131,5 +133,12 @@ class MainViewModel : ViewModel() {
                 )
             )
         )
+        homeData.value = testHomeData
+        allCategoryList.clear()
+        testHomeData.categoryList?.map {
+            it.categoryList?.map { item ->
+                allCategoryList.add(item)
+            }
+        }
     }
 }

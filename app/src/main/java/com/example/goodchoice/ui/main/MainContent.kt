@@ -136,6 +136,7 @@ fun MainContent(viewModel: MainViewModel) {
                 modifier = Modifier.padding(paddingValues),
                 navController = mainState.navController,
                 startDestination = NavItem.Home.route,
+                viewModel = viewModel,
                 homeData = homeData.value
             )
         }

@@ -23,7 +23,7 @@ fun HotelItemWidget(stayItem: StayItem) {
     Column(
         modifier = Modifier
             .width(200.dp)
-            .height(300.dp)
+            .height(IntrinsicSize.Min)
             .border(
                 width = 1.dp,
                 color = Theme.colorScheme.pureGray,

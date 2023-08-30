@@ -11,6 +11,7 @@ import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.data.*
 import com.example.goodchoice.ui.home.HomeContent
+import com.example.goodchoice.ui.main.MainViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
@@ -18,6 +19,7 @@ fun NavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: String,
+    viewModel: MainViewModel,
     homeData:HomeData,
 ) {
     NavHost(
@@ -26,7 +28,7 @@ fun NavGraph(
         startDestination = startDestination,
     ) {
         composable(NavItem.Home.route) {
-            HomeContent(modifier, homeData)
+            HomeContent(modifier, homeData, viewModel)
         }
         composable(NavItem.Search.route) {
         }
