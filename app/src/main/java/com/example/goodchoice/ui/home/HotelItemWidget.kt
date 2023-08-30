@@ -25,22 +25,25 @@ fun HotelItemWidget(stayItem: StayItem) {
             .width(200.dp)
             .height(IntrinsicSize.Min)
             .border(
-                width = 1.dp,
-                color = Theme.colorScheme.pureGray,
-                shape = RoundedCornerShape(10.dp)
-            ),
-        verticalArrangement = Arrangement.Center
+                width = 1.dp, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(10.dp)
+            ), verticalArrangement = Arrangement.Center
     ) {
         val padding = PaddingValues(start = 20.dp, end = 20.dp)
         val label = stayItem.label ?: ""
         val name = stayItem.name ?: ""
         val discountPer = stayItem.discountPer ?: 0
-        val discountPrice = stayItem.defaultPrice ?: 0
-        val convertDefaultPrice = StringUtil.convertCommaString(stayItem.defaultPrice ?: 0)
-        val convertDiscountPrice = StringUtil.convertCommaString(stayItem.discountPrice ?: 0)
+        val defaultPrice = stayItem.defaultPrice ?: ""
+        val discountPrice = stayItem.discountPrice ?: "" //다른 날짜 확인 of 120000
+        val isDefaultPriceNumber = defaultPrice.toIntOrNull() != null // 숫자로 변경 가능
+        val isDiscountPriceNumber = discountPrice.toIntOrNull() != null // 숫자로 변경 가능
+
+        val convertDefaultPrice =
+            if (isDefaultPriceNumber) StringUtil.convertCommaString(defaultPrice) else defaultPrice
+        val convertDiscountPrice =
+            if (isDiscountPriceNumber) StringUtil.convertCommaString(discountPrice) else discountPrice
+
         val painter = rememberAsyncImagePainter(
-            model = stayItem.imageUrl,
-            error = painterResource(id = R.drawable.shape_yellow)
+            model = stayItem.imageUrl, error = painterResource(id = R.drawable.shape_yellow)
         )
 
         Image(
@@ -90,19 +93,20 @@ fun HotelItemWidget(stayItem: StayItem) {
                 Text(text = "${discountPer}%", color = Theme.colorScheme.red)
                 Spacer(modifier = Modifier.width(10.dp))
             }
-            if (discountPrice > 0) {
-                Text(
-                    text = "$convertDefaultPrice ",
-                    color = Theme.colorScheme.gray,
-                    textDecoration = TextDecoration.LineThrough
-                )
-            } else {
-                Text(text = "$convertDefaultPrice ")
+            if (isDiscountPriceNumber) {
+                if (discountPrice != "") {
+                    Text(
+                        text = "$convertDefaultPrice ",
+                        color = Theme.colorScheme.gray,
+                        textDecoration = TextDecoration.LineThrough //취소선
+                    )
+                } else {
+                    Text(text = "$convertDefaultPrice ")
+                }
             }
+
         }
-        if (discountPrice > 0) {
-            Text(modifier = Modifier.padding(padding), text = convertDiscountPrice)
-        }
+        Text(modifier = Modifier.padding(padding), text = convertDiscountPrice)
         Spacer(modifier = Modifier.height(15.dp))
     }
 }

@@ -10,4 +10,13 @@
     <string name="str_today_hotel_more">호텔 특가 더보기</string>
     <string name="str_hot_hotel_more">인기 호텔 특가</string>
     <string name="str_more">더보기</string>
+
+    <string name="str_coupon">쿠폰</string>
+    <string name="str_advance_select">도전뽑기</string>
+    <string name="str_event">이벤트</string>
+
+    <string name="str_banner_sign_up">지금 신규가입하면 혜택 * 쿠폰이 와르르!</string>
+    <string name="str_banner_3_sign_up_receive_coupon">3초 가입하고 쿠폰 받기</string>
+
+    <string name="str_recent_item">최근 본 상품</string>
 </resources>

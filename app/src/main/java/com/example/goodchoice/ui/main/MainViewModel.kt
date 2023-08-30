@@ -12,6 +12,9 @@ class MainViewModel : ViewModel() {
     val homeData = MutableStateFlow(HomeData())
     val allCategoryList = LinkedList<CategoryItem>()
 
+    //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
+    var isShowFullHeader = MutableStateFlow(false)
+
     fun requestHomeData() {
         val testHomeData = HomeData(
             categoryList = listOf(
@@ -58,8 +61,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 906,
                             location = "양양군.주문진터미널",
                             discountPer = 50,
-                            defaultPrice = 330000,
-                            discountPrice = 166470
+                            defaultPrice = "330000",
+                            discountPrice = "166470"
                         ),
                         StayItem(
                             label = "호텔.리조트",
@@ -68,8 +71,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 885,
                             location = "거제시.와현해수욕장",
                             discountPer = 6,
-                            defaultPrice = 59000,
-                            discountPrice = 55460
+                            defaultPrice = "59000",
+                            discountPrice = "55460"
                         ),
                         StayItem(
                             label = "호텔.리조트",
@@ -78,8 +81,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 1842,
                             location = "마포구.디지털미디어",
                             discountPer = 0,
-                            defaultPrice = 129000,
-                            discountPrice = 0
+                            defaultPrice = "129000",
+                            discountPrice = "0"
                         ),
                         StayItem(
                             label = "호텔.리조트",
@@ -88,8 +91,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 1118,
                             location = "연수구.인천대입구역",
                             discountPer = 60,
-                            defaultPrice = 250000,
-                            discountPrice = 99000
+                            defaultPrice = "250000",
+                            discountPrice = "다른 날짜 확인"
                         ),
                     ),
                     isMore = true
@@ -105,8 +108,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 308,
                             location = "청포대해변 앞",
                             discountPer = 0,
-                            defaultPrice = 130000,
-                            discountPrice = 1250000
+                            defaultPrice = "130000",
+                            discountPrice = "1250000"
                         ),
                         StayItem(
                             label = "",
@@ -115,8 +118,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 124,
                             location = "태안빛축제 차량 2분",
                             discountPer = 6,
-                            defaultPrice = 71000,
-                            discountPrice = 66740
+                            defaultPrice = "71000",
+                            discountPrice = "66740"
                         ),
                         StayItem(
                             label = "",
@@ -125,8 +128,8 @@ class MainViewModel : ViewModel() {
                             commentCount = 166,
                             location = "청도프로방스 차량 17분",
                             discountPer = 11,
-                            defaultPrice = 179000,
-                            discountPrice = 159847
+                            defaultPrice = "179000",
+                            discountPrice = "159847"
                         ),
                     ),
                     isMore = true

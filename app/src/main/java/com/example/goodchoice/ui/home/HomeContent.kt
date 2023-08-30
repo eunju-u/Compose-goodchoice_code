@@ -13,14 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.Const
-import com.example.goodchoice.ui.theme.CategoryItemHeight
-import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.R
 import com.example.goodchoice.data.*
 import com.example.goodchoice.ui.components.TopBarWidget
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun HomeContent(
@@ -32,7 +32,7 @@ fun HomeContent(
     val stayList = homeData.stayList ?: emptyList()
     val row = 4
 
-    var isShowFullHeader by remember { mutableStateOf(false) }
+    val isShowFullHeader = viewModel.isShowFullHeader.collectAsState()
     val lazyColumnListState = rememberLazyListState()
 
     // header 노출하기 위한 플래그
@@ -51,7 +51,7 @@ fun HomeContent(
                 TopBarWidget(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 20.dp, bottom = 20.dp),
+                        .padding(top = dp20, bottom = dp20),
                     title = "여기 어때",
                     titleStyle = MaterialTheme.typography.displayLarge.copy(color = Theme.colorScheme.red),
                     onFinish = {},
@@ -73,9 +73,9 @@ fun HomeContent(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(60.dp)
-                                .padding(start = 20.dp, end = 20.dp),
+                                .padding(start = dp20, end = dp20),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(20.dp)
+                            horizontalArrangement = Arrangement.spacedBy(dp20)
                         ) {
                             Text(
                                 text = "해외 여행 갈때",
@@ -103,7 +103,7 @@ fun HomeContent(
                         LazyVerticalGrid(
                             modifier = Modifier
                                 .height(gridHeight.dp)
-                                .padding(start = 20.dp, end = 20.dp),
+                                .padding(start = dp20, end = dp20),
                             columns = GridCells.Fixed(count = row),
                             verticalArrangement = Arrangement.spacedBy(2.dp),
                             userScrollEnabled = false
@@ -117,12 +117,37 @@ fun HomeContent(
             }
 
             item {
+                //배너
                 BannerWidget(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp),
                     bannerList = bannerList
                 )
+
+                //쿠폰, 도전뽑기, 이벤트
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = dp10, horizontal = dp10),
+                    horizontalArrangement = Arrangement.spacedBy(dp5),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    EventItemWidget(
+                        modifier = Modifier.weight(1f),
+                        title = stringResource(id = R.string.str_coupon)
+                    )
+                    EventItemWidget(
+                        modifier = Modifier.weight(1f),
+                        title = stringResource(id = R.string.str_advance_select)
+                    )
+                    EventItemWidget(
+                        modifier = Modifier.weight(1f),
+                        title = stringResource(id = R.string.str_event)
+                    )
+                }
+
+                //지금 신규가입하면~
             }
 
             if (stayList.isNotEmpty()) {
@@ -136,7 +161,7 @@ fun HomeContent(
             }
 
             item {
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(dp30))
             }
         }
 
@@ -145,18 +170,18 @@ fun HomeContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Theme.colorScheme.white)
-                    .padding(20.dp),
+                    .padding(dp20),
                 viewModel.allCategoryList,
                 onClickMore = {
-                    isShowFullHeader = true
+                    viewModel.isShowFullHeader.value = true
                 })
         }
 
-        if (isShowFullHeader) {
+        if (isShowFullHeader.value) {
             FullHeaderWidget(
                 categoryItem = viewModel.allCategoryList,
                 onClickClose = {
-                    isShowFullHeader = false
+                    viewModel.isShowFullHeader.value = false
                 })
         }
     }

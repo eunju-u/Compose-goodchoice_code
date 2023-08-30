@@ -115,7 +115,7 @@ val Typography = Typography(
     labelLarge = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 21.sp,
+        fontSize = 14.sp,
         lineHeight = 20.sp,
         textAlign = TextAlign.Center
     ),
@@ -123,7 +123,7 @@ val Typography = Typography(
     labelMedium = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
+        fontSize = 12.sp,
         lineHeight = 20.sp,
         textAlign = TextAlign.Center
     ),

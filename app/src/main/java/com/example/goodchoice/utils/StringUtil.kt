@@ -8,11 +8,16 @@ object StringUtil {
     fun convertCommaString(source: Any?): String {
         val sb = StringBuilder()
         source?.let {
-            var str = if (it is String) {
-                it
+            var str: Any
+            if (it is String) {
+                str = it
             } else {
-                it.toString()
+                str = it.toString()
+                if (str == "") {
+                    return sb.toString()
+                }
             }
+
 
             var isMinus = false
             // 마이너스인 경우 처리

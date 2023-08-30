@@ -73,7 +73,8 @@ class ThemeColorScheme(
     red: Color,
     white: Color,
     darkGray: Color,
-    gray: Color
+    gray: Color,
+    yellow: Color,
 ) {
     var blue by mutableStateOf(blue)
         private set
@@ -87,7 +88,8 @@ class ThemeColorScheme(
         private set
     var gray by mutableStateOf(gray)
         private set
-
+    var yellow by mutableStateOf(yellow)
+        private set
     fun copy(): ThemeColorScheme = ThemeColorScheme(
         blue = blue,
         pureGray = pureGray,
@@ -95,6 +97,7 @@ class ThemeColorScheme(
         white = white,
         darkGray = darkGray,
         gray = gray,
+        yellow = yellow,
     )
 
     fun update(other: ThemeColorScheme) {
@@ -104,6 +107,7 @@ class ThemeColorScheme(
         white = other.white
         darkGray = other.darkGray
         gray = other.gray
+        yellow = other.yellow
     }
 }
 
@@ -114,6 +118,7 @@ val LightColorScheme = ThemeColorScheme(
     white = White,
     darkGray = DarkGray,
     gray = Gray,
+    yellow = Yellow,
 )
 
 private val DarkColorScheme = ThemeColorScheme(
@@ -123,6 +128,7 @@ private val DarkColorScheme = ThemeColorScheme(
     white = DarkGray,
     darkGray = White,
     gray = White,
+    yellow = Yellow,
 )
 
 fun mappingColorScheme() = ColorScheme(
