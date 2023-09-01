@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.data.*
+import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.*
 
@@ -15,7 +16,26 @@ class MainViewModel : ViewModel() {
     //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
     var isShowFullHeader = MutableStateFlow(false)
 
-    fun requestHomeData() {
+    var currentRoute = MutableStateFlow("")
+
+    fun getCurrentViewData() {
+        when (currentRoute.value) {
+            NavItem.Home.route -> {
+                requestHomeData()
+            }
+            NavItem.Search.route -> {
+                requestSearchData()
+            }
+            NavItem.Like.route -> {
+                requestLikeData()
+            }
+            NavItem.MyInfo.route -> {
+                requestMyInfoData()
+            }
+        }
+    }
+
+    private fun requestHomeData() {
         val testHomeData = HomeData(
             categoryList = listOf(
                 CategoryData(
@@ -53,7 +73,7 @@ class MainViewModel : ViewModel() {
                 StayData(
                     type = Const.TODAY_HOTEL,
                     title = "오늘 체크인 호텔 특가",
-                    listOf(
+                    stayList = listOf(
                         StayItem(
                             label = "호텔.리조트",
                             name = "양양 더 앤 리조트 호텔&스파",
@@ -62,7 +82,8 @@ class MainViewModel : ViewModel() {
                             location = "양양군.주문진터미널",
                             discountPer = 50,
                             defaultPrice = "330000",
-                            discountPrice = "166470"
+                            discountPrice = "166470",
+                            level = "3성급",
                         ),
                         StayItem(
                             label = "호텔.리조트",
@@ -72,7 +93,8 @@ class MainViewModel : ViewModel() {
                             location = "거제시.와현해수욕장",
                             discountPer = 6,
                             defaultPrice = "59000",
-                            discountPrice = "55460"
+                            discountPrice = "55460",
+                            level = "1성급",
                         ),
                         StayItem(
                             label = "호텔.리조트",
@@ -82,7 +104,8 @@ class MainViewModel : ViewModel() {
                             location = "마포구.디지털미디어",
                             discountPer = 0,
                             defaultPrice = "129000",
-                            discountPrice = "0"
+                            discountPrice = "0",
+                            level = "레지던스",
                         ),
                         StayItem(
                             label = "호텔.리조트",
@@ -92,15 +115,16 @@ class MainViewModel : ViewModel() {
                             location = "연수구.인천대입구역",
                             discountPer = 60,
                             defaultPrice = "250000",
-                            discountPrice = "다른 날짜 확인"
+                            discountPrice = "다른 날짜 확인",
+                            level = "아파트먼트",
                         ),
                     ),
                     isMore = true
                 ),
                 StayData(
                     type = Const.HOT_HOTEL,
-                    "오늘 HOT 인기 펜션",
-                    listOf(
+                    title = "오늘 HOT 인기 펜션",
+                    stayList = listOf(
                         StayItem(
                             label = "",
                             name = "태안 팜비치펜션",
@@ -109,7 +133,8 @@ class MainViewModel : ViewModel() {
                             location = "청포대해변 앞",
                             discountPer = 0,
                             defaultPrice = "130000",
-                            discountPrice = "1250000"
+                            discountPrice = "1250000",
+                            level = "아파트먼트",
                         ),
                         StayItem(
                             label = "",
@@ -119,7 +144,8 @@ class MainViewModel : ViewModel() {
                             location = "태안빛축제 차량 2분",
                             discountPer = 6,
                             defaultPrice = "71000",
-                            discountPrice = "66740"
+                            discountPrice = "66740",
+                            level = "아파트먼트",
                         ),
                         StayItem(
                             label = "",
@@ -129,11 +155,46 @@ class MainViewModel : ViewModel() {
                             location = "청도프로방스 차량 17분",
                             discountPer = 11,
                             defaultPrice = "179000",
-                            discountPrice = "159847"
+                            discountPrice = "159847",
+                            level = "풀빌라",
+                            message = "개별수영장 보일러 공사로 미온수(32~33도), 노천탕(40도) 온도유지 가능합니다.[]애견 동반이 가능한 객실을 보유하고 있습니다.[]전 객실 3층 독채로 프라이빗하게 이요하실 수 있고, ~12인까지 충분히 입실 가능한 신축 풀빌라입니다.",
+                            defaultMessage = "입실 : 15:00 | 퇴실 11:00[]20시 이후 입실 시 사전문의 (필수)[]무료 Wi-Fi[]전 객실 금연[]주차 가능",
+                            aroundInfo = "",
+                            service = listOf(
+                                Const.WIFI,
+                                Const.FULL,
+                                Const.SPA,
+                                Const.COOKING,
+                                Const.BBQ,
+                                Const.COOKER,
+                                Const.TV,
+                                Const.BATHROOM,
+                                Const.FREE_PARKING,
+                                Const.AIR_CONDITIONER,
+                                Const.REFRIGERATOR,
+                                Const.SHOWER_ROOM,
+                                Const.NO_SMOKING,
+                                Const.ANIMAL,
+                                Const.DRYER,
+                                Const.CARD,
+                                Const.PARKING_LOT,
+                                Const.COOKING_POSSIBLE,
+                                Const.MICROWAVE
+                            )
+
                         ),
                     ),
                     isMore = true
                 )
+            ),
+            overSeaCityList = listOf(
+                OverSeaCityItem(id = 11000, cityName = "오사카"),
+                OverSeaCityItem(id = 11001, cityName = "도쿄"),
+                OverSeaCityItem(id = 11002, cityName = "미국"),
+                OverSeaCityItem(id = 11003, cityName = "중국"),
+                OverSeaCityItem(id = 11004, cityName = "밀레이시아"),
+                OverSeaCityItem(id = 11005, cityName = "나고야"),
+                OverSeaCityItem(id = 11006, cityName = "후쿠오카"),
             )
         )
         homeData.value = testHomeData
@@ -143,5 +204,17 @@ class MainViewModel : ViewModel() {
                 allCategoryList.add(item)
             }
         }
+    }
+
+    private fun requestSearchData() {
+
+    }
+
+    private fun requestLikeData() {
+
+    }
+
+    private fun requestMyInfoData() {
+
     }
 }

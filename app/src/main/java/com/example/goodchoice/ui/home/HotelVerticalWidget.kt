@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.goodchoice.Const
@@ -18,12 +19,13 @@ import com.example.goodchoice.data.StayData
 import com.example.goodchoice.ui.theme.GMarketSansFamily
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.R
+import com.example.goodchoice.data.StayItem
 import com.example.goodchoice.ui.components.RightImageButtonWidget
 
 @Composable
 fun HotelVerticalWidget(
-    modifier: Modifier,
-    stayData: StayData
+    modifier: Modifier = Modifier,
+    stayData: StayData = StayData()
 ) {
     val scrollState = rememberLazyListState()
     Column(
@@ -112,4 +114,40 @@ fun HotelVerticalWidget(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun previewHotelVerticalWidget() {
+    HotelVerticalWidget(
+        stayData = StayData(
+            type = Const.TODAY_HOTEL,
+            title = "오늘 체크인 호텔 특가",
+            stayList = listOf(
+                StayItem(
+                    label = "호텔.리조트",
+                    name = "[당일특가] 스탠포드 호출 서울",
+                    star = "9.3",
+                    commentCount = 1842,
+                    location = "마포구.디지털미디어",
+                    discountPer = 0,
+                    defaultPrice = "129000",
+                    discountPrice = "0",
+                    level = "레지던스",
+                ),
+                StayItem(
+                    label = "호텔.리조트",
+                    name = "브릿지호텔 인천송도 (구 호텔 스카이파크 인천 송도)",
+                    star = "9.1",
+                    commentCount = 1118,
+                    location = "연수구.인천대입구역",
+                    discountPer = 60,
+                    defaultPrice = "250000",
+                    discountPrice = "다른 날짜 확인",
+                    level = "아파트먼트",
+                )
+            ),
+            isMore = true
+        )
+    )
 }

@@ -26,11 +26,11 @@ import com.example.goodchoice.ui.theme.Theme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData>) {
+fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {
     val pagerState = rememberPagerState(initialPage = 0)
     val currentPage = pagerState.currentPage
     val listSize = bannerList.size
-    val isNotEmptyList = listSize > 1
+    val userScrollEnabled = listSize > 1
 
     Box(
         modifier = modifier
@@ -39,7 +39,7 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData>) {
         HorizontalPager(
             state = pagerState,
             pageCount = Int.MAX_VALUE,
-            userScrollEnabled = isNotEmptyList
+            userScrollEnabled = userScrollEnabled
         ) { page ->
             val index = page % listSize
             val item = bannerList[index]
@@ -60,7 +60,6 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData>) {
         }
 
         if (listSize > 1) {
-
             val textString = buildAnnotatedString {
                 withStyle(
                     SpanStyle(

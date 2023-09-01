@@ -20,7 +20,6 @@ fun NavGraph(
     navController: NavHostController,
     startDestination: String,
     viewModel: MainViewModel,
-    homeData:HomeData,
 ) {
     NavHost(
         modifier = Modifier,
@@ -28,7 +27,7 @@ fun NavGraph(
         startDestination = startDestination,
     ) {
         composable(NavItem.Home.route) {
-            HomeContent(modifier, homeData, viewModel)
+            HomeContent(modifier, viewModel)
         }
         composable(NavItem.Search.route) {
         }

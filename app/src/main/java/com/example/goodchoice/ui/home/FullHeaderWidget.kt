@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.data.CategoryItem
 import com.example.goodchoice.ui.theme.Theme
@@ -26,13 +27,12 @@ import com.example.goodchoice.R
 @SuppressLint("RememberReturnType")
 @Composable
 fun FullHeaderWidget(
-    categoryItem: List<CategoryItem>,
-
+    categoryItem: List<CategoryItem> = emptyList(),
     onClickClose: () -> Unit
 ) {
     val configuration = LocalConfiguration.current
     val fullHeight = configuration.screenHeightDp
-    val ratio = 0.8f
+    val ratio = 0.6f
     val row = 4
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
@@ -68,7 +68,7 @@ fun FullHeaderWidget(
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(max = (fullHeight * ratio).dp)
-                        .padding(20.dp),
+                        .padding(10.dp),
                     columns = GridCells.Fixed(count = row),
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
@@ -88,4 +88,15 @@ fun FullHeaderWidget(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun previewFullHeaderWidget() {
+    FullHeaderWidget(
+        listOf(
+            CategoryItem(0, "프리미엄블랙", R.drawable.ic_airplane),
+            CategoryItem(1, "모텔", R.drawable.ic_airplane)
+        )
+    ) {}
 }

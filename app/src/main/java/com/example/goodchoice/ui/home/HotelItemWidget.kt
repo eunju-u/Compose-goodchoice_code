@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.data.StayItem
@@ -19,7 +20,7 @@ import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.utils.StringUtil
 
 @Composable
-fun HotelItemWidget(stayItem: StayItem) {
+fun HotelItemWidget(stayItem: StayItem = StayItem()) {
     Column(
         modifier = Modifier
             .width(200.dp)
@@ -42,9 +43,13 @@ fun HotelItemWidget(stayItem: StayItem) {
         val convertDiscountPrice =
             if (isDiscountPriceNumber) StringUtil.convertCommaString(discountPrice) else discountPrice
 
-        val painter = rememberAsyncImagePainter(
-            model = stayItem.imageUrl, error = painterResource(id = R.drawable.shape_yellow)
-        )
+        val painter =
+            if (stayItem.imageList?.isNotEmpty() == true)
+                rememberAsyncImagePainter(
+                    model = stayItem.imageList[0],
+                    painterResource(id = R.drawable.shape_yellow)
+                )
+            else painterResource(id = R.drawable.shape_yellow)
 
         Image(
             modifier = Modifier
@@ -53,6 +58,7 @@ fun HotelItemWidget(stayItem: StayItem) {
             painter = painter,
             contentDescription = "호텔 사진"
         )
+
 
         Spacer(modifier = Modifier.height(5.dp))
         if (label.isNotEmpty()) {
@@ -109,4 +115,22 @@ fun HotelItemWidget(stayItem: StayItem) {
         Text(modifier = Modifier.padding(padding), text = convertDiscountPrice)
         Spacer(modifier = Modifier.height(15.dp))
     }
+}
+
+@Preview
+@Composable
+fun previewHotelItemWidget() {
+    HotelItemWidget(
+        StayItem(
+            label = "",
+            name = "태안 팜비치펜션",
+            star = "9.7",
+            commentCount = 308,
+            location = "청포대해변 앞",
+            discountPer = 0,
+            defaultPrice = "130000",
+            discountPrice = "1250000",
+            level = "아파트먼트",
+        )
+    )
 }

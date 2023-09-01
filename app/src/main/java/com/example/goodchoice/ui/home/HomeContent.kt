@@ -1,6 +1,5 @@
 package com.example.goodchoice.ui.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -14,27 +13,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.data.*
 import com.example.goodchoice.ui.components.TopBarWidget
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun HomeContent(
-    modifier: Modifier, homeData: HomeData, viewModel: MainViewModel
+    modifier: Modifier = Modifier, viewModel: MainViewModel
 ) {
     val context = LocalContext.current
+    val homeData = viewModel.homeData.collectAsStateWithLifecycle().value
     val categoryList = homeData.categoryList ?: emptyList()
     val bannerList = homeData.bannerList ?: emptyList()
     val stayList = homeData.stayList ?: emptyList()
+    val recentStayList = homeData.recentStayList ?: emptyList()
+    val overSeaCityList = homeData.overSeaCityList ?: emptyList()
     val row = 4
 
     val isShowFullHeader = viewModel.isShowFullHeader.collectAsState()
     val lazyColumnListState = rememberLazyListState()
-
+    val textStyle = MaterialTheme.typography.displayMedium
     // header 노출하기 위한 플래그
     val isShowHeader by remember {
         derivedStateOf {
@@ -72,15 +79,14 @@ fun HomeContent(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(60.dp)
                                 .padding(start = dp20, end = dp20),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(dp20)
                         ) {
                             Text(
-                                text = "해외 여행 갈때",
+                                text = stringResource(id = R.string.str_go_oversea),
                                 color = Theme.colorScheme.blue,
-                                style = MaterialTheme.typography.displayMedium
+                                style = textStyle
                             )
                             Divider(
                                 modifier = Modifier.weight(1f, fill = false),
@@ -118,12 +124,14 @@ fun HomeContent(
 
             item {
                 //배너
-                BannerWidget(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp),
-                    bannerList = bannerList
-                )
+                if (bannerList.isNotEmpty()) {
+                    BannerWidget(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        bannerList = bannerList
+                    )
+                }
 
                 //쿠폰, 도전뽑기, 이벤트
                 Row(
@@ -160,6 +168,32 @@ fun HomeContent(
                 }
             }
 
+            if (overSeaCityList.isNotEmpty()) {
+                item {
+                    Text(
+                        buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontFamily = GMarketSansFamily,
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 10.sp,
+                                    color = Theme.colorScheme.blue
+                                )
+                            ) {
+                                val str = stringResource(id = R.string.str_over_sea_row_price)
+                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append(str.substring(0, 7))
+                                }
+                                append(str.substring(7))
+                            }
+                        },
+                        color = Theme.colorScheme.blue,
+                        style = textStyle
+                    )
+                }
+
+            }
+
             item {
                 Spacer(modifier = Modifier.height(dp30))
             }
@@ -168,9 +202,7 @@ fun HomeContent(
         if (isShowHeader && viewModel.allCategoryList.isNotEmpty()) {
             StickyHeaderWidget(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Theme.colorScheme.white)
-                    .padding(dp20),
+                    .fillMaxWidth(),
                 viewModel.allCategoryList,
                 onClickMore = {
                     viewModel.isShowFullHeader.value = true

@@ -1,7 +1,9 @@
 package com.example.goodchoice.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.res.Configuration
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,6 +32,7 @@ import com.example.goodchoice.ui.theme.GMarketSansFamily
 import com.example.goodchoice.ui.theme.Theme
 import kotlinx.coroutines.launch
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainContent(viewModel: MainViewModel) {
@@ -42,7 +45,6 @@ fun MainContent(viewModel: MainViewModel) {
     val currentRoute = navBackStackEntry?.destination?.route
 
     var titleText by remember { mutableStateOf("") }
-    val homeData = viewModel.homeData.collectAsStateWithLifecycle()
 
     val style = TextStyle(
         fontSize = 9.sp,
@@ -51,13 +53,6 @@ fun MainContent(viewModel: MainViewModel) {
         fontWeight = FontWeight.Medium,
     )
     var textStyle by remember { mutableStateOf(style) }
-
-    val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                titleText = ""
-            }
-        }
 
     Box {
         Scaffold(
@@ -117,6 +112,8 @@ fun MainContent(viewModel: MainViewModel) {
             backgroundColor = Theme.colorScheme.white,
             contentColor = Theme.colorScheme.darkGray
         ) { paddingValues ->
+            //현재 navigation 값 viewModel 에 저장
+            viewModel.currentRoute.value = currentRoute ?: NavItem.Home.route
 
             BackHandler {
                 if (mainState.bottomSheetState.isVisible) {
@@ -136,8 +133,7 @@ fun MainContent(viewModel: MainViewModel) {
                 modifier = Modifier.padding(paddingValues),
                 navController = mainState.navController,
                 startDestination = NavItem.Home.route,
-                viewModel = viewModel,
-                homeData = homeData.value
+                viewModel = viewModel
             )
         }
     }
