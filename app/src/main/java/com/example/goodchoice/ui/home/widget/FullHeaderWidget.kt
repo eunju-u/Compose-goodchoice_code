@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas

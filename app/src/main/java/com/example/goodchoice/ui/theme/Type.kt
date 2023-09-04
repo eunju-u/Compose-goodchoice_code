@@ -19,9 +19,8 @@ val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 35.sp,
+        fontSize = 30.sp,
         lineHeight = 20.sp,
-        textAlign = TextAlign.Center
     ),
 
     displayMedium = TextStyle(
@@ -29,7 +28,6 @@ val Typography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 21.sp,
         lineHeight = 20.sp,
-        textAlign = TextAlign.Center
     ),
 
     displaySmall = TextStyle(
@@ -37,79 +35,6 @@ val Typography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
         lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    headlineLarge = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Bold,
-        fontSize = 21.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    headlineMedium = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    headlineSmall = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    titleLarge = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 21.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    titleMedium = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    titleSmall = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 9.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    bodyLarge = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 21.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    bodyMedium = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
-    ),
-
-    bodySmall = TextStyle(
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
-        lineHeight = 20.sp,
-        textAlign = TextAlign.Center
     ),
 
     labelLarge = TextStyle(
@@ -117,7 +42,6 @@ val Typography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        textAlign = TextAlign.Center
     ),
 
     labelMedium = TextStyle(
@@ -125,7 +49,6 @@ val Typography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 12.sp,
         lineHeight = 20.sp,
-        textAlign = TextAlign.Center
     ),
 
     labelSmall = TextStyle(
@@ -133,6 +56,71 @@ val Typography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 10.sp,
         lineHeight = 20.sp,
-        textAlign = TextAlign.Center
+    ),
+
+    //사용하지 않은 type
+    bodyLarge = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 21.sp,
+        lineHeight = 20.sp,
+    ),
+
+    //사용하지 않은 type
+    bodyMedium = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+    ),
+
+    bodySmall = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 8.sp,
+        lineHeight = 20.sp,
+    ),
+
+    //사용하지 않은 type
+    headlineLarge = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 21.sp,
+        lineHeight = 20.sp,
+    ),
+
+    headlineMedium = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+    ),
+
+    headlineSmall = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 13.sp,
+        lineHeight = 20.sp,
+    ),
+
+    titleLarge = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 21.sp,
+        lineHeight = 20.sp,
+    ),
+
+    titleMedium = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+    ),
+
+    titleSmall = TextStyle(
+        fontFamily = GMarketSansFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 9.sp,
+        lineHeight = 20.sp,
     )
 )

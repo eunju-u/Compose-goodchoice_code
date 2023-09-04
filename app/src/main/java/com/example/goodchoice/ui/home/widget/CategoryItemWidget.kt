@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -16,6 +16,9 @@ import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.theme.CategoryItemHeight
 import com.example.goodchoice.ui.theme.dp35
 
+/**
+ * 홈 > 카테고리
+ */
 @Composable
 fun CategoryItemWidget(item: CategoryItem = CategoryItem()) {
     Column(
@@ -32,7 +35,7 @@ fun CategoryItemWidget(item: CategoryItem = CategoryItem()) {
             alpha = LocalContentAlpha.current
         )
         TextWidget(
-            text = item.name, style = MaterialTheme.typography.titleSmall,
+            text = item.name, style = MaterialTheme.typography.labelSmall,
         )
     }
 }

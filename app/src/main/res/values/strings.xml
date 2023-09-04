@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">GoodChoice</string>
     <string name="navi_home">홈</string>
     <string name="navi_search">검색</string>
     <string name="navi_around">주변</string>
     <string name="navi_like">찜</string>
     <string name="navi_my_Info">내 정보</string>
 
+    <!--  홈  -->
+    <string name="str_app_name">여기 어때</string>
     <string name="str_go_oversea">해외 여행 갈때</string>
     <string name="str_today_hotel_more">호텔 특가 더보기</string>
     <string name="str_hot_hotel_more">인기 호텔 특가</string>
@@ -19,5 +21,25 @@
     <string name="str_banner_sign_up">지금 신규가입하면 혜택 * 쿠폰이 와르르!</string>
     <string name="str_banner_3_sign_up_receive_coupon">3초 가입하고 쿠폰 받기</string>
 
-    <string name="str_recent_item">최근 본 상품</string>
+    <string name="str_recent_seen_item">최근 본 상품</string>
+    <string name="str_business_info">사업자 정보</string>
+    <string name="str_terms_of_use">이용약관</string>
+    <string name="str_privacy_policy">개인정보 처리방침</string>
+    <string name="str_consumer_dispute_standards">소비자 분쟁해결 기준</string>
+    <string name="str_check_business_info">사업자 정보확인</string>
+    <string name="str_content_business">콘텐츠산업진흥법에 의한 표시</string>
+    <string name="str_business_info_responsibility">(주)여기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</string>
+    <string name="str_business_info_detail">주소: 서울특별시 강남구 봉은사로 479, 479타워 11층\n대표이사: 정명훈 | 사업자등록번호: 742-86-00224\n통신판매번호: 2017-서울강남-01779\n\n전화번호: 1670-6250\n전자우편주소: hep@goodchoice.kr\n호스팅서비스제공자의 상호 표시: (주)여기어때컴퍼니</string>
+
+    <!--  검색  -->
+
+    <!--  주변  -->
+
+    <!--  찜  -->
+
+    <!--  내 정보  -->
+
+    <!--  버튼 text  -->
+    <string name="str_all_remove">전체 삭제</string>
+
 </resources>

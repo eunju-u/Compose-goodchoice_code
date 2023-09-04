@@ -80,7 +80,7 @@ fun MainContent(viewModel: MainViewModel) {
                                         tint = if (currentRoute == item.route) {
                                             Theme.colorScheme.red
                                         } else {
-                                            Theme.colorScheme.pureGray
+                                            Theme.colorScheme.gray
                                         }
                                     )
                                 }
@@ -91,7 +91,7 @@ fun MainContent(viewModel: MainViewModel) {
                                     color = if (currentRoute == item.route) {
                                         Theme.colorScheme.darkGray
                                     } else {
-                                        Theme.colorScheme.pureGray
+                                        Theme.colorScheme.gray
                                     },
                                     maxLines = 1,
                                     style = textStyle,
@@ -104,7 +104,7 @@ fun MainContent(viewModel: MainViewModel) {
                                 )
                             },
                             selectedContentColor = Theme.colorScheme.darkGray,
-                            unselectedContentColor = Theme.colorScheme.pureGray
+                            unselectedContentColor = Theme.colorScheme.gray
                         )
                     }
                 }

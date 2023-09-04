@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.components
+package com.example.goodchoice.ui.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.TextStyle
 
 @Composable
-fun TopBarWidget(
+fun HomeTopBarWidget(
     modifier: Modifier = Modifier,
     title: String,
     titleStyle: TextStyle = MaterialTheme.typography.displayMedium,

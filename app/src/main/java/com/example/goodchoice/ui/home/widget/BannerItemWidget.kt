@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
 import com.example.goodchoice.data.BannerData
-import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.*
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -75,12 +75,12 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
             Row(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(end = 15.dp, bottom = 15.dp)
-                    .width(55.dp)
-                    .height(25.dp)
+                    .padding(end = dp15, bottom = dp15)
+                    .width(dp55)
+                    .height(dp25)
                     .background(
                         color = Theme.colorScheme.darkGray,
-                        shape = RoundedCornerShape(20.dp)
+                        shape = RoundedCornerShape(dp20)
                     ),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
@@ -108,9 +108,9 @@ fun previewBannerWidget() {
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp), bannerList = listOf(
-            BannerData(R.drawable.shape_purple),
-            BannerData(R.drawable.shape_yellow),
-            BannerData(R.drawable.shape_teal)
+            BannerData(R.drawable.bg_purple),
+            BannerData(R.drawable.bg_yellow),
+            BannerData(R.drawable.bg_teal)
         )
     )
 }

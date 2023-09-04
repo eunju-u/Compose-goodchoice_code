@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -15,6 +15,9 @@ import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.dp15
 
+/**
+ * 홈 > 이벤트 배너
+ */
 @Composable
 fun EventItemWidget(
     modifier: Modifier = Modifier,
@@ -24,7 +27,7 @@ fun EventItemWidget(
         modifier = modifier,
         onItemClick = {},
         title = title,
-        containerColor = Theme.colorScheme.gray,
+        containerColor = Theme.colorScheme.pureGray,
         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
     ) {
         Image(

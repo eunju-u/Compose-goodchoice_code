@@ -11,10 +11,10 @@ object Const {
     const val KOREA = "Korea"
     const val OVERSEA = "Oversea"
 
-    //호텔 더보기
+    //숙소 타입 (최근, 오늘특가, hot 인기)
+    const val RECENT_HOTEL = 122
     const val TODAY_HOTEL = 123
     const val HOT_HOTEL = 124
-    const val MORE = 125
 
     //편의시설 및 서비스
     const val WIFI = "WIFI"
@@ -36,5 +36,12 @@ object Const {
     const val PARKING_LOT = "PARKING_LOT"
     const val COOKING_POSSIBLE = "COOKING_POSSIBLE"
     const val MICROWAVE = "MICROWAVE"
+
+    const val OSAKA = 11000
+    const val FUKUOKA = 11001
+    const val TOKYO = 11002
+    const val DANANG = 11003
+    const val KYOTO = 11004
+    const val SINGAPORE = 11005
 
 }

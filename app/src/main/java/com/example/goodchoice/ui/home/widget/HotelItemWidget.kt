@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -16,9 +16,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.data.StayItem
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil
 
+/**
+ * 숙소 item 뷰
+ */
 @Composable
 fun HotelItemWidget(stayItem: StayItem = StayItem()) {
     Column(
@@ -26,10 +29,10 @@ fun HotelItemWidget(stayItem: StayItem = StayItem()) {
             .width(200.dp)
             .height(IntrinsicSize.Min)
             .border(
-                width = 1.dp, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(10.dp)
+                width = 1.dp, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(dp10)
             ), verticalArrangement = Arrangement.Center
     ) {
-        val padding = PaddingValues(start = 20.dp, end = 20.dp)
+        val padding = PaddingValues(start = dp20, end = dp20)
         val label = stayItem.label ?: ""
         val name = stayItem.name ?: ""
         val discountPer = stayItem.discountPer ?: 0
@@ -47,9 +50,9 @@ fun HotelItemWidget(stayItem: StayItem = StayItem()) {
             if (stayItem.imageList?.isNotEmpty() == true)
                 rememberAsyncImagePainter(
                     model = stayItem.imageList[0],
-                    painterResource(id = R.drawable.shape_yellow)
+                    painterResource(id = R.drawable.bg_yellow)
                 )
-            else painterResource(id = R.drawable.shape_yellow)
+            else painterResource(id = R.drawable.bg_yellow)
 
         Image(
             modifier = Modifier
@@ -60,10 +63,10 @@ fun HotelItemWidget(stayItem: StayItem = StayItem()) {
         )
 
 
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(dp5))
         if (label.isNotEmpty()) {
             Text(modifier = Modifier.padding(padding), text = label)
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(dp5))
         }
 
         if (name.isNotEmpty()) {
@@ -73,18 +76,18 @@ fun HotelItemWidget(stayItem: StayItem = StayItem()) {
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(dp5))
         }
 
         Row(modifier = Modifier.padding(padding), verticalAlignment = Alignment.CenterVertically) {
             Image(
-                modifier = Modifier.size(15.dp),
+                modifier = Modifier.size(dp15),
                 painter = painterResource(id = R.drawable.ic_star),
                 contentDescription = "별점"
             )
             Text(text = "${stayItem.star ?: 0}")
             Text(text = "(${stayItem.commentCount ?: 0})")
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(dp10))
             Text(
                 text = stayItem.location ?: "",
                 maxLines = 1,
@@ -92,12 +95,12 @@ fun HotelItemWidget(stayItem: StayItem = StayItem()) {
                 color = Theme.colorScheme.gray
             )
         }
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(dp5))
 
         Row(modifier = Modifier.padding(padding), verticalAlignment = Alignment.CenterVertically) {
             if (discountPer > 0) {
                 Text(text = "${discountPer}%", color = Theme.colorScheme.red)
-                Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.width(dp10))
             }
             if (isDiscountPriceNumber) {
                 if (discountPrice != "") {
@@ -113,7 +116,7 @@ fun HotelItemWidget(stayItem: StayItem = StayItem()) {
 
         }
         Text(modifier = Modifier.padding(padding), text = convertDiscountPrice)
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(dp15))
     }
 }
 

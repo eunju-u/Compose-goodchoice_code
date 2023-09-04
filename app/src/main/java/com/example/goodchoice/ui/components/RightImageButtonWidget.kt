@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
@@ -34,7 +35,7 @@ fun RightImageButtonWidget(
     borderColor: Color = Theme.colorScheme.blue,
     style: TextStyle = MaterialTheme.typography.labelSmall,
     onItemClick: () -> Unit,
-    content: @Composable @UiComposable (BoxScope.() -> Unit)? = null,
+    content: @Composable @UiComposable (() -> Unit)? = null,
 ) {
     title?.let {
         ImageButtonWidget(
@@ -52,19 +53,21 @@ fun RightImageButtonWidget(
                 horizontalArrangement = Arrangement.Center
             ) {
                 if (it is String) {
-                    Text(
+                    TextWidget(
                         modifier = Modifier
                             .padding(end = if (hasEndPadding) endPadding else 0.dp)
                             .weight(1f, fill = false),
                         text = it,
+                        color = contentColor,
                         style = style
                     )
                 } else {
-                    Text(
+                    TextWidget(
                         modifier = Modifier
                             .padding(end = if (hasEndPadding) endPadding else 0.dp)
                             .weight(1f, fill = false),
                         text = it as AnnotatedString,
+                        color = contentColor,
                         style = style
                     )
                 }
@@ -80,4 +83,13 @@ fun RightImageButtonWidget(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun previewRightImageButtonWidget() {
+    RightImageButtonWidget(
+        title = "text",
+        onItemClick = {},
+        content = { Text(text = "right_image") })
 }

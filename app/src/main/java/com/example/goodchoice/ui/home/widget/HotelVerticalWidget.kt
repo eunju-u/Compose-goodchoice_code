@@ -1,13 +1,15 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
@@ -16,24 +18,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.goodchoice.Const
 import com.example.goodchoice.data.StayData
-import com.example.goodchoice.ui.theme.GMarketSansFamily
-import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.R
 import com.example.goodchoice.data.StayItem
 import com.example.goodchoice.ui.components.RightImageButtonWidget
+import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun HotelVerticalWidget(
     modifier: Modifier = Modifier,
-    stayData: StayData = StayData()
+    stayData: StayData = StayData(),
 ) {
+    val context = LocalContext.current
     val scrollState = rememberLazyListState()
+    val textStyle = MaterialTheme.typography.labelLarge
+
     Column(
         modifier = modifier
     ) {
-        Text(
-            modifier = Modifier.padding(15.dp),
-            text = stayData.title ?: ""
+        TextWidget(
+            modifier = Modifier.padding(
+                start = dp15,
+                bottom = dp10,
+                end = 15.dp,
+                top = dp20
+            ),
+            text = stayData.title ?: "",
+            style = textStyle
         )
 
         //horizontal item
@@ -46,7 +58,14 @@ fun HotelVerticalWidget(
             ) {
                 itemsIndexed(items = stayData.stayList) { index, item ->
                     if (index == 0) Spacer(Modifier.width(15.dp))
-                    HotelItemWidget(stayItem = item)
+                    stayData.type?.let { type ->
+                        if (type == Const.TODAY_HOTEL || type == Const.HOT_HOTEL) {
+                            HotelItemWidget(stayItem = item)
+                        } else if (type == Const.RECENT_HOTEL) {
+                            RecentSeenWidget(stayItem = item)
+                        }
+                    } ?: HotelItemWidget(stayItem = item)
+
                     if (index == stayData.stayList.lastIndex) Spacer(Modifier.width(15.dp))
                 }
             }
@@ -58,38 +77,20 @@ fun HotelVerticalWidget(
                 when (stayData.type) {
                     Const.TODAY_HOTEL -> {
                         buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontFamily = GMarketSansFamily,
-                                    fontWeight = FontWeight.Medium,
-                                    fontSize = 10.sp,
-                                    color = Theme.colorScheme.blue
-                                )
-                            ) {
-                                val str = stringResource(id = R.string.str_today_hotel_more)
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                    append(str.substring(0, 5))
-                                }
-                                append(str.substring(5))
+                            val str = stringResource(id = R.string.str_today_hotel_more)
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                append(str.substring(0, 5))
                             }
+                            append(str.substring(5))
                         }
                     }
                     Const.HOT_HOTEL -> {
                         buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontFamily = GMarketSansFamily,
-                                    fontWeight = FontWeight.Medium,
-                                    fontSize = 10.sp,
-                                    color = Theme.colorScheme.blue
-                                )
-                            ) {
-                                val str = stringResource(id = R.string.str_hot_hotel_more)
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                    append(str.substring(0, 2))
-                                }
-                                append(str.substring(2))
+                            val str = stringResource(id = R.string.str_hot_hotel_more)
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                append(str.substring(0, 2))
                             }
+                            append(str.substring(2))
                         }
                     }
                     else -> {
@@ -100,7 +101,7 @@ fun HotelVerticalWidget(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 10.dp),
+                    .padding(top = dp15),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -109,8 +110,19 @@ fun HotelVerticalWidget(
                     hasOutline = true,
                     borderWidth = 1.dp,
                     imageColor = Theme.colorScheme.blue,
-                    shape = 20.dp,
-                    onItemClick = {})
+                    shape = dp20,
+                    style = MaterialTheme.typography.labelSmall,
+                    contentColor = Theme.colorScheme.blue,
+                    onItemClick = {
+                        if (stayData.type == Const.RECENT_HOTEL) {
+                            context.startActivity(
+                                Intent(
+                                    context,
+                                    RecentSeenActivity::class.java
+                                )
+                            )
+                        }
+                    })
             }
         }
     }

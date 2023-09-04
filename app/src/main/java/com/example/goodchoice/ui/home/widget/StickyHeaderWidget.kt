@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home
+package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -15,9 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.data.CategoryItem
 import com.example.goodchoice.R
-import com.example.goodchoice.data.StayItem
 import com.example.goodchoice.ui.theme.*
 
+/**
+ * 홈 스크롤시 상단에 노출되는 뷰
+ */
 @Composable
 fun StickyHeaderWidget(
     modifier: Modifier = Modifier,

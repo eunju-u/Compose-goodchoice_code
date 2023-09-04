@@ -1,5 +1,7 @@
 package com.example.goodchoice.ui.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -22,7 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.TopBarWidget
+import com.example.goodchoice.ui.home.HomeTopBarWidget
+import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
 
@@ -55,11 +58,11 @@ fun HomeContent(
             state = lazyColumnListState
         ) {
             item {
-                TopBarWidget(
+                HomeTopBarWidget(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = dp20, bottom = dp20),
-                    title = "여기 어때",
+                    title = stringResource(id = R.string.str_app_name),
                     titleStyle = MaterialTheme.typography.displayLarge.copy(color = Theme.colorScheme.red),
                     onFinish = {},
                     isBackButton = false,
@@ -157,44 +160,85 @@ fun HomeContent(
 
                 //지금 신규가입하면~
             }
+            if (recentStayList.isNotEmpty()) {
+                items(items = recentStayList) { stayData ->
+                    HotelVerticalWidget(
+                        modifier = Modifier
+                            .fillMaxWidth(), stayData = stayData
+                    )
+                }
+            }
 
             if (stayList.isNotEmpty()) {
                 items(items = stayList) { stayData ->
                     HotelVerticalWidget(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(400.dp), stayData = stayData
+                            .fillMaxWidth(), stayData = stayData
                     )
                 }
-            }
-
-            if (overSeaCityList.isNotEmpty()) {
-                item {
-                    Text(
-                        buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontFamily = GMarketSansFamily,
-                                    fontWeight = FontWeight.Medium,
-                                    fontSize = 10.sp,
-                                    color = Theme.colorScheme.blue
-                                )
-                            ) {
-                                val str = stringResource(id = R.string.str_over_sea_row_price)
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                    append(str.substring(0, 7))
-                                }
-                                append(str.substring(7))
-                            }
-                        },
-                        color = Theme.colorScheme.blue,
-                        style = textStyle
-                    )
-                }
-
             }
 
             item {
+                Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
+            }
+            if (overSeaCityList.isNotEmpty()) {
+                item {
+                    Column(Modifier.background(color = Theme.colorScheme.pureGray)) {
+                        Text(
+                            modifier = Modifier.padding(
+                                start = dp15,
+                                end = 15.dp,
+                                top = dp20
+                            ),
+                            text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontFamily = GMarketSansFamily,
+                                        fontWeight = FontWeight.Medium,
+                                        fontSize = 14.sp,
+                                        color = Theme.colorScheme.blue
+                                    )
+                                ) {
+                                    val str = stringResource(id = R.string.str_over_sea_row_price)
+                                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                        append(str.substring(0, 7))
+                                    }
+                                    append(str.substring(7))
+                                }
+                            },
+                            color = Theme.colorScheme.blue,
+                            style = textStyle
+                        )
+                        LazyRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(dp10)
+                        ) {
+                            itemsIndexed(items = overSeaCityList) { index, item ->
+                                if (index == 0) Spacer(Modifier.width(dp15))
+                                Column(
+                                    modifier = Modifier
+                                        .clickable {
+
+                                        }
+                                        .padding(start = dp5, end = dp5, top = dp20, bottom = dp20),
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    OverSeaWidget(item)
+                                }
+                                if (index == overSeaCityList.lastIndex) Spacer(Modifier.width(dp15))
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            item {
+                CompanyInfoWidget()
                 Spacer(modifier = Modifier.height(dp30))
             }
         }

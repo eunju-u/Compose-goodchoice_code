@@ -10,6 +10,7 @@ import androidx.compose.ui.UiComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.ui.theme.Theme
@@ -29,7 +30,7 @@ fun LeftImageButtonWidget(
     borderColor: Color = Theme.colorScheme.blue,
     style: TextStyle = MaterialTheme.typography.labelSmall,
     onItemClick: () -> Unit,
-    content: @Composable @UiComposable (BoxScope.() -> Unit)? = null,
+    content: @Composable @UiComposable (() -> Unit)? = null,
 ) {
     title?.let {
         ImageButtonWidget(
@@ -47,21 +48,22 @@ fun LeftImageButtonWidget(
                 horizontalArrangement = Arrangement.Center
             ) {
                 if (content != null) {
-                    Box(modifier = Modifier
-                        .padding(end = if (hasEndPadding) endPadding else 0.dp),
+                    Box(
+                        modifier = Modifier
+                            .padding(end = if (hasEndPadding) endPadding else 0.dp),
                         contentAlignment = Alignment.Center
                     ) { content() }
                 }
 
                 if (it is String) {
-                    Text(
+                    TextWidget(
                         modifier = Modifier
                             .weight(1f, fill = false),
                         text = it,
                         style = style
                     )
                 } else {
-                    Text(
+                    TextWidget(
                         modifier = Modifier
                             .weight(1f, fill = false),
                         text = it as AnnotatedString,
@@ -71,4 +73,10 @@ fun LeftImageButtonWidget(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun previewLeftImageButtonWidget() {
+    LeftImageButtonWidget(title = "text", onItemClick = {}, content = { Text(text = "left_image") })
 }
