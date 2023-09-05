@@ -41,7 +41,7 @@ fun HotelVerticalWidget(
             modifier = Modifier.padding(
                 start = dp15,
                 bottom = dp10,
-                end = 15.dp,
+                end = dp15,
                 top = dp20
             ),
             text = stayData.title ?: "",
@@ -101,7 +101,7 @@ fun HotelVerticalWidget(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = dp15),
+                    .padding(top = dp10, bottom = dp10),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

@@ -41,5 +41,6 @@
 
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
+    <string name="str_close">닫기</string>
 
 </resources>

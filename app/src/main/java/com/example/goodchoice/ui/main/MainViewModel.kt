@@ -18,6 +18,7 @@ class MainViewModel : ViewModel() {
     var isShowFullHeader = MutableStateFlow(false)
 
     var currentRoute = MutableStateFlow("")
+    var isRefreshHomeData = MutableStateFlow(false)
 
     fun getCurrentViewData() {
         when (currentRoute.value) {
@@ -305,7 +306,11 @@ class MainViewModel : ViewModel() {
                 allCategoryList.add(item)
             }
         }
-        Log.d("eunju", "homeData ${homeData.value}")
+
+        //홈 화면 재로드 플래그 초기화
+        if (isRefreshHomeData.value) {
+            isRefreshHomeData.value = false
+        }
     }
 
     private fun requestSearchData() {

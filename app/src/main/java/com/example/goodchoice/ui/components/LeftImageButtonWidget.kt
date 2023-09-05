@@ -33,7 +33,7 @@ fun LeftImageButtonWidget(
     content: @Composable @UiComposable (() -> Unit)? = null,
 ) {
     title?.let {
-        ImageButtonWidget(
+        ButtonWidget(
             modifier = Modifier.then(modifier),
             enabled = enabled,
             hasOutline = hasOutline,

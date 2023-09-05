@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.home.HomeTopBarWidget
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
@@ -42,7 +41,7 @@ fun HomeContent(
     val overSeaCityList = homeData.overSeaCityList ?: emptyList()
     val row = 4
 
-    val isShowFullHeader = viewModel.isShowFullHeader.collectAsState()
+    val isShowFullHeader = viewModel.isShowFullHeader.collectAsStateWithLifecycle()
     val lazyColumnListState = rememberLazyListState()
     val textStyle = MaterialTheme.typography.displayMedium
     // header 노출하기 위한 플래그
@@ -51,6 +50,9 @@ fun HomeContent(
             lazyColumnListState.firstVisibleItemIndex > 1
         }
     }
+
+    val scope = rememberCoroutineScope()
+    val isRefresh = viewModel.isRefreshHomeData.collectAsStateWithLifecycle()
 
     Box(modifier = modifier) {
         LazyColumn(
@@ -238,6 +240,7 @@ fun HomeContent(
 
 
             item {
+                Spacer(modifier = Modifier.height(dp20))
                 CompanyInfoWidget()
                 Spacer(modifier = Modifier.height(dp30))
             }

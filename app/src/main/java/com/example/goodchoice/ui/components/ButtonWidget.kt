@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.goodchoice.ui.theme.Theme
 
 @Composable
-fun ImageButtonWidget(
+fun ButtonWidget(
     modifier: Modifier = Modifier,
     hasOutline: Boolean = false,
     shape: Dp = 10.dp,
