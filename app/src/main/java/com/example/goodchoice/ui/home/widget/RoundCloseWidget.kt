@@ -3,6 +3,7 @@ package com.example.goodchoice.ui.home.widget
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,30 +19,36 @@ import com.example.goodchoice.R
 import com.example.goodchoice.ui.theme.*
 
 @Composable
-fun RoundCloseWidget() {
+fun RoundCloseWidget(modifier: Modifier = Modifier) {
     RoundImageWidget(
-        modifier = Modifier.size(dp40),
+        modifier = Modifier
+            .size(dp55)
+            .then(modifier),
         painter = painterResource(id = R.drawable.bg_white),
-        roundShape = dp30
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                modifier = Modifier.size(dp20),
-                painter = painterResource(id = R.drawable.ic_close),
-                colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                contentDescription = "image"
-            )
-            Text(
-                text = stringResource(id = R.string.str_close),
-                color = Theme.colorScheme.darkGray,
-                style = MaterialTheme.typography.labelSmall
-            )
+        roundShape = dp30,
+        boxAlignment = Alignment.Center,
+        content = {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    modifier = Modifier
+                        .padding(bottom = dp5)
+                        .size(dp20),
+                    painter = painterResource(id = R.drawable.ic_close),
+                    colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
+                    contentDescription = "image"
+                )
+                Text(
+                    text = stringResource(id = R.string.str_close),
+                    color = Theme.colorScheme.darkGray,
+                    style = MaterialTheme.typography.labelSmall
+                )
 
+            }
         }
-    }
+    )
 }
 
 @Preview

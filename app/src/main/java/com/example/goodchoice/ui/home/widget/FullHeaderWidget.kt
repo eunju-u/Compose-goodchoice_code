@@ -8,14 +8,13 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +40,7 @@ fun FullHeaderWidget(
             Canvas(
                 Modifier
                     .fillMaxSize()
-                    .pointerInput(true) { detectTapGestures { } }
+                    .pointerInput(true) {}
                     .semantics(mergeDescendants = true) {
                         onClick { false }
                     }
@@ -72,20 +71,14 @@ fun FullHeaderWidget(
                     columns = GridCells.Fixed(count = row),
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
-                    itemsIndexed(items = categoryItem) { index, item ->
+                    items(items = categoryItem) { item ->
                         CategoryItemWidget(item)
                     }
                 }
             }
             Spacer(modifier = Modifier.height(15.dp))
 
-            Image(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clickable { onClickClose() },
-                painter = painterResource(id = R.drawable.ic_circle_close),
-                contentDescription = "닫기"
-            )
+            RoundCloseWidget(modifier = Modifier.clickable { onClickClose() })
         }
     }
 }

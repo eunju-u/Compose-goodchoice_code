@@ -35,30 +35,37 @@ fun RecentSeenWidget(stayItem: StayItem) {
         verticalArrangement = Arrangement.Center,
     ) {
         RoundImageWidget(
-            modifier = Modifier.height(dp120), painter = painter
-        ) {
-            if (!stayItem.label.isNullOrEmpty()) {
-                Column(
-                    modifier = Modifier
-                        .clip(shape = RoundedCornerShape(topEnd = dp5))
-                        .alpha(0.65f)
-                        .background(color = Theme.colorScheme.darkGray)
-                        .padding(start = dp8, end = dp8, top = dp5, bottom = dp5)
-                ) {
+            modifier = Modifier.height(dp120),
+            painter = painter,
+            content = {
+                if (!stayItem.label.isNullOrEmpty()) {
+                    Column(
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(topEnd = dp5))
+                            .alpha(0.65f)
+                            .background(color = Theme.colorScheme.darkGray)
+                            .padding(start = dp8, end = dp8, top = dp5, bottom = dp5)
+                    ) {
+                        Text(
+                            text = stayItem.label,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Transparent
+                        )
+                    }
                     Text(
+                        modifier = Modifier.padding(
+                            start = dp8,
+                            end = dp8,
+                            top = dp5,
+                            bottom = dp5
+                        ),
                         text = stayItem.label,
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.Transparent
+                        color = Theme.colorScheme.white
                     )
                 }
-                Text(
-                    modifier = Modifier.padding(start = dp8, end = dp8, top = dp5, bottom = dp5),
-                    text = stayItem.label,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Theme.colorScheme.white
-                )
             }
-        }
+        )
 
         TextWidget(
             modifier = Modifier.padding(top = dp8),
