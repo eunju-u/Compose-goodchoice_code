@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -15,7 +16,6 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.goodchoice.Const
 import com.example.goodchoice.data.StayData
 import com.example.goodchoice.R
@@ -29,11 +29,13 @@ import com.example.goodchoice.ui.theme.*
 fun HotelVerticalWidget(
     modifier: Modifier = Modifier,
     stayData: StayData = StayData(),
+    recentStayList: SnapshotStateList<StayData> = mutableStateListOf()
 ) {
     val context = LocalContext.current
     val scrollState = rememberLazyListState()
     val textStyle = MaterialTheme.typography.labelLarge
 
+    val stayList = stayData.stayList ?: emptyList()
     Column(
         modifier = modifier
     ) {
@@ -49,29 +51,35 @@ fun HotelVerticalWidget(
         )
 
         //horizontal item
-        if (!stayData.stayList.isNullOrEmpty()) {
+        if (stayList.isNotEmpty()) {
             LazyRow(
                 modifier = Modifier
                     .fillMaxWidth(),
                 state = scrollState,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                itemsIndexed(items = stayData.stayList) { index, item ->
+                itemsIndexed(items = stayList) { index, item ->
                     if (index == 0) Spacer(Modifier.width(15.dp))
                     stayData.type?.let { type ->
                         if (type == Const.TODAY_HOTEL || type == Const.HOT_HOTEL) {
-                            HotelItemWidget(stayItem = item)
+                            HotelItemWidget(
+                                stayItem = item,
+                                recentStayList = recentStayList
+                            )
                         } else if (type == Const.RECENT_HOTEL) {
                             RecentSeenWidget(stayItem = item)
                         }
-                    } ?: HotelItemWidget(stayItem = item)
+                    } ?: HotelItemWidget(
+                        stayItem = item,
+                        recentStayList = recentStayList
+                    )
 
-                    if (index == stayData.stayList.lastIndex) Spacer(Modifier.width(15.dp))
+                    if (index == stayList.lastIndex) Spacer(Modifier.width(15.dp))
                 }
             }
         }
 
-        if (stayData.isMore) {
+        if (stayList.size > 3) {
             //더보기 버튼
             val text: Any =
                 when (stayData.type) {
@@ -158,8 +166,7 @@ fun previewHotelVerticalWidget() {
                     discountPrice = "다른 날짜 확인",
                     level = "아파트먼트",
                 )
-            ),
-            isMore = true
+            )
         )
     )
 }

@@ -4,12 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.TestTheme
-import kotlinx.coroutines.launch
 
 /**
  * 최근 본 상품 activity
@@ -28,7 +24,7 @@ class RecentSeenActivity : ComponentActivity() {
                 RecentSeenContent(viewModel = viewModel)
             }
         }
-        observerRecentData()
+//        observerRecentData()
     }
 
     override fun onResume() {
@@ -39,18 +35,17 @@ class RecentSeenActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-    //MainViewModel 에서 최근 본 상품 가져오기 위해서 데이터 조회 함.
-    private fun observerRecentData() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.homeData.collect { value ->
-                    value.recentStayList?.let {
-                        if (it.isEmpty()) {
-                            viewModel.requestHomeData()
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    //MainViewModel 에서 최근 본 상품 가져오기 위해서 데이터 조회 함.
+//    //TODO eunju : mainviewModel 에 남아있을 텐데..?
+//    private fun observerRecentData() {
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.homeUiState.collect { value ->
+//                    if (value !is ConnectInfo.Available) {
+//                        viewModel.requestRecentSeenData()
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

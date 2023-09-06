@@ -39,6 +39,11 @@
 
     <!--  내 정보  -->
 
+    <!--  최근 본 상품  -->
+    <string name="str_empty_recent_seen_item_title">최근 본 상품이 없어요</string>
+    <string name="str_empty_recent_seen_item_sub">내정보 > 앱 설정에서 최근 본 상품이 보이도록 설정할 수 있어요.</string>
+    <string name="str_see_item">상품 둘러보기</string>
+
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
     <string name="str_close">닫기</string>
