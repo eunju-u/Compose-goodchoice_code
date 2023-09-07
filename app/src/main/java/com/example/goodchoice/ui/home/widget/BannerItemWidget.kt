@@ -21,7 +21,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
-import com.example.goodchoice.data.BannerData
+import com.example.goodchoice.api.data.BannerData
 import com.example.goodchoice.ui.theme.*
 
 @OptIn(ExperimentalFoundationApi::class)

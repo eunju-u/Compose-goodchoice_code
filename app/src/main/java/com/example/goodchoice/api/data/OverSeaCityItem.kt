@@ -1,4 +1,4 @@
-package com.example.goodchoice.data
+package com.example.goodchoice.api.data
 
 //id : 11000 ~
 data class OverSeaCityItem(

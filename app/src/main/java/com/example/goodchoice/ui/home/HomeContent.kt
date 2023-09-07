@@ -26,6 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.api.data.StayData
+import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
@@ -41,7 +43,7 @@ fun HomeContent(
     val categoryList = homeData.categoryList
     val bannerList = homeData.bannerList
     val stayList = homeData.stayList
-    val recentStayList = homeData.recentStayList
+    val recentStay = homeData.recentStay
     val overSeaCityList = homeData.overSeaCityList
     val row = 4
 
@@ -167,25 +169,28 @@ fun HomeContent(
                         }
 
                         //지금 신규가입하면~
-                    }
-                    if (recentStayList.isNotEmpty()) {
-                        items(items = recentStayList) { stayData ->
-                            HotelVerticalWidget(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                stayData = stayData,
-                                recentStayList = recentStayList
-                            )
+
+                        recentStay.value.stayList?.let {
+                            if (it.isNotEmpty()) {
+                                HotelVerticalWidget(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    stayData = StayData(
+                                        Const.RECENT_HOTEL,
+                                        "최근 본 상품",
+                                        recentStay.value.stayList
+                                    )
+                                )
+                            }
                         }
                     }
-
                     if (stayList.isNotEmpty()) {
                         items(items = stayList) { stayData ->
                             HotelVerticalWidget(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 stayData = stayData,
-                                recentStayList = recentStayList
+                                recentStay = recentStay
                             )
                         }
                     }

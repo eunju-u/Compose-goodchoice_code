@@ -1,4 +1,4 @@
-package com.example.goodchoice.data
+package com.example.goodchoice.api.data
 
 /**
  * 홈 화면 카테고리 아이템

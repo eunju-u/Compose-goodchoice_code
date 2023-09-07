@@ -1,4 +1,4 @@
-package com.example.goodchoice.data
+package com.example.goodchoice.api.data
 
 data class StayData(
     val type: Int? = 0,

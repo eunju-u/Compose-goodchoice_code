@@ -24,7 +24,6 @@ class RecentSeenActivity : ComponentActivity() {
                 RecentSeenContent(viewModel = viewModel)
             }
         }
-//        observerRecentData()
     }
 
     override fun onResume() {
@@ -35,17 +34,4 @@ class RecentSeenActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-//    //MainViewModel 에서 최근 본 상품 가져오기 위해서 데이터 조회 함.
-//    //TODO eunju : mainviewModel 에 남아있을 텐데..?
-//    private fun observerRecentData() {
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                viewModel.homeUiState.collect { value ->
-//                    if (value !is ConnectInfo.Available) {
-//                        viewModel.requestRecentSeenData()
-//                    }
-//                }
-//            }
-//        }
-//    }
 }

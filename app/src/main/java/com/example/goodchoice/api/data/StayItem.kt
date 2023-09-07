@@ -1,4 +1,4 @@
-package com.example.goodchoice.data
+package com.example.goodchoice.api.data
 
 data class StayItem(
     val id: Int? = 0,

@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -17,11 +16,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.Const
-import com.example.goodchoice.data.StayData
+import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.R
-import com.example.goodchoice.data.StayItem
+import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.RightImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.ui.home.homeData.HomeRecentData
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 import com.example.goodchoice.ui.theme.*
 
@@ -29,7 +29,7 @@ import com.example.goodchoice.ui.theme.*
 fun HotelVerticalWidget(
     modifier: Modifier = Modifier,
     stayData: StayData = StayData(),
-    recentStayList: SnapshotStateList<StayData> = mutableStateListOf()
+    recentStay: MutableState<HomeRecentData> = mutableStateOf(HomeRecentData())
 ) {
     val context = LocalContext.current
     val scrollState = rememberLazyListState()
@@ -64,14 +64,14 @@ fun HotelVerticalWidget(
                         if (type == Const.TODAY_HOTEL || type == Const.HOT_HOTEL) {
                             HotelItemWidget(
                                 stayItem = item,
-                                recentStayList = recentStayList
+                                recentStay = recentStay
                             )
                         } else if (type == Const.RECENT_HOTEL) {
                             RecentSeenWidget(stayItem = item)
                         }
                     } ?: HotelItemWidget(
                         stayItem = item,
-                        recentStayList = recentStayList
+                        recentStay = recentStay
                     )
 
                     if (index == stayList.lastIndex) Spacer(Modifier.width(15.dp))

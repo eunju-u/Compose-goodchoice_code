@@ -8,7 +8,7 @@ import  androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
-import com.example.goodchoice.data.OverSeaCityItem
+import com.example.goodchoice.api.data.OverSeaCityItem
 import com.example.goodchoice.ui.components.RoundImageWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.theme.*
