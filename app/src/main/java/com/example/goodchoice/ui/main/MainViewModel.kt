@@ -1,12 +1,14 @@
 package com.example.goodchoice.ui.main
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
-import com.example.goodchoice.ui.home.homeData.HomeUiData
+import com.example.goodchoice.ui.home.homeData.HomeRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +19,9 @@ class MainViewModel : ViewModel() {
 
     var homeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
         private set
-    val homeData = MutableStateFlow(HomeUiData())
+    var homeData = MutableStateFlow(HomeData())
     val allCategoryList = LinkedList<CategoryItem>()
+    var recentData: MutableState<HomeRecentData> = mutableStateOf(HomeRecentData())
 
     //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
     var isShowFullHeader = MutableStateFlow(false)
@@ -61,7 +64,7 @@ class MainViewModel : ViewModel() {
                         CategoryItem(5, "캠핑*글램핑", R.drawable.img_camping),
                         CategoryItem(6, "게하*한옥", R.drawable.img_guest_house),
                         CategoryItem(7, "공간대여", R.drawable.img_hotel_inside),
-                        CategoryItem(8, "국내 항공", R.drawable. img_airplane),
+                        CategoryItem(8, "국내 항공", R.drawable.img_airplane),
                         CategoryItem(9, "렌터카", R.drawable.img_car),
                         CategoryItem(10, "레저*티켓", R.drawable.img_cablecar),
                         CategoryItem(11, "맛집", R.drawable.img_food)
@@ -207,23 +210,13 @@ class MainViewModel : ViewModel() {
         )
         delay(1000)
 
-        homeData.value.categoryList.clear()
-        homeData.value.bannerList.clear()
-        homeData.value.stayList.clear()
-        homeData.value.overSeaCityList.clear()
-
-        homeData.value.categoryList.addAll(testHomeData.categoryList ?: emptyList())
-        homeData.value.bannerList.addAll(testHomeData.bannerList ?: emptyList())
-        homeData.value.stayList.addAll(testHomeData.stayList ?: emptyList())
-        homeData.value.overSeaCityList.addAll(testHomeData.overSeaCityList ?: emptyList())
-
         allCategoryList.clear()
         testHomeData.categoryList?.map {
             it.categoryList?.map { item ->
                 allCategoryList.add(item)
             }
         }
-
+        homeData.value = testHomeData
         homeUiState.value = ConnectInfo.Available()
 
         //홈 화면 재로드 플래그 초기화

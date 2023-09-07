@@ -34,7 +34,7 @@ fun RecentSeenContent(viewModel: MainViewModel) {
     val context = LocalContext.current
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
     val homeData = viewModel.homeData.value
-    val stayList =  homeData.recentStay.value.stayList?: mutableStateListOf()
+    val stayList = viewModel.recentData.value.stayList ?: mutableStateListOf()
 
     Column {
         TopAppBarWidget(
@@ -63,13 +63,13 @@ fun RecentSeenContent(viewModel: MainViewModel) {
                         .fillMaxSize()
                         .background(Theme.colorScheme.white)
                 ) {
-                    if (stayList.isNotEmpty()) {
+                    if (stayList.size > 0) {
                         item {
                             Text(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(start = dp20, top = dp20, bottom = dp15),
-                                text = homeData.recentStay.value.title ?: "",
+                                text = viewModel.recentData.value.title ?: "",
                                 style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
                             )
                         }

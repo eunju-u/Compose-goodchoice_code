@@ -39,12 +39,12 @@ fun HomeContent(
 ) {
     val context = LocalContext.current
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
-    val homeData = viewModel.homeData.value
-    val categoryList = homeData.categoryList
-    val bannerList = homeData.bannerList
-    val stayList = homeData.stayList
-    val recentStay = homeData.recentStay
-    val overSeaCityList = homeData.overSeaCityList
+    val homeData = viewModel.homeData.collectAsStateWithLifecycle().value
+    val categoryList = homeData.categoryList ?: emptyList()
+    val bannerList = homeData.bannerList ?: emptyList()
+    val stayList = homeData.stayList ?: emptyList()
+    val recentData = viewModel.recentData
+    val overSeaCityList = homeData.overSeaCityList ?: emptyList()
     val row = 4
 
     val isShowFullHeader = viewModel.isShowFullHeader.collectAsStateWithLifecycle()
@@ -170,7 +170,7 @@ fun HomeContent(
 
                         //지금 신규가입하면~
 
-                        recentStay.value.stayList?.let {
+                        recentData.value.stayList?.let {
                             if (it.isNotEmpty()) {
                                 HotelVerticalWidget(
                                     modifier = Modifier
@@ -178,7 +178,7 @@ fun HomeContent(
                                     stayData = StayData(
                                         Const.RECENT_HOTEL,
                                         "최근 본 상품",
-                                        recentStay.value.stayList
+                                        recentData.value.stayList
                                     )
                                 )
                             }
@@ -190,7 +190,7 @@ fun HomeContent(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 stayData = stayData,
-                                recentStay = recentStay
+                                recentStay = recentData
                             )
                         }
                     }
