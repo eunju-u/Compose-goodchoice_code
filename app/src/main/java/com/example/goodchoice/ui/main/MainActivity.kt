@@ -7,9 +7,6 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
-import com.example.goodchoice.data.*
 import com.example.goodchoice.ui.theme.TestTheme
 import kotlinx.coroutines.launch
 

@@ -7,9 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
-import com.example.goodchoice.data.*
 import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.main.MainViewModel
 
