@@ -21,7 +21,7 @@ import com.example.goodchoice.R
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.RightImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.home.homeData.HomeRecentData
+import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 import com.example.goodchoice.ui.theme.*
 
@@ -29,7 +29,7 @@ import com.example.goodchoice.ui.theme.*
 fun HotelVerticalWidget(
     modifier: Modifier = Modifier,
     stayData: StayData = StayData(),
-    recentStay: MutableState<HomeRecentData> = mutableStateOf(HomeRecentData())
+    recentStay: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
 ) {
     val context = LocalContext.current
     val scrollState = rememberLazyListState()

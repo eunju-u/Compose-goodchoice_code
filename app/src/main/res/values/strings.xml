@@ -36,6 +36,9 @@
     <!--  주변  -->
 
     <!--  찜  -->
+    <string name="str_no_see_like_list"> 찜 목록을 볼 수 없어요</string>
+    <string name="str_check_like_list_after_login"> 로그인 후 찜한 상품을 확인하세요</string>
+
 
     <!--  내 정보  -->
 
@@ -47,5 +50,6 @@
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
     <string name="str_close">닫기</string>
+    <string name="str_login">로그인</string>
 
 </resources>

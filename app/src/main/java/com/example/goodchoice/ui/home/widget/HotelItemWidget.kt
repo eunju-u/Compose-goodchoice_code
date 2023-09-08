@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.home.homeData.HomeRecentData
+import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil
 
@@ -30,7 +30,7 @@ import com.example.goodchoice.utils.StringUtil
 @Composable
 fun HotelItemWidget(
     stayItem: StayItem = StayItem(),
-    recentStay: MutableState<HomeRecentData> = mutableStateOf(HomeRecentData())
+    recentStay: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
 ) {
     Column(
         modifier = Modifier

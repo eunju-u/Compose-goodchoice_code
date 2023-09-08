@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.example.goodchoice.api.data.StayItem
 
-data class HomeRecentData(
+data class MutableRecentData(
     val type: Int? = 0,
     val title: String? = "",
     val stayList: SnapshotStateList<StayItem>? = mutableStateListOf(),

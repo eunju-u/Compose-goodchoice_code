@@ -7,9 +7,28 @@ object Const {
     const val LIKE = "Like"
     const val MY_INFO = "MyInfo"
 
+    //카테고리 Text
+    const val C_PREMIUM_BLACK = "프리미엄블랙"
+    const val C_MOTEL = "모텔"
+    const val C_HOTEL_AND_RESORT = "호텔*리조트"
+    const val C_PENSION_AND_PULL_VILLA = "펜션*풀빌라"
+    const val C_HOUSE_AND_VILLA = "홈&빌라"
+    const val C_CAMPING_AND_GLAMPING = "캠핑*글램핑"
+    const val C_GUESTHOUSE = "게하*한옥"
+    const val C_SPACE_RENTAL = "공간대여"
+    const val C_KOREA_AIRPLANE = "국내 항공"
+    const val C_RENTAL_CAR = "렌터카"
+    const val C_LEISURE_AND_TICKET = "레저*티켓"
+    const val C_GOOD_FOOD = "맛집"
+    const val C_OVERSEA_AIRPLANE = "해외 항공"
+    const val C_OVERSEA_STAY = "해외 숙소"
+    const val C_OVERSEA_AIRPLANE_AND_STAY = "항공+숙소"
+
     // 나라 타입
-    const val KOREA = "Korea"
-    const val OVERSEA = "Oversea"
+    const val KOREA = "Korea" //국내여행
+    const val OVERSEA = "Oversea" //해외여행
+    const val SPACE_RENTAL= "Space_Rental" //공간대여
+    const val LEISURE_AND_TICKET= "Leisure_and_Ticket" //레저, 티켓
 
     //숙소 타입 (최근, 오늘특가, hot 인기)
     const val RECENT_HOTEL = 122
@@ -20,11 +39,11 @@ object Const {
     const val WIFI = "WIFI"
     const val FULL = "FULL"
     const val SPA = "SPA"
-    const val COOKING  = "COOKING"
+    const val COOKING = "COOKING"
     const val BBQ = "BBQ"
     const val COOKER = "COOKER"
     const val TV = "TV"
-    const val  BATHROOM = "BATHROOM"
+    const val BATHROOM = "BATHROOM"
     const val FREE_PARKING = "FREE_PARKING"
     const val AIR_CONDITIONER = "AIR_CONDITIONER"
     const val REFRIGERATOR = "REFRIGERATOR"
@@ -37,6 +56,7 @@ object Const {
     const val COOKING_POSSIBLE = "COOKING_POSSIBLE"
     const val MICROWAVE = "MICROWAVE"
 
+    //해외 도시
     const val OSAKA = 11000
     const val FUKUOKA = 11001
     const val TOKYO = 11002

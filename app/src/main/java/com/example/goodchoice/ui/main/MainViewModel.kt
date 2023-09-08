@@ -1,14 +1,16 @@
 package com.example.goodchoice.ui.main
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
-import com.example.goodchoice.ui.home.homeData.HomeRecentData
+import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +23,21 @@ class MainViewModel : ViewModel() {
         private set
     var homeData = MutableStateFlow(HomeData())
     val allCategoryList = LinkedList<CategoryItem>()
-    var recentData: MutableState<HomeRecentData> = mutableStateOf(HomeRecentData())
+
+    // 최근 본 상품
+    var recentData: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
+
+    // 찜 > 국내 여행
+    var koreaLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
+
+    // 찜 > 해외 여행
+    var overseaLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
+
+    // 찜 > 공간 대여
+    var spaceRentalLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
+
+    // 찜 > 레저 티켓
+    var leisureLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
 
     //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
     var isShowFullHeader = MutableStateFlow(false)
@@ -56,26 +72,26 @@ class MainViewModel : ViewModel() {
                 CategoryData(
                     countryType = Const.KOREA,
                     categoryList = listOf(
-                        CategoryItem(0, "프리미엄블랙", R.drawable.img_premium),
-                        CategoryItem(1, "모텔", R.drawable.img_bed),
-                        CategoryItem(2, "호텔*리조트", R.drawable.img_hotel),
-                        CategoryItem(3, "펜션*풀빌라", R.drawable.img_pull),
-                        CategoryItem(4, "홈&빌라", R.drawable.img_house),
-                        CategoryItem(5, "캠핑*글램핑", R.drawable.img_camping),
-                        CategoryItem(6, "게하*한옥", R.drawable.img_guest_house),
-                        CategoryItem(7, "공간대여", R.drawable.img_hotel_inside),
-                        CategoryItem(8, "국내 항공", R.drawable.img_airplane),
-                        CategoryItem(9, "렌터카", R.drawable.img_car),
-                        CategoryItem(10, "레저*티켓", R.drawable.img_cablecar),
-                        CategoryItem(11, "맛집", R.drawable.img_food)
+                        CategoryItem(0, Const.C_PREMIUM_BLACK, R.drawable.img_premium),
+                        CategoryItem(1, Const.C_MOTEL, R.drawable.img_bed),
+                        CategoryItem(2, Const.C_HOTEL_AND_RESORT, R.drawable.img_hotel),
+                        CategoryItem(3, Const.C_PENSION_AND_PULL_VILLA, R.drawable.img_pull),
+                        CategoryItem(4, Const.C_HOUSE_AND_VILLA, R.drawable.img_house),
+                        CategoryItem(5, Const.C_CAMPING_AND_GLAMPING, R.drawable.img_camping),
+                        CategoryItem(6, Const.C_GUESTHOUSE, R.drawable.img_guest_house),
+                        CategoryItem(7, Const.C_SPACE_RENTAL, R.drawable.img_hotel_inside),
+                        CategoryItem(8, Const.C_KOREA_AIRPLANE, R.drawable.img_airplane),
+                        CategoryItem(9, Const.C_RENTAL_CAR, R.drawable.img_car),
+                        CategoryItem(10, Const.C_LEISURE_AND_TICKET, R.drawable.img_cablecar),
+                        CategoryItem(11, Const.C_GOOD_FOOD, R.drawable.img_food)
                     )
                 ),
                 CategoryData(
                     countryType = Const.OVERSEA,
                     categoryList = listOf(
-                        CategoryItem(0, "해외 항공", R.drawable.img_oversea_airplane),
-                        CategoryItem(1, "해외 숙소", R.drawable.img_oversea_house),
-                        CategoryItem(2, "항공+숙소", R.drawable.img_oversea)
+                        CategoryItem(0, Const.C_OVERSEA_AIRPLANE, R.drawable.img_oversea_airplane),
+                        CategoryItem(1, Const.C_OVERSEA_STAY, R.drawable.img_oversea_house),
+                        CategoryItem(2, Const.C_OVERSEA_AIRPLANE_AND_STAY, R.drawable.img_oversea)
                     )
                 )
             ),
