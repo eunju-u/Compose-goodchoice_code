@@ -28,15 +28,16 @@ fun EventItemWidget(
         onItemClick = {},
         title = title,
         containerColor = Theme.colorScheme.pureGray,
-        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
-    ) {
-        Image(
-            modifier = Modifier.size(dp15),
-            painter = painterResource(id = R.drawable.ic_brightness),
-            colorFilter = ColorFilter.tint(Theme.colorScheme.yellow),
-            contentDescription = null
-        )
-    }
+        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+        content = {
+            Image(
+                modifier = Modifier.size(dp15),
+                painter = painterResource(id = R.drawable.ic_brightness),
+                colorFilter = ColorFilter.tint(Theme.colorScheme.yellow),
+                contentDescription = null
+            )
+        }
+    )
 }
 
 @Preview

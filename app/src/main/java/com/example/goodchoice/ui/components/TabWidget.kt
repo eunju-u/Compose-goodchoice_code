@@ -35,7 +35,7 @@ fun TabWidget(
         TabRowDefaults.Indicator(
             modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
             height = height,
-            color = Theme.colorScheme.darkGray
+            color = selectedContentColor
         )
     },
     divider: @Composable () -> Unit = {},

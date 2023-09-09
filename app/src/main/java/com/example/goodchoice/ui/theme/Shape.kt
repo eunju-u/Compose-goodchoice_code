@@ -5,6 +5,8 @@ import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
 val CategoryItemHeight = 55.dp
+val dp1 = 1.dp
+val dp3 = 3.dp
 val dp5 = 5.dp
 val dp8 = 8.dp
 val dp10 = 10.dp

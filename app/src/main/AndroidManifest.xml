@@ -23,6 +23,9 @@
         <activity
             android:name=".ui.recentSeen.RecentSeenActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

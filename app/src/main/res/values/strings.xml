@@ -47,6 +47,16 @@
     <string name="str_empty_recent_seen_item_sub">내정보 > 앱 설정에서 최근 본 상품이 보이도록 설정할 수 있어요.</string>
     <string name="str_see_item">상품 둘러보기</string>
 
+    <!--  로그인  -->
+    <string name="str_login_and_join">로그인/회원가입</string>
+    <string name="str_login_kakao">카카오로 시작하기</string>
+    <string name="str_login_naver">네이버로 시작하기</string>
+    <string name="str_login_facebook">페이스북으로 시작하기</string>
+    <string name="str_login_apple">Apple로 시작하기</string>
+    <string name="str_login_email">이메일로 시작하기</string>
+    <string name="str_login_business">비즈니스 로그인/회원가입</string>
+    <string name="str_login_recent">최근에 로그인했어요</string>
+
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
     <string name="str_close">닫기</string>

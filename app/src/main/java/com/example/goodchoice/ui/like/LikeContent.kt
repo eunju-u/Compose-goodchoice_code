@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.goodchoice.ui.TabData
 import com.example.goodchoice.ui.components.TabWidget
-import com.example.goodchoice.ui.like.widget.EmptyLikeWidget
+import com.example.goodchoice.ui.like.widget.LikeLoginWidget
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.Theme
 
@@ -53,36 +53,21 @@ fun LikeContent(
                     state = state,
                     verticalAlignment = Alignment.Top
                 ) { page: Int ->
-                    when (menus[page].route) {
-                        TabData.KOREA.route -> {
-                            if (koreaLikeData.isEmpty()) {
-                                EmptyLikeWidget(Modifier.fillMaxSize())
-                            } else {
-
+                    //TODO eunju : 로그인 여부
+                    if (true) {
+                        LikeLoginWidget(Modifier.fillMaxSize())
+                    } else {
+                        when (menus[page].route) {
+                            TabData.KOREA.route -> {
                             }
-                        }
-                        TabData.OVERSEA.route -> {
-                            if (overseaLikeData.isEmpty()) {
-                                EmptyLikeWidget(Modifier.fillMaxSize())
-                            } else {
-
+                            TabData.OVERSEA.route -> {
                             }
-                        }
-                        TabData.RENTAL.route -> {
-                            if (spaceRentalLikeData.isEmpty()) {
-                                EmptyLikeWidget(Modifier.fillMaxSize())
-                            } else {
-
+                            TabData.RENTAL.route -> {
                             }
-                        }
-                        TabData.LEISURE.route -> {
-                            if (leisureLikeData.isEmpty()) {
-                                EmptyLikeWidget(Modifier.fillMaxSize())
-                            } else {
-
+                            TabData.LEISURE.route -> {
                             }
+                            else -> {}
                         }
-                        else -> {}
                     }
                 }
             }

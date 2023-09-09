@@ -17,7 +17,8 @@ import com.example.goodchoice.ui.theme.*
 @Composable
 fun TopAppBarWidget(
     height: Dp = dp50,
-    title: String,
+    title: String = "",
+    isCloseButton: Boolean = false, // close 버튼인기 back 버튼인지
     titleStyle: TextStyle = MaterialTheme.typography.labelMedium,
     onFinish: () -> Unit,
     rightContent: @Composable @UiComposable (() -> Unit)? = null
@@ -38,7 +39,10 @@ fun TopAppBarWidget(
             IconButton(onClick = onFinish) {
                 Icon(
                     modifier = Modifier.size(dp20),
-                    painter = painterResource(id = R.drawable.ic_back),
+                    painter =
+                    if (isCloseButton) painterResource(id = R.drawable.ic_close)
+                    else painterResource(id = R.drawable.ic_back),
+                    tint = Theme.colorScheme.darkGray,
                     contentDescription = null
                 )
             }

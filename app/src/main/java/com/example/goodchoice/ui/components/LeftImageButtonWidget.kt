@@ -18,6 +18,7 @@ import com.example.goodchoice.ui.theme.Theme
 @Composable
 fun LeftImageButtonWidget(
     modifier: Modifier = Modifier,
+    outsideModifier: Modifier = Modifier,
     title: Any? = null,
     hasOutline: Boolean = false,
     hasEndPadding: Boolean = true,
@@ -34,7 +35,7 @@ fun LeftImageButtonWidget(
 ) {
     title?.let {
         ButtonWidget(
-            modifier = Modifier.then(modifier),
+            modifier = Modifier.then(outsideModifier).then(modifier),
             enabled = enabled,
             hasOutline = hasOutline,
             shape = shape,
@@ -60,14 +61,16 @@ fun LeftImageButtonWidget(
                         modifier = Modifier
                             .weight(1f, fill = false),
                         text = it,
-                        style = style
+                        style = style,
+                        color = contentColor
                     )
                 } else {
                     TextWidget(
                         modifier = Modifier
                             .weight(1f, fill = false),
                         text = it as AnnotatedString,
-                        style = style
+                        style = style,
+                        color = contentColor
                     )
                 }
             }
