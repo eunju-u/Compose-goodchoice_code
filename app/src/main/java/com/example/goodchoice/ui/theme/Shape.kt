@@ -4,8 +4,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
-val CategoryItemHeight = 55.dp
+val CategoryItemHeight = 57.dp
 val dp1 = 1.dp
+val dp2 = 2.dp
 val dp3 = 3.dp
 val dp5 = 5.dp
 val dp8 = 8.dp
@@ -26,6 +27,9 @@ val dp90 = 90.dp
 val dp95 = 95.dp
 val dp100 = 100.dp
 val dp120 = 120.dp
+val dp150 = 150.dp
+val dp170 = 170.dp
+val dp200 = 200.dp
 
 val SmallComponentCornerRadius = 24.dp
 val MediumComponentCornerRadius = 18.dp

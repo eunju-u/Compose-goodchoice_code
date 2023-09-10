@@ -1,6 +1,8 @@
 package com.example.goodchoice.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -27,6 +29,7 @@ import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.StayData
+import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
@@ -69,14 +72,29 @@ fun HomeContent(
                 HomeTopBarWidget(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = dp20, bottom = dp20),
-                    title = stringResource(id = R.string.str_app_name),
-                    titleStyle = MaterialTheme.typography.displayLarge.copy(color = Theme.colorScheme.red),
-                    onFinish = {},
-                    isBackButton = false,
+                        .padding(top = dp30, bottom = dp30),
+                    isTitleText = false,
+                    titleIcon = {
+                        Image(
+                            modifier = Modifier.size(dp120),
+                            painter = painterResource(id = R.drawable.img_goodchoice),
+                            contentDescription = stringResource(id = R.string.str_app_name)
+                        )
+                    },
                     icon = {
                         Icon(
+                            modifier = Modifier
+                                .padding(end = dp20)
+                                .clickable {
+                                    context.startActivity(
+                                        Intent(
+                                            context,
+                                            AlarmActivity::class.java
+                                        )
+                                    )
+                                },
                             painter = painterResource(id = R.drawable.ic_notification),
+                            tint = Theme.colorScheme.darkGray,
                             contentDescription = "알림"
                         )
                     })

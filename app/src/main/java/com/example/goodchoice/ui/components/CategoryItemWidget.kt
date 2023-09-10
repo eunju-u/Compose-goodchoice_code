@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material3.MaterialTheme
@@ -13,12 +14,15 @@ import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.ui.theme.CategoryItemHeight
+import com.example.goodchoice.ui.theme.dp2
 import com.example.goodchoice.ui.theme.dp35
 
 @Composable
 fun CategoryItemWidget(item: CategoryItem = CategoryItem()) {
     Column(
-        modifier = Modifier.height(CategoryItemHeight),
+        modifier = Modifier
+            .height(CategoryItemHeight)
+            .clickable { },
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -31,6 +35,7 @@ fun CategoryItemWidget(item: CategoryItem = CategoryItem()) {
             alpha = LocalContentAlpha.current
         )
         TextWidget(
+            modifier = Modifier.padding(bottom = dp2),
             text = item.name, style = MaterialTheme.typography.labelSmall,
         )
     }

@@ -26,6 +26,9 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.alarm.AlarmActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

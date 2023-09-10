@@ -27,8 +27,8 @@ object Const {
     // 나라 타입
     const val KOREA = "Korea" //국내여행
     const val OVERSEA = "Oversea" //해외여행
-    const val SPACE_RENTAL= "Space_Rental" //공간대여
-    const val LEISURE_AND_TICKET= "Leisure_and_Ticket" //레저, 티켓
+    const val SPACE_RENTAL = "Space_Rental" //공간대여
+    const val LEISURE_AND_TICKET = "Leisure_and_Ticket" //레저, 티켓
 
     //숙소 타입 (최근, 오늘특가, hot 인기)
     const val RECENT_HOTEL = 122

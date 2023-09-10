@@ -26,7 +26,7 @@ import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.ui.theme.*
 
 @Composable
-fun LoginContent(modifier: Modifier = Modifier, onFinish: () -> Unit = {}) {
+fun LoginContent(onFinish: () -> Unit = {}) {
     val style = MaterialTheme.typography.labelMedium
     val iconModifier = Modifier.size(dp15)
     val endPadding = dp10
@@ -49,7 +49,7 @@ fun LoginContent(modifier: Modifier = Modifier, onFinish: () -> Unit = {}) {
         Column {
             TopAppBarWidget(onFinish = { onFinish() }) {}
             LazyColumn(
-                modifier.padding(start = dp40, end = dp40),
+                Modifier.padding(start = dp40, end = dp40),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

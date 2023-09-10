@@ -19,7 +19,7 @@ fun TopAppBarWidget(
     height: Dp = dp50,
     title: String = "",
     isCloseButton: Boolean = false, // close 버튼인기 back 버튼인지
-    titleStyle: TextStyle = MaterialTheme.typography.labelMedium,
+    titleStyle: TextStyle = MaterialTheme.typography.labelLarge,
     onFinish: () -> Unit,
     rightContent: @Composable @UiComposable (() -> Unit)? = null
 ) {

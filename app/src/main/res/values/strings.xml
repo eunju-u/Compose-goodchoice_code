@@ -57,6 +57,12 @@
     <string name="str_login_business">비즈니스 로그인/회원가입</string>
     <string name="str_login_recent">최근에 로그인했어요</string>
 
+    <!--  알림  -->
+    <string name="str_alarm">알림함</string>
+    <string name="str_no_see_alarm">알림을 볼 수 없어요</string>
+    <string name="str_check_alarm_after_login">로그인 후 알림함을 확인하세요.</string>
+
+
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
     <string name="str_close">닫기</string>

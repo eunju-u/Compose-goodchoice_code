@@ -165,6 +165,11 @@ class MainViewModel : ViewModel() {
                             defaultPrice = "130000",
                             discountPrice = "1250000",
                             level = "아파트먼트",
+                            imageList = listOf(
+//                                "https://image.goodchoice.kr/resize_490x348x1/affiliate/2021/01/05/5ff428bb363f5.jpg",
+//                                "https://image.goodchoice.kr/resize_490x348/affiliate/2021/01/05/5ff426fa3495a.jpg",
+//                                "https://image.goodchoice.kr/resize_490x348/affiliate/2021/01/05/5ff427a82d07c.jpg",
+                            )
                         ),
                         StayItem(
                             label = "국내 숙소",
