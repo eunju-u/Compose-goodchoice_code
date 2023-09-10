@@ -31,11 +31,22 @@ import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
+import com.example.goodchoice.ui.home.homeData.RefreshData
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-@SuppressLint("StateFlowValueCalledInComposition")
+val refreshDataList = listOf(
+    RefreshData(R.drawable.img_bed, "잠깐 쉬고 싶을 때"),
+    RefreshData(R.drawable.img_drink, "몰디브 한잔이 땡길 땐"),
+    RefreshData(R.drawable.img_hotel, "나만의 휴가가 필요할 때 ")
+)
+
+@SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier, viewModel: MainViewModel
@@ -61,237 +72,273 @@ fun HomeContent(
     }
 
     val scope = rememberCoroutineScope()
-    val isRefresh = viewModel.isRefreshHomeData.collectAsStateWithLifecycle()
+    var isRefresh by remember { mutableStateOf(false) }
+
+    var refreshDataIndex by remember { mutableStateOf(0) }
+    val refreshData = refreshDataList[refreshDataIndex]
+
+    LaunchedEffect(refreshDataIndex) {
+        while (true) {
+            delay(200)
+            refreshDataIndex = (refreshDataIndex + 1) % refreshDataList.size
+        }
+    }
 
     Box(modifier = modifier) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = lazyColumnListState
-        ) {
-            item {
-                HomeTopBarWidget(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = dp30, bottom = dp30),
-                    isTitleText = false,
-                    titleIcon = {
-                        Image(
-                            modifier = Modifier.size(dp120),
-                            painter = painterResource(id = R.drawable.img_goodchoice),
-                            contentDescription = stringResource(id = R.string.str_app_name)
-                        )
-                    },
-                    icon = {
-                        Icon(
-                            modifier = Modifier
-                                .padding(end = dp20)
-                                .clickable {
-                                    context.startActivity(
-                                        Intent(
-                                            context,
-                                            AlarmActivity::class.java
-                                        )
-                                    )
-                                },
-                            painter = painterResource(id = R.drawable.ic_notification),
-                            tint = Theme.colorScheme.darkGray,
-                            contentDescription = "알림"
-                        )
-                    })
+        SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefresh), onRefresh = {
+            scope.launch {
+                isRefresh = homeUiState.value is ConnectInfo.Available
+                viewModel.requestHomeData().await()
+                isRefresh = false
             }
+        }, indicator = { s, trigger -> {} }) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                state = lazyColumnListState
+            ) {
+                item {
+                    if (isRefresh) {
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(top = dp15, bottom = dp15),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Image(
+                                modifier = Modifier.padding(end = dp10),
+                                painter = painterResource(id = refreshData.icon),
+                                contentDescription = "image"
+                            )
+                            Text(text = refreshData.text)
+                        }
+                    }
+                    HomeTopBarWidget(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = dp30, bottom = dp30),
+                        isTitleText = false,
+                        titleIcon = {
+                            Image(
+                                modifier = Modifier.size(dp120),
+                                painter = painterResource(id = R.drawable.img_goodchoice),
+                                contentDescription = stringResource(id = R.string.str_app_name)
+                            )
+                        },
+                        icon = {
+                            Icon(
+                                modifier = Modifier
+                                    .padding(end = dp20)
+                                    .clickable {
+                                        context.startActivity(
+                                            Intent(
+                                                context,
+                                                AlarmActivity::class.java
+                                            )
+                                        )
+                                    },
+                                painter = painterResource(id = R.drawable.ic_notification),
+                                tint = Theme.colorScheme.darkGray,
+                                contentDescription = "알림"
+                            )
+                        })
+                }
 
-            when (homeUiState.value) {
-                is ConnectInfo.Available -> {
-                    if (categoryList.isNotEmpty()) {
-                        //나라 타입
-                        itemsIndexed(items = categoryList) { index, item ->
-                            val categoryItemList = item.categoryList
-                            if (item.countryType == Const.OVERSEA) {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(start = dp20, end = dp20),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(dp20)
-                                ) {
-                                    Text(
-                                        text = stringResource(id = R.string.str_go_oversea),
-                                        color = Theme.colorScheme.blue,
-                                        style = textStyle
-                                    )
-                                    Divider(
-                                        modifier = Modifier.weight(1f, fill = false),
-                                        thickness = 5.dp,
-                                        color = Theme.colorScheme.pureGray
-                                    )
+                when (homeUiState.value) {
+                    is ConnectInfo.Available -> {
+                        if (categoryList.isNotEmpty()) {
+                            //나라 타입
+                            itemsIndexed(items = categoryList) { index, item ->
+                                val categoryItemList = item.categoryList
+                                if (item.countryType == Const.OVERSEA) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(start = dp20, end = dp20),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(dp20)
+                                    ) {
+                                        Text(
+                                            text = stringResource(id = R.string.str_go_oversea),
+                                            color = Theme.colorScheme.blue,
+                                            style = textStyle
+                                        )
+                                        Divider(
+                                            modifier = Modifier.weight(1f, fill = false),
+                                            thickness = 5.dp,
+                                            color = Theme.colorScheme.pureGray
+                                        )
+                                    }
                                 }
-                            }
 
-                            if (!categoryItemList.isNullOrEmpty()) {
-                                val itemListSize = categoryItemList.size
-                                val column =
-                                    if (itemListSize >= row) {
-                                        (itemListSize / row) + (if (itemListSize % row > 0) 1 else 0)
-                                    } else 1
+                                if (!categoryItemList.isNullOrEmpty()) {
+                                    val itemListSize = categoryItemList.size
+                                    val column =
+                                        if (itemListSize >= row) {
+                                            (itemListSize / row) + (if (itemListSize % row > 0) 1 else 0)
+                                        } else 1
 
-                                val gridHeight = (column * CategoryItemHeight.value) + (column * 2)
+                                    val gridHeight =
+                                        (column * CategoryItemHeight.value) + (column * 2)
 
-                                // 카테고리 뷰
-                                LazyVerticalGrid(
-                                    modifier = Modifier
-                                        .height(gridHeight.dp)
-                                        .padding(start = dp20, end = dp20),
-                                    columns = GridCells.Fixed(count = row),
-                                    verticalArrangement = Arrangement.spacedBy(2.dp),
-                                    userScrollEnabled = false
-                                ) {
-                                    itemsIndexed(items = categoryItemList) { index, item ->
-                                        CategoryItemWidget(item)
+                                    // 카테고리 뷰
+                                    LazyVerticalGrid(
+                                        modifier = Modifier
+                                            .height(gridHeight.dp)
+                                            .padding(start = dp20, end = dp20),
+                                        columns = GridCells.Fixed(count = row),
+                                        verticalArrangement = Arrangement.spacedBy(2.dp),
+                                        userScrollEnabled = false
+                                    ) {
+                                        itemsIndexed(items = categoryItemList) { index, item ->
+                                            CategoryItemWidget(item)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    item {
-                        //배너
-                        if (bannerList.isNotEmpty()) {
-                            BannerWidget(
+                        item {
+                            //배너
+                            if (bannerList.isNotEmpty()) {
+                                BannerWidget(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp),
+                                    bannerList = bannerList
+                                )
+                            }
+
+                            //쿠폰, 도전뽑기, 이벤트
+                            Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(200.dp),
-                                bannerList = bannerList
-                            )
+                                    .padding(vertical = dp10, horizontal = dp10),
+                                horizontalArrangement = Arrangement.spacedBy(dp5),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                EventItemWidget(
+                                    modifier = Modifier.weight(1f),
+                                    title = stringResource(id = R.string.str_coupon)
+                                )
+                                EventItemWidget(
+                                    modifier = Modifier.weight(1f),
+                                    title = stringResource(id = R.string.str_advance_select)
+                                )
+                                EventItemWidget(
+                                    modifier = Modifier.weight(1f),
+                                    title = stringResource(id = R.string.str_event)
+                                )
+                            }
+
+                            //지금 신규가입하면~
+
+                            recentData.value.stayList?.let {
+                                if (it.isNotEmpty()) {
+                                    HotelVerticalWidget(
+                                        modifier = Modifier
+                                            .fillMaxWidth(),
+                                        stayData = StayData(
+                                            Const.RECENT_HOTEL,
+                                            "최근 본 상품",
+                                            recentData.value.stayList
+                                        )
+                                    )
+                                }
+                            }
                         }
-
-                        //쿠폰, 도전뽑기, 이벤트
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = dp10, horizontal = dp10),
-                            horizontalArrangement = Arrangement.spacedBy(dp5),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            EventItemWidget(
-                                modifier = Modifier.weight(1f),
-                                title = stringResource(id = R.string.str_coupon)
-                            )
-                            EventItemWidget(
-                                modifier = Modifier.weight(1f),
-                                title = stringResource(id = R.string.str_advance_select)
-                            )
-                            EventItemWidget(
-                                modifier = Modifier.weight(1f),
-                                title = stringResource(id = R.string.str_event)
-                            )
-                        }
-
-                        //지금 신규가입하면~
-
-                        recentData.value.stayList?.let {
-                            if (it.isNotEmpty()) {
+                        if (stayList.isNotEmpty()) {
+                            items(items = stayList) { stayData ->
                                 HotelVerticalWidget(
                                     modifier = Modifier
                                         .fillMaxWidth(),
-                                    stayData = StayData(
-                                        Const.RECENT_HOTEL,
-                                        "최근 본 상품",
-                                        recentData.value.stayList
-                                    )
+                                    stayData = stayData,
+                                    recentStay = recentData
                                 )
                             }
                         }
-                    }
-                    if (stayList.isNotEmpty()) {
-                        items(items = stayList) { stayData ->
-                            HotelVerticalWidget(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                stayData = stayData,
-                                recentStay = recentData
-                            )
-                        }
-                    }
 
-                    item {
-                        Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
-                    }
-                    if (overSeaCityList.isNotEmpty()) {
                         item {
-                            Column(Modifier.background(color = Theme.colorScheme.pureGray)) {
-                                Text(
-                                    modifier = Modifier.padding(
-                                        start = dp15,
-                                        end = 15.dp,
-                                        top = dp20
-                                    ),
-                                    text = buildAnnotatedString {
-                                        withStyle(
-                                            SpanStyle(
-                                                fontFamily = GMarketSansFamily,
-                                                fontWeight = FontWeight.Medium,
-                                                fontSize = 14.sp,
-                                                color = Theme.colorScheme.blue
-                                            )
-                                        ) {
-                                            val str =
-                                                stringResource(id = R.string.str_over_sea_row_price)
-                                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                                append(str.substring(0, 7))
-                                            }
-                                            append(str.substring(7))
-                                        }
-                                    },
-                                    color = Theme.colorScheme.blue,
-                                    style = textStyle
-                                )
-                                LazyRow(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(dp10)
-                                ) {
-                                    itemsIndexed(items = overSeaCityList) { index, item ->
-                                        if (index == 0) Spacer(Modifier.width(dp15))
-                                        Column(
-                                            modifier = Modifier
-                                                .clickable {
-
+                            Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
+                        }
+                        if (overSeaCityList.isNotEmpty()) {
+                            item {
+                                Column(Modifier.background(color = Theme.colorScheme.pureGray)) {
+                                    Text(
+                                        modifier = Modifier.padding(
+                                            start = dp15,
+                                            end = 15.dp,
+                                            top = dp20
+                                        ),
+                                        text = buildAnnotatedString {
+                                            withStyle(
+                                                SpanStyle(
+                                                    fontFamily = GMarketSansFamily,
+                                                    fontWeight = FontWeight.Medium,
+                                                    fontSize = 14.sp,
+                                                    color = Theme.colorScheme.blue
+                                                )
+                                            ) {
+                                                val str =
+                                                    stringResource(id = R.string.str_over_sea_row_price)
+                                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                                    append(str.substring(0, 7))
                                                 }
-                                                .padding(
-                                                    start = dp5,
-                                                    end = dp5,
-                                                    top = dp20,
-                                                    bottom = dp20
-                                                ),
-                                            verticalArrangement = Arrangement.Center,
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            OverSeaWidget(item)
-                                        }
-                                        if (index == overSeaCityList.lastIndex) Spacer(
-                                            Modifier.width(
-                                                dp15
-                                            )
-                                        )
+                                                append(str.substring(7))
+                                            }
+                                        },
+                                        color = Theme.colorScheme.blue,
+                                        style = textStyle
+                                    )
+                                    LazyRow(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(dp10)
+                                    ) {
+                                        itemsIndexed(items = overSeaCityList) { index, item ->
+                                            if (index == 0) Spacer(Modifier.width(dp15))
+                                            Column(
+                                                modifier = Modifier
+                                                    .clickable {
 
+                                                    }
+                                                    .padding(
+                                                        start = dp5,
+                                                        end = dp5,
+                                                        top = dp20,
+                                                        bottom = dp20
+                                                    ),
+                                                verticalArrangement = Arrangement.Center,
+                                                horizontalAlignment = Alignment.CenterHorizontally
+                                            ) {
+                                                OverSeaWidget(item)
+                                            }
+                                            if (index == overSeaCityList.lastIndex) Spacer(
+                                                Modifier.width(
+                                                    dp15
+                                                )
+                                            )
+
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    item {
-                        Spacer(modifier = Modifier.height(dp20))
-                        CompanyInfoWidget()
-                        Spacer(modifier = Modifier.height(dp30))
+                        item {
+                            Spacer(modifier = Modifier.height(dp20))
+                            CompanyInfoWidget()
+                            Spacer(modifier = Modifier.height(dp30))
+                        }
                     }
-                }
-                is ConnectInfo.Loading -> {}
-                else -> {
-                    //Error
+                    is ConnectInfo.Loading -> {}
+                    else -> {
+                        //Error
+                    }
                 }
             }
         }
+
 
         if (isShowHeader && viewModel.allCategoryList.isNotEmpty()) {
             StickyHeaderWidget(

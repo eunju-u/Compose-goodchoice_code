@@ -12,9 +12,8 @@ import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
 import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import java.util.*
 
 class MainViewModel : ViewModel() {
@@ -43,15 +42,17 @@ class MainViewModel : ViewModel() {
     var isShowFullHeader = MutableStateFlow(false)
 
     var currentRoute = MutableStateFlow("")
-    var isRefreshHomeData = MutableStateFlow(false)
 
     //서버가 없어, 최근 본 상품 삭제 하기 위한 플래그
     //홈 처음 진입시 최근 본 상품 목록이 보여야 하고, 최근 목록 함에 있어야 하며, 전체 삭제시 리스트 삭제되어야 함.
     var isRemoveRecentList = false
+
     fun getCurrentViewData() {
         when (currentRoute.value) {
             NavItem.Home.route -> {
-                requestHomeData()
+                CoroutineScope(Dispatchers.Default).launch {
+                    requestHomeData().await()
+                }
             }
             NavItem.Search.route -> {
                 requestSearchData()
@@ -65,7 +66,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun requestHomeData() = viewModelScope.launch {
+    fun requestHomeData() = viewModelScope.async {
         homeUiState.value = ConnectInfo.Loading
         val testHomeData = HomeData(
             categoryList = listOf(
@@ -240,10 +241,6 @@ class MainViewModel : ViewModel() {
         homeData.value = testHomeData
         homeUiState.value = ConnectInfo.Available()
 
-        //홈 화면 재로드 플래그 초기화
-        if (isRefreshHomeData.value) {
-            isRefreshHomeData.value = false
-        }
     }
 
     private fun requestSearchData() {
