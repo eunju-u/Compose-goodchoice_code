@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.main
 
+import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +11,7 @@ import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.*
@@ -19,7 +21,6 @@ import java.util.*
 class MainViewModel : ViewModel() {
 
     var homeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
-        private set
     var homeData = MutableStateFlow(HomeData())
     val allCategoryList = LinkedList<CategoryItem>()
 
@@ -47,7 +48,10 @@ class MainViewModel : ViewModel() {
     //홈 처음 진입시 최근 본 상품 목록이 보여야 하고, 최근 목록 함에 있어야 하며, 전체 삭제시 리스트 삭제되어야 함.
     var isRemoveRecentList = false
 
-    fun getCurrentViewData() {
+    //찜 서버 조회 시 state
+    var likeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
+
+    fun getCurrentViewData(context: Context) {
         when (currentRoute.value) {
             NavItem.Home.route -> {
                 CoroutineScope(Dispatchers.Default).launch {
@@ -58,7 +62,7 @@ class MainViewModel : ViewModel() {
                 requestSearchData()
             }
             NavItem.Like.route -> {
-                requestLikeData()
+                requestLikeData(context)
             }
             NavItem.MyInfo.route -> {
                 requestMyInfoData()
@@ -247,8 +251,19 @@ class MainViewModel : ViewModel() {
 
     }
 
-    private fun requestLikeData() {
+    private fun requestLikeData(context: Context) = viewModelScope.launch {
+        val pref = GoodChoicePreference(context)
+        likeUiState.value = ConnectInfo.Loading
 
+        //로그인이 안되어 있는 경우 로딩 안돌게 함.
+        // (이유 : 로그인 안된 화면에서는 로딩이 필요없고, 리스트가 필요할 경우만 로딩노출함.)
+        if (pref.isLogin()) {
+            withContext(coroutineContext) {
+                delay(1000)
+            }
+        }
+
+        likeUiState.value = ConnectInfo.Available()
     }
 
     private fun requestMyInfoData() {

@@ -10,14 +10,20 @@ class AlarmActivity : ComponentActivity() {
     companion object {
         val TAG: String = AlarmActivity::class.java.simpleName
     }
+
     private val viewModel: AlarmViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TestTheme {
-                AlarmContent(onFinish = { this.finish() })
+                AlarmContent(viewModel = viewModel, onFinish = { this.finish() })
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAlarmData(this@AlarmActivity)
     }
 }

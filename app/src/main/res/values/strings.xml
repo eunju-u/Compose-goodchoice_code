@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">GoodChoice</string>
     <string name="navi_home">홈</string>
     <string name="navi_search">검색</string>
@@ -36,8 +36,14 @@
     <!--  주변  -->
 
     <!--  찜  -->
-    <string name="str_no_see_like_list"> 찜 목록을 볼 수 없어요</string>
-    <string name="str_check_like_list_after_login"> 로그인 후 찜한 상품을 확인하세요</string>
+    <string name="str_no_see_like_list">찜 목록을 볼 수 없어요</string>
+    <string name="str_check_like_list_after_login">로그인 후 찜한 상품을 확인하세요</string>
+    <string name="str_no_like_list">아직 찜한 <xliff:g id="name">%s</xliff:g>이 없어요</string>
+    <string name="str_search_like">마음에 드는 <xliff:g id="name">%s</xliff:g> 찜 해두면\n빠르게 다시 찾아볼 수 있어요.</string>
+    <string name="str_go_to_like"><xliff:g id="name">%s</xliff:g> 둘러보기</string>
+    <string name="str_stay">숙소</string>
+    <string name="str_space">공간</string>
+    <string name="str_ticket">티켓</string>
 
 
     <!--  내 정보  -->

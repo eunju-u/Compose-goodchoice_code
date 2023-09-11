@@ -64,4 +64,11 @@ object Const {
     const val KYOTO = 11004
     const val SINGAPORE = 11005
 
+    //로그인 방법
+    const val KAKAO = "KAKAO"
+    const val NAVER = "NAVER"
+    const val FACEBOOK = "FACEBOOK"
+    const val APPLE = "APPLE"
+    const val EMAIL = "EMAIL"
+
 }

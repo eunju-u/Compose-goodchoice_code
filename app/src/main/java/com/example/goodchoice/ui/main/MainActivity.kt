@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.theme.TestTheme
 import kotlinx.coroutines.launch
 
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.currentRoute.collect { value ->
                     if (value.isNotEmpty()) {
-                        viewModel.getCurrentViewData()
+                        viewModel.getCurrentViewData(this@MainActivity)
                     }
                 }
             }

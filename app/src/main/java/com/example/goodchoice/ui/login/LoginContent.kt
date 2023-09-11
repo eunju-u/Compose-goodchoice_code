@@ -14,13 +14,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.ui.theme.*
@@ -35,11 +38,9 @@ fun LoginContent(onFinish: () -> Unit = {}) {
         .fillMaxWidth()
         .height(dp50)
 
-    val isLoginKakao = false
-    val isLoginNaver = true
-    val isLoginFacebook = false
-    val isLoginApple = false
-    val isLoginEmail = false
+    val context = LocalContext.current
+    val pref = GoodChoicePreference(context)
+    val isLoginWay = pref.getLoginWay()
 
     Box(
         Modifier
@@ -101,7 +102,11 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                                 contentDescription = null
                             )
                         },
-                        onItemClick = { })
+                        onItemClick = {
+                            pref.setIsLogin(true)
+                            pref.setLoginWay(Const.KAKAO)
+                            onFinish()
+                        })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outsideModifier = outsideModifier,
@@ -118,7 +123,11 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                                 contentDescription = null
                             )
                         },
-                        onItemClick = { })
+                        onItemClick = {
+                            pref.setIsLogin(true)
+                            pref.setLoginWay(Const.NAVER)
+                            onFinish()
+                        })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outsideModifier = outsideModifier,
@@ -134,7 +143,11 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                                 contentDescription = null
                             )
                         },
-                        onItemClick = { })
+                        onItemClick = {
+                            pref.setIsLogin(true)
+                            pref.setLoginWay(Const.FACEBOOK)
+                            onFinish()
+                        })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outsideModifier = outsideModifier,
@@ -151,7 +164,11 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                                 contentDescription = null
                             )
                         },
-                        onItemClick = { })
+                        onItemClick = {
+                            pref.setIsLogin(true)
+                            pref.setLoginWay(Const.APPLE)
+                            onFinish()
+                        })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outsideModifier = outsideModifier,
@@ -168,7 +185,11 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                                 contentDescription = null
                             )
                         },
-                        onItemClick = { })
+                        onItemClick = {
+                            pref.setIsLogin(true)
+                            pref.setLoginWay(Const.EMAIL)
+                            onFinish()
+                        })
                 }
             }
         }
@@ -188,13 +209,13 @@ fun LoginContent(onFinish: () -> Unit = {}) {
 
         var recentViewTopPadding = 215.dp
         val plusPadding = 65.dp
-        if (isLoginNaver) {
+        if (isLoginWay == Const.NAVER) {
             recentViewTopPadding += plusPadding * 1
-        } else if (isLoginFacebook) {
+        } else if (isLoginWay == Const.FACEBOOK) {
             recentViewTopPadding += plusPadding * 2
-        } else if (isLoginApple) {
+        } else if (isLoginWay == Const.APPLE) {
             recentViewTopPadding += plusPadding * 3
-        } else if (isLoginEmail) {
+        } else if (isLoginWay == Const.EMAIL) {
             recentViewTopPadding += plusPadding * 4
         }
         //최근에 로그인했어요 뷰
@@ -225,7 +246,6 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                     contentDescription = null
                 )
             }
-
         }
     }
 }
