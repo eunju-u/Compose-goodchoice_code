@@ -131,10 +131,7 @@ fun HomeContent(
                                     .padding(end = dp20)
                                     .clickable {
                                         context.startActivity(
-                                            Intent(
-                                                context,
-                                                AlarmActivity::class.java
-                                            )
+                                                Intent(context, AlarmActivity::class.java)
                                         )
                                     },
                                 painter = painterResource(id = R.drawable.ic_notification),

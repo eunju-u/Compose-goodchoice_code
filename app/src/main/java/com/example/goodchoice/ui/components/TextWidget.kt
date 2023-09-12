@@ -1,7 +1,6 @@
 package com.example.goodchoice.ui.components
 
 import android.content.res.Configuration
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -11,15 +10,13 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.goodchoice.ui.theme.Theme
 
 @Composable
@@ -32,7 +29,7 @@ fun TextWidget(
     color: Color = Theme.colorScheme.darkGray,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Start,
     lineHeight: TextUnit = TextUnit.Unspecified,
     softWrap: Boolean = true,
     minLines: Int = 1,
@@ -43,12 +40,17 @@ fun TextWidget(
     val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
     var textStyle by remember { mutableStateOf(style) }
 
+    val textFontSize = style.fontSize
     LaunchedEffect(key1 = screenWidth) {
         if (isPortrait) {
-            if (screenWidth < 400.dp) {
-                textStyle.copy(fontSize = textStyle.fontSize * 0.95)
+            textStyle = if (screenWidth < 400.dp) {
+                if (textFontSize < 14.sp) {
+                    textStyle.copy(fontSize = textStyle.fontSize * 0.95)
+                } else {
+                    textStyle.copy(fontSize = textStyle.fontSize * 0.82)
+                }
             } else {
-                textStyle = style
+                style
             }
         }
     }
@@ -59,7 +61,7 @@ fun TextWidget(
             text = text,
             color = color,
             style = textStyle,
-            textAlign = TextAlign.Center,
+            textAlign = textAlign,
             maxLines = maxLines,
             overflow = overflow
         )
@@ -69,7 +71,7 @@ fun TextWidget(
             text = text as AnnotatedString,
             color = color,
             style = textStyle,
-            textAlign = TextAlign.Center,
+            textAlign = textAlign,
             maxLines = maxLines,
             overflow = overflow
         )

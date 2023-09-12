@@ -10,6 +10,7 @@ import androidx.compose.ui.UiComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -62,7 +63,8 @@ fun LeftImageButtonWidget(
                             .weight(1f, fill = false),
                         text = it,
                         style = style,
-                        color = contentColor
+                        color = contentColor,
+                        textAlign = TextAlign.Center
                     )
                 } else {
                     TextWidget(
@@ -70,7 +72,8 @@ fun LeftImageButtonWidget(
                             .weight(1f, fill = false),
                         text = it as AnnotatedString,
                         style = style,
-                        color = contentColor
+                        color = contentColor,
+                        textAlign = TextAlign.Center
                     )
                 }
             }

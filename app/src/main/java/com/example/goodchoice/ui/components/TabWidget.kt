@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -59,10 +60,12 @@ fun TabWidget(
                 selectedContentColor = selectedContentColor,
                 unselectedContentColor = unselectedContentColor,
                 text = {
-                    Text(
+                    TextWidget(
                         text = tabData.name,
                         style = if (pagerState.currentPage == index) selectedTextStyle else unselectedTextStyle,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
                 }
             )
