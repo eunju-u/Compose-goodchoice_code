@@ -67,6 +67,8 @@
     <string name="str_alarm">알림함</string>
     <string name="str_no_see_alarm">알림을 볼 수 없어요</string>
     <string name="str_check_alarm_after_login">로그인 후 알림함을 확인하세요.</string>
+    <string name="str_save_alarm_max">받은 알림은 최대 31일 동안 보관돼요.</string>
+    <string name="str_no_alarm">알림이 없어요.</string>
 
 
     <!--  버튼 text  -->

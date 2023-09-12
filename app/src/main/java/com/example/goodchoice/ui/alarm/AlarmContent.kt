@@ -4,20 +4,25 @@ import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.api.data.AlarmItem
 import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.goodchoice.ui.alarm.widget.AlarmItemWidget
 import com.example.goodchoice.ui.components.GoToWidget
+import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.login.LoginActivity
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp30
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
@@ -26,37 +31,65 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
     val alarmUiState = viewModel.alarmUiState.collectAsStateWithLifecycle()
 
     Box {
-        Column {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
             TopAppBarWidget(
                 title = stringResource(id = R.string.str_alarm),
                 isCloseButton = false,
                 onFinish = { onFinish() })
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = Theme.colorScheme.white)
-                    .padding(start = dp30, end = dp30),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                if (alarmUiState.value is ConnectInfo.Available) {
-                    if (!pref.isLogin()) {
-                        item {
-                            GoToWidget(
-                                firstText = stringResource(id = R.string.str_no_see_alarm),
-                                secondText = stringResource(id = R.string.str_check_alarm_after_login),
-                                thirdText = stringResource(id = R.string.str_login),
-                                onClick = {
-                                    context.startActivity(
-                                        Intent(
-                                            context,
-                                            LoginActivity::class.java
-                                        )
-                                    )
-                                }
+
+            if (alarmUiState.value is ConnectInfo.Available) {
+                if (!pref.isLogin()) {
+                    GoToWidget(modifier = Modifier.fillMaxSize(),
+                        firstText = stringResource(id = R.string.str_no_see_alarm),
+                        secondText = stringResource(id = R.string.str_check_alarm_after_login),
+                        thirdText = stringResource(id = R.string.str_login),
+                        onClick = {
+                            context.startActivity(
+                                Intent(
+                                    context,
+                                    LoginActivity::class.java
+                                )
                             )
                         }
-                    } else {
+                    )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Theme.colorScheme.white)
+                            .padding(start = dp30, end = dp30),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        val data =
+                            (alarmUiState.value as ConnectInfo.Available).data as List<AlarmItem>
+                        //알림 리스트가 없는 경우
+                        if (data.isEmpty()) {
+                            item {
+                                TextWidget(
+                                    text = stringResource(id = R.string.str_no_alarm),
+                                    style = MaterialTheme.typography.displaySmall,
+                                    color = Theme.colorScheme.gray,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                        //알림 리스트가 있는 경우
+                        else {
+                            items(items = data) { item ->
+                                AlarmItemWidget(item)
+                            }
+                            item {
+                                Spacer(modifier = Modifier.height(dp35))
+                                TextWidget(
+                                    text = stringResource(id = R.string.str_save_alarm_max),
+                                    style = MaterialTheme.typography.displaySmall,
+                                    color = Theme.colorScheme.gray,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
                     }
                 }
             }

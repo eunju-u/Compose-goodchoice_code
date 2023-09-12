@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.api.data.AlarmItem
 import com.example.goodchoice.preference.GoodChoicePreference
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,9 +20,19 @@ class AlarmViewModel : ViewModel() {
 
         if (pref.isLogin()) {
             withContext(coroutineContext) {
-                delay(1000)
+                delay(200)
             }
         }
-        alarmUiState.value = ConnectInfo.Available()
+
+        val data = listOf(
+            AlarmItem(
+                alarmIdx = 0,
+                title = "알림함이 새롭게 단장되었어요!",
+                content = "이제 예약부터 할인 * 혜택 소식까지 알림함에서 모두 확인 할 수 있어요",
+                date = "2023-08-26"
+            )
+        )
+
+        alarmUiState.value = ConnectInfo.Available(data)
     }
 }
