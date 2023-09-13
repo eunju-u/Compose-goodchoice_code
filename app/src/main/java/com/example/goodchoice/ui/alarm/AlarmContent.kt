@@ -59,7 +59,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(color = Theme.colorScheme.white)
-                            .padding(start = dp30, end = dp30),
+                            .padding(start = dp20, end = dp20),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         val data =
