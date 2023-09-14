@@ -1,7 +1,6 @@
 package com.example.goodchoice.ui.recentSeen
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,6 +21,7 @@ import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.ui.components.ButtonWidget
+import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
 
@@ -92,7 +92,7 @@ fun RecentSeenContent(viewModel: MainViewModel) {
                             )
                             Spacer(modifier = Modifier.height(dp10))
 
-                            ButtonWidget(content = {
+                            CardWidget(content = {
                                 Text(
                                     text = stringResource(id = R.string.str_see_item),
                                     color = Theme.colorScheme.panoramaBlue,

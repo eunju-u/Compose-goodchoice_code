@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -14,36 +15,36 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun LeftImageButtonWidget(
     modifier: Modifier = Modifier,
-    outsideModifier: Modifier = Modifier,
+    outerPadding: PaddingValues = PaddingValues(dp0),
+    innerPadding: PaddingValues = PaddingValues(horizontal = dp12, vertical = dp10),
     title: Any? = null,
-    hasOutline: Boolean = false,
     hasEndPadding: Boolean = true,
     endPadding: Dp = 5.dp,
     shape: Dp = 10.dp,
     borderWidth: Dp = 1.5.dp,
-    enabled: Boolean = true,
     containerColor: Color = Theme.colorScheme.white,
     contentColor: Color = Theme.colorScheme.darkGray,
-    borderColor: Color = Theme.colorScheme.blue,
+    borderColor: Color = Color.Transparent,
     style: TextStyle = MaterialTheme.typography.labelSmall,
-    onItemClick: () -> Unit,
+    isCenterHorizontalArrangement: Boolean = true,
+    onItemClick: () -> Unit = {},
     content: @Composable @UiComposable (() -> Unit)? = null,
 ) {
     title?.let {
-        ButtonWidget(
-            modifier = Modifier.then(outsideModifier).then(modifier),
-            enabled = enabled,
-            hasOutline = hasOutline,
-            shape = shape,
+        CardWidget(
+            modifier = modifier,
+            outerPadding = outerPadding,
+            cornerShape = RoundedCornerShape(shape),
             containerColor = containerColor,
-            contentColor = contentColor,
             borderColor = borderColor,
             borderWidth = borderWidth,
+            innerPadding = innerPadding,
+            alignment = if (isCenterHorizontalArrangement) Alignment.Center else Alignment.TopStart,
             onItemClick = { onItemClick() }) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -84,5 +85,8 @@ fun LeftImageButtonWidget(
 @Preview
 @Composable
 fun previewLeftImageButtonWidget() {
-    LeftImageButtonWidget(title = "text", onItemClick = {}, content = { Text(text = "left_image") })
+    LeftImageButtonWidget(
+        modifier = Modifier.fillMaxWidth(),
+        title = "text",
+        onItemClick = {}) { Text(text = "d") }
 }

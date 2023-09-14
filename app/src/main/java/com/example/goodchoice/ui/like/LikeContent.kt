@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +23,6 @@ import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp30
 
 private val menus = listOf(
     TabData.KOREA, TabData.OVERSEA, TabData.RENTAL, TabData.LEISURE
@@ -46,6 +46,10 @@ fun LikeContent(
     val pagerState = rememberPagerState(initialPage = 0)
     val likeUiState = viewModel.likeUiState.collectAsStateWithLifecycle()
 
+    val pageModifier = Modifier
+        .fillMaxSize()
+        .background(color = Theme.colorScheme.pureGray)
+
     Box(modifier = modifier) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -54,12 +58,11 @@ fun LikeContent(
                 menus = menus,
                 pagerState = pagerState,
                 selectedContentColor = Theme.colorScheme.blue,
-                unselectedContentColor = Theme.colorScheme.gray
+                unselectedContentColor = Theme.colorScheme.gray,
+                divider = { Divider() }
             ) { state ->
                 HorizontalPager(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = Theme.colorScheme.pureGray),
+                    modifier = pageModifier,
                     pageCount = menus.size,
                     state = state,
                     verticalAlignment = Alignment.Top
@@ -79,53 +82,53 @@ fun LikeContent(
                             when (menus[page].route) {
                                 TabData.KOREA.route -> {
                                     Column(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(color = Theme.colorScheme.pureGray)
-                                            .padding(start = dp30, end = dp30),
+                                        modifier = pageModifier
                                     ) {
-                                        val stay = stringResource(id = R.string.str_stay)
                                         if (koreaLikeData.isEmpty()) {
-                                            EmptyDataWidget(value = stay, onClick = {})
+                                            EmptyDataWidget(
+                                                value = stringResource(id = R.string.str_stay),
+                                                onClick = {})
+                                        } else {
+
                                         }
                                     }
                                 }
                                 TabData.OVERSEA.route -> {
                                     Column(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(color = Theme.colorScheme.pureGray)
-                                            .padding(start = dp30, end = dp30),
+                                        modifier = pageModifier
                                     ) {
-                                        val stay = stringResource(id = R.string.str_stay)
                                         if (overseaLikeData.isEmpty()) {
-                                            EmptyDataWidget(value = stay, onClick = {})
+                                            EmptyDataWidget(
+                                                value = stringResource(id = R.string.str_stay),
+                                                onClick = {})
+                                        } else {
+
                                         }
                                     }
                                 }
                                 TabData.RENTAL.route -> {
                                     Column(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(color = Theme.colorScheme.pureGray)
-                                            .padding(start = dp30, end = dp30),
+                                        modifier = pageModifier
                                     ) {
-                                        val space = stringResource(id = R.string.str_space)
                                         if (spaceRentalLikeData.isEmpty()) {
-                                            EmptyDataWidget(value = space, onClick = {})
+                                            EmptyDataWidget(
+                                                value = stringResource(id = R.string.str_space),
+                                                onClick = {})
+                                        } else {
+
                                         }
                                     }
                                 }
                                 TabData.LEISURE.route -> {
                                     Column(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(color = Theme.colorScheme.pureGray)
-                                            .padding(start = dp30, end = dp30),
+                                        modifier = pageModifier
                                     ) {
-                                        val ticket = stringResource(id = R.string.str_ticket)
                                         if (leisureLikeData.isEmpty()) {
-                                            EmptyDataWidget(value = ticket, onClick = {})
+                                            EmptyDataWidget(
+                                                value = stringResource(id = R.string.str_ticket),
+                                                onClick = {})
+                                        } else {
+
                                         }
                                     }
                                 }

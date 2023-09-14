@@ -1,6 +1,8 @@
 package com.example.goodchoice.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.TextButton
@@ -11,10 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.dp0
 
 @Composable
 fun ButtonWidget(
     modifier: Modifier = Modifier,
+    outerPadding: PaddingValues = PaddingValues(dp0),
     hasOutline: Boolean = false,
     shape: Dp = 10.dp,
     borderWidth: Dp = 1.5.dp,
@@ -26,8 +30,8 @@ fun ButtonWidget(
     content: @Composable @UiComposable () -> Unit,
 ) {
     TextButton(
-        modifier = Modifier
-            .then(modifier),
+        modifier = modifier
+            .padding(outerPadding),
         shape = RoundedCornerShape(shape),
         colors = ButtonDefaults.textButtonColors(
             containerColor = containerColor,

@@ -31,6 +31,7 @@ import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
+import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.home.homeData.RefreshData
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
@@ -151,18 +152,18 @@ fun HomeContent(
                                     Row(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(start = dp20, end = dp20),
+                                            .padding(start = dp20, end = dp20, top = dp5, bottom = dp5),
                                         verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(dp20)
+                                        horizontalArrangement = Arrangement.spacedBy(dp8)
                                     ) {
-                                        Text(
+                                        TextWidget(
                                             text = stringResource(id = R.string.str_go_oversea),
                                             color = Theme.colorScheme.blue,
                                             style = textStyle
                                         )
                                         Divider(
-                                            modifier = Modifier.weight(1f, fill = false),
-                                            thickness = 5.dp,
+                                            modifier = Modifier.weight(1f),
+                                            thickness = dp2,
                                             color = Theme.colorScheme.pureGray
                                         )
                                     }

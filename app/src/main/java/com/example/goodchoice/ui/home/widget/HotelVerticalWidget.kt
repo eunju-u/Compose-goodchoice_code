@@ -117,12 +117,13 @@ fun HotelVerticalWidget(
             ) {
                 RightImageButtonWidget(
                     title = text,
-                    hasOutline = true,
                     borderWidth = 1.dp,
                     imageColor = Theme.colorScheme.blue,
-                    shape = dp20,
+                    shape = dp30,
                     style = MaterialTheme.typography.labelSmall,
+                    borderColor = Theme.colorScheme.blue,
                     contentColor = Theme.colorScheme.blue,
+                    innerPadding = PaddingValues(horizontal = dp10, vertical = dp8),
                     onItemClick = {
                         if (stayData.type == Const.RECENT_HOTEL) {
                             context.startActivity(

@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
@@ -33,10 +34,9 @@ fun LoginContent(onFinish: () -> Unit = {}) {
     val style = MaterialTheme.typography.labelMedium
     val iconModifier = Modifier.size(dp15)
     val endPadding = dp10
-    val outsideModifier = Modifier.padding(bottom = dp15)
+    val outsidePadding = PaddingValues(bottom = dp15)
     val widgetSize = Modifier
         .fillMaxWidth()
-        .height(dp50)
 
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
@@ -89,7 +89,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
 
                     LeftImageButtonWidget(
                         modifier = widgetSize,
-                        outsideModifier = outsideModifier,
+                        outerPadding = outsidePadding,
                         title = stringResource(id = R.string.str_login_kakao),
                         containerColor = Theme.colorScheme.yellow,
                         contentColor = Theme.colorScheme.darkGray,
@@ -109,7 +109,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
-                        outsideModifier = outsideModifier,
+                        outerPadding = outsidePadding,
                         title = stringResource(id = R.string.str_login_naver),
                         containerColor = Theme.colorScheme.green,
                         contentColor = Theme.colorScheme.white,
@@ -130,7 +130,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
-                        outsideModifier = outsideModifier,
+                        outerPadding = outsidePadding,
                         title = stringResource(id = R.string.str_login_facebook),
                         containerColor = Theme.colorScheme.blue,
                         contentColor = Theme.colorScheme.white,
@@ -150,7 +150,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
-                        outsideModifier = outsideModifier,
+                        outerPadding = outsidePadding,
                         title = stringResource(id = R.string.str_login_apple),
                         containerColor = Theme.colorScheme.darkGray,
                         contentColor = Theme.colorScheme.white,
@@ -171,7 +171,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
-                        outsideModifier = outsideModifier,
+                        outerPadding = outsidePadding,
                         title = stringResource(id = R.string.str_login_email),
                         containerColor = Theme.colorScheme.pureBlue,
                         contentColor = Theme.colorScheme.blue,
@@ -248,4 +248,11 @@ fun LoginContent(onFinish: () -> Unit = {}) {
             }
         }
     }
+}
+
+
+@Preview
+@Composable
+fun PreviewLoginContent() {
+    LoginContent()
 }

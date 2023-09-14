@@ -2,6 +2,7 @@ package com.example.goodchoice.ui.alarm.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,16 +12,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.ui.components.ButtonWidget
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.AlarmItem
+import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.dp10
 import com.example.goodchoice.ui.theme.dp15
 
 @Composable
 fun AlarmItemWidget(item: AlarmItem) {
-    ButtonWidget(onItemClick = { }) {
+    CardWidget(
+        onItemClick = { },
+        outerPadding = PaddingValues(vertical = dp10),
+        cornerShape = RoundedCornerShape(dp10),
+        alignment = Alignment.Center
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,

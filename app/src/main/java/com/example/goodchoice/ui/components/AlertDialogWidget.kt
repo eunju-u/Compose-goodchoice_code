@@ -94,16 +94,15 @@ fun OneButton(
     val color = Theme.colorScheme.blue
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(dp40),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
-        ButtonWidget(
+        CardWidget(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxWidth(),
             onItemClick = onConfirm,
             containerColor = color,
+            cornerShape = RoundedCornerShape(dp0),
             content = {
                 Text(
                     text = buttonText,
@@ -126,16 +125,16 @@ fun TwoButton(
 
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(dp40),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(space = dp10)
     ) {
-        ButtonWidget(
+        CardWidget(
             modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight(),
+                .weight(1f),
             onItemClick = onDismiss,
             containerColor = color,
+            alignment = Alignment.Center,
+            cornerShape = RoundedCornerShape(dp10),
             content = {
                 Text(
                     text = oneButtonText, style = MaterialTheme.typography.labelLarge,
@@ -144,12 +143,13 @@ fun TwoButton(
             }
         )
 
-        ButtonWidget(
+        CardWidget(
             modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight(),
+                .weight(1f),
             onItemClick = onConfirm,
             containerColor = color,
+            alignment = Alignment.Center,
+            cornerShape = RoundedCornerShape(dp10),
             content = {
                 Text(
                     text = twoButtonText, style = MaterialTheme.typography.labelLarge,
