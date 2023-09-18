@@ -121,8 +121,6 @@ fun TwoButton(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    val color = Theme.colorScheme.blue
-
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -132,13 +130,14 @@ fun TwoButton(
             modifier = Modifier
                 .weight(1f),
             onItemClick = onDismiss,
-            containerColor = color,
+            containerColor = Theme.colorScheme.pureGray,
             alignment = Alignment.Center,
             cornerShape = RoundedCornerShape(dp10),
             content = {
                 Text(
-                    text = oneButtonText, style = MaterialTheme.typography.labelLarge,
-                    color = Theme.colorScheme.white
+                    text = oneButtonText,
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+                    color = Theme.colorScheme.darkGray
                 )
             }
         )
@@ -147,12 +146,13 @@ fun TwoButton(
             modifier = Modifier
                 .weight(1f),
             onItemClick = onConfirm,
-            containerColor = color,
+            containerColor = Theme.colorScheme.blue,
             alignment = Alignment.Center,
             cornerShape = RoundedCornerShape(dp10),
             content = {
                 Text(
-                    text = twoButtonText, style = MaterialTheme.typography.labelLarge,
+                    text = twoButtonText,
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = Theme.colorScheme.white
                 )
             }

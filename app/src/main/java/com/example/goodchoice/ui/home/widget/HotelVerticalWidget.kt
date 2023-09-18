@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.home.widget
 
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -9,7 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
@@ -20,7 +23,7 @@ import com.example.goodchoice.Const
 import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.StayItem
-import com.example.goodchoice.ui.components.RightImageButtonWidget
+import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
@@ -115,10 +118,10 @@ fun HotelVerticalWidget(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                RightImageButtonWidget(
+                ImageButtonWidget(
                     title = text,
                     borderWidth = 1.dp,
-                    imageColor = Theme.colorScheme.blue,
+                    isLeftImage = false,
                     shape = dp30,
                     style = MaterialTheme.typography.labelSmall,
                     borderColor = Theme.colorScheme.blue,
@@ -133,6 +136,12 @@ fun HotelVerticalWidget(
                                 )
                             )
                         }
+                    }, content = {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_right),
+                            colorFilter = ColorFilter.tint(Theme.colorScheme.blue),
+                            contentDescription = null
+                        )
                     })
             }
         }
