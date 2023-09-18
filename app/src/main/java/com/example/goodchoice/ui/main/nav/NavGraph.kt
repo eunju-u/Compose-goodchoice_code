@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.like.LikeContent
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.myInfo.MyInfoContent
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
@@ -35,6 +36,7 @@ fun NavGraph(
             LikeContent(modifier, viewModel)
         }
         composable(NavItem.MyInfo.route) {
+            MyInfoContent(modifier, viewModel)
         }
     }
 }
