@@ -64,7 +64,6 @@ fun ImageButtonWidget(
                 }
 
                 if (it is String) {
-                    Log.d("eunju", "itit :$it")
                     TextWidget(
                         text = it,
                         style = style,

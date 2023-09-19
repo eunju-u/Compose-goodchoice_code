@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.goodchoice.ui.around.AroundContent
 import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.like.LikeContent
 import com.example.goodchoice.ui.main.MainViewModel
@@ -31,6 +32,7 @@ fun NavGraph(
         composable(NavItem.Search.route) {
         }
         composable(NavItem.Around.route) {
+            AroundContent(modifier, viewModel)
         }
         composable(NavItem.Like.route) {
             LikeContent(modifier, viewModel)

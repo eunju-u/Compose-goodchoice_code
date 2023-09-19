@@ -62,7 +62,7 @@ fun HomeContent(
     val overSeaCityList = homeData.overSeaCityList ?: emptyList()
     val row = 4
 
-    val isShowFullHeader = viewModel.isShowFullHeader.collectAsStateWithLifecycle()
+    val isShowFullHeader = viewModel.isShowFullHeader
     val lazyColumnListState = rememberLazyListState()
     val textStyle = MaterialTheme.typography.displayMedium
     // header 노출하기 위한 플래그

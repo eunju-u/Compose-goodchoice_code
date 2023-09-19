@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.components.bottomSheet
 
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -11,17 +12,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.*
+import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState.Companion.MySaver
 import com.example.goodchoice.ui.theme.dp5
 import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.roundToInt
+import com.example.goodchoice.R
+import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.dp15
 
 
 @ExperimentalMaterialApi
@@ -195,7 +203,7 @@ fun MyBottomSheetLayout(
     sheetShape: Shape = MaterialTheme.shapes.large,
     sheetBackgroundColor: Color = MaterialTheme.colors.surface,
     sheetContentColor: Color = contentColorFor(sheetBackgroundColor),
-    hiddenHeight :Float = 0.0f,
+    hiddenHeight: Float = 0.0f,
     content: @Composable () -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -264,32 +272,35 @@ fun MyBottomSheetLayout(
                     }
                 }
                 .semantics {
-                        dismiss {
-                            if (sheetState.mySwipeableState.confirmValueChange(ModalBottomSheetValue.Hidden)) {
-                                scope.launch { sheetState.show() }
+                    dismiss {
+                        if (sheetState.mySwipeableState.confirmValueChange(
+                                ModalBottomSheetValue.Hidden
+                            )
+                        ) {
+                            scope.launch { sheetState.show() }
+                        }
+                        true
+                    }
+                    if (sheetState.mySwipeableState.currentValue == ModalBottomSheetValue.HalfExpanded) {
+                        expand {
+                            if (sheetState.mySwipeableState.confirmValueChange(
+                                    ModalBottomSheetValue.Expanded
+                                )
+                            ) {
+                                scope.launch { sheetState.expand() }
                             }
                             true
                         }
-                        if (sheetState.mySwipeableState.currentValue == ModalBottomSheetValue.HalfExpanded) {
-                            expand {
-                                if (sheetState.mySwipeableState.confirmValueChange(
-                                        ModalBottomSheetValue.Expanded
-                                    )
-                                ) {
-                                    scope.launch { sheetState.expand() }
-                                }
-                                true
+                    } else if (sheetState.hasHalfExpandedState) {
+                        collapse {
+                            if (sheetState.mySwipeableState.confirmValueChange(
+                                    ModalBottomSheetValue.HalfExpanded
+                                )
+                            ) {
+                                scope.launch { sheetState.halfExpand() }
                             }
-                        } else if (sheetState.hasHalfExpandedState) {
-                            collapse {
-                                if (sheetState.mySwipeableState.confirmValueChange(
-                                        ModalBottomSheetValue.HalfExpanded
-                                    )
-                                ) {
-                                    scope.launch { sheetState.halfExpand() }
-                                }
-                                true
-                            }
+                            true
+                        }
                     }
                 },
             shape = sheetShape,

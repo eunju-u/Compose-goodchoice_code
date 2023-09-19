@@ -71,4 +71,34 @@ object Const {
     const val APPLE = "APPLE"
     const val EMAIL = "EMAIL"
 
+    //주변 > 필터 type
+    const val FILTER = "FILTER" //필터
+    const val RECOMMEND = "RECOMMEND" //추천순
+    const val ROOM = "ROOM" //숙소유형
+    const val RESERVATION = "RESERVATION" //예약가능
+    const val PRICE = "PRICE"
+
+    const val DISTANCE = "DISTANCE" //거리순
+    const val HIGH_GRADE = "HIGH_GRADE" //평점높은순
+    const val HIGH_REVIEW = "HIGH_REVIEW" //리뷰많은순
+    const val ROW_PRICE = "ROW_PRICE" //낮은가격순
+    const val HIGH_PRICE = "HIGH_PRICE" //높은가격순
+    const val MOTEL = "MOTEL"
+    const val HOTEL_AND_RESORT = "HOTEL_AND_RESORT"
+    const val PENSION = "PENSION"
+    const val HOUSE_AND_VILLA = "HOUSE_AND_VILLA"
+    const val CAMPING = "CAMPING"
+    const val GUESTHOUSE = "GUESTHOUSE"
+    const val LESS_5 = "LESS_5"
+    const val M5_L10 = "M5_L10"
+    const val M10_L15 = "M10_L15"
+    const val M15_L20 = "M15_L20"
+    const val M20_L25 = "M20_L25"
+    const val M25_L30 = "M25_L30"
+    const val MORE_30 = "MORE_30"
+}
+
+// 숙박, 대실
+enum class RoomType {
+    SLEEP_ROOM, RENTAL_ROOM
 }

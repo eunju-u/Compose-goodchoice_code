@@ -1,14 +1,13 @@
 package com.example.goodchoice.ui.main
 
 import android.content.Context
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
+import com.example.goodchoice.RoomType
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
 import com.example.goodchoice.preference.GoodChoicePreference
@@ -17,6 +16,17 @@ import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.*
+
+//(Map으로 관리 하려 했지만, 서버에서 받아오는 내용이 아니기 때문에 select 된 아이템을 유지하기 어려워 사용 하지 않음.)
+data class AroundFilterSelectedData(
+    //주변 선택한 필터 > 필터는 list 로 하려다가 타입값 맞추기 위해 MutableState 로 사용
+    var selectedFilter: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
+    //주변 선택한 필터 > 추천순
+    var selectedRecommend: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
+    var selectedRoom: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
+    var selectedReservation: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
+    var selectedPrice: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
+)
 
 class MainViewModel : ViewModel() {
 
@@ -43,7 +53,7 @@ class MainViewModel : ViewModel() {
     var myInfoData = MutableStateFlow(MyInfoData())
 
     //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
-    var isShowFullHeader = MutableStateFlow(false)
+    var isShowFullHeader = mutableStateOf(false)
 
     var currentRoute = MutableStateFlow("")
 
@@ -54,6 +64,12 @@ class MainViewModel : ViewModel() {
     //찜 서버 조회 시 state
     var likeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
 
+    //주변 서버 조회 시 state
+    val aroundUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
+    var aroundFilterSelect = AroundFilterSelectedData()
+
+    val selectRoomType = mutableStateOf(RoomType.SLEEP_ROOM)
+
     fun getCurrentViewData(context: Context) {
         when (currentRoute.value) {
             NavItem.Home.route -> {
@@ -63,6 +79,9 @@ class MainViewModel : ViewModel() {
             }
             NavItem.Search.route -> {
                 requestSearchData()
+            }
+            NavItem.Around.route -> {
+                requestAroundData()
             }
             NavItem.Like.route -> {
                 requestLikeData(context)
@@ -78,8 +97,7 @@ class MainViewModel : ViewModel() {
         val testHomeData = HomeData(
             categoryList = listOf(
                 CategoryData(
-                    countryType = Const.KOREA,
-                    categoryList = listOf(
+                    countryType = Const.KOREA, categoryList = listOf(
                         CategoryItem(0, Const.C_PREMIUM_BLACK, R.drawable.img_premium),
                         CategoryItem(1, Const.C_MOTEL, R.drawable.img_bed),
                         CategoryItem(2, Const.C_HOTEL_AND_RESORT, R.drawable.img_hotel),
@@ -93,22 +111,18 @@ class MainViewModel : ViewModel() {
                         CategoryItem(10, Const.C_LEISURE_AND_TICKET, R.drawable.img_cablecar),
                         CategoryItem(11, Const.C_GOOD_FOOD, R.drawable.img_food)
                     )
-                ),
-                CategoryData(
-                    countryType = Const.OVERSEA,
-                    categoryList = listOf(
+                ), CategoryData(
+                    countryType = Const.OVERSEA, categoryList = listOf(
                         CategoryItem(0, Const.C_OVERSEA_AIRPLANE, R.drawable.img_oversea_airplane),
                         CategoryItem(1, Const.C_OVERSEA_STAY, R.drawable.img_oversea_house),
                         CategoryItem(2, Const.C_OVERSEA_AIRPLANE_AND_STAY, R.drawable.img_oversea)
                     )
                 )
-            ),
-            bannerList = listOf(
+            ), bannerList = listOf(
                 BannerData(R.drawable.bg_purple),
                 BannerData(R.drawable.bg_yellow),
                 BannerData(R.drawable.bg_teal)
-            ),
-            stayList = listOf(
+            ), stayList = listOf(
                 StayData(
                     type = Const.TODAY_HOTEL,
                     title = "오늘 체크인 호텔 특가",
@@ -158,11 +172,8 @@ class MainViewModel : ViewModel() {
                             level = "아파트먼트",
                         ),
                     ),
-                ),
-                StayData(
-                    type = Const.HOT_HOTEL,
-                    title = "오늘 HOT 인기 펜션",
-                    stayList = listOf(
+                ), StayData(
+                    type = Const.HOT_HOTEL, title = "오늘 HOT 인기 펜션", stayList = listOf(
                         StayItem(
                             label = "국내 숙소",
                             name = "태안 팜비치펜션",
@@ -178,8 +189,7 @@ class MainViewModel : ViewModel() {
 //                                "https://image.goodchoice.kr/resize_490x348/affiliate/2021/01/05/5ff426fa3495a.jpg",
 //                                "https://image.goodchoice.kr/resize_490x348/affiliate/2021/01/05/5ff427a82d07c.jpg",
                             )
-                        ),
-                        StayItem(
+                        ), StayItem(
                             label = "국내 숙소",
                             name = "태안 린더버그풀빌라",
                             star = "8.7",
@@ -189,8 +199,7 @@ class MainViewModel : ViewModel() {
                             defaultPrice = "71000",
                             discountPrice = "66740",
                             level = "아파트먼트",
-                        ),
-                        StayItem(
+                        ), StayItem(
                             label = "국내 숙소",
                             name = "청도 더포레 풀빌라",
                             star = "9.3",
@@ -227,8 +236,7 @@ class MainViewModel : ViewModel() {
                         )
                     )
                 )
-            ),
-            overSeaCityList = listOf(
+            ), overSeaCityList = listOf(
                 OverSeaCityItem(id = 11000, cityName = "오사카"),
                 OverSeaCityItem(id = 11001, cityName = "후쿠오카"),
                 OverSeaCityItem(id = 11002, cityName = "도쿄"),
@@ -252,6 +260,87 @@ class MainViewModel : ViewModel() {
 
     private fun requestSearchData() {
 
+    }
+
+    fun requestAroundData() = viewModelScope.launch {
+        aroundUiState.value = ConnectInfo.Loading
+
+        withContext(coroutineContext) {
+            delay(1000)
+        }
+
+        //숙박에서 사용되는 필터
+        val listSleepType = listOf(
+            AroundFilterData(
+                type = Const.FILTER,
+                text = "필터",
+                filterList = listOf(),
+            ),
+            AroundFilterData(
+                type = Const.RECOMMEND,
+                text = "추천순",
+                filterList = listOf(
+                    AroundFilterItem(type = Const.RECOMMEND, text = "추천순"),
+                    AroundFilterItem(type = Const.DISTANCE, text = "거리순"),
+                    AroundFilterItem(type = Const.HIGH_GRADE, text = "평점높은순"),
+                    AroundFilterItem(type = Const.HIGH_REVIEW, text = "리뷰많은순"),
+                    AroundFilterItem(type = Const.ROW_PRICE, text = "낮은가격순"),
+                    AroundFilterItem(type = Const.HIGH_PRICE, text = "높은가격순")
+                )
+            ),
+            AroundFilterData(
+                type = Const.ROOM,
+                text = "숙소유형",
+                filterList = listOf(
+                    AroundFilterItem(type = Const.MOTEL, text = "모텔"),
+                    AroundFilterItem(type = Const.HOTEL_AND_RESORT, text = "호텔*리조트"),
+                    AroundFilterItem(type = Const.PENSION, text = "펜션"),
+                    AroundFilterItem(type = Const.HOUSE_AND_VILLA, text = "홈&빌라"),
+                    AroundFilterItem(type = Const.CAMPING, text = "캠핑"),
+                    AroundFilterItem(type = Const.GUESTHOUSE, text = "게하*한옥")
+                )
+            ),
+            AroundFilterData(type = Const.RESERVATION, text = "예약가능", filterList = listOf()),
+            AroundFilterData(
+                type = Const.PRICE,
+                text = "가격",
+                filterList = listOf(
+                    AroundFilterItem(type = Const.LESS_5, text = "~5만원"),
+                    AroundFilterItem(type = Const.M5_L10, text = "5~10만원"),
+                    AroundFilterItem(type = Const.M10_L15, text = "10만원~15만원"),
+                    AroundFilterItem(type = Const.M15_L20, text = "15만원~20만원"),
+                    AroundFilterItem(type = Const.M20_L25, text = "20만원~25만원"),
+                    AroundFilterItem(type = Const.M25_L30, text = "25만원~30만원"),
+                    AroundFilterItem(type = Const.MORE_30, text = "30만원 이상~")
+                )
+            )
+        )
+
+        val listRentalType = listOf(
+            AroundFilterData(
+                type = Const.FILTER,
+                text = "필터",
+                filterList = listOf(),
+            ),
+            AroundFilterData(
+                type = Const.RECOMMEND,
+                text = "추천순",
+                filterList = listOf(
+                    AroundFilterItem(type = Const.RECOMMEND, text = "추천순"),
+                    AroundFilterItem(type = Const.DISTANCE, text = "거리순"),
+                    AroundFilterItem(type = Const.HIGH_GRADE, text = "평점높은순"),
+                    AroundFilterItem(type = Const.HIGH_REVIEW, text = "리뷰많은순")
+                )
+            )
+        )
+
+        val list =
+            if (selectRoomType.value == RoomType.SLEEP_ROOM) listSleepType else listRentalType
+
+        aroundUiState.value = ConnectInfo.Available(list)
+        list.find { it.type == Const.RECOMMEND }?.filterList?.let {
+            aroundFilterSelect.selectedRecommend.value = it.first()
+        }
     }
 
     private fun requestLikeData(context: Context) = viewModelScope.launch {
