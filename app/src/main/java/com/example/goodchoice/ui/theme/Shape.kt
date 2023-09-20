@@ -15,6 +15,7 @@ val dp7 = 7.dp
 val dp8 = 8.dp
 val dp10 = 10.dp
 val dp12 = 12.dp
+val dp13 = 13.dp
 val dp15 = 15.dp
 val dp20 = 20.dp
 val dp25 = 25.dp
@@ -31,9 +32,15 @@ val dp90 = 90.dp
 val dp95 = 95.dp
 val dp100 = 100.dp
 val dp120 = 120.dp
+val dp125 = 125.dp
+val dp130 = 130.dp
+val dp135 = 135.dp
 val dp150 = 150.dp
 val dp170 = 170.dp
 val dp200 = 200.dp
+
+val fontLargeSizeRatio = 0.95
+val fontSmallSizeRaio = 0.82
 
 val SmallComponentCornerRadius = 24.dp
 val MediumComponentCornerRadius = 18.dp

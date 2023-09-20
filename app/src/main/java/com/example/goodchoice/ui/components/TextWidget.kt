@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.fontLargeSizeRatio
+import com.example.goodchoice.ui.theme.fontSmallSizeRaio
 
 @Composable
 fun TextWidget(
@@ -45,9 +47,9 @@ fun TextWidget(
         if (isPortrait) {
             textStyle = if (screenWidth < 400.dp) {
                 if (textFontSize < 14.sp) {
-                    textStyle.copy(fontSize = textStyle.fontSize * 0.95)
+                    textStyle.copy(fontSize = textStyle.fontSize * fontLargeSizeRatio)
                 } else {
-                    textStyle.copy(fontSize = textStyle.fontSize * 0.82)
+                    textStyle.copy(fontSize = textStyle.fontSize * fontSmallSizeRaio)
                 }
             } else {
                 style

@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.login
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,19 +10,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.preference.GoodChoicePreference
@@ -34,7 +36,8 @@ fun LoginContent(onFinish: () -> Unit = {}) {
     val style = MaterialTheme.typography.labelMedium
     val iconModifier = Modifier.size(dp15)
     val endPadding = dp10
-    val outsidePadding = PaddingValues(bottom = dp15)
+    val outsidePadding = PaddingValues(bottom = dp12)
+    val innerPadding = PaddingValues(horizontal = dp15, vertical = dp15)
     val widgetSize = Modifier
         .fillMaxWidth()
 
@@ -42,32 +45,54 @@ fun LoginContent(onFinish: () -> Unit = {}) {
     val pref = GoodChoicePreference(context)
     val isLoginWay = pref.getLoginWay()
 
+    var plusPadding by remember { mutableStateOf(58.5.dp) }
+
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+    val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+    //해상도에 따라 이미지 버튼의 크기가 달라짐 (CardWidget 이라서)
+    //달라짐에 따라 '최근에 로그인했어요' 뷰 이동 처리
+    //해당 내용 추가 하지 않으려면 정적인 ButtonWidget 나 height 줘서 써야함.
+    LaunchedEffect(key1 = screenWidth) {
+        if (isPortrait) {
+            plusPadding = if (screenWidth < 400.dp) {
+                if (style.fontSize < 14.sp) {
+                    (plusPadding.value * 0.97).dp
+                } else {
+                    (plusPadding.value * fontSmallSizeRaio).dp
+                }
+            } else {
+                plusPadding
+            }
+        }
+    }
+
     Box(
         Modifier
             .fillMaxSize()
             .background(Theme.colorScheme.white)
     ) {
         Column {
-            TopAppBarWidget(onFinish = { onFinish() }) {}
+            TopAppBarWidget(isCloseButton = true, onFinish = { onFinish() }) {}
             LazyColumn(
-                Modifier.padding(start = dp40, end = dp40),
+                Modifier.padding(start = dp20, end = dp20),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 item {
-
-                    Text(
-                        modifier = Modifier.padding(top = dp100),
-                        text = stringResource(id = R.string.str_app_name),
-                        style = MaterialTheme.typography.displayLarge.copy(fontWeight = FontWeight.Bold),
-                        color = Theme.colorScheme.red,
-                        textAlign = TextAlign.Center
+                    Image(
+                        modifier = Modifier
+                            .size(dp130)
+                            .padding(top = dp25),
+                        painter = painterResource(id = R.drawable.img_goodchoice),
+                        contentDescription = stringResource(id = R.string.str_app_name)
                     )
 
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = dp35, bottom = dp25),
+                            .padding(top = dp25, bottom = dp25),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Divider(
@@ -90,6 +115,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
+                        innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_login_kakao),
                         containerColor = Theme.colorScheme.yellow,
                         contentColor = Theme.colorScheme.darkGray,
@@ -110,6 +136,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
+                        innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_login_naver),
                         containerColor = Theme.colorScheme.green,
                         contentColor = Theme.colorScheme.white,
@@ -131,6 +158,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
+                        innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_login_facebook),
                         containerColor = Theme.colorScheme.blue,
                         contentColor = Theme.colorScheme.white,
@@ -151,16 +179,16 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
-                        title = stringResource(id = R.string.str_login_apple),
-                        containerColor = Theme.colorScheme.darkGray,
-                        contentColor = Theme.colorScheme.white,
+                        innerPadding = innerPadding,
+                        title = stringResource(id = R.string.str_login_google),
+                        contentColor = Theme.colorScheme.darkGray,
+                        borderColor = Theme.colorScheme.pureGray,
                         style = style,
                         endPadding = endPadding,
                         content = {
                             Image(
                                 modifier = iconModifier,
-                                painter = painterResource(id = R.drawable.ic_apple),
-                                colorFilter = ColorFilter.tint(Theme.colorScheme.white),
+                                painter = painterResource(id = R.drawable.ic_google),
                                 contentDescription = null
                             )
                         },
@@ -172,6 +200,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
+                        innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_login_email),
                         containerColor = Theme.colorScheme.pureBlue,
                         contentColor = Theme.colorScheme.blue,
@@ -207,8 +236,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
             )
         )
 
-        var recentViewTopPadding = 215.dp
-        val plusPadding = 65.dp
+        var recentViewTopPadding = 197.dp
         if (isLoginWay == Const.NAVER) {
             recentViewTopPadding += plusPadding * 1
         } else if (isLoginWay == Const.FACEBOOK) {
@@ -223,7 +251,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = recentViewTopPadding),
+                    .padding(top = recentViewTopPadding, start = dp15, end = dp15),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
