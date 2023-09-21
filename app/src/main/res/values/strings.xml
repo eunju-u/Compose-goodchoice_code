@@ -78,6 +78,7 @@
     <string name="str_sleep_room">숙박</string>
     <string name="str_rental_room">대실</string>
     <string name="str_show_list">목록보기</string>
+    <string name="str_show_map">지도보기</string>
     <string name="str_search_local_stay">지역, 숙소 검색</string>
 
 </resources>
