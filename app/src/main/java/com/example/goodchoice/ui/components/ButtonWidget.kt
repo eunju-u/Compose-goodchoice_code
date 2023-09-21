@@ -26,8 +26,8 @@ fun ButtonWidget(
     containerColor: Color = Theme.colorScheme.white,
     contentColor: Color = Theme.colorScheme.darkGray,
     borderColor: Color = Theme.colorScheme.blue,
-    onItemClick: () -> Unit,
-    content: @Composable @UiComposable () -> Unit,
+    onItemClick: () -> Unit = {},
+    content: @Composable @UiComposable () -> Unit = {},
 ) {
     TextButton(
         modifier = modifier

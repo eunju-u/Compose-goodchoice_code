@@ -32,6 +32,7 @@ fun PayWidget(data: PayData = PayData()) {
                 containerColor = Theme.colorScheme.lightPink,
                 contentColor = Theme.colorScheme.red,
                 shape = dp5,
+                innerPadding = PaddingValues(dp5)
             )
             Text(
                 modifier = Modifier.padding(start = dp10),

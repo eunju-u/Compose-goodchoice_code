@@ -31,6 +31,7 @@ fun CardWidget(
     innerPadding: PaddingValues = PaddingValues(horizontal = dp10, vertical = dp12),
     outerPadding: PaddingValues = PaddingValues(dp0),
     isVisibleShadow: Boolean = false,
+    shadowOffsetY: Dp = dp5,
     shadowColor: Color = Theme.colorScheme.pureGray,
     borderWidth: Dp = 1.5.dp,
     borderColor: Color = Color.Transparent,
@@ -47,7 +48,7 @@ fun CardWidget(
             .coloredShadow(
                 color = if (isVisibleShadow) shadowColor else Color.Transparent,
                 blur = dp10,
-                offsetY = dp5
+                offsetY = shadowOffsetY
             )
             .background(
                 color = containerColor, shape = cornerShape

@@ -1,0 +1,273 @@
+package com.example.goodchoice.ui.filter
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.goodchoice.R
+import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.api.data.FilterData
+import com.example.goodchoice.api.data.FilterItem
+import com.example.goodchoice.ui.components.*
+import com.example.goodchoice.ui.filter.widget.FilterItemWidget
+import com.example.goodchoice.ui.theme.*
+
+@SuppressLint("MutableCollectionMutableState")
+@Composable
+fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
+    val context = LocalContext.current
+    var checkReservation by remember { mutableStateOf(false) }
+    val clickStayType = viewModel.clickStayType
+    //다이얼로그 에서 확인 클릭시 clickStayType set 해야 하므로 추가
+    var clickFilterStayItem = FilterItem()
+
+    val stayTypeList = viewModel.stayTypeList
+    var list = listOf(FilterData())
+    val filterUiState = viewModel.filterUiState.collectAsStateWithLifecycle()
+
+    //key 에는 #취향, 할인혜택, 가격 등 상위 제목이 들어가고
+    //value 에는 상위 title 에서 선택한 필터값이 list 로 들어간다.
+    val selectFilterMap = remember { mutableStateMapOf<String, MutableList<FilterItem>>() }
+//    val selectFilterList = viewModel.selectFilterList
+
+    //필터한 숙소 갯수
+    val stayCount = viewModel.stayCount
+    //다이얼로그 노출 여부
+    var isShowDialog by remember { mutableStateOf(false) }
+    val scrollState = rememberLazyListState()
+
+    Box {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Theme.colorScheme.white)
+        ) {
+
+            when (filterUiState.value) {
+                is ConnectInfo.Error -> {}
+                else -> {
+                    if (filterUiState.value is ConnectInfo.Available) {
+                        val item = filterUiState.value as ConnectInfo.Available
+                        list = item.data as List<FilterData>
+                    }
+
+                    TopAppBarWidget(title = stringResource(id = R.string.str_filter),
+                        isCloseButton = true,
+                        onFinish = { onFinish() })
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(start = dp20, end = dp20, bottom = dp70),
+                        state = scrollState
+                    ) {
+                        item {
+                            SpaceBetweenRowWidget(modifier = Modifier
+                                .fillMaxWidth()
+                                .height(dp40),
+                                text = stringResource(id = R.string.str_reservation_available),
+                                textStyle = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                                content = {
+                                    Switch(
+                                        checked = checkReservation,
+                                        onCheckedChange = { checkReservation = it },
+                                        colors = SwitchDefaults.colors(
+                                            checkedTrackColor = Theme.colorScheme.blue,
+                                            uncheckedTrackColor = Theme.colorScheme.pureGray,
+                                        )
+                                    )
+                                })
+                            Spacer(modifier = Modifier.height(dp20))
+                        }
+
+                        if (stayTypeList.isNotEmpty()) {
+                            item {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = "숙소유형",
+                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                )
+                                Spacer(modifier = Modifier.height(dp20))
+
+                                val height =
+                                    ((stayTypeList.size / 2) + (if (stayTypeList.size % 2 > 0) 1 else 0)) * 50
+                                LazyVerticalGrid(
+                                    modifier = Modifier.height(height.dp),
+                                    columns = GridCells.Fixed(count = 2),
+                                    userScrollEnabled = false
+                                ) {
+                                    items(items = stayTypeList) { item ->
+                                        //숙소 유형 '전체' 에 체크 표시 하도록 함
+                                        if (clickStayType.value.filterCode == "" && item.filterCode == "r_1") {
+                                            clickStayType.value = item
+                                        }
+                                        LeftImageButtonWidget(modifier = Modifier.height(dp50),
+                                            title = item.filterTitle,
+                                            style = MaterialTheme.typography.labelMedium,
+                                            isCenterHorizontalArrangement = false,
+                                            content = {
+                                                ShapeButton(
+                                                    isChecked = clickStayType.value.filterCode == item.filterCode,
+                                                    checkedColor = Theme.colorScheme.blue,
+                                                )
+                                            },
+                                            onItemClick = {
+                                                clickFilterStayItem = item
+                                                if (clickStayType.value != item && selectFilterMap.values.isNotEmpty()) {
+                                                    isShowDialog = true
+                                                } else {
+                                                    if (clickStayType.value != item) {
+                                                        clickStayType.value = item
+                                                    }
+                                                    selectFilterMap.clear()
+                                                    viewModel.requestFilterData()
+                                                }
+                                            })
+                                    }
+                                }
+                            }
+                            item { Spacer(modifier = Modifier.height(dp20)) }
+                        }
+
+                        if (list.isNotEmpty()) {
+                            items(items = list, key = { it.title ?: "" }) { filterData ->
+                                filterData.title?.let {
+                                    Text(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(top = dp10, bottom = dp10),
+                                        text = it,
+                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                    )
+                                }
+
+                                val filterDataList = filterData.list ?: listOf()
+                                filterDataList.forEach { filterListData ->
+                                    Log.d("eunju", "리스트 for!!!!")
+                                    FilterItemWidget(
+                                        subTitle =
+                                        if (filterDataList.size == 1 && filterData.code == filterDataList[0].code)
+                                            "" else filterListData.title ?: "",
+                                        list = filterListData.list ?: listOf(),
+                                        selectList = selectFilterMap[filterListData.code]
+                                            ?: listOf(),
+                                        onItemClick = { clickItem ->
+                                            val value = selectFilterMap[filterListData.code]
+                                                ?: mutableListOf()
+                                            if (!value.contains(clickItem)) {
+                                                value.add(clickItem)
+                                            } else {
+                                                value.remove(clickItem)
+                                            }
+                                            filterListData.code?.let {
+                                                selectFilterMap[it] = value
+                                            }
+                                        })
+                                }
+
+                                Spacer(modifier = Modifier.height(dp20))
+                            }
+
+//                            for ((key, value) in selectFilterMap) {
+//                                item {
+//                                    Text("Key: $key")
+//                                    Text("Values: ${value.joinToString()}")
+//                                }
+//                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        CardWidget(modifier = Modifier.align(Alignment.BottomEnd),
+            isVisibleShadow = true,
+            shadowOffsetY = -dp5,
+            content = {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(dp50)
+                ) {
+                    val isChecked =
+                        selectFilterMap.values.isNotEmpty() || clickStayType.value.filterCode != "r_1"
+                    LeftImageButtonWidget(modifier = Modifier
+                        .weight(0.3f)
+                        .fillMaxHeight(),
+                        title = stringResource(id = R.string.str_filter_reset),
+                        innerPadding = PaddingValues(horizontal = dp5),
+                        shape = dp0,
+                        contentColor = if (isChecked) Theme.colorScheme.darkGray else Theme.colorScheme.gray,
+                        style = MaterialTheme.typography.labelMedium,
+                        endPadding = dp10,
+                        onItemClick = {
+                            selectFilterMap.clear()
+                            val allData = stayTypeList.filter { item -> item.filterCode == "r_1" }
+                            if (allData.isNotEmpty()) {
+                                clickStayType.value =
+                                    stayTypeList.filter { item -> item.filterCode == "r_1" }[0]
+                            }
+                        },
+                        content = {
+                            Icon(
+                                modifier = Modifier.size(dp15),
+                                painter = painterResource(id = R.drawable.ic_refresh),
+                                tint = if (isChecked) Theme.colorScheme.darkGray else Theme.colorScheme.gray,
+                                contentDescription = null
+                            )
+                        })
+                    ButtonWidget(
+                        modifier = Modifier.weight(0.7f),
+                        containerColor = Theme.colorScheme.pureGray,
+                        content = {
+                            Text(
+                                text = stringResource(
+                                    id = R.string.str_filter_stay_count, stayCount
+                                ),
+                                style = MaterialTheme.typography.labelLarge,
+                                color = if (stayCount == 0) Theme.colorScheme.gray else Theme.colorScheme.white
+                            )
+                        }, onItemClick = {
+                            (context as FilterActivity).apply {
+                                setResult(Activity.RESULT_OK)
+                                finish()
+                            }
+                        })
+                }
+            })
+
+        if (filterUiState.value is ConnectInfo.Loading) {
+            LoadingWidget()
+        }
+    }
+
+    if (isShowDialog) {
+        AlertDialogWidget(
+            onDismiss = { isShowDialog = false },
+            title = stringResource(id = R.string.str_filter_reset_dialog),
+            onConfirm = {
+                clickStayType.value = clickFilterStayItem
+                selectFilterMap.clear()
+                isShowDialog = false
+            },
+            oneButtonText = stringResource(id = R.string.str_cancel),
+            twoButtonText = stringResource(id = R.string.str_ok)
+        )
+    }
+}

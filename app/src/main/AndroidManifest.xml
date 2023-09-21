@@ -45,6 +45,9 @@
         <activity
             android:name=".ui.stayDetail.service.ServiceActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.filter.FilterActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

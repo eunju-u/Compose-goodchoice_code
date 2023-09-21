@@ -48,9 +48,7 @@ fun AlertDialogWidget(
                                 .fillMaxWidth()
                                 .padding(top = dp20),
                             text = title,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                            ),
+                            style = MaterialTheme.typography.labelLarge,
                             color = textColor
                         )
                     } else {
@@ -137,7 +135,7 @@ fun TwoButton(
                 Text(
                     text = oneButtonText,
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = Theme.colorScheme.darkGray
+                    color = Theme.colorScheme.gray
                 )
             }
         )

@@ -47,6 +47,7 @@ fun LeftImageButtonWidget(
             alignment = if (isCenterHorizontalArrangement) Alignment.Center else Alignment.TopStart,
             onItemClick = { onItemClick() }) {
             Row(
+                modifier = modifier,
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {

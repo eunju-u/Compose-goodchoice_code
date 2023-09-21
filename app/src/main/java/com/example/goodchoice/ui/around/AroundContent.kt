@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.around
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -30,7 +31,9 @@ import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
+import com.example.goodchoice.ui.filter.FilterActivity
 import com.example.goodchoice.ui.main.AroundFilterSelectedData
+import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.DeviceUtil
@@ -183,6 +186,13 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                             } else {
                                                 selectDepthItem.value = AroundFilterItem()
                                             }
+                                        } else if (item.type == Const.FILTER) {
+                                            (context as MainActivity).activityForResult.launch(
+                                                Intent(
+                                                    context,
+                                                    FilterActivity::class.java
+                                                )
+                                            )
                                         }
                                     },
                                     content = when (item.type) {

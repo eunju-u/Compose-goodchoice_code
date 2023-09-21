@@ -87,6 +87,12 @@
     <string name="str_pay_benefit_information">결제 혜택 안내</string>
     <string name="str_benefit">혜택</string>
 
+    <!--  필터  -->
+    <string name="str_filter">필터</string>
+    <string name="str_reservation_available">예약가능만 보기</string>
+    <string name="str_filter_reset">필터 재설정</string>
+    <string name="str_filter_stay_count"><xliff:g id="count">%s</xliff:g>개의 숙소보기</string>
+    <string name="str_filter_reset_dialog">선택한 필터항목이 초기화됩니다.</string>
 
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
@@ -98,5 +104,7 @@
     <string name="str_show_map">지도보기</string>
     <string name="str_search_local_stay">지역, 숙소 검색</string>
     <string name="str_download_coupon">쿠폰 받기</string>
+    <string name="str_cancel">취소</string>
+    <string name="str_ok">확인</string>
 
 </resources>

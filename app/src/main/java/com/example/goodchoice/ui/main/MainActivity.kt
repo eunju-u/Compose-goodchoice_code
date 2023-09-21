@@ -1,15 +1,14 @@
 package com.example.goodchoice.ui.main
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.theme.TestTheme
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     companion object {
@@ -36,4 +35,17 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
+
+    val activityForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                Activity.RESULT_OK-> {
+                    Log.d("eunju", "activityForResult")
+
+                    result.data?.let {
+                        val isFiltered = it.getBooleanExtra("filtered", false)
+                    }
+                }
+            }
+        }
 }

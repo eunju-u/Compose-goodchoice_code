@@ -1,7 +1,9 @@
 package com.example.goodchoice.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -12,31 +14,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.example.goodchoice.ui.theme.Theme
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.dp5
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun TagWidget(
     modifier: Modifier = Modifier,
+    outerPadding: PaddingValues = PaddingValues(dp0),
     title: String = "",
     contentColor: Color = Theme.colorScheme.pureGray,
     containerColor: Color = Theme.colorScheme.white,
     style: TextStyle = MaterialTheme.typography.labelSmall,
-    shape: Dp = 3.dp,
-    onClick: (() -> Unit)? = null,
+    borderColor: Color = Color.Transparent,
+    shape: Dp = dp0,
+    onItemClick: (() -> Unit)? = null,
+    innerPadding: PaddingValues = PaddingValues(horizontal = dp10, vertical = dp12),
 ) {
 
     Text(modifier = modifier
-        .then(if (onClick != null) {
-            Modifier.clickable { onClick() }
+        .padding(outerPadding)
+        .then(if (onItemClick != null) {
+            Modifier.clickable { onItemClick() }
         } else {
             Modifier
         }.background(color = containerColor, shape = RoundedCornerShape(shape)))
-        .padding(dp5),
+        .border(shape = RoundedCornerShape(shape), width = dp1, color = borderColor)
+        .padding(innerPadding),
         color = contentColor,
         text = title, textAlign = TextAlign.Center,
         style = style
@@ -45,7 +50,7 @@ fun TagWidget(
 
 @Preview
 @Composable
-fun PreviewTagWidget(){
+fun PreviewTagWidget() {
     TagWidget(
         title = stringResource(id = R.string.str_benefit),
         containerColor = Theme.colorScheme.lightPink,
