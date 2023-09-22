@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.ui.components.LoadingWidget
 import com.example.goodchoice.ui.main.nav.NavGraph
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.ui.main.nav.navigation
@@ -43,6 +45,8 @@ fun MainContent(viewModel: MainViewModel) {
     val mainState = rememberMainState()
     val navBackStackEntry by mainState.navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
+    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
 
     var titleText by remember { mutableStateOf("") }
 
@@ -135,6 +139,10 @@ fun MainContent(viewModel: MainViewModel) {
                 startDestination = NavItem.Home.route,
                 viewModel = viewModel
             )
+        }
+
+        if (homeUiState.value is ConnectInfo.Loading) {
+            LoadingWidget()
         }
     }
 }

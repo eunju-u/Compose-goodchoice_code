@@ -44,7 +44,7 @@ fun LikeContent(
     val leisureLikeData = viewModel.leisureLikeData
 
     val pagerState = rememberPagerState(initialPage = 0)
-    val likeUiState = viewModel.likeUiState.collectAsStateWithLifecycle()
+    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
 
     val pageModifier = Modifier
         .fillMaxSize()
@@ -78,7 +78,7 @@ fun LikeContent(
                             }
                         )
                     } else {
-                        if (likeUiState.value is ConnectInfo.Available) {
+                        if (homeUiState.value is ConnectInfo.Available) {
                             when (menus[page].route) {
                                 TabData.KOREA.route -> {
                                     Column(
