@@ -89,7 +89,7 @@ fun HomeContent(
         SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefresh), onRefresh = {
             scope.launch {
                 isRefresh = homeUiState.value is ConnectInfo.Available
-                viewModel.requestHomeData().await()
+                viewModel.requestHomeData()
                 isRefresh = false
             }
         }, indicator = { s, trigger -> {} }) {
