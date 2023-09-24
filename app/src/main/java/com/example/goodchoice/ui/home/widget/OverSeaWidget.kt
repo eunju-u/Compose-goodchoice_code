@@ -31,9 +31,8 @@ fun OverSeaWidget(item: OverSeaCityItem) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         RoundImageWidget(
-            modifier = Modifier
-                .width(dp50)
-                .height(dp50), painter = painter
+            imageModifier = Modifier
+                .width(dp50).height(dp50), painter = painter
         )
         TextWidget(
             modifier = Modifier

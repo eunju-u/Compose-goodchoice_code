@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -25,17 +26,22 @@ import com.example.goodchoice.ui.theme.*
  */
 @Composable
 fun RecentSeenWidget(stayItem: StayItem) {
-    val painter = if (stayItem.imageList?.isNotEmpty() == true) rememberAsyncImagePainter(
-        model = stayItem.imageList[0], painterResource(id = R.drawable.bg_yellow)
+    val painter = if (stayItem.mainImage?.isNotEmpty() == true) rememberAsyncImagePainter(
+        model = stayItem.mainImage, painterResource(id = R.drawable.bg_white)
     )
-    else painterResource(id = R.drawable.bg_yellow)
+    else painterResource(id = R.drawable.bg_white)
 
     Column(
-        modifier = Modifier.width(dp120),
+        modifier = Modifier
+            .width(dp120)
+            .clip(RoundedCornerShape(dp10))
+            .clickable { }
+            .padding(bottom = dp20),
         verticalArrangement = Arrangement.Center,
     ) {
         RoundImageWidget(
-            modifier = Modifier.height(dp120),
+            imageModifier = Modifier.height(dp120),
+            roundShape = dp10,
             painter = painter,
             content = {
                 if (!stayItem.label.isNullOrEmpty()) {

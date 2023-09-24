@@ -18,24 +18,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp30
-import com.example.goodchoice.ui.theme.dp5
-import com.example.goodchoice.ui.theme.dp55
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun RoundImageWidget(
     modifier: Modifier = Modifier,
-    roundShape: Dp = dp5,
+    imageModifier: Modifier = Modifier,
+    roundShape: Dp = dp0,
     painter: Painter, //이미지
     boxAlignment: Alignment = Alignment.BottomStart, //상위에 올라가는 뷰의 정렬
     contentScale: ContentScale = ContentScale.Crop,
     content: @Composable @UiComposable (() -> Unit)? = null
 ) {
-    Box {
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(roundShape)),
+    ) {
         Image(
-            modifier = modifier
-                .clip(RoundedCornerShape(roundShape)),
+            modifier = imageModifier,
             painter = painter,
             contentScale = contentScale,
             contentDescription = "image"

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.goodchoice.Const
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.theme.TestTheme
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +36,9 @@ class SplashActivity : ComponentActivity() {
                 Intent(
                     this@SplashActivity,
                     MainActivity::class.java
-                )
+                ).apply {
+                    putExtra(Const.FIRST_SPLASH, true)
+                }
             )
             this@SplashActivity.finish()
         }

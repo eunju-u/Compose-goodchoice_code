@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.goodchoice.Const
 import com.example.goodchoice.ui.theme.TestTheme
 import kotlinx.coroutines.launch
 
@@ -20,6 +20,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.firstSplash = intent.getBooleanExtra(Const.FIRST_SPLASH, false)
+
         setContent {
             TestTheme {
                 MainContent(viewModel = viewModel)

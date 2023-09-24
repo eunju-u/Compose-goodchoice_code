@@ -11,24 +11,21 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Text
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.components.TextWidget
@@ -36,6 +33,7 @@ import com.example.goodchoice.ui.home.homeData.RefreshData
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
+import com.example.goodchoice.utils.StringUtil
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.delay
@@ -60,6 +58,7 @@ fun HomeContent(
     val stayList = homeData.stayList ?: emptyList()
     val recentData = viewModel.recentData
     val overSeaCityList = homeData.overSeaCityList ?: emptyList()
+    val overseaSpecialList = homeData.overseaSpecialList ?: emptyList()
     val row = 4
 
     val isShowFullHeader = viewModel.isShowFullHeader
@@ -78,9 +77,9 @@ fun HomeContent(
     var refreshDataIndex by remember { mutableStateOf(0) }
     val refreshData = refreshDataList[refreshDataIndex]
 
-    LaunchedEffect(refreshDataIndex) {
-        while (true) {
-            delay(200)
+    LaunchedEffect(isRefresh) {
+        while (isRefresh) {
+            delay(150)
             refreshDataIndex = (refreshDataIndex + 1) % refreshDataList.size
         }
     }
@@ -89,7 +88,7 @@ fun HomeContent(
         SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefresh), onRefresh = {
             scope.launch {
                 isRefresh = homeUiState.value is ConnectInfo.Available
-                viewModel.requestHomeData()
+                viewModel.requestHomeData(isRefresh)
                 isRefresh = false
             }
         }, indicator = { s, trigger -> {} }) {
@@ -142,189 +141,197 @@ fun HomeContent(
                         })
                 }
 
-                if (categoryList.isNotEmpty()) {
-                    //나라 타입
-                    itemsIndexed(items = categoryList) { index, item ->
-                        val categoryItemList = item.categoryList
-                        if (item.countryType == Const.OVERSEA) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(start = dp20, end = dp20, top = dp5, bottom = dp5),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(dp8)
-                            ) {
-                                TextWidget(
-                                    text = stringResource(id = R.string.str_go_oversea),
-                                    color = Theme.colorScheme.blue,
-                                    style = textStyle
-                                )
-                                Divider(
-                                    modifier = Modifier.weight(1f),
-                                    thickness = dp2,
-                                    color = Theme.colorScheme.pureGray
-                                )
-                            }
-                        }
-
-                        if (!categoryItemList.isNullOrEmpty()) {
-                            val itemListSize = categoryItemList.size
-                            val column =
-                                if (itemListSize >= row) {
-                                    (itemListSize / row) + (if (itemListSize % row > 0) 1 else 0)
-                                } else 1
-
-                            val gridHeight =
-                                (column * CategoryItemHeight.value) + (column * 2)
-
-                            // 카테고리 뷰
-                            LazyVerticalGrid(
-                                modifier = Modifier
-                                    .height(gridHeight.dp)
-                                    .padding(start = dp20, end = dp20),
-                                columns = GridCells.Fixed(count = row),
-                                verticalArrangement = Arrangement.spacedBy(2.dp),
-                                userScrollEnabled = false
-                            ) {
-                                itemsIndexed(items = categoryItemList) { index, item ->
-                                    CategoryItemWidget(item)
+                // 스플래쉬에서 진입한 경우 서버 조회 끝날 때까지 화면 모든 내용 보이지 않도록 한다.
+                // 해당 플래그 제거하면 서버 조회 후 받아오는 데이터 제외한 "쿠폰,도전뽑기,이벤트" 뷰나 사업자 정보 뷰가 노훛된다.
+                if (!viewModel.firstSplash) {
+                    if (categoryList.isNotEmpty()) {
+                        //나라 타입
+                        itemsIndexed(items = categoryList) { index, item ->
+                            val categoryItemList = item.categoryList
+                            if (item.countryType == Const.OVERSEA) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(start = dp40, end = dp40, top = dp5, bottom = dp5),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(dp25)
+                                ) {
+                                    TextWidget(
+                                        text = stringResource(id = R.string.str_go_oversea),
+                                        color = Theme.colorScheme.blue,
+                                        style = textStyle.copy(fontWeight = FontWeight.Bold)
+                                    )
+                                    Divider(
+                                        modifier = Modifier.weight(1f),
+                                        thickness = dp2,
+                                        color = Theme.colorScheme.pureGray
+                                    )
                                 }
                             }
+
+                            if (!categoryItemList.isNullOrEmpty()) {
+                                val itemListSize = categoryItemList.size
+                                val column =
+                                    if (itemListSize >= row) {
+                                        (itemListSize / row) + (if (itemListSize % row > 0) 1 else 0)
+                                    } else 1
+
+                                val gridHeight =
+                                    (column * CategoryItemHeight.value) + (column * 2)
+
+                                // 카테고리 뷰
+                                LazyVerticalGrid(
+                                    modifier = Modifier
+                                        .height(gridHeight.dp)
+                                        .padding(start = dp20, end = dp20),
+                                    columns = GridCells.Fixed(count = row),
+                                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                                    userScrollEnabled = false
+                                ) {
+                                    itemsIndexed(items = categoryItemList) { index, item ->
+                                        CategoryItemWidget(item)
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(dp5))
+                            }
                         }
                     }
-                }
 
-                item {
-                    //배너
-                    if (bannerList.isNotEmpty()) {
-                        BannerWidget(
+                    item {
+                        //배너
+                        if (bannerList.isNotEmpty()) {
+                            BannerWidget(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(dp120)
+                                    .background(color = Theme.colorScheme.pureGray),
+                                bannerList = bannerList
+                            )
+                        }
+
+                        //쿠폰, 도전뽑기, 이벤트
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(200.dp),
-                            bannerList = bannerList
-                        )
+                                .padding(vertical = dp15, horizontal = dp10),
+                            horizontalArrangement = Arrangement.spacedBy(dp5),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            EventItemWidget(
+                                modifier = Modifier.weight(1f),
+                                title = stringResource(id = R.string.str_coupon)
+                            )
+                            EventItemWidget(
+                                modifier = Modifier.weight(1f),
+                                title = stringResource(id = R.string.str_advance_select)
+                            )
+                            EventItemWidget(
+                                modifier = Modifier.weight(1f),
+                                title = stringResource(id = R.string.str_event)
+                            )
+                        }
+
+                        //지금 신규가입하면~
+
+                        recentData.value.stayList?.let {
+                            if (it.isNotEmpty()) {
+                                HotelVerticalWidget(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    type = Const.RECENT_HOTEL,
+                                    title = "최근 본 상품",
+                                    stayList = recentData.value.stayList!!
+                                )
+                                Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
+                            }
+                        }
                     }
-
-                    //쿠폰, 도전뽑기, 이벤트
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = dp10, horizontal = dp10),
-                        horizontalArrangement = Arrangement.spacedBy(dp5),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        EventItemWidget(
-                            modifier = Modifier.weight(1f),
-                            title = stringResource(id = R.string.str_coupon)
-                        )
-                        EventItemWidget(
-                            modifier = Modifier.weight(1f),
-                            title = stringResource(id = R.string.str_advance_select)
-                        )
-                        EventItemWidget(
-                            modifier = Modifier.weight(1f),
-                            title = stringResource(id = R.string.str_event)
-                        )
-                    }
-
-                    //지금 신규가입하면~
-
-                    recentData.value.stayList?.let {
-                        if (it.isNotEmpty()) {
+                    if (stayList.isNotEmpty()) {
+                        items(items = stayList) { stayData ->
                             HotelVerticalWidget(
                                 modifier = Modifier
                                     .fillMaxWidth(),
-                                stayData = StayData(
-                                    Const.RECENT_HOTEL,
-                                    "최근 본 상품",
-                                    recentData.value.stayList
-                                )
+                                type = stayData.type ?: 0,
+                                title = stayData.title ?: "",
+                                stayList = stayData.stayList ?: listOf(),
+                                recentStay = recentData
                             )
                         }
+                        item {
+                            Spacer(modifier = Modifier.height(dp5))
+                        }
                     }
-                }
-                if (stayList.isNotEmpty()) {
-                    items(items = stayList) { stayData ->
-                        HotelVerticalWidget(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            stayData = stayData,
-                            recentStay = recentData
-                        )
-                    }
-                }
 
-                item {
-                    Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
-                }
-                if (overSeaCityList.isNotEmpty()) {
                     item {
-                        Column(Modifier.background(color = Theme.colorScheme.pureGray)) {
-                            Text(
-                                modifier = Modifier.padding(
-                                    start = dp15,
-                                    end = 15.dp,
-                                    top = dp20
-                                ),
-                                text = buildAnnotatedString {
-                                    withStyle(
-                                        SpanStyle(
-                                            fontFamily = GMarketSansFamily,
-                                            fontWeight = FontWeight.Medium,
-                                            fontSize = 14.sp,
-                                            color = Theme.colorScheme.blue
-                                        )
-                                    ) {
-                                        val str =
-                                            stringResource(id = R.string.str_over_sea_row_price)
-                                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append(str.substring(0, 7))
+                        Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
+                    }
+                    if (overSeaCityList.isNotEmpty()) {
+                        item {
+                            Column(Modifier.background(color = Theme.colorScheme.pureGray)) {
+                                Text(
+                                    modifier = Modifier.padding(
+                                        start = dp15,
+                                        end = 15.dp,
+                                        top = dp20
+                                    ),
+                                    text = StringUtil.setTextColor(
+                                        originText = stringResource(id = R.string.str_over_sea_row_price),
+                                        targetText = "최저가 숙소"
+                                    ),
+                                    style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+                                )
+                                LazyRow(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(dp10)
+                                ) {
+                                    itemsIndexed(items = overSeaCityList) { index, item ->
+                                        if (index == 0) Spacer(Modifier.width(dp15))
+                                        Column(
+                                            modifier = Modifier
+                                                .clickable {
+
+                                                }
+                                                .padding(
+                                                    start = dp5,
+                                                    end = dp5,
+                                                    top = dp20,
+                                                    bottom = dp20
+                                                ),
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            OverSeaWidget(item)
                                         }
-                                        append(str.substring(7))
-                                    }
-                                },
-                                color = Theme.colorScheme.blue,
-                                style = textStyle
-                            )
-                            LazyRow(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(dp10)
-                            ) {
-                                itemsIndexed(items = overSeaCityList) { index, item ->
-                                    if (index == 0) Spacer(Modifier.width(dp15))
-                                    Column(
-                                        modifier = Modifier
-                                            .clickable {
-
-                                            }
-                                            .padding(
-                                                start = dp5,
-                                                end = dp5,
-                                                top = dp20,
-                                                bottom = dp20
-                                            ),
-                                        verticalArrangement = Arrangement.Center,
-                                        horizontalAlignment = Alignment.CenterHorizontally
-                                    ) {
-                                        OverSeaWidget(item)
-                                    }
-                                    if (index == overSeaCityList.lastIndex) Spacer(
-                                        Modifier.width(
-                                            dp15
+                                        if (index == overSeaCityList.lastIndex) Spacer(
+                                            Modifier.width(
+                                                dp15
+                                            )
                                         )
-                                    )
 
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                item {
-                    Spacer(modifier = Modifier.height(dp20))
-                    CompanyInfoWidget()
-                    Spacer(modifier = Modifier.height(dp30))
+                    if (overseaSpecialList.isNotEmpty()) {
+                        item {
+                            HotelVerticalWidget(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                type = Const.OVERSEA_SPECIAL,
+                                title = "해외 항공 + 숙소 이번 주 특가",
+                                stayList = overseaSpecialList
+                            )
+                        }
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.height(dp20))
+                        CompanyInfoWidget()
+                        Spacer(modifier = Modifier.height(dp30))
+                    }
                 }
             }
         }

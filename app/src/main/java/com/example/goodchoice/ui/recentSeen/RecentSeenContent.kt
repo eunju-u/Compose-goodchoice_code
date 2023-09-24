@@ -38,7 +38,6 @@ fun RecentSeenContent(viewModel: MainViewModel) {
 
     Column {
         TopAppBarWidget(
-            title = stringResource(id = R.string.str_recent_seen_item),
             onFinish = { (context as RecentSeenActivity).finish() }) {
             Text(
                 modifier = Modifier

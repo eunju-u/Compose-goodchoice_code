@@ -29,12 +29,12 @@ fun RecentSeenItemWidget(stayItem: StayItem) {
         horizontalArrangement = Arrangement.spacedBy(dp15)
     ) {
         val painter =
-            if (stayItem.imageList?.isNotEmpty() == true)
+            if (stayItem.mainImage?.isNotEmpty() == true)
                 rememberAsyncImagePainter(
-                    model = stayItem.imageList[0],
-                    painterResource(id = R.drawable.bg_yellow)
+                    model = stayItem.mainImage,
+                    painterResource(id = R.drawable.bg_white)
                 )
-            else painterResource(id = R.drawable.bg_yellow)
+            else painterResource(id = R.drawable.bg_white)
 
         RoundImageWidget(modifier = Modifier.size(dp95), painter = painter, roundShape = dp15)
         Column(verticalArrangement = Arrangement.Center) {

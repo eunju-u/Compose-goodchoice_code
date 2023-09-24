@@ -30,10 +30,11 @@ object Const {
     const val SPACE_RENTAL = "Space_Rental" //공간대여
     const val LEISURE_AND_TICKET = "Leisure_and_Ticket" //레저, 티켓
 
-    //숙소 타입 (최근, 오늘특가, hot 인기)
-    const val RECENT_HOTEL = 122
-    const val TODAY_HOTEL = 123
-    const val HOT_HOTEL = 124
+    //홈에 노출되는 숙소 타입
+    const val RECENT_HOTEL = 122 //최근 본 상품
+    const val TODAY_HOTEL = 123 //오늘 체크인 호텔 특가
+    const val HOT_HOTEL = 124 //이번 주 HOT 인기 펜션
+    const val OVERSEA_SPECIAL = 125 //해외 항공 + 숙소 이번주 특가
 
     //편의시설 및 서비스
     const val WIFI = "WIFI"
@@ -96,6 +97,9 @@ object Const {
     const val M20_L25 = "M20_L25"
     const val M25_L30 = "M25_L30"
     const val MORE_30 = "MORE_30"
+
+    //Intent
+    const val FIRST_SPLASH = "FIRST_SPLASH"
 }
 
 // 숙박, 대실

@@ -14,32 +14,33 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.Const
-import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.R
+import com.example.goodchoice.api.data.OverseaSpecialItem
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 import com.example.goodchoice.ui.theme.*
+import com.example.goodchoice.utils.StringUtil
 
 @Composable
 fun HotelVerticalWidget(
     modifier: Modifier = Modifier,
-    stayData: StayData = StayData(),
+    type: Int = 0,
+    title: String = "",
+    stayList: List<Any> = listOf(),
     recentStay: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
 ) {
     val context = LocalContext.current
     val scrollState = rememberLazyListState()
-    val textStyle = MaterialTheme.typography.labelLarge
+    val textStyle = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
 
-    val stayList = stayData.stayList ?: emptyList()
     Column(
         modifier = modifier
     ) {
@@ -50,7 +51,10 @@ fun HotelVerticalWidget(
                 end = dp15,
                 top = dp20
             ),
-            text = stayData.title ?: "",
+            text = StringUtil.setTextColor(
+                originText = title,
+                targetText = if (type == Const.TODAY_HOTEL) "호텔 특가" else if (type == Const.HOT_HOTEL) "이번 주 HOT" else if (type == Const.OVERSEA_SPECIAL) "해외 항공 + 숙소" else ""
+            ),
             style = textStyle,
             textAlign = TextAlign.Center
         )
@@ -65,20 +69,19 @@ fun HotelVerticalWidget(
             ) {
                 itemsIndexed(items = stayList) { index, item ->
                     if (index == 0) Spacer(Modifier.width(15.dp))
-                    stayData.type?.let { type ->
+                    if (item is StayItem) {
                         if (type == Const.TODAY_HOTEL || type == Const.HOT_HOTEL) {
-                            HotelItemWidget(
+                            KoreaStayItemWidget(
+                                stayDataType = type,
                                 stayItem = item,
                                 recentStay = recentStay
                             )
                         } else if (type == Const.RECENT_HOTEL) {
                             RecentSeenWidget(stayItem = item)
                         }
-                    } ?: HotelItemWidget(
-                        stayItem = item,
-                        recentStay = recentStay
-                    )
-
+                    } else if (item is OverseaSpecialItem) {
+                        OverseaStayItemWidget(item)
+                    }
                     if (index == stayList.lastIndex) Spacer(Modifier.width(15.dp))
                 }
             }
@@ -87,24 +90,24 @@ fun HotelVerticalWidget(
         if (stayList.size > 3) {
             //더보기 버튼
             val text: Any =
-                when (stayData.type) {
+                when (type) {
                     Const.TODAY_HOTEL -> {
-                        buildAnnotatedString {
-                            val str = stringResource(id = R.string.str_today_hotel_more)
-                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                append(str.substring(0, 5))
-                            }
-                            append(str.substring(5))
-                        }
+                        StringUtil.setTextBold(
+                            originText = stringResource(id = R.string.str_today_hotel_more),
+                            targetText = "호텔 특가"
+                        )
                     }
                     Const.HOT_HOTEL -> {
-                        buildAnnotatedString {
-                            val str = stringResource(id = R.string.str_hot_hotel_more)
-                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                append(str.substring(0, 2))
-                            }
-                            append(str.substring(2))
-                        }
+                        StringUtil.setTextBold(
+                            originText = stringResource(id = R.string.str_hot_hotel_more),
+                            targetText = "인기"
+                        )
+                    }
+                    Const.OVERSEA_SPECIAL -> {
+                        StringUtil.setTextBold(
+                            originText = stringResource(id = R.string.str_oversea_airplane_stay_more),
+                            targetText = "항공 + 숙소 특가"
+                        )
                     }
                     else -> {
                         stringResource(id = R.string.str_more)
@@ -128,7 +131,7 @@ fun HotelVerticalWidget(
                     contentColor = Theme.colorScheme.blue,
                     innerPadding = PaddingValues(horizontal = dp10, vertical = dp8),
                     onItemClick = {
-                        if (stayData.type == Const.RECENT_HOTEL) {
+                        if (type == Const.RECENT_HOTEL) {
                             context.startActivity(
                                 Intent(
                                     context,
@@ -152,32 +155,30 @@ fun HotelVerticalWidget(
 @Composable
 fun previewHotelVerticalWidget() {
     HotelVerticalWidget(
-        stayData = StayData(
-            type = Const.TODAY_HOTEL,
-            title = "오늘 체크인 호텔 특가",
-            stayList = listOf(
-                StayItem(
-                    label = "호텔.리조트",
-                    name = "[당일특가] 스탠포드 호출 서울",
-                    star = "9.3",
-                    commentCount = 1842,
-                    location = "마포구.디지털미디어",
-                    discountPer = 0,
-                    defaultPrice = "129000",
-                    discountPrice = "0",
-                    level = "레지던스",
-                ),
-                StayItem(
-                    label = "호텔.리조트",
-                    name = "브릿지호텔 인천송도 (구 호텔 스카이파크 인천 송도)",
-                    star = "9.1",
-                    commentCount = 1118,
-                    location = "연수구.인천대입구역",
-                    discountPer = 60,
-                    defaultPrice = "250000",
-                    discountPrice = "다른 날짜 확인",
-                    level = "아파트먼트",
-                )
+        type = Const.TODAY_HOTEL,
+        title = "오늘 체크인 호텔 특가",
+        stayList = listOf(
+            StayItem(
+                label = "호텔.리조트",
+                name = "[당일특가] 스탠포드 호출 서울",
+                star = "9.3",
+                commentCount = 1842,
+                location = "마포구.디지털미디어",
+                discountPer = 0,
+                defaultPrice = "129000",
+                discountPrice = "0",
+                level = "레지던스",
+            ),
+            StayItem(
+                label = "호텔.리조트",
+                name = "브릿지호텔 인천송도 (구 호텔 스카이파크 인천 송도)",
+                star = "9.1",
+                commentCount = 1118,
+                location = "연수구.인천대입구역",
+                discountPer = 60,
+                defaultPrice = "250000",
+                discountPrice = "다른 날짜 확인",
+                level = "아파트먼트",
             )
         )
     )

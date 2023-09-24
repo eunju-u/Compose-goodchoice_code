@@ -47,9 +47,9 @@ fun TextWidget(
         if (isPortrait) {
             textStyle = if (screenWidth < 400.dp) {
                 if (textFontSize < 14.sp) {
-                    textStyle.copy(fontSize = textStyle.fontSize * fontLargeSizeRatio)
-                } else {
                     textStyle.copy(fontSize = textStyle.fontSize * fontSmallSizeRaio)
+                } else {
+                    textStyle.copy(fontSize = textStyle.fontSize * fontLargeSizeRatio)
                 }
             } else {
                 style

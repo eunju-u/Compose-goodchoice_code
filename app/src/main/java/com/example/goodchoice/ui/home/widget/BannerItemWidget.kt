@@ -12,14 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.BannerData
 import com.example.goodchoice.ui.theme.*
@@ -46,16 +44,14 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
             Image(
                 modifier = Modifier
                     .fillMaxSize(),
-                painter = painterResource(id = item.image),
-//                painter = rememberAsyncImagePainter(
-//                    ImageRequest.Builder(LocalContext.current)
-//                        .data(data = item.image)
-//                        .apply(block = fun ImageRequest.Builder.() {
-//                            size(Size.ORIGINAL)
-//                        }).build()
-//                )
+                painter =
+                if (item.image?.isNotEmpty() == true)
+                    rememberAsyncImagePainter(
+                        model = item.image,
+                        painterResource(id = R.drawable.bg_white)
+                    )
+                else painterResource(id = R.drawable.bg_white),
                 contentDescription = "배너",
-                contentScale = ContentScale.FillWidth
             )
         }
 
@@ -66,7 +62,7 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
                         color = Theme.colorScheme.white,
                     )
                 ) {
-                    append(((currentPage) % 3 + 1).toString())
+                    append(((currentPage) % listSize + 1).toString())
                 }
                 append("/${listSize}")
             }
@@ -99,18 +95,4 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun previewBannerWidget() {
-    BannerWidget(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp), bannerList = listOf(
-            BannerData(R.drawable.bg_purple),
-            BannerData(R.drawable.bg_yellow),
-            BannerData(R.drawable.bg_teal)
-        )
-    )
 }

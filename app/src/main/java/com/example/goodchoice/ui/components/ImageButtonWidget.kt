@@ -1,6 +1,5 @@
 package com.example.goodchoice.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -68,14 +67,16 @@ fun ImageButtonWidget(
                         text = it,
                         style = style,
                         color = contentColor,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
                     )
                 } else {
                     TextWidget(
                         text = it as AnnotatedString,
                         style = style,
                         color = contentColor,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
                     )
                 }
                 if (!isLeftImage && content != null) {

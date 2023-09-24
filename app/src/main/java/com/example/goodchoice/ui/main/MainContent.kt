@@ -48,8 +48,6 @@ fun MainContent(viewModel: MainViewModel) {
 
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
 
-    var titleText by remember { mutableStateOf("") }
-
     val style = TextStyle(
         fontSize = 9.sp,
         lineHeight = 10.sp,

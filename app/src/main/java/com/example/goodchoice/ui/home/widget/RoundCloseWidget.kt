@@ -21,7 +21,7 @@ import com.example.goodchoice.ui.theme.*
 @Composable
 fun RoundCloseWidget(modifier: Modifier = Modifier) {
     RoundImageWidget(
-        modifier = Modifier
+        imageModifier = Modifier
             .size(dp55)
             .then(modifier),
         painter = painterResource(id = R.drawable.bg_white),
@@ -53,6 +53,6 @@ fun RoundCloseWidget(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun previewRoundCloseWidget() {
+fun PreviewRoundCloseWidget() {
     RoundCloseWidget()
 }

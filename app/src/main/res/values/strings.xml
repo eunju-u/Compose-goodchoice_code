@@ -10,7 +10,8 @@
     <string name="str_app_name">여기 어때</string>
     <string name="str_go_oversea">해외 여행 갈때</string>
     <string name="str_today_hotel_more">호텔 특가 더보기</string>
-    <string name="str_hot_hotel_more">인기 호텔 특가</string>
+    <string name="str_hot_hotel_more">인기 호텔 특가 더보기</string>
+    <string name="str_oversea_airplane_stay_more">항공 + 숙소 특가 더보기</string>
     <string name="str_over_sea_row_price">최저가 숙소로 누리는 해외 인기 도시</string>
     <string name="str_more">더보기</string>
 
@@ -30,6 +31,7 @@
     <string name="str_content_business">콘텐츠산업진흥법에 의한 표시</string>
     <string name="str_business_info_responsibility">(주)여기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</string>
     <string name="str_business_info_detail">주소: 서울특별시 강남구 봉은사로 479, 479타워 11층\n대표이사: 정명훈 | 사업자등록번호: 742-86-00224\n통신판매번호: 2017-서울강남-01779\n\n전화번호: 1670-6250\n전자우편주소: hep@goodchoice.kr\n호스팅서비스제공자의 상호 표시: (주)여기어때컴퍼니</string>
+    <string name="str_oversea_special_info">망설이는 순간 마감!</string>
 
     <!--  검색  -->
 
