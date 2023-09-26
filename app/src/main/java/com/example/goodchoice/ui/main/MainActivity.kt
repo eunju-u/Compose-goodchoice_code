@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
                 MainContent(viewModel = viewModel)
             }
         }
-        observerCurrentViewData()
     }
 
     override fun onResume() {
@@ -36,18 +35,5 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-    }
-
-    /** route 값이 변경되는지 observer 해서 데이터 조회함  **/
-    private fun observerCurrentViewData() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.currentRoute.collect { value ->
-                    if (value.isNotEmpty()) {
-                        viewModel.getCurrentViewData(this@MainActivity)
-                    }
-                }
-            }
-        }
     }
 }

@@ -32,6 +32,7 @@ import com.example.goodchoice.ui.main.nav.navigation
 import com.example.goodchoice.ui.main.state.rememberMainState
 import com.example.goodchoice.ui.theme.GMarketSansFamily
 import com.example.goodchoice.ui.theme.Theme
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -55,6 +56,16 @@ fun MainContent(viewModel: MainViewModel) {
         fontWeight = FontWeight.Medium,
     )
     var textStyle by remember { mutableStateOf(style) }
+
+
+    /** route 값이 변경되면 데이터 조회함  **/
+    LaunchedEffect(Unit) {
+        viewModel.currentRoute.collectLatest {
+            if (it.isNotEmpty()) {
+                viewModel.getCurrentViewData(context)
+            }
+        }
+    }
 
     Box {
         Scaffold(
