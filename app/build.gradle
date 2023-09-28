@@ -70,4 +70,7 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-swiperefresh:0.26.5-rc")
 
+    //compose 용 웹뷰
+    implementation("com.google.accompanist:accompanist-webview:0.30.0")
+
 }

@@ -1,8 +1,10 @@
 package com.example.goodchoice.ui.home.widget
 
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -12,19 +14,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import coil.compose.rememberAsyncImagePainter
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.BannerData
 import com.example.goodchoice.ui.theme.*
+import com.example.goodchoice.ui.webview.WebViewActivity
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {
+    val context = LocalContext.current
     val pagerState = rememberPagerState(initialPage = 0)
     val currentPage = pagerState.currentPage
     val listSize = bannerList.size
@@ -43,7 +49,14 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
             val item = bannerList[index]
             Image(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .clickable {
+                        val intent = Intent(context, WebViewActivity::class.java).apply {
+                            putExtra(Const.WEBVIEW_TITLE, item.title)
+                            putExtra(Const.WEBVIEW_URL, item.url)
+                        }
+                        context.startActivity(intent)
+                    },
                 painter =
                 if (item.image?.isNotEmpty() == true)
                     rememberAsyncImagePainter(

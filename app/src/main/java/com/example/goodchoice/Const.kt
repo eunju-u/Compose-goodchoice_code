@@ -100,6 +100,8 @@ object Const {
 
     //Intent
     const val FIRST_SPLASH = "FIRST_SPLASH"
+    const val WEBVIEW_TITLE = "WEBVIEW_TITLE"
+    const val WEBVIEW_URL = "WEBVIEW_URL"
 }
 
 // 숙박, 대실

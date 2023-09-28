@@ -42,7 +42,7 @@ fun TopAppBarWidget(
                     painter =
                     if (isCloseButton) painterResource(id = R.drawable.ic_close)
                     else painterResource(id = R.drawable.ic_back),
-                    tint = Theme.colorScheme.darkGray,
+                    tint = Theme.colorScheme.gray,
                     contentDescription = null
                 )
             }
