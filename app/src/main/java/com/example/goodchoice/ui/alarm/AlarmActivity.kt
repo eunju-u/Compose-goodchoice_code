@@ -24,6 +24,6 @@ class AlarmActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getAlarmData(this@AlarmActivity)
+        viewModel.requestAlarmData(this@AlarmActivity)
     }
 }

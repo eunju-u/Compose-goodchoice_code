@@ -13,7 +13,18 @@ object ConvertUtil {
             Const.DANANG -> R.drawable.img_danang
             Const.KYOTO -> R.drawable.img_kyoto
             Const.SINGAPORE -> R.drawable.img_singapore
-            else -> R.drawable.bg_gray
+            else -> R.drawable.bg_white
+        }
+        return image
+    }
+
+    fun convertPayImage(payType: String): Int {
+        val image = when (payType) {
+            Const.PAY_TOSS -> R.drawable.img_toss
+            Const.PAY_KAKAO -> R.drawable.bg_white
+            Const.PAY_KB -> R.drawable.bg_white
+            Const.PAY_PAYCO -> R.drawable.bg_white
+            else -> R.drawable.bg_white
         }
         return image
     }

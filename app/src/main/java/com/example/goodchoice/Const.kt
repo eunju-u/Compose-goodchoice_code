@@ -98,10 +98,18 @@ object Const {
     const val M25_L30 = "M25_L30"
     const val MORE_30 = "MORE_30"
 
+    //결제 혜택 방식 type
+    const val PAY_TOSS = "toss"
+    const val PAY_KAKAO = "kakao"
+    const val PAY_KB = "kb"
+    const val PAY_CARD = "card"
+    const val PAY_PAYCO = "payco"
+
     //Intent
     const val FIRST_SPLASH = "FIRST_SPLASH"
     const val WEBVIEW_TITLE = "WEBVIEW_TITLE"
     const val WEBVIEW_URL = "WEBVIEW_URL"
+    const val ITEM_ID = "ITEM_ID"
 }
 
 // 숙박, 대실

@@ -10,9 +10,10 @@ data class StayDetailData(
     val discountPer: Int? = 0, //할인율
     val defaultPrice: String? = "", //기본 가격 String 으로 변환한 이유 : 가격 값에 "다른 날짜 확인" 이 들어올 수 있기 때문
     val discountPrice: String? = "", //할인 가격
-    val mainImage: String? = "", //메인 이미지
     val imageList: List<String>? = emptyList(), //이미지
     val level: String? = "", //성급
+    val coupon: String? = "", //쿠폰
+    val payList: List<PayData>? = emptyList(),
     val roomList: List<RoomItem>? = emptyList(), //방
     val message: String? = "", //주인 메시지
     val defaultMessage: String? = "", //기본정보 웹뷰에 노출될 string

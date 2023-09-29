@@ -37,6 +37,7 @@ fun RightImageButtonWidget(
     borderColor: Color = Color.Transparent,
     style: TextStyle = MaterialTheme.typography.labelSmall,
     isCenterHorizontalArrangement: Boolean = true,
+    imageSize: Dp = dp30,
     onItemClick: () -> Unit = {},
     content: @Composable @UiComposable (() -> Unit)? = null,
 ) {
@@ -80,6 +81,7 @@ fun RightImageButtonWidget(
                     Box(contentAlignment = Alignment.Center) { content() }
                 } else {
                     Image(
+                        modifier = Modifier.size(imageSize),
                         painter = painterResource(id = R.drawable.ic_right),
                         colorFilter = ColorFilter.tint(imageColor),
                         contentDescription = null

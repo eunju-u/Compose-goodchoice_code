@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -9,7 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import com.example.goodchoice.R
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.dp15
 
@@ -17,7 +25,8 @@ import com.example.goodchoice.ui.theme.dp15
 fun SpaceBetweenRowWidget(
     modifier: Modifier = Modifier,
     isPadding: Boolean = false,
-    text: String = "",
+    padding: Dp = dp15,
+    text: Any? = null,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     textColor: Color = Theme.colorScheme.darkGray,
     textClick: (() -> Unit)? = null,
@@ -29,24 +38,57 @@ fun SpaceBetweenRowWidget(
         Modifier
     }
     val rowModifier = if (isPadding) {
-        modifier.padding(start = dp15, end = dp15)
+        modifier.padding(start = padding, end = padding)
     } else {
         modifier
     }
+
     Row(
         modifier = rowModifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Text(
-            modifier = Modifier
-                .fillMaxHeight()
-                .then(textModifier)
-                .wrapContentSize(Alignment.Center),
-            text = text,
-            style = textStyle,
-            color = textColor
-        )
+        text?.let {
+            if (it is String) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .then(textModifier)
+                        .wrapContentSize(Alignment.Center),
+                    text = it,
+                    style = textStyle,
+                    color = textColor
+                )
+            } else {
+                Text(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .then(textModifier)
+                        .wrapContentSize(Alignment.Center),
+                    text = it as AnnotatedString,
+                    style = textStyle,
+                    color = textColor
+                )
+            }
+
+        }
         content()
     }
+}
+
+@Preview
+@Composable
+fun PreviewSpaceBetweenRowWidget() {
+    SpaceBetweenRowWidget(modifier = Modifier.fillMaxWidth(), text = "sdfsdfsd", content = {
+        RightImageButtonWidget(
+            title = stringResource(id = R.string.str_download_coupon),
+            contentColor = Theme.colorScheme.white,
+            content = {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_download),
+                    colorFilter = ColorFilter.tint(color = Theme.colorScheme.white),
+                    contentDescription = "쿠폰"
+                )
+            })
+    })
 }

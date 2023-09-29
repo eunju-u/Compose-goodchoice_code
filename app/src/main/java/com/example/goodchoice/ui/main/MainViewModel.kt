@@ -158,6 +158,7 @@ class MainViewModel : ViewModel() {
                         title = "오늘 체크인 호텔 특가",
                         stayList = listOf(
                             StayItem(
+                                id = "s_1",
                                 label = "호텔.리조트",
                                 name = "양양 더 앤 리조트 호텔&스파",
                                 star = "8.7",
@@ -170,6 +171,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2020/12/16/5fd9c03138e91.jpg"
                             ),
                             StayItem(
+                                id = "s_2",
                                 label = "호텔.리조트",
                                 name = "[당일특가] 체스터톤스 호텔",
                                 star = "8.9",
@@ -182,6 +184,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2019/10/01/5d929ac78a245.jpg"
                             ),
                             StayItem(
+                                id = "s_3",
                                 label = "호텔.리조트",
                                 name = "[당일특가] 스탠포드 호텔 서울",
                                 star = "9.3",
@@ -194,6 +197,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2019/11/20/5dd4d28395866.jpg"
                             ),
                             StayItem(
+                                id = "s_4",
                                 label = "호텔.리조트",
                                 name = "브릿지호텔 인천송도 (구 호텔 스카이파크 인천 송도)",
                                 star = "9.1",
@@ -206,6 +210,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2018/05/10/5af38b9510af6.jpg"
                             ),
                             StayItem(
+                                id = "s_5",
                                 label = "호텔.리조트",
                                 name = "[당일특가] 평창 라마다 호텔&스위트 바이 윈덤",
                                 star = "9.3",
@@ -218,6 +223,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2022/09/22/632ba76ebd516.jpg"
                             ),
                             StayItem(
+                                id = "s_6",
                                 label = "호텔.리조트",
                                 name = "[당일특가] 라한셀렉트 경주",
                                 star = "9.4",
@@ -230,6 +236,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2021/06/01/60b5ce848d252.jpg"
                             ),
                             StayItem(
+                                id = "s_7",
                                 label = "호텔.리조트",
                                 name = "[당일특가] 호메르스 호텔",
                                 star = "8.9",
@@ -244,6 +251,7 @@ class MainViewModel : ViewModel() {
                     StayData(
                         type = Const.HOT_HOTEL, title = "이번 주 HOT 인기 펜션", stayList = listOf(
                             StayItem(
+                                id = "s_8",
                                 label = "국내 숙소",
                                 name = "태안 팜비치펜션",
                                 star = "9.7",
@@ -256,6 +264,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2021/01/05/5ff427a82d07c.jpg"
                             ),
                             StayItem(
+                                id = "s_9",
                                 label = "국내 숙소",
                                 name = "태안 린더버그풀빌라",
                                 star = "8.7",
@@ -268,6 +277,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2021/04/01/6065228219f14.jpg"
                             ),
                             StayItem(
+                                id = "s_10",
                                 label = "국내 숙소",
                                 name = "강화 오카소 애견펜션",
                                 star = "10",
@@ -280,6 +290,7 @@ class MainViewModel : ViewModel() {
                                 mainImage = "https://image.goodchoice.kr/resize_490x348/affiliate/2022/05/23/628b30715115f.jpg"
                             ),
                             StayItem(
+                                id = "s_11",
                                 label = "국내 숙소",
                                 name = "청도 더포레 풀빌라",
                                 star = "9.3",

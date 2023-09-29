@@ -1,7 +1,7 @@
 package com.example.goodchoice.api.data
 
 data class StayItem(
-    val id: Int? = 0,
+    val id: String? = "",
     val label: String? = "", //해외숙소, 국내숙소
     val name: String? = "", //숙소 이름
     val star: String? = "", //별점

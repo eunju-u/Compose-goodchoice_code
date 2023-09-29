@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 class AlarmViewModel : ViewModel() {
     var alarmUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
 
-    fun getAlarmData(context: Context) = viewModelScope.launch {
+    fun requestAlarmData(context: Context) = viewModelScope.launch {
         val pref = GoodChoicePreference(context)
         alarmUiState.value = ConnectInfo.Loading
 

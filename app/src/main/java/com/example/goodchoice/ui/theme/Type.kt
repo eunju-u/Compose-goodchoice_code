@@ -48,14 +48,14 @@ val Typography = Typography(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 12.sp,
-        lineHeight = 20.sp,
+        lineHeight = 15.sp,
     ),
 
     labelSmall = TextStyle(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 10.sp,
-        lineHeight = 20.sp,
+        lineHeight = 15.sp,
     ),
 
     //사용하지 않은 type
@@ -78,7 +78,7 @@ val Typography = Typography(
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 8.sp,
-        lineHeight = 20.sp,
+        lineHeight = 15.sp,
     ),
 
     //사용하지 않은 type

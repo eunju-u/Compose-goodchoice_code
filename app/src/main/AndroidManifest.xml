@@ -39,6 +39,9 @@
             android:name=".ui.webview.WebViewActivity"
             android:exported="true"
             android:hardwareAccelerated="true" />
+        <activity
+            android:name=".ui.stayDetail.StayDetailActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

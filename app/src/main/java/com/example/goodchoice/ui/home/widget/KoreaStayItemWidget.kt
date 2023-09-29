@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.home.widget
 
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -24,7 +26,9 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.R
+import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.home.homeData.MutableRecentData
+import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil
 
@@ -37,6 +41,7 @@ fun KoreaStayItemWidget(
     stayItem: StayItem = StayItem(),
     recentStay: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
 ) {
+    val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
@@ -61,12 +66,16 @@ fun KoreaStayItemWidget(
             )
             .clip(RoundedCornerShape(dp10))
             .clickable {
+                context.startActivity(
+                    Intent(context, StayDetailActivity::class.java).apply {
+                        putExtra(Const.ITEM_ID, stayItem.id)
+                    }
+                )
                 recentStay.value.stayList?.let {
                     if (it.contains(stayItem)) {
                         it.remove(stayItem)
                     }
                     it.add(0, stayItem)
-
                 }
             }, verticalArrangement = Arrangement.Center
     ) {

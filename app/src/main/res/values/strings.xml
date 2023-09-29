@@ -72,6 +72,17 @@
     <string name="str_save_alarm_max">받은 알림은 최대 31일 동안 보관돼요.</string>
     <string name="str_no_alarm">알림이 없어요.</string>
 
+    <!--  달력  -->
+    <string name="str_select_date">날짜 선택하기</string>
+
+    <!--  숙소 상세  -->
+    <string name="str_see_review">리뷰 <xliff:g id="count">%s</xliff:g>개 보기</string>
+    <string name="str_inTime_outTime">입실 <xliff:g id="inTime">%s</xliff:g>*퇴실 <xliff:g id="outTime">%s</xliff:g></string>
+    <string name="str_left_count"><xliff:g id="count">%s</xliff:g>개 남음</string>
+    <string name="str_coupon_discount"><xliff:g id="coupon">%s</xliff:g>할인 적용가</string>
+    <string name="str_max_add_discount">최대 <xliff:g id="coupon">%s</xliff:g> 추가 할인</string>
+    <string name="str_pay_benefit">결제 혜택</string>
+
 
     <!--  버튼 text  -->
     <string name="str_all_remove">전체 삭제</string>
@@ -82,5 +93,6 @@
     <string name="str_show_list">목록보기</string>
     <string name="str_show_map">지도보기</string>
     <string name="str_search_local_stay">지역, 숙소 검색</string>
+    <string name="str_download_coupon">쿠폰 받기</string>
 
 </resources>

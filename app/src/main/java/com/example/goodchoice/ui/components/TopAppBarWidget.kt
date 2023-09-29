@@ -7,6 +7,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -20,6 +22,8 @@ fun TopAppBarWidget(
     title: String = "",
     isCloseButton: Boolean = false, // close 버튼인기 back 버튼인지
     titleStyle: TextStyle = MaterialTheme.typography.labelLarge,
+    isAlpha: Boolean = false,
+    iconColor: Color = Theme.colorScheme.gray,
     onFinish: () -> Unit,
     rightContent: @Composable @UiComposable (() -> Unit)? = null
 ) {
@@ -29,7 +33,7 @@ fun TopAppBarWidget(
         Modifier
             .fillMaxWidth()
             .height(height)
-            .background(color = Theme.colorScheme.white)
+            .background(color = if (isAlpha) Color.Transparent else Theme.colorScheme.white)
     ) {
         Box(
             Modifier
@@ -42,7 +46,7 @@ fun TopAppBarWidget(
                     painter =
                     if (isCloseButton) painterResource(id = R.drawable.ic_close)
                     else painterResource(id = R.drawable.ic_back),
-                    tint = Theme.colorScheme.gray,
+                    tint = iconColor,
                     contentDescription = null
                 )
             }
