@@ -23,8 +23,8 @@ fun TopAppBarWidget(
     isCloseButton: Boolean = false, // close 버튼인기 back 버튼인지
     titleStyle: TextStyle = MaterialTheme.typography.labelLarge,
     isAlpha: Boolean = false,
-    iconColor: Color = Theme.colorScheme.gray,
-    onFinish: () -> Unit,
+    iconColor: Color = Theme.colorScheme.darkGray,
+    onFinish: () -> Unit = {},
     rightContent: @Composable @UiComposable (() -> Unit)? = null
 ) {
     var textStyle by remember { mutableStateOf(titleStyle) }

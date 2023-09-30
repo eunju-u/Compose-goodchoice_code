@@ -4,10 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.PayData
-import com.example.goodchoice.api.data.PayItem
-import com.example.goodchoice.api.data.RoomItem
-import com.example.goodchoice.api.data.StayDetailData
+import com.example.goodchoice.api.data.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -16,6 +13,17 @@ import kotlinx.coroutines.withContext
 class StayDetailViewModel : ViewModel() {
     //서버 찌를 경우 보낼 request 파라미터 값
     var stayItemId = ""
+
+    //서버 찌를 경우 보낼 설정한 날짜 파라미터 값
+    val settingDate = ""
+
+    //intent 통해 받아오는 숙소 이름, TopAppBarWidget 에 노출하기 위함.
+    //해당 viewModel 에서 가져오지 않는 이유 : 에러시 title 노출하려고 하는데
+    //서버 조회 완료와 에러시 TopAppBar 가 다르기 때문에 두개를 만들어야 해서 하나로 통일하기 위함
+    var stayItemTitle = ""
+
+    var payList : List<PayData> = emptyList()
+
     var detailUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
 
     fun requestStayDetail() = viewModelScope.launch {
@@ -72,7 +80,8 @@ class StayDetailViewModel : ViewModel() {
                         )
                     ),
                     PayData(
-                        payName = Const.PAY_KB,
+                        payType = Const.PAY_KB,
+                        payName = "KB 페이",
                         payInfoList = listOf(
                             PayItem(
                                 payLineTest = "3천원 즉시할인",
@@ -81,7 +90,8 @@ class StayDetailViewModel : ViewModel() {
                         )
                     ),
                     PayData(
-                        payName = Const.PAY_PAYCO,
+                        payType = Const.PAY_PAYCO,
+                        payName = "페이코",
                         payInfoList = listOf(
                             PayItem(
                                 payLineTest = "",
@@ -216,9 +226,27 @@ class StayDetailViewModel : ViewModel() {
                         count = 2,
                         image = "https://image.goodchoice.kr/resize_480x500/affiliate/2020/08/04/5f291b9a2e74d.jpg"
                     )
+                ),
+                message = "양양 최상급 온천이 샘솟는 더 앤 리조트 & 스파는 자연에 둘러싸여 계절의 소리를 들으며 편안한 휴식을 즐길 수 있습니다\n" +
+                        "또한 전 객실에 천연 온천수 공급 및 모든 시설이 자연 친화적이며 최첨단 건강 소재와 세련된 인테리어로 안락한 휴식이 가능한 호텔입니다",
+                service = arrayListOf(
+                    ServiceData(type = Const.MINIBAR, name = "미니바"),
+                    ServiceData(type = Const.WIFI, name = "와이파이"),
+                    ServiceData(type = Const.BATHROOM_SUPPLIES, name = "욕실용품"),
+                    ServiceData(type = Const.RESTAURANT, name = "레스토랑"),
+                    ServiceData(type = Const.TV, name = "TV"),
+                    ServiceData(type = Const.NO_SMOKING, name = "금연"),
+                    ServiceData(type = Const.AIR_CONDITIONER, name = "에어컨"),
+                    ServiceData(type = Const.REFRIGERATOR, name = "냉장고"),
+                    ServiceData(type = Const.SHOWER_ROOM, name = "객실샤워실"),
+                    ServiceData(type = Const.DRYER, name = "드라이기"),
+                    ServiceData(type = Const.CAFE, name = "카페"),
+                    ServiceData(type = Const.FREE_PARKING, name = "무료주차"),
+                    ServiceData(type = Const.PARKING_LOT, name = "주차장")
                 )
             )
         }
+        payList = data.payList?: emptyList()
         detailUiState.value = ConnectInfo.Available(data)
     }
 }

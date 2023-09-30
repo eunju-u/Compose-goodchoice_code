@@ -82,6 +82,10 @@
     <string name="str_coupon_discount"><xliff:g id="coupon">%s</xliff:g>할인 적용가</string>
     <string name="str_max_add_discount">최대 <xliff:g id="coupon">%s</xliff:g> 추가 할인</string>
     <string name="str_pay_benefit">결제 혜택</string>
+    <string name="str_convenience_service">편의시설 및 서비스</string>
+    <string name="str_detail_more">자세히보기</string>
+    <string name="str_pay_benefit_information">결제 혜택 안내</string>
+    <string name="str_benefit">혜택</string>
 
 
     <!--  버튼 text  -->

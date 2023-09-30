@@ -45,7 +45,12 @@ fun StickyHeaderWidget(
             //카테고리 노출
             if (categoryItem.size > 4) {
                 for (i in 0..3) {
-                    CategoryItemWidget(item = categoryItem[i])
+                    val item = categoryItem[i]
+                    CategoryItemWidget(
+                        icon = item.icon,
+                        name = item.name,
+                        height = CategoryItemHeight
+                    )
                 }
                 Divider(
                     modifier = Modifier
@@ -61,7 +66,12 @@ fun StickyHeaderWidget(
                 }
             } else {
                 for (i in categoryItem.indices) {
-                    CategoryItemWidget(item = categoryItem[i])
+                    val item = categoryItem[i]
+                    CategoryItemWidget(
+                        icon = item.icon,
+                        name = item.name,
+                        height = CategoryItemHeight
+                    )
                 }
             }
         }

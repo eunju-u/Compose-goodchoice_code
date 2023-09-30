@@ -189,7 +189,11 @@ fun HomeContent(
                                     userScrollEnabled = false
                                 ) {
                                     itemsIndexed(items = categoryItemList) { index, item ->
-                                        CategoryItemWidget(item)
+                                        CategoryItemWidget(
+                                            icon = item.icon,
+                                            name = item.name,
+                                            height = CategoryItemHeight
+                                        )
                                     }
                                 }
                                 Spacer(modifier = Modifier.height(dp5))

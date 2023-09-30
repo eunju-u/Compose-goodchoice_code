@@ -18,5 +18,5 @@ data class StayDetailData(
     val message: String? = "", //주인 메시지
     val defaultMessage: String? = "", //기본정보 웹뷰에 노출될 string
     val aroundInfo: String? = "", //주변정보
-    val service: List<String>? = emptyList() //편의시설 및 서비스
+    val service: ArrayList<ServiceData>? = arrayListOf() //편의시설 및 서비스
 )

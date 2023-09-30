@@ -28,4 +28,24 @@ object ConvertUtil {
         }
         return image
     }
+
+    fun convertServiceImage(serviceType: String): Int {
+        val image = when (serviceType) {
+            Const.MINIBAR -> R.drawable.ic_minibar
+            Const.WIFI -> R.drawable.ic_wifi
+            Const.BATHROOM_SUPPLIES -> R.drawable.ic_towel
+            Const.RESTAURANT -> R.drawable.ic_restaurant
+            Const.TV -> R.drawable.ic_tv
+            Const.NO_SMOKING -> R.drawable.ic_no_smoking
+            Const.AIR_CONDITIONER -> R.drawable.ic_air_conditioner
+            Const.REFRIGERATOR -> R.drawable.ic_refrigerator
+            Const.SHOWER_ROOM -> R.drawable.ic_shower_room
+            Const.DRYER -> R.drawable.ic_dryer
+            Const.CAFE -> R.drawable.ic_cafe
+            Const.FREE_PARKING -> R.drawable.ic_parking
+            Const.PARKING_LOT -> R.drawable.ic_parking
+            else -> R.drawable.bg_white
+        }
+        return image
+    }
 }

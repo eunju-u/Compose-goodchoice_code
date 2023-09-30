@@ -17,6 +17,7 @@ class StayDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.stayItemId = intent.getStringExtra(Const.ITEM_ID) ?: ""
+        viewModel.stayItemTitle = intent.getStringExtra(Const.ITEM_TITLE) ?: ""
         viewModel.requestStayDetail()
 
         setContent {

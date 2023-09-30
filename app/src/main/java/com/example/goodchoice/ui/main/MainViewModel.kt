@@ -304,27 +304,6 @@ class MainViewModel : ViewModel() {
 //                            message = "개별수영장 보일러 공사로 미온수(32~33도), 노천탕(40도) 온도유지 가능합니다.[]애견 동반이 가능한 객실을 보유하고 있습니다.[]전 객실 3층 독채로 프라이빗하게 이요하실 수 있고, ~12인까지 충분히 입실 가능한 신축 풀빌라입니다.",
 //                            defaultMessage = "입실 : 15:00 | 퇴실 11:00[]20시 이후 입실 시 사전문의 (필수)[]무료 Wi-Fi[]전 객실 금연[]주차 가능",
 //                            aroundInfo = "",
-//                            service = listOf(
-//                                Const.WIFI,
-//                                Const.FULL,
-//                                Const.SPA,
-//                                Const.COOKING,
-//                                Const.BBQ,
-//                                Const.COOKER,
-//                                Const.TV,
-//                                Const.BATHROOM,
-//                                Const.FREE_PARKING,
-//                                Const.AIR_CONDITIONER,
-//                                Const.REFRIGERATOR,
-//                                Const.SHOWER_ROOM,
-//                                Const.NO_SMOKING,
-//                                Const.ANIMAL,
-//                                Const.DRYER,
-//                                Const.CARD,
-//                                Const.PARKING_LOT,
-//                                Const.COOKING_POSSIBLE,
-//                                Const.MICROWAVE
-//                            )
                             )
                         )
                     )

@@ -8,37 +8,69 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.CategoryItem
-import com.example.goodchoice.ui.theme.CategoryItemHeight
-import com.example.goodchoice.ui.theme.dp2
-import com.example.goodchoice.ui.theme.dp35
+import com.example.goodchoice.ui.theme.*
 
 @Composable
-fun CategoryItemWidget(item: CategoryItem = CategoryItem()) {
+fun CategoryItemWidget(
+    icon: Int = 0,
+    name: String = "",
+    width: Dp = dp0,
+    height: Dp = dp0,
+    bottomPadding: Dp = dp5,
+    imageSize: Dp = dp35,
+    textStyle: TextStyle = MaterialTheme.typography.labelSmall,
+    textColor: Color = Theme.colorScheme.darkGray,
+    colorFilter: ColorFilter? = null,
+    onItemClick: (() -> Unit)? = null
+) {
+    val widthModifier = if (width > dp0) {
+        Modifier.width(width)
+    } else {
+        Modifier
+    }
+
+    val heightModifier = if (height > dp0) {
+        Modifier.height(height)
+    } else {
+        Modifier
+    }
+
+    val clickModifier = if (onItemClick != null) {
+        Modifier.clickable { onItemClick() }
+    } else {
+        Modifier
+    }
     Column(
         modifier = Modifier
-            .height(CategoryItemHeight)
-            .clickable { },
+            .then(widthModifier)
+            .then(heightModifier)
+            .then(clickModifier),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             modifier = Modifier
-                .size(dp35)
-                .padding(bottom = 5.dp),
-            painter = painterResource(id = item.icon),
-            contentDescription = item.name,
-            alpha = LocalContentAlpha.current
+                .size(imageSize)
+                .padding(bottom = bottomPadding),
+            painter = painterResource(id = if (icon != 0) icon else R.drawable.bg_white),
+            contentDescription = name,
+            alpha = LocalContentAlpha.current,
+            colorFilter = colorFilter
         )
         TextWidget(
             modifier = Modifier.padding(bottom = dp2),
-            text = item.name, style = MaterialTheme.typography.labelSmall,
-            textAlign = TextAlign.Center
+            text = name,
+            style = textStyle,
+            textAlign = TextAlign.Center,
+            color = textColor
         )
     }
 }
@@ -46,5 +78,5 @@ fun CategoryItemWidget(item: CategoryItem = CategoryItem()) {
 @Preview
 @Composable
 fun previewCategoryItemWidget() {
-    CategoryItemWidget(CategoryItem(7, "공간대여", R.drawable.ic_airplane))
+    CategoryItemWidget(name = "공간대여", icon = R.drawable.ic_airplane)
 }

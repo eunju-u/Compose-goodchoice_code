@@ -38,24 +38,28 @@ object Const {
 
     //편의시설 및 서비스
     const val WIFI = "WIFI"
-    const val FULL = "FULL"
+    const val FULL = "FULL" //수영장
     const val SPA = "SPA"
     const val COOKING = "COOKING"
     const val BBQ = "BBQ"
     const val COOKER = "COOKER"
     const val TV = "TV"
-    const val BATHROOM = "BATHROOM"
-    const val FREE_PARKING = "FREE_PARKING"
-    const val AIR_CONDITIONER = "AIR_CONDITIONER"
-    const val REFRIGERATOR = "REFRIGERATOR"
-    const val SHOWER_ROOM = "SHOWER_ROOM"
-    const val NO_SMOKING = "NO_SMOKING"
-    const val ANIMAL = "ANIMAL"
-    const val DRYER = "DRYER"
-    const val CARD = "CARD"
-    const val PARKING_LOT = "PARKING_LOT"
-    const val COOKING_POSSIBLE = "COOKING_POSSIBLE"
-    const val MICROWAVE = "MICROWAVE"
+    const val BATHROOM = "BATHROOM" //욕실
+    const val FREE_PARKING = "FREE_PARKING" //무료주차
+    const val AIR_CONDITIONER = "AIR_CONDITIONER" //에어컨
+    const val REFRIGERATOR = "REFRIGERATOR" //냉장고
+    const val SHOWER_ROOM = "SHOWER_ROOM" //샤워룸
+    const val NO_SMOKING = "NO_SMOKING" //금연
+    const val ANIMAL = "ANIMAL" //동물
+    const val DRYER = "DRYER" //드라이기
+    const val CARD = "CARD" //카드
+    const val PARKING_LOT = "PARKING_LOT" //주차장
+    const val COOKING_POSSIBLE = "COOKING_POSSIBLE" //취사가능
+    const val MICROWAVE = "MICROWAVE" //전자레인지
+    const val MINIBAR = "MINIBAR" //미니바
+    const val RESTAURANT = "RESTAURANT" //레스토랑
+    const val CAFE = "CAFE" //카페
+    const val BATHROOM_SUPPLIES = "BATHROOM_SUPPLIES" //욕실용품
 
     //해외 도시
     const val OSAKA = 11000
@@ -110,6 +114,8 @@ object Const {
     const val WEBVIEW_TITLE = "WEBVIEW_TITLE"
     const val WEBVIEW_URL = "WEBVIEW_URL"
     const val ITEM_ID = "ITEM_ID"
+    const val ITEM_TITLE = "ITEM_TITLE"
+    const val DATA = "DATA"
 }
 
 // 숙박, 대실

@@ -2,9 +2,7 @@ package com.example.goodchoice.ui.home.widget
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -23,6 +21,7 @@ import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.components.CategoryItemWidget
+import com.example.goodchoice.ui.theme.CategoryItemHeight
 
 @SuppressLint("RememberReturnType")
 @Composable
@@ -73,7 +72,11 @@ fun FullHeaderWidget(
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
                     items(items = categoryItem) { item ->
-                        CategoryItemWidget(item)
+                        CategoryItemWidget(
+                            icon = item.icon,
+                            name = item.name,
+                            height = CategoryItemHeight
+                        )
                     }
                 }
             }

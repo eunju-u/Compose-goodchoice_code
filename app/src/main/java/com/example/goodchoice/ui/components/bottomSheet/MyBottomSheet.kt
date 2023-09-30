@@ -1,8 +1,9 @@
 package com.example.goodchoice.ui.components.bottomSheet
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -12,24 +13,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.*
-import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState.Companion.MySaver
 import com.example.goodchoice.ui.theme.dp5
 import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.roundToInt
-import com.example.goodchoice.R
 import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp15
 
 
 @ExperimentalMaterialApi
@@ -204,7 +201,8 @@ fun MyBottomSheetLayout(
     sheetBackgroundColor: Color = MaterialTheme.colors.surface,
     sheetContentColor: Color = contentColorFor(sheetBackgroundColor),
     hiddenHeight: Float = 0.0f,
-    content: @Composable () -> Unit
+    isFullExpand: Boolean = true,
+    isScrim: Boolean = true //바텀 시트 뒤 어두운 배경 넣을건지
 ) {
     val scope = rememberCoroutineScope()
     val orientation = Orientation.Vertical
@@ -221,8 +219,20 @@ fun MyBottomSheetLayout(
     BoxWithConstraints(modifier) {
         val fullHeight = constraints.maxHeight.toFloat() - hiddenHeight
         val fullWidth = constraints.maxWidth.toFloat()
-        Box(Modifier.fillMaxSize()) {
-            content()
+        Box(
+            Modifier.fillMaxSize()
+        ) {
+            if (isScrim) {
+                Scrim(
+                    color = Theme.colorScheme.darkGray.copy(alpha = 0.3f),
+                    onDismiss = {
+                        if (sheetState.mySwipeableState.confirmValueChange(ModalBottomSheetValue.Hidden)) {
+                            scope.launch { sheetState.hide() }
+                        }
+                    },
+                    visible = sheetState.mySwipeableState.targetValue != ModalBottomSheetValue.Hidden
+                )
+            }
         }
         Surface(
             Modifier
@@ -267,7 +277,10 @@ fun MyBottomSheetLayout(
                         }
 
                         ModalBottomSheetValue.Expanded -> if (sheetSize.height != 0) {
-                            max(0f, fullHeight - sheetSize.height)
+                            max(
+                                0f,
+                                fullHeight - (if (isFullExpand) sheetSize.height else sheetSize.height - 200)
+                            )
                         } else null
                     }
                 }
@@ -396,6 +409,41 @@ private fun MySheetAnchorChangeHandler(
             }
         }
     }
+
+@Composable
+fun Scrim(
+    color: Color,
+    onDismiss: () -> Unit,
+    visible: Boolean
+) {
+    if (color.isSpecified) {
+        val alpha by animateFloatAsState(
+            targetValue = if (visible) 1f else 0f,
+            animationSpec = TweenSpec(),
+        )
+        //background 클릭시 sheet 사라짐.
+        val dismissModifier = if (visible) {
+            Modifier
+                .pointerInput(onDismiss) { detectTapGestures { onDismiss() } }
+                .semantics(mergeDescendants = true) {
+                    contentDescription = ""
+                    onClick { onDismiss(); true }
+                }
+        } else {
+            Modifier
+        }
+
+        Canvas(
+            Modifier
+                .fillMaxSize()
+                .then(dismissModifier)
+        ) {
+            drawRect(
+                color = color, alpha = alpha
+            )
+        }
+    }
+}
 
 private val PositionalThreshold: Density.(Float) -> Float = { 56.dp.toPx() }
 private val VelocityThreshold = 125.dp

@@ -1,70 +1,99 @@
 package com.example.goodchoice.ui.stayDetail
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material3.Divider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.window.isPopupLayout
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.StayDetailData
-import com.example.goodchoice.ui.components.RightImageButtonWidget
-import com.example.goodchoice.ui.components.RoundImageWidget
-import com.example.goodchoice.ui.components.SpaceBetweenRowWidget
-import com.example.goodchoice.ui.components.TopAppBarWidget
+import com.example.goodchoice.ui.components.*
+import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
+import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
+import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
+import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
+import com.example.goodchoice.ui.stayDetail.service.ServiceActivity
 import com.example.goodchoice.ui.stayDetail.widget.InfoWidget
+import com.example.goodchoice.ui.stayDetail.widget.PayWidget
 import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil
 import com.example.goodchoice.utils.StringUtil
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StayDetailContent(
     viewModel: StayDetailViewModel,
     onFinish: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val fullWith = configuration.screenWidthDp
+    val lazyColumnListState = rememberLazyListState()
+
     val detailUiState = viewModel.detailUiState.collectAsStateWithLifecycle()
+    val isChangeTopWidget = false
+
+    //바텀시트
+    val sheetState: MyBottomSheetState =
+        rememberMyBottomSheetState(
+            initialValue = ModalBottomSheetValue.Hidden,
+            skipHalfExpanded = true
+        )
+
+    val rememberScope = rememberCoroutineScope()
 
     Box {
-        LazyColumn(modifier = Modifier.background(Theme.colorScheme.white)) {
-            if (detailUiState.value is ConnectInfo.Available) {
-                val item = (detailUiState.value as ConnectInfo.Available).data as StayDetailData
-                val padding = PaddingValues(start = dp20, end = dp20)
-                val innerPadding = PaddingValues(horizontal = dp8, vertical = dp8)
+        if (detailUiState.value is ConnectInfo.Available) {
+            val item = (detailUiState.value as ConnectInfo.Available).data as StayDetailData
+            val padding = PaddingValues(start = dp20, end = dp20)
+            val innerPadding = PaddingValues(horizontal = dp8, vertical = dp8)
+            LazyColumn(
+                modifier = Modifier.background(Theme.colorScheme.white), state = lazyColumnListState
+            ) {
                 item {
-                    //숙소 사진
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(dp300)
-                            .clickable {},
-                        contentScale = ContentScale.FillHeight,
-                        painter = if (item.imageList?.isNotEmpty() == true)
-                            rememberAsyncImagePainter(
-                                model = item.imageList[0], painterResource(id = R.drawable.bg_white)
-                            )
-                        else painterResource(id = R.drawable.bg_white),
-                        contentDescription = "이미지",
-                    )
+                    if (!item.imageList.isNullOrEmpty()) {
+                        //숙소 사진
+                        Image(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(dp300)
+                                .clickable {},
+                            contentScale = ContentScale.FillHeight,
+                            painter = if (item.imageList.isNotEmpty() == true)
+                                rememberAsyncImagePainter(
+                                    model = item.imageList[0],
+                                    painterResource(id = R.drawable.bg_white)
+                                )
+                            else painterResource(id = R.drawable.bg_white),
+                            contentDescription = "이미지",
+                        )
+                    }
 
+                }
+                item {
                     Spacer(modifier = Modifier.height(dp25))
 
                     //성급
@@ -86,40 +115,44 @@ fun StayDetailContent(
                     Spacer(modifier = Modifier.height(dp5))
 
                     //위치
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(padding),
-                        horizontalArrangement = Arrangement.spacedBy(dp5),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
+                    if (!item.location.isNullOrEmpty()) {
                         Row(
-                            modifier = Modifier.weight(1f),
-                            horizontalArrangement = Arrangement.spacedBy(dp5)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(padding),
+                            horizontalArrangement = Arrangement.spacedBy(dp5),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_around),
-                                colorFilter = ColorFilter.tint(color = Theme.colorScheme.blue),
-                                contentDescription = "위치"
-                            )
-                            Text(
-                                text = item.location ?: "",
-                                color = Theme.colorScheme.darkGray,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                style = MaterialTheme.typography.labelMedium
+                            Row(
+                                modifier = Modifier.weight(1f),
+                                horizontalArrangement = Arrangement.spacedBy(dp5),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_around),
+                                    colorFilter = ColorFilter.tint(color = Theme.colorScheme.blue),
+                                    contentDescription = "위치"
+                                )
+                                Text(
+                                    text = item.location,
+                                    color = Theme.colorScheme.darkGray,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    style = MaterialTheme.typography.labelMedium
+                                )
+                            }
+                            RightImageButtonWidget(
+                                title = stringResource(id = R.string.str_show_map),
+                                contentColor = Theme.colorScheme.blue,
+                                style = MaterialTheme.typography.labelMedium,
+                                imageColor = Theme.colorScheme.gray,
+                                endPadding = dp0,
+                                innerPadding = innerPadding,
+                                imageSize = dp15,
                             )
                         }
-                        RightImageButtonWidget(
-                            title = stringResource(id = R.string.str_show_map),
-                            contentColor = Theme.colorScheme.blue,
-                            style = MaterialTheme.typography.labelMedium,
-                            imageColor = Theme.colorScheme.gray,
-                            endPadding = dp0,
-                            innerPadding = innerPadding,
-                            imageSize = dp15,
-                        )
                     }
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -193,7 +226,11 @@ fun StayDetailContent(
                     if (!item.payList.isNullOrEmpty()) {
                         Column(modifier = Modifier
                             .fillMaxWidth()
-                            .clickable {}
+                            .clickable {
+                                rememberScope.launch {
+                                    sheetState.show()
+                                }
+                            }
                             .padding(padding)
                             .padding(top = dp20, bottom = dp20)
                         ) {
@@ -282,9 +319,101 @@ fun StayDetailContent(
                                 .fillMaxWidth()
                                 .background(color = Theme.colorScheme.pureGray)
                         ) {
-
                             item.roomList.forEach { item ->
                                 StayDetailItemWidget(item)
+                            }
+                        }
+                    }
+                    if (!item.message.isNullOrEmpty()) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(padding)
+                                .padding(top = dp20, bottom = dp20)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_left_quote),
+                                colorFilter = ColorFilter.tint(Theme.colorScheme.pureBlue),
+                                contentDescription = null
+                            )
+                            Text(
+                                modifier = Modifier.padding(top = dp15, bottom = dp15),
+                                text = item.message,
+                                color = Theme.colorScheme.gray,
+                                style = MaterialTheme.typography.labelMedium
+                            )
+                            Image(
+                                modifier = Modifier.align(Alignment.End),
+                                painter = painterResource(id = R.drawable.ic_right_quote),
+                                colorFilter = ColorFilter.tint(Theme.colorScheme.pureBlue),
+
+                                contentDescription = null
+                            )
+                        }
+                    }
+
+                    if (!item.service.isNullOrEmpty()) {
+                        Divider(thickness = dp10, color = Theme.colorScheme.pureGray)
+
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                context.startActivity(
+                                    Intent(context, ServiceActivity::class.java).apply {
+                                        putExtra(Const.DATA, item.service)
+                                    }
+                                )
+                            }
+                            .padding(padding)
+                            .padding(top = dp20, bottom = dp20)
+                        ) {
+                            SpaceBetweenRowWidget(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = stringResource(id = R.string.str_convenience_service),
+                                content = {
+                                    Text(
+                                        text = stringResource(id = R.string.str_detail_more),
+                                        color = Theme.colorScheme.blue,
+                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                    )
+                                })
+
+                            //(가로길이 - start padding 20 - end padding 20) / 아이템 width 70
+                            val count = (fullWith - 40) / 70
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = dp20),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                if (item.service.size > count) {
+                                    for (i in 0 until count) {
+                                        val serviceData = item.service[i]
+                                        CategoryItemWidget(
+                                            width = dp70,
+                                            imageSize = dp45,
+                                            bottomPadding = dp15,
+                                            textStyle = MaterialTheme.typography.labelMedium,
+                                            colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
+                                            icon =
+                                            ConvertUtil.convertServiceImage(serviceData.type ?: ""),
+                                            name = serviceData.name ?: ""
+                                        )
+                                    }
+                                } else {
+                                    item.service.forEach { serviceData ->
+                                        CategoryItemWidget(
+                                            imageSize = dp60,
+                                            bottomPadding = dp15,
+                                            textStyle = MaterialTheme.typography.labelMedium,
+                                            colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
+                                            icon =
+                                            ConvertUtil.convertServiceImage(serviceData.type ?: ""),
+                                            name = serviceData.name ?: ""
+                                        )
+                                    }
+
+                                }
                             }
                         }
                     }
@@ -292,10 +421,12 @@ fun StayDetailContent(
             }
         }
 
+        // 상단 바
         TopAppBarWidget(
+            title = if (isChangeTopWidget) viewModel.stayItemTitle else "",
             onFinish = onFinish,
-            isAlpha = true,
-            iconColor = Theme.colorScheme.white,
+            isAlpha = !isChangeTopWidget,
+            iconColor = if (isChangeTopWidget) Theme.colorScheme.darkGray else Theme.colorScheme.white,
             rightContent = {
                 Row {
                     IconButton(onClick = { }) {
@@ -303,7 +434,7 @@ fun StayDetailContent(
                             modifier = Modifier
                                 .size(dp20),
                             painter = painterResource(id = R.drawable.ic_share),
-                            tint = Theme.colorScheme.pureGray,
+                            tint = if (isChangeTopWidget) Theme.colorScheme.darkGray else Theme.colorScheme.pureGray,
                             contentDescription = "공유"
                         )
                     }
@@ -312,13 +443,44 @@ fun StayDetailContent(
                             modifier = Modifier
                                 .size(dp20),
                             painter = painterResource(id = R.drawable.ic_like),
-                            tint = Theme.colorScheme.pureGray,
+                            tint = if (isChangeTopWidget) Theme.colorScheme.darkGray else Theme.colorScheme.pureGray,
                             contentDescription = "하트"
                         )
                     }
                 }
             })
+
+        // 바텀시트
+        MyBottomSheetLayout(
+            sheetState = sheetState,
+            sheetContent = {
+                SheetWidget(
+                    shape = RoundedCornerShape(topStart = dp30, topEnd = dp30),
+                    content = {
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(dp20)
+                        ) {
+                            Text(
+                                modifier = Modifier.padding(top = dp15, bottom = dp15),
+                                text = stringResource(id = R.string.str_pay_benefit_information),
+                                color = Theme.colorScheme.darkGray,
+                                style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+                            )
+
+                            LazyColumn {
+                                items(items = viewModel.payList) { item ->
+                                    PayWidget(item)
+                                }
+                            }
+                        }
+                    })
+            })
+
+        // 로딩바
+        if (detailUiState.value is ConnectInfo.Loading) {
+            LoadingWidget()
+        }
     }
-
-
 }

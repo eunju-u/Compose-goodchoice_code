@@ -42,6 +42,9 @@
         <activity
             android:name=".ui.stayDetail.StayDetailActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.stayDetail.service.ServiceActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

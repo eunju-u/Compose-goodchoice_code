@@ -11,8 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.dp15
 import com.example.goodchoice.ui.theme.dp5
 
 @Composable
@@ -54,4 +56,16 @@ fun InfoWidget(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewInfoWidget() {
+    InfoWidget(
+        leftText = "객실정보",
+        rightText = "기준4인 * 최대4인",
+        leftColor = Theme.colorScheme.gray,
+        rightColor = Theme.colorScheme.darkGray,
+        endPadding = dp15
+    )
 }

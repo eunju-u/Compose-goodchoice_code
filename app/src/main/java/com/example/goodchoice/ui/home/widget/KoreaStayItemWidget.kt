@@ -69,6 +69,7 @@ fun KoreaStayItemWidget(
                 context.startActivity(
                     Intent(context, StayDetailActivity::class.java).apply {
                         putExtra(Const.ITEM_ID, stayItem.id)
+                        putExtra(Const.ITEM_TITLE, stayItem.name)
                     }
                 )
                 recentStay.value.stayList?.let {
