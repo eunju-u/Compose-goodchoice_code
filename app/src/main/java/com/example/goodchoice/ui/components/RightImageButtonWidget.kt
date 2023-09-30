@@ -94,7 +94,7 @@ fun RightImageButtonWidget(
 
 @Preview
 @Composable
-fun previewRightImageButtonWidget() {
+fun PreviewRightImageButtonWidget() {
     RightImageButtonWidget(
         title = "text",
         onItemClick = {},

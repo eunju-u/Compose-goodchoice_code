@@ -9,11 +9,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.ui.theme.Theme
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.goodchoice.R
 import com.example.goodchoice.ui.theme.dp5
 
 @Composable
@@ -37,5 +40,16 @@ fun TagWidget(
         color = contentColor,
         text = title, textAlign = TextAlign.Center,
         style = style
+    )
+}
+
+@Preview
+@Composable
+fun PreviewTagWidget(){
+    TagWidget(
+        title = stringResource(id = R.string.str_benefit),
+        containerColor = Theme.colorScheme.lightPink,
+        contentColor = Theme.colorScheme.red,
+        shape = dp5,
     )
 }

@@ -77,6 +77,6 @@ fun CategoryItemWidget(
 
 @Preview
 @Composable
-fun previewCategoryItemWidget() {
+fun PreviewCategoryItemWidget() {
     CategoryItemWidget(name = "공간대여", icon = R.drawable.ic_airplane)
 }

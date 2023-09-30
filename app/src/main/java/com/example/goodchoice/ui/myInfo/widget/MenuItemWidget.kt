@@ -87,7 +87,7 @@ fun MenuItemWidget(menuItem: MyMenuItem){
 
 @Preview
 @Composable
-fun previewMenuItemWidget() {
+fun PreviewMenuItemWidget() {
     MenuItemWidget(
         menuItem = MyMenuItem(id = 0, name = "테스트")
     )

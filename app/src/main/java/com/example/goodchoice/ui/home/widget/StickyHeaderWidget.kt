@@ -80,7 +80,7 @@ fun StickyHeaderWidget(
 
 @Preview
 @Composable
-fun previewStickyHeaderWidget() {
+fun PreviewStickyHeaderWidget() {
     StickyHeaderWidget(
         categoryItem = listOf(CategoryItem(5, "캠핑*글램핑", R.drawable.ic_airplane))
     ) {}

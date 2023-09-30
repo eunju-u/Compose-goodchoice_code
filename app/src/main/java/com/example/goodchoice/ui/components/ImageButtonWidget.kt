@@ -93,7 +93,7 @@ fun ImageButtonWidget(
 
 @Preview
 @Composable
-fun previewImageButtonWidget() {
+fun PreviewImageButtonWidget() {
     LeftImageButtonWidget(
         modifier = Modifier.fillMaxWidth(),
         title = "text",

@@ -47,6 +47,6 @@ fun OverSeaWidget(item: OverSeaCityItem) {
 
 @Preview
 @Composable
-fun previewOverSeaWidget() {
+fun PreviewOverSeaWidget() {
     OverSeaWidget(OverSeaCityItem(id = 11000, cityName = "오사카"))
 }

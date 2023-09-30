@@ -41,6 +41,6 @@ fun EventItemWidget(
 
 @Preview
 @Composable
-fun previewEventItemWidget() {
+fun PreviewEventItemWidget() {
     EventItemWidget(title = "이벤트")
 }

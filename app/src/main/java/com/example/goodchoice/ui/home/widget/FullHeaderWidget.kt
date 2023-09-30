@@ -89,7 +89,7 @@ fun FullHeaderWidget(
 
 @Preview
 @Composable
-fun previewFullHeaderWidget() {
+fun PreviewFullHeaderWidget() {
     FullHeaderWidget(
         listOf(
             CategoryItem(0, "프리미엄블랙", R.drawable.ic_airplane),

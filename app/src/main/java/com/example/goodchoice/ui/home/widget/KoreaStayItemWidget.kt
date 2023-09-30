@@ -26,7 +26,6 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.home.homeData.MutableRecentData
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.*

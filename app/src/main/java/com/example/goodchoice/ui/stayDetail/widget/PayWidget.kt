@@ -9,9 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.goodchoice.Const
 import com.example.goodchoice.ui.components.TagWidget
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.PayData
+import com.example.goodchoice.api.data.PayItem
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil
@@ -57,8 +60,32 @@ fun PayWidget(data: PayData = PayData()) {
                         }
                     }
                 }
-
             }
         )
     }
+}
+
+@Preview
+@Composable
+fun PreviewPayWidget() {
+    PayWidget(
+        PayData(
+            payType = Const.PAY_TOSS,
+            payName = "토스페이",
+            payInfoList = listOf(
+                PayItem(
+                    payLineTest = "최대 1만원 할인",
+                    payInfo = "3만원 이상, 10% 최대 1만원 할인(오전 10시, 일450명)"
+                ),
+                PayItem(
+                    payLineTest = "2천원 할인",
+                    payInfo = "2만원 이상, 2천원 할인 (오후 4시, 일 1,500명)"
+                ),
+                PayItem(
+                    payLineTest = "5천원 캐시백",
+                    payInfo = "+생애 첫결제 시, 5천원 캐시백"
+                )
+            )
+        )
+    )
 }

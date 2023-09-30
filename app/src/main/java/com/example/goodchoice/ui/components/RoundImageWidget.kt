@@ -54,7 +54,7 @@ fun RoundImageWidget(
 
 @Preview
 @Composable
-fun previewRoundImageWidget() {
+fun PreviewRoundImageWidget() {
     RoundImageWidget(
         modifier = Modifier
             .size(dp55),

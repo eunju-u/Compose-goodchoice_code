@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.components
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -7,8 +8,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.goodchoice.R
+import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.dp10
 
@@ -18,7 +23,7 @@ fun GoToWidget(
     firstText: String = "",
     secondText: String = "",
     thirdText: String = "",
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier,
@@ -51,4 +56,14 @@ fun GoToWidget(
             color = Theme.colorScheme.panoramaBlue
         )
     }
+}
+
+@Preview
+@Composable
+fun PreviewGoToWidget() {
+    GoToWidget(
+        firstText = stringResource(id = R.string.str_no_see_like_list),
+        secondText = stringResource(id = R.string.str_check_like_list_after_login),
+        thirdText = stringResource(id = R.string.str_login),
+    )
 }

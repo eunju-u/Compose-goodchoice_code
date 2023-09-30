@@ -82,6 +82,6 @@ fun TextWidget(
 
 @Preview
 @Composable
-fun previewTextWidget() {
+fun PreviewTextWidget() {
     TextWidget(text = "TextWidget")
 }

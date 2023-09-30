@@ -153,7 +153,7 @@ fun HotelVerticalWidget(
 
 @Preview
 @Composable
-fun previewHotelVerticalWidget() {
+fun PreviewHotelVerticalWidget() {
     HotelVerticalWidget(
         type = Const.TODAY_HOTEL,
         title = "오늘 체크인 호텔 특가",
