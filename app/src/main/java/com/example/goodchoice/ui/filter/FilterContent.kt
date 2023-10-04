@@ -28,6 +28,7 @@ import com.example.goodchoice.api.data.FilterItem
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.filter.widget.FilterItemWidget
 import com.example.goodchoice.ui.theme.*
+import java.util.LinkedList
 
 @SuppressLint("MutableCollectionMutableState")
 @Composable
@@ -35,21 +36,26 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
     val context = LocalContext.current
     var checkReservation by remember { mutableStateOf(false) }
     val clickStayType = viewModel.clickStayType
-    //다이얼로그 에서 확인 클릭시 clickStayType set 해야 하므로 추가
+    // 다이얼로그 에서 확인 클릭시 clickStayType set 해야 하므로 추가
     var clickFilterStayItem = FilterItem()
 
     val stayTypeList = viewModel.stayTypeList
     var list = listOf(FilterData())
     val filterUiState = viewModel.filterUiState.collectAsStateWithLifecycle()
 
-    //key 에는 #취향, 할인혜택, 가격 등 상위 제목이 들어가고
-    //value 에는 상위 title 에서 선택한 필터값이 list 로 들어간다.
-    val selectFilterMap = remember { mutableStateMapOf<String, MutableList<FilterItem>>() }
-//    val selectFilterList = viewModel.selectFilterList
+    // key 에는 #취향, 할인혜택, 가격 등 상위 제목이 들어가고
+    // value 에는 상위 title 에서 선택한 필터값이 list 로 들어간다.
+    val selectFilterMap = remember { mutableStateMapOf<String, LinkedList<FilterItem>>() }
 
-    //필터한 숙소 갯수
+    // selectFilterMap 의 value 를 MutableList 로 했는데, list add, remove 시 상태가 변경 (필터 클릭시 색상 변하지 않음.) 되지 않음
+    // selectFilterMap 의 value 값이 변경되면 상태 변경(recomposition)할 수 있도록 Mutable list 를 사용한다.
+    // selectFilterMap 의 value 는 기존 MutableList 였는데,
+    // selectFilterList 추가 되었기 때문에 MutableList 로 사용할 필요성이 없어 LinkedList 로 대체함.
+    val selectFilterList = viewModel.selectFilterList
+
+    // 필터한 숙소 갯수
     val stayCount = viewModel.stayCount
-    //다이얼로그 노출 여부
+    // 다이얼로그 노출 여부
     var isShowDialog by remember { mutableStateOf(false) }
     val scrollState = rememberLazyListState()
 
@@ -165,15 +171,17 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                         if (filterDataList.size == 1 && filterData.code == filterDataList[0].code)
                                             "" else filterListData.title ?: "",
                                         list = filterListData.list ?: listOf(),
-                                        selectList = selectFilterMap[filterListData.code]
-                                            ?: listOf(),
+                                        selectList = if (selectFilterList.isNotEmpty()) selectFilterMap[filterListData.code]
+                                            ?: LinkedList() else LinkedList(),
                                         onItemClick = { clickItem ->
                                             val value = selectFilterMap[filterListData.code]
-                                                ?: mutableListOf()
+                                                ?: LinkedList()
                                             if (!value.contains(clickItem)) {
                                                 value.add(clickItem)
+                                                selectFilterList.add(clickItem)
                                             } else {
                                                 value.remove(clickItem)
+                                                selectFilterList.remove(clickItem)
                                             }
                                             filterListData.code?.let {
                                                 selectFilterMap[it] = value
