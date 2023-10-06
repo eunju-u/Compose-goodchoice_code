@@ -26,9 +26,9 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.api.data.OverseaSpecialItem
 import com.example.goodchoice.ui.components.RoundImageWidget
 import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.StringUtil
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.utils.ConvertUtil
 
 /**
  * 홈의 해외 숙소 item 뷰
@@ -68,9 +68,9 @@ fun OverseaStayItemWidget(
         val isDiscountPriceNumber = discountPrice.toIntOrNull() != null // 숫자로 변경 가능
 
         val convertDefaultPrice =
-            if (isDefaultPriceNumber) StringUtil.convertCommaString(defaultPrice) else defaultPrice
+            if (isDefaultPriceNumber) ConvertUtil.convertCommaString(defaultPrice) else defaultPrice
         val convertDiscountPrice =
-            if (isDiscountPriceNumber) StringUtil.convertCommaString(discountPrice) else discountPrice
+            if (isDiscountPriceNumber) ConvertUtil.convertCommaString(discountPrice) else discountPrice
 
         val painter =
             if (stayItem.mainImage?.isNotEmpty() == true)

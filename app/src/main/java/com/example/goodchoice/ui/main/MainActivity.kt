@@ -40,8 +40,6 @@ class MainActivity : ComponentActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
                 Activity.RESULT_OK-> {
-                    Log.d("eunju", "activityForResult")
-
                     result.data?.let {
                         val isFiltered = it.getBooleanExtra("filtered", false)
                     }

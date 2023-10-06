@@ -24,7 +24,7 @@ import com.example.goodchoice.api.data.OverseaSpecialItem
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.home.homeData.MutableRecentData
+import com.example.goodchoice.ui.home.model.MutableRecentData
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil

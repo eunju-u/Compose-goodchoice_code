@@ -48,6 +48,8 @@ val dp230 = 230.dp
 val dp250 = 250.dp
 val dp280 = 280.dp
 val dp300 = 300.dp
+val dp400 = 400.dp
+val dp550 = 550.dp
 
 val fontLargeSizeRatio = 0.95
 val fontSmallSizeRaio = 0.82

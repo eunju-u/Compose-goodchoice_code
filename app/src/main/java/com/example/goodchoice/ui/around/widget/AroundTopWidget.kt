@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.around.widget
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -7,13 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.goodchoice.R
 import com.example.goodchoice.RoomType
+import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.ImageButtonWidget
-import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.theme.*
 
 @Composable
@@ -21,6 +23,7 @@ fun AroundTopWidget(
     selectedRoomType: RoomType = RoomType.SLEEP_ROOM,
     onItemClick: (roomType: RoomType) -> Unit = {}
 ) {
+    val context = LocalContext.current
     // 숙박
     val isSleepRoom = selectedRoomType == RoomType.SLEEP_ROOM
     // 대실
@@ -61,7 +64,14 @@ fun AroundTopWidget(
                         contentColor = Theme.colorScheme.darkGray,
                         title = "",
                         style = MaterialTheme.typography.labelMedium,
-                        onItemClick = {},
+                        onItemClick = {
+                            context.startActivity(
+                                Intent(
+                                    context,
+                                    CalendarActivity::class.java
+                                )
+                            )
+                        },
                         content = {
                             Image(
                                 modifier = Modifier.size(dp15),

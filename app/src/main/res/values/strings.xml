@@ -74,6 +74,16 @@
 
     <!--  달력  -->
     <string name="str_select_date">날짜 선택하기</string>
+    <string name="str_monday">월</string>
+    <string name="str_tuesday">화</string>
+    <string name="str_wednesday">수</string>
+    <string name="str_thursday">목</string>
+    <string name="str_friday">금</string>
+    <string name="str_saturday">토</string>
+    <string name="str_sunday">일</string>
+    <string name="str_year_month"><xliff:g id="year">%s</xliff:g>년 <xliff:g id="month">%s</xliff:g>월</string>
+    <string name="str_day_apply"><xliff:g id="day">%s</xliff:g>박 적용</string>
+    <string name="str_person_count"><xliff:g id="count">%s</xliff:g>명</string>
 
     <!--  숙소 상세  -->
     <string name="str_see_review">리뷰 <xliff:g id="count">%s</xliff:g>개 보기</string>
@@ -106,5 +116,6 @@
     <string name="str_download_coupon">쿠폰 받기</string>
     <string name="str_cancel">취소</string>
     <string name="str_ok">확인</string>
+    <string name="str_reset">초기화</string>
 
 </resources>

@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,8 @@ fun LeftImageButtonWidget(
     borderColor: Color = Color.Transparent,
     style: TextStyle = MaterialTheme.typography.labelSmall,
     isCenterHorizontalArrangement: Boolean = true,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Clip,
     onItemClick: () -> Unit = {},
     content: @Composable @UiComposable (() -> Unit)? = null,
 ) {
@@ -66,7 +69,9 @@ fun LeftImageButtonWidget(
                         text = it,
                         style = style,
                         color = contentColor,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = maxLines,
+                        overflow = overflow
                     )
                 } else {
                     TextWidget(
@@ -75,7 +80,9 @@ fun LeftImageButtonWidget(
                         text = it as AnnotatedString,
                         style = style,
                         color = contentColor,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = maxLines,
+                        overflow = overflow
                     )
                 }
             }

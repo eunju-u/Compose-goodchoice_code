@@ -165,7 +165,6 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
 
                                 val filterDataList = filterData.list ?: listOf()
                                 filterDataList.forEach { filterListData ->
-                                    Log.d("eunju", "리스트 for!!!!")
                                     FilterItemWidget(
                                         subTitle =
                                         if (filterDataList.size == 1 && filterData.code == filterDataList[0].code)

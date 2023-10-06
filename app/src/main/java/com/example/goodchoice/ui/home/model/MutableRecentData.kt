@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.home.homeData
+package com.example.goodchoice.ui.home.model
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList

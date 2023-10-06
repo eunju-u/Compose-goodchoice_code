@@ -11,7 +11,7 @@ import com.example.goodchoice.RoomType
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.home.homeData.MutableRecentData
+import com.example.goodchoice.ui.home.model.MutableRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow

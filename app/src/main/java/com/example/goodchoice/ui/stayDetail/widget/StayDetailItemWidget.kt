@@ -22,6 +22,7 @@ import com.example.goodchoice.R
 import com.example.goodchoice.api.data.RoomItem
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.theme.*
+import com.example.goodchoice.utils.ConvertUtil
 import com.example.goodchoice.utils.StringUtil
 
 @Composable
@@ -39,9 +40,9 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
     val addInfo = roomItem.addInfo ?: ""
 
     val convertDefaultPrice =
-        if (isDefaultPriceNumber) StringUtil.convertCommaString(defaultPrice) else defaultPrice
+        if (isDefaultPriceNumber) ConvertUtil.convertCommaString(defaultPrice) else defaultPrice
     val convertDiscountPrice =
-        if (isDiscountPriceNumber) StringUtil.convertCommaString(discountPrice) else discountPrice
+        if (isDiscountPriceNumber) ConvertUtil.convertCommaString(discountPrice) else discountPrice
 
     CardWidget(
         isVisibleShadow = true,
@@ -83,9 +84,11 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                     verticalArrangement = Arrangement.Center
                 ) {
                     if (count > 0) {
-                        Box(modifier = Modifier
-                            .width(IntrinsicSize.Max)
-                            .padding(bottom = dp3)) {
+                        Box(
+                            modifier = Modifier
+                                .width(IntrinsicSize.Max)
+                                .padding(bottom = dp3)
+                        ) {
                             Divider(
                                 modifier = Modifier
                                     .fillMaxWidth()

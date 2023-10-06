@@ -29,7 +29,7 @@ import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.home.homeData.RefreshData
+import com.example.goodchoice.ui.home.model.RefreshData
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
