@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.example.goodchoice.Const
 import com.example.goodchoice.ui.theme.TestTheme
 
 class CalendarActivity : ComponentActivity() {
@@ -15,6 +16,10 @@ class CalendarActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        intent.getSerializableExtra(Const.DATA)?.let {
+            viewModel.type.value = it as CalendarType
+        }
+
         setContent {
             TestTheme {
                 CalendarContent(viewModel = viewModel, onFinish = { this.finish() })

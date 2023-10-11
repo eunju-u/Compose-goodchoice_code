@@ -16,7 +16,10 @@ import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.ui.theme.Theme
 
 @Composable
-fun CalendarContent(viewModel: CalendarViewModel, onFinish: () -> Unit = {}) {
+fun CalendarContent(
+    viewModel: CalendarViewModel,
+    onFinish: () -> Unit = {}
+) {
     val calendarState = remember { viewModel.calendarState }
     val type = remember { viewModel.type }
 

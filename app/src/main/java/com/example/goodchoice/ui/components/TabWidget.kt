@@ -57,12 +57,11 @@ fun TabWidget(
             Tab(
                 selected = pagerState.currentPage == index,
                 onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
-                selectedContentColor = selectedContentColor,
-                unselectedContentColor = unselectedContentColor,
                 text = {
                     TextWidget(
                         text = tabData.name,
                         style = if (pagerState.currentPage == index) selectedTextStyle else unselectedTextStyle,
+                        color = if (pagerState.currentPage == index) selectedContentColor else unselectedContentColor,
                         textAlign = TextAlign.Center,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

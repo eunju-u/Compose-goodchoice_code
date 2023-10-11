@@ -120,4 +120,10 @@
     <string name="str_ok">확인</string>
     <string name="str_reset">초기화</string>
 
+    <!--  검색  -->
+    <string name="str_search_korea_area">지역, 지하철역, 숙소</string>
+    <string name="str_search_oversea_area">여행지, 숙소</string>
+    <string name="str_search_reisure_area">여행지, 액티비티, 티켓</string>
+    <string name="str_search_recommend">추천 검색어</string>
+
 </resources>

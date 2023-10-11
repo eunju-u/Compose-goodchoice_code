@@ -52,6 +52,12 @@ class MainViewModel : ViewModel() {
     // 찜 > 레저 티켓
     var leisureLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
 
+    // 검색 > 레저 티켓 (추천 검색어)
+    var leisureSearchWordData: List<FilterItem> = listOf()
+
+    // 검색 > 레저 티켓 (추천 지역)
+    var leisureSearchAreaData: List<FilterItem> = listOf()
+
     // 내 정보
     var myInfoData = MutableStateFlow(MyInfoData())
 
@@ -376,10 +382,32 @@ class MainViewModel : ViewModel() {
             }
         }
 
-    private fun requestSearchData() {
+    // 검색 데이터 요청
+    private fun requestSearchData() = viewModelScope.launch {
+        homeUiState.value = ConnectInfo.Loading
+        withContext(coroutineContext) {
+            delay(400)
+        }
 
+        // 레저*티켓 > 추천검색어 서버 조회
+        leisureSearchWordData = listOf(
+            FilterItem(filterCode = "l1_1_1", filterTitle = "웰니스 페스타"),
+            FilterItem(filterCode = "l1_1_2", filterTitle = "특가"),
+            FilterItem(filterCode = "l1_1_3", filterTitle = "테마파크"),
+            FilterItem(filterCode = "l1_1_4", filterTitle = "에버랜드"),
+            FilterItem(filterCode = "l1_1_5", filterTitle = "롯데월드"),
+            FilterItem(filterCode = "l1_1_6", filterTitle = "경주월드"),
+            FilterItem(filterCode = "l1_1_7", filterTitle = "아쿠아필드"),
+            FilterItem(filterCode = "l1_1_8", filterTitle = "패러글라이딩"),
+            FilterItem(filterCode = "l1_1_9", filterTitle = "유니버셜 스튜디오 재팬")
+        )
+
+        leisureSearchAreaData = listOf()
+
+        homeUiState.value = ConnectInfo.Available()
     }
 
+    // 주변 데이터 요청
     // 숙박, 대실 클릭 했을 때만 서버 조회.
     // 처음 진입시는 서버 조회 하지 않고 하드코딩된 내용 보여줌.
     // 왜냐하면 네트워크가 없는 상태에서 주변 화면 진입 할경우 필터 리스트가 보여지고 있음.

@@ -120,9 +120,11 @@ object ConvertUtil {
     /**
      * 2023-10-05 -> 10.5 로 포멧
      */
-    fun formatDate(dateString: String): String {
-        val date = LocalDate.parse(dateString)
-        val formatter = DateTimeFormatter.ofPattern("M.d")
-        return date.format(formatter)
+    fun formatDate(dateString: String?): String {
+        return dateString?.run {
+            val date = LocalDate.parse(dateString)
+            val formatter = DateTimeFormatter.ofPattern("M.d")
+            date.format(formatter)
+        } ?: ""
     }
 }

@@ -92,7 +92,6 @@ fun PreviewCardView() {
                 })
             LeftImageButtonWidget(
                 modifier = Modifier.weight(1f),
-                isCenterHorizontalArrangement = false,
                 containerColor = Theme.colorScheme.gray,
                 contentColor = Theme.colorScheme.darkGray,
                 title = "인원",

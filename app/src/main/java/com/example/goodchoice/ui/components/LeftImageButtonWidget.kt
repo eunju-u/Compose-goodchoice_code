@@ -52,7 +52,7 @@ fun LeftImageButtonWidget(
             Row(
                 modifier = modifier,
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = if (isCenterHorizontalArrangement) Arrangement.Center else Arrangement.Start
             ) {
                 if (content != null) {
                     Box(

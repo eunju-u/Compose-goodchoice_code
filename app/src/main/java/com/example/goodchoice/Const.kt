@@ -116,6 +116,10 @@ object Const {
     const val ITEM_ID = "ITEM_ID"
     const val ITEM_TITLE = "ITEM_TITLE"
     const val DATA = "DATA"
+
+    //검색 Tab
+    const val KOREA_STAY = "국내숙소"
+    const val OVERSEA_STAY = "해외숙소"
 }
 
 // 숙박, 대실

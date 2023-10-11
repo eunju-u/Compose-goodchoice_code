@@ -12,6 +12,7 @@ import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.like.LikeContent
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.MyInfoContent
+import com.example.goodchoice.ui.search.SearchContent
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
@@ -30,6 +31,7 @@ fun NavGraph(
             HomeContent(modifier, viewModel)
         }
         composable(NavItem.Search.route) {
+            SearchContent(modifier, viewModel)
         }
         composable(NavItem.Around.route) {
             AroundContent(modifier, viewModel)
