@@ -56,7 +56,7 @@ fun Calendar(
     val type = calendarType.value
     val calendarUiState = calendarState.calendarUiState.value
     val numberSelectedDays = calendarUiState.numberSelectedDays.toInt()
-    var personCount by remember { mutableStateOf(pref.getPersonCount()) }
+    var personCount by remember { mutableStateOf(pref.personCount) }
 
     val selectedAnimationPercentage = remember(numberSelectedDays) {
         Animatable(0f)
@@ -99,8 +99,8 @@ fun Calendar(
                 horizontalArrangement = Arrangement.spacedBy(dp10)
             ) {
                 val startDate =
-                    (calendarUiState.selectedStartDate ?: pref.getStartDate()).toString()
-                val endDate = (calendarUiState.selectedEndDate ?: pref.getEndDate()).toString()
+                    (calendarUiState.selectedStartDate ?: pref.startDate).toString()
+                val endDate = (calendarUiState.selectedEndDate ?: pref.endDate).toString()
                 val startDateFormat = ConvertUtil.formatDate(startDate)
                 val endDateFormat = ConvertUtil.formatDate(endDate)
                 val startDayOfWeek =
@@ -228,9 +228,9 @@ fun Calendar(
                             )
                         },
                         onItemClick = {
-                            pref.setPersonCount(personCount)
-                            pref.setStartDate(calendarUiState.selectedStartDate.toString())
-                            pref.setEndDate(calendarUiState.selectedEndDate.toString())
+                            pref.personCount = personCount
+                            pref.startDate = calendarUiState.selectedStartDate.toString()
+                            pref.endDate = calendarUiState.selectedEndDate.toString()
                             (context as CalendarActivity).finish()
                         })
                 }

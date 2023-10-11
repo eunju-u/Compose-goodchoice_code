@@ -480,7 +480,7 @@ class MainViewModel : ViewModel() {
 
         //로그인이 안되어 있는 경우 로딩 안돌게 함.
         // (이유 : 로그인 안된 화면에서는 로딩이 필요없고, 리스트가 필요할 경우만 로딩노출함.)
-        if (pref.isLogin()) {
+        if (pref.isLogin) {
             withContext(coroutineContext) {
                 delay(200)
             }

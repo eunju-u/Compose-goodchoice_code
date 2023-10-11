@@ -40,7 +40,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                 onFinish = { onFinish() })
 
             if (alarmUiState.value is ConnectInfo.Available) {
-                if (!pref.isLogin()) {
+                if (!pref.isLogin) {
                     GoToWidget(modifier = Modifier.fillMaxSize(),
                         firstText = stringResource(id = R.string.str_no_see_alarm),
                         secondText = stringResource(id = R.string.str_check_alarm_after_login),

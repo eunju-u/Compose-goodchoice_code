@@ -18,7 +18,7 @@ class AlarmViewModel : ViewModel() {
         val pref = GoodChoicePreference(context)
         alarmUiState.value = ConnectInfo.Loading
 
-        if (pref.isLogin()) {
+        if (pref.isLogin) {
             withContext(coroutineContext) {
                 delay(200)
             }

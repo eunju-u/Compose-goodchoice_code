@@ -43,7 +43,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
 
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
-    val isLoginWay = pref.getLoginWay()
+    val isLoginWay = pref.loginWay
 
     var plusPadding by remember { mutableStateOf(58.5.dp) }
 
@@ -129,8 +129,8 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.setIsLogin(true)
-                            pref.setLoginWay(Const.KAKAO)
+                            pref.isLogin = true
+                            pref.loginWay = Const.KAKAO
                             onFinish()
                         })
                     LeftImageButtonWidget(
@@ -151,8 +151,8 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.setIsLogin(true)
-                            pref.setLoginWay(Const.NAVER)
+                            pref.isLogin = true
+                            pref.loginWay = Const.NAVER
                             onFinish()
                         })
                     LeftImageButtonWidget(
@@ -172,8 +172,8 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.setIsLogin(true)
-                            pref.setLoginWay(Const.FACEBOOK)
+                            pref.isLogin = true
+                            pref.loginWay = Const.FACEBOOK
                             onFinish()
                         })
                     LeftImageButtonWidget(
@@ -193,8 +193,8 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.setIsLogin(true)
-                            pref.setLoginWay(Const.APPLE)
+                            pref.isLogin = true
+                            pref.loginWay = Const.APPLE
                             onFinish()
                         })
                     LeftImageButtonWidget(
@@ -215,8 +215,8 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.setIsLogin(true)
-                            pref.setLoginWay(Const.EMAIL)
+                            pref.isLogin = true
+                            pref.loginWay = Const.EMAIL
                             onFinish()
                         })
                 }

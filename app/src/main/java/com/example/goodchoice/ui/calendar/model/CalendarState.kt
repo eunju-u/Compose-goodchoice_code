@@ -14,8 +14,8 @@ class CalendarState {
 
     val calendarUiState = mutableStateOf(
         CalendarUiState(
-            selectedStartDate = LocalDate.parse(pref.getStartDate()),
-            selectedEndDate = LocalDate.parse(pref.getEndDate())
+            selectedStartDate = LocalDate.parse(pref.startDate),
+            selectedEndDate = LocalDate.parse(pref.endDate)
         )
     )
     val listMonths: List<Month>

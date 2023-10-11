@@ -67,7 +67,7 @@ fun LikeContent(
                     state = state,
                     verticalAlignment = Alignment.Top
                 ) { page: Int ->
-                    if (!pref.isLogin()) {
+                    if (!pref.isLogin) {
                         GoToWidget(
                             modifier = Modifier.fillMaxSize(),
                             firstText = stringResource(id = R.string.str_no_see_like_list),
