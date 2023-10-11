@@ -77,7 +77,6 @@ private fun DayContainer(
                     .align(Alignment.BottomCenter).padding(bottom = dp8)
             ) {
                 ShapeButton(size = dp6, normalColor = Theme.colorScheme.blue)
-
             }
         }
     }

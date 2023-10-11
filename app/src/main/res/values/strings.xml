@@ -84,6 +84,8 @@
     <string name="str_year_month"><xliff:g id="year">%s</xliff:g>년 <xliff:g id="month">%s</xliff:g>월</string>
     <string name="str_day_apply"><xliff:g id="day">%s</xliff:g>박 적용</string>
     <string name="str_person_count"><xliff:g id="count">%s</xliff:g>명</string>
+    <string name="str_person">인원</string>
+    <string name="str_person_sub">유아 및 아동도 인원수에\n포함해 주세요.</string>
 
     <!--  숙소 상세  -->
     <string name="str_see_review">리뷰 <xliff:g id="count">%s</xliff:g>개 보기</string>

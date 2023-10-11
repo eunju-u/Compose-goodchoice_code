@@ -1,6 +1,8 @@
 package com.example.goodchoice.ui.calendar.model
 
 import androidx.compose.runtime.mutableStateOf
+import com.example.goodchoice.GoodChoiceApplication
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.widget.getNumberWeeks
 import java.time.LocalDate
 import java.time.Period
@@ -8,11 +10,19 @@ import java.time.YearMonth
 
 class CalendarState {
 
-    val calendarUiState = mutableStateOf(CalendarUiState())
+    val pref = GoodChoicePreference(GoodChoiceApplication.context())
+
+    val calendarUiState = mutableStateOf(
+        CalendarUiState(
+            selectedStartDate = LocalDate.parse(pref.getStartDate()),
+            selectedEndDate = LocalDate.parse(pref.getEndDate())
+        )
+    )
     val listMonths: List<Month>
 
     // 캘린더 시작하는 날짜
     private val calendarStartDate: LocalDate = LocalDate.now()
+
     // 현재날짜로 부터 5달 후 까지만 보여줌
     private val calendarEndDate: LocalDate = LocalDate.now().plusMonths(5)
 

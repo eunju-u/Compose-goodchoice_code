@@ -56,6 +56,7 @@ fun Calendar(
     val type = calendarType.value
     val calendarUiState = calendarState.calendarUiState.value
     val numberSelectedDays = calendarUiState.numberSelectedDays.toInt()
+    var personCount by remember { mutableStateOf(pref.getPersonCount()) }
 
     val selectedAnimationPercentage = remember(numberSelectedDays) {
         Animatable(0f)
@@ -91,21 +92,22 @@ fun Calendar(
         .wrapContentWidth(Alignment.CenterHorizontally)
     Box(modifier = modifier.padding(contentPadding)) {
         Column {
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = dp20, end = dp20),
                 horizontalArrangement = Arrangement.spacedBy(dp10)
             ) {
-                val startDate = pref.getStartDate()
-                val endDate = pref.getEndDate()
+                val startDate =
+                    (calendarUiState.selectedStartDate ?: pref.getStartDate()).toString()
+                val endDate = (calendarUiState.selectedEndDate ?: pref.getEndDate()).toString()
                 val startDateFormat = ConvertUtil.formatDate(startDate)
                 val endDateFormat = ConvertUtil.formatDate(endDate)
                 val startDayOfWeek =
                     ConvertUtil.convertDayOfWeek(LocalDate.parse(startDate).dayOfWeek.name)
                 val endDayOfWeek =
                     ConvertUtil.convertDayOfWeek(LocalDate.parse(endDate).dayOfWeek.name)
+
                 LeftImageButtonWidget(
                     modifier = Modifier.weight(0.6f),
                     title = "$startDateFormat ${stringResource(id = startDayOfWeek)} " +
@@ -127,8 +129,9 @@ fun Calendar(
                     },
                     onItemClick = { calendarType.value = CalendarType.CALENDAR }
                 )
+                val person = if (personCount == 10) "$personCount+" else personCount.toString()
                 LeftImageButtonWidget(
-                    title = stringResource(id = R.string.str_person_count, pref.getPersonCount()),
+                    title = stringResource(id = R.string.str_person_count, person),
                     borderColor = personBorderColor,
                     contentColor = personContentColor,
                     shape = dp20,
@@ -174,7 +177,11 @@ fun Calendar(
                     }
                 }
             } else {
-                PersonWidget(contentPadding = contentPadding)
+                PersonWidget(
+                    contentPadding = contentPadding,
+                    personCount = personCount,
+                    onLeftItemClick = { if (personCount > 1) personCount-- },
+                    onRightItemClick = { if (personCount < 10) personCount++ })
             }
         }
 
@@ -206,6 +213,8 @@ fun Calendar(
                                 contentDescription = null
                             )
                         })
+
+                    //적용 버튼
                     ButtonWidget(modifier = Modifier.weight(0.7f),
                         containerColor = Theme.colorScheme.blue,
                         content = {
@@ -218,7 +227,12 @@ fun Calendar(
                                 color = Theme.colorScheme.white
                             )
                         },
-                        onItemClick = {})
+                        onItemClick = {
+                            pref.setPersonCount(personCount)
+                            pref.setStartDate(calendarUiState.selectedStartDate.toString())
+                            pref.setEndDate(calendarUiState.selectedEndDate.toString())
+                            (context as CalendarActivity).finish()
+                        })
                 }
             })
     }
