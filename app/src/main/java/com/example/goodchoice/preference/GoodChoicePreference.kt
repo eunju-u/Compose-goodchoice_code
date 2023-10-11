@@ -30,22 +30,26 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
             return getPreferenceString(LOGIN_WAY, "KAKAO") ?: "KAKAO"
         }
 
-    var startDate: String
+    var startDate: String?
         set(value) {
-            setPreference(START_DATE, value)
+            value?.let {
+                setPreference(START_DATE, value)
+            }
         }
         get() {
             return getPreferenceString(START_DATE, LocalDate.now().toString())
                 ?: LocalDate.now().toString()
         }
 
-    var endDate: String
+    var endDate: String?
         set(value) {
-            setPreference(END_DATE, value)
+            value?.let {
+                setPreference(END_DATE, value)
+            }
         }
         get() {
-            return getPreferenceString(END_DATE, LocalDate.now().plusDays(1).toString())
-                ?: LocalDate.now().plusDays(1).toString()
+            return getPreferenceString(END_DATE, LocalDate.parse(startDate).plusDays(1).toString())
+                ?: LocalDate.parse(startDate).plusDays(1).toString()
         }
 
     var personCount: Int
