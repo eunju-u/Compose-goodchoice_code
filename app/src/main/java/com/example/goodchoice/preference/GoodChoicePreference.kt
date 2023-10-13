@@ -8,9 +8,12 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
     private val IS_LOGIN = "isLogin"
     private val LOGIN_WAY = "loginWay"
 
-    private val START_DATE = "startDate"
-    private val END_DATE = "endDate"
-    private val PERSON_COUNT = "personCount"
+    private val KOREA_START_DATE = "koreaStartDate"   //국내 여행 시작 날짜
+    private val KOREA_END_DATE = "koreaEndDate"    //국내 여행 마지막 날짜
+    private val OVERSEA_START_DATE = "overseaStartDate"   //해외 여행 시작 날짜
+    private val OVERSEA_END_DATE = "overseaEndDate"    //해외 여행 마지막 날짜
+    private val KOREA_PERSON_COUNT = "koreaPersonCount"   //국내 여행 인원수
+    private val OVERSEA_PERSON_COUNT = "overseaPersonCount"   //해외 여행 인원수
 
     //로그인 여부색
     var isLogin: Boolean
@@ -30,33 +33,64 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
             return getPreferenceString(LOGIN_WAY, "KAKAO") ?: "KAKAO"
         }
 
-    var startDate: String?
+    var koreaStartDate: String?
         set(value) {
             value?.let {
-                setPreference(START_DATE, value)
+                setPreference(KOREA_START_DATE, value)
             }
         }
         get() {
-            return getPreferenceString(START_DATE, LocalDate.now().toString())
+            return getPreferenceString(KOREA_START_DATE, LocalDate.now().toString())
                 ?: LocalDate.now().toString()
         }
 
-    var endDate: String?
+    var koreaEndDate: String?
         set(value) {
             value?.let {
-                setPreference(END_DATE, value)
+                setPreference(KOREA_END_DATE, value)
             }
         }
         get() {
-            return getPreferenceString(END_DATE, LocalDate.parse(startDate).plusDays(1).toString())
-                ?: LocalDate.parse(startDate).plusDays(1).toString()
+            return getPreferenceString(KOREA_END_DATE, LocalDate.parse(koreaStartDate).plusDays(1).toString())
+                ?: LocalDate.parse(koreaStartDate).plusDays(1).toString()
         }
 
-    var personCount: Int
+
+    var overseaStartDate: String?
         set(value) {
-            setPreference(PERSON_COUNT, value)
+            value?.let {
+                setPreference(OVERSEA_START_DATE, value)
+            }
         }
         get() {
-            return getPreferenceInt(PERSON_COUNT, 2)
+            return getPreferenceString(OVERSEA_START_DATE, LocalDate.now().toString())
+                ?: LocalDate.now().toString()
+        }
+
+    var overseaEndDate: String?
+        set(value) {
+            value?.let {
+                setPreference(OVERSEA_END_DATE, value)
+            }
+        }
+        get() {
+            return getPreferenceString(OVERSEA_END_DATE, LocalDate.parse(overseaStartDate).plusDays(1).toString())
+                ?: LocalDate.parse(overseaStartDate).plusDays(1).toString()
+        }
+
+    var koreaPersonCount: Int
+        set(value) {
+            setPreference(KOREA_PERSON_COUNT, value)
+        }
+        get() {
+            return getPreferenceInt(KOREA_PERSON_COUNT, 2)
+        }
+
+    var overseaPersonCount: Int
+        set(value) {
+            setPreference(OVERSEA_PERSON_COUNT, value)
+        }
+        get() {
+            return getPreferenceInt(OVERSEA_PERSON_COUNT, 2)
         }
 }

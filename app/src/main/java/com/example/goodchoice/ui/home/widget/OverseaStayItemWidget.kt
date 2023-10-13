@@ -44,7 +44,7 @@ fun OverseaStayItemWidget(
 
     //해상도에 따라 호텔 item view 가로 조정
     LaunchedEffect(key1 = screenWidth) {
-        itemWidth = if (screenWidth < 400.dp) {
+        itemWidth = if (screenWidth < dp400) {
             width / 1.9
         } else {
             width

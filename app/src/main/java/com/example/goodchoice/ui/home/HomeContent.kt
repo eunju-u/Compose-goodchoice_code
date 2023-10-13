@@ -185,12 +185,12 @@ fun HomeContent(
                                         .height(gridHeight.dp)
                                         .padding(start = dp20, end = dp20),
                                     columns = GridCells.Fixed(count = row),
-                                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                                    verticalArrangement = Arrangement.spacedBy(dp2),
                                     userScrollEnabled = false
                                 ) {
                                     itemsIndexed(items = categoryItemList) { index, item ->
                                         CategoryItemWidget(
-                                            icon = item.icon,
+                                            painter = painterResource(id = item.icon),
                                             name = item.name,
                                             height = CategoryItemHeight
                                         )
@@ -275,7 +275,7 @@ fun HomeContent(
                                 Text(
                                     modifier = Modifier.padding(
                                         start = dp15,
-                                        end = 15.dp,
+                                        end = dp15,
                                         top = dp20
                                     ),
                                     text = StringUtil.setTextColor(

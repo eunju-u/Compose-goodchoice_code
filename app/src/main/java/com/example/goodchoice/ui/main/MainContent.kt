@@ -32,6 +32,7 @@ import com.example.goodchoice.ui.main.nav.navigation
 import com.example.goodchoice.ui.main.state.rememberMainState
 import com.example.goodchoice.ui.theme.GMarketSansFamily
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.dp50
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -72,7 +73,7 @@ fun MainContent(viewModel: MainViewModel) {
             scaffoldState = mainState.scaffoldState,
             bottomBar = {
                 BottomNavigation(
-                    modifier = Modifier.height(50.dp),
+                    modifier = Modifier.height(dp50),
                     backgroundColor = Theme.colorScheme.white,
                     contentColor = Theme.colorScheme.darkGray,
                     elevation = 12.dp

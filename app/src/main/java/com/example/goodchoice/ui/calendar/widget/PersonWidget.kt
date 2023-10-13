@@ -19,7 +19,7 @@ import com.example.goodchoice.ui.theme.*
 //기존 여기어때 앱은 인원 선택 뷰에서 해상도 고려 하지 않고 있다!
 @Composable
 fun PersonWidget(
-    contentPadding: PaddingValues = PaddingValues(0.dp), personCount: Int = 0,
+    contentPadding: PaddingValues = PaddingValues(dp0), personCount: Int = 0,
     onLeftItemClick: () -> Unit = {}, onRightItemClick: () -> Unit = {}
 ) {
     LazyColumn(

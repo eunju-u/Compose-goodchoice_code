@@ -36,31 +36,6 @@ object Const {
     const val HOT_HOTEL = 124 //이번 주 HOT 인기 펜션
     const val OVERSEA_SPECIAL = 125 //해외 항공 + 숙소 이번주 특가
 
-    //편의시설 및 서비스
-    const val WIFI = "WIFI"
-    const val FULL = "FULL" //수영장
-    const val SPA = "SPA"
-    const val COOKING = "COOKING"
-    const val BBQ = "BBQ"
-    const val COOKER = "COOKER"
-    const val TV = "TV"
-    const val BATHROOM = "BATHROOM" //욕실
-    const val FREE_PARKING = "FREE_PARKING" //무료주차
-    const val AIR_CONDITIONER = "AIR_CONDITIONER" //에어컨
-    const val REFRIGERATOR = "REFRIGERATOR" //냉장고
-    const val SHOWER_ROOM = "SHOWER_ROOM" //샤워룸
-    const val NO_SMOKING = "NO_SMOKING" //금연
-    const val ANIMAL = "ANIMAL" //동물
-    const val DRYER = "DRYER" //드라이기
-    const val CARD = "CARD" //카드
-    const val PARKING_LOT = "PARKING_LOT" //주차장
-    const val COOKING_POSSIBLE = "COOKING_POSSIBLE" //취사가능
-    const val MICROWAVE = "MICROWAVE" //전자레인지
-    const val MINIBAR = "MINIBAR" //미니바
-    const val RESTAURANT = "RESTAURANT" //레스토랑
-    const val CAFE = "CAFE" //카페
-    const val BATHROOM_SUPPLIES = "BATHROOM_SUPPLIES" //욕실용품
-
     //해외 도시
     const val OSAKA = 11000
     const val FUKUOKA = 11001

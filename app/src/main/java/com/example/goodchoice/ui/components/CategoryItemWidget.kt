@@ -3,13 +3,17 @@ package com.example.goodchoice.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -20,14 +24,16 @@ import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun CategoryItemWidget(
-    icon: Int = 0,
+    painter: Painter? = null,
     name: String = "",
     width: Dp = dp0,
     height: Dp = dp0,
     bottomPadding: Dp = dp5,
     imageSize: Dp = dp35,
+    imageClip: Dp = dp0,
     textStyle: TextStyle = MaterialTheme.typography.labelSmall,
     textColor: Color = Theme.colorScheme.darkGray,
+    contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
     onItemClick: (() -> Unit)? = null
 ) {
@@ -59,14 +65,16 @@ fun CategoryItemWidget(
         Image(
             modifier = Modifier
                 .size(imageSize)
-                .padding(bottom = bottomPadding),
-            painter = painterResource(id = if (icon != 0) icon else R.drawable.bg_white),
+                .clip(RoundedCornerShape(imageClip)),
+            painter = painter ?: painterResource(id = R.drawable.bg_white),
             contentDescription = name,
             alpha = LocalContentAlpha.current,
-            colorFilter = colorFilter
+            colorFilter = colorFilter,
+            contentScale = contentScale,
         )
+
         TextWidget(
-            modifier = Modifier.padding(bottom = dp2),
+            modifier = Modifier.padding(top = bottomPadding, bottom = dp2),
             text = name,
             style = textStyle,
             textAlign = TextAlign.Center,
@@ -78,5 +86,5 @@ fun CategoryItemWidget(
 @Preview
 @Composable
 fun PreviewCategoryItemWidget() {
-    CategoryItemWidget(name = "공간대여", icon = R.drawable.ic_airplane)
+    CategoryItemWidget(name = "공간대여", painter = painterResource(id = R.drawable.ic_airplane))
 }

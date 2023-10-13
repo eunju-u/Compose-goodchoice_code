@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.goodchoice.ui.theme.Theme
+import com.example.goodchoice.ui.theme.dp400
 import com.example.goodchoice.ui.theme.fontLargeSizeRatio
 import com.example.goodchoice.ui.theme.fontSmallSizeRaio
 
@@ -45,7 +46,7 @@ fun TextWidget(
     val textFontSize = style.fontSize
     LaunchedEffect(key1 = screenWidth) {
         if (isPortrait) {
-            textStyle = if (screenWidth < 400.dp) {
+            textStyle = if (screenWidth < dp400) {
                 if (textFontSize < 14.sp) {
                     textStyle.copy(fontSize = textStyle.fontSize * fontSmallSizeRaio)
                 } else {

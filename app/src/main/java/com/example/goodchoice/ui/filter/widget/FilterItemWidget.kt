@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import com.example.goodchoice.api.data.FilterItem
 import com.example.goodchoice.ui.components.TagWidget
 import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp0
 import com.example.goodchoice.ui.theme.dp10
 import com.example.goodchoice.ui.theme.dp5
 

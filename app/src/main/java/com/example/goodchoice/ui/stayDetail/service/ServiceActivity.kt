@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.components.TopAppBarWidget
@@ -45,7 +46,11 @@ class ServiceActivity : ComponentActivity() {
                     ) {
                         itemsIndexed(items = serviceData) { index, item ->
                             CategoryItemWidget(
-                                icon = ConvertUtil.convertServiceImage(item.type ?: ""),
+                                painter = painterResource(
+                                    id = ConvertUtil.convertServiceImage(
+                                        item.type ?: ""
+                                    )
+                                ),
                                 name = item.name ?: "",
                                 colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
                                 imageSize = dp40,

@@ -43,6 +43,8 @@ fun SearchContent(
     val pagerState = rememberPagerState(initialPage = 0)
 
     val leisureSearchWordData = viewModel.leisureSearchWordData
+    val leisureSearchAreaData = viewModel.leisureSearchAreaData
+    val koreaSearchRankData = viewModel.koreaSearchRankData
 
     val pageModifier = Modifier
         .fillMaxSize()
@@ -74,8 +76,8 @@ fun SearchContent(
                     if (homeUiState.value is ConnectInfo.Available) {
                         when (menus[page].route) {
                             TabData.KOREA_STAY.route -> {
-                                val startDate = pref.startDate
-                                val endDate = pref.endDate
+                                val startDate = pref.koreaStartDate
+                                val endDate = pref.koreaEndDate
 
                                 val startDateFormat = ConvertUtil.formatDate(startDate)
                                 val endDateFormat = ConvertUtil.formatDate(endDate)
@@ -87,9 +89,11 @@ fun SearchContent(
                                     "$startDateFormat ${stringResource(id = startDayOfWeek)} " +
                                             "- $endDateFormat ${stringResource(id = endDayOfWeek)}"
 
+                                // 국내숙소
                                 KoreaStayContent(modifier = pageModifier,
                                     date = date,
-                                    personCount = pref.personCount,
+                                    personCount = pref.koreaPersonCount,
+                                    rankList = koreaSearchRankData,
                                     onLeftItemClick = {
                                         context.startActivity(
                                             Intent(
@@ -113,13 +117,32 @@ fun SearchContent(
                             }
 
                             TabData.OVERSEA_STAY.route -> {
-                                OverSeaContent(modifier = pageModifier)
+                                val startDate = pref.overseaStartDate
+                                val endDate = pref.overseaEndDate
+
+                                val startDateFormat = ConvertUtil.formatDate(startDate)
+                                val endDateFormat = ConvertUtil.formatDate(endDate)
+                                val startDayOfWeek =
+                                    ConvertUtil.convertDayOfWeek(LocalDate.parse(startDate).dayOfWeek.name)
+                                val endDayOfWeek =
+                                    ConvertUtil.convertDayOfWeek(LocalDate.parse(endDate).dayOfWeek.name)
+                                val date =
+                                    "$startDateFormat ${stringResource(id = startDayOfWeek)} " +
+                                            "- $endDateFormat ${stringResource(id = endDayOfWeek)}"
+
+                                // 해외숙소
+                                OverSeaContent(
+                                    modifier = pageModifier, date = date,
+                                    personCount = pref.overseaPersonCount,
+                                )
                             }
 
                             TabData.LEISURE.route -> {
+                                // 레저*티켓
                                 LeisureContent(
                                     modifier = pageModifier,
-                                    list = leisureSearchWordData
+                                    wordList = leisureSearchWordData,
+                                    areaList = leisureSearchAreaData
                                 )
                             }
                             else -> {}

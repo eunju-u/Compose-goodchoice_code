@@ -14,13 +14,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.dp0
+import com.example.goodchoice.ui.theme.dp10
 
 @Composable
 fun ButtonWidget(
     modifier: Modifier = Modifier,
     outerPadding: PaddingValues = PaddingValues(dp0),
     hasOutline: Boolean = false,
-    shape: Dp = 10.dp,
+    shape: Dp = dp10,
     borderWidth: Dp = 1.5.dp,
     enabled: Boolean = true,
     containerColor: Color = Theme.colorScheme.white,

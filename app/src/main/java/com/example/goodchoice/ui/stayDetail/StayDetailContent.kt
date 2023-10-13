@@ -34,7 +34,6 @@ import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
 import com.example.goodchoice.ui.stayDetail.service.ServiceActivity
-import com.example.goodchoice.ui.stayDetail.widget.InfoWidget
 import com.example.goodchoice.ui.stayDetail.widget.PayWidget
 import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
 import com.example.goodchoice.ui.theme.*
@@ -291,7 +290,7 @@ fun StayDetailContent(
                                 this.forEachIndexed { index, item ->
                                     val infoPadding =
                                         if (index == 0 || index == this.lastIndex) dp0 else dp3
-                                    InfoWidget(
+                                    RowTwoWidget(
                                         modifier = Modifier.padding(
                                             top = infoPadding,
                                             bottom = infoPadding
@@ -395,8 +394,12 @@ fun StayDetailContent(
                                             bottomPadding = dp15,
                                             textStyle = MaterialTheme.typography.labelMedium,
                                             colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                                            icon =
-                                            ConvertUtil.convertServiceImage(serviceData.type ?: ""),
+                                            painter =
+                                            painterResource(
+                                                id = ConvertUtil.convertServiceImage(
+                                                    serviceData.type ?: ""
+                                                )
+                                            ),
                                             name = serviceData.name ?: ""
                                         )
                                     }
@@ -407,12 +410,15 @@ fun StayDetailContent(
                                             bottomPadding = dp15,
                                             textStyle = MaterialTheme.typography.labelMedium,
                                             colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                                            icon =
-                                            ConvertUtil.convertServiceImage(serviceData.type ?: ""),
+                                            painter =
+                                            painterResource(
+                                                id = ConvertUtil.convertServiceImage(
+                                                    serviceData.type ?: ""
+                                                )
+                                            ),
                                             name = serviceData.name ?: ""
                                         )
                                     }
-
                                 }
                             }
                         }

@@ -17,6 +17,7 @@ val dp10 = 10.dp
 val dp12 = 12.dp
 val dp13 = 13.dp
 val dp15 = 15.dp
+val dp17 = 17.dp
 val dp20 = 20.dp
 val dp25 = 25.dp
 val dp30 = 30.dp

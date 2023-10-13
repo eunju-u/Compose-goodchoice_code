@@ -6,6 +6,57 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 object ConvertUtil {
+    fun convertOverSeaImage(cityId: Int): Int {
+        return when (cityId) {
+            Const.OSAKA -> R.drawable.img_osaka
+            Const.FUKUOKA -> R.drawable.img_fukuoka
+            Const.TOKYO -> R.drawable.img_tokyo
+            Const.DANANG -> R.drawable.img_danang
+            Const.KYOTO -> R.drawable.img_kyoto
+            Const.SINGAPORE -> R.drawable.img_singapore
+            else -> R.drawable.bg_white
+        }
+    }
+
+    fun convertPayImage(payType: String): Int {
+        return when (payType) {
+            Const.PAY_TOSS -> R.drawable.img_toss
+            Const.PAY_KAKAO -> R.drawable.bg_white
+            Const.PAY_KB -> R.drawable.bg_white
+            Const.PAY_PAYCO -> R.drawable.bg_white
+            else -> R.drawable.bg_white
+        }
+    }
+
+    fun convertServiceImage(serviceType: String): Int {
+        return when (serviceType) {
+            ServerConst.MINIBAR -> R.drawable.ic_minibar
+            ServerConst.WIFI -> R.drawable.ic_wifi
+            ServerConst.BATHROOM_SUPPLIES -> R.drawable.ic_towel
+            ServerConst.RESTAURANT -> R.drawable.ic_restaurant
+            ServerConst.TV -> R.drawable.ic_tv
+            ServerConst.NO_SMOKING -> R.drawable.ic_no_smoking
+            ServerConst.AIR_CONDITIONER -> R.drawable.ic_air_conditioner
+            ServerConst.REFRIGERATOR -> R.drawable.ic_refrigerator
+            ServerConst.SHOWER_ROOM -> R.drawable.ic_shower_room
+            ServerConst.DRYER -> R.drawable.ic_dryer
+            ServerConst.CAFE -> R.drawable.ic_cafe
+            ServerConst.FREE_PARKING -> R.drawable.ic_parking
+            ServerConst.PARKING_LOT -> R.drawable.ic_parking
+            else -> R.drawable.bg_white
+        }
+    }
+
+    fun convertLeisureSearchImage(code: String): Int {
+        return when (code) {
+            ServerConst.SEOUL -> R.drawable.ic_minibar
+            ServerConst.JEJU -> R.drawable.ic_wifi
+            ServerConst.BUSAN -> R.drawable.ic_towel
+            ServerConst.GYEONGGI -> R.drawable.ic_restaurant
+            ServerConst.YEOSU -> R.drawable.ic_tv
+            else -> R.drawable.bg_white
+        }
+    }
 
     /**
      * 콤마 변환 20000 -> 20,000
@@ -44,47 +95,6 @@ object ConvertUtil {
         }
 
         return sb.toString()
-    }
-
-    fun convertOverSeaImage(cityId: Int): Int {
-        return when (cityId) {
-            Const.OSAKA -> R.drawable.img_osaka
-            Const.FUKUOKA -> R.drawable.img_fukuoka
-            Const.TOKYO -> R.drawable.img_tokyo
-            Const.DANANG -> R.drawable.img_danang
-            Const.KYOTO -> R.drawable.img_kyoto
-            Const.SINGAPORE -> R.drawable.img_singapore
-            else -> R.drawable.bg_white
-        }
-    }
-
-    fun convertPayImage(payType: String): Int {
-        return when (payType) {
-            Const.PAY_TOSS -> R.drawable.img_toss
-            Const.PAY_KAKAO -> R.drawable.bg_white
-            Const.PAY_KB -> R.drawable.bg_white
-            Const.PAY_PAYCO -> R.drawable.bg_white
-            else -> R.drawable.bg_white
-        }
-    }
-
-    fun convertServiceImage(serviceType: String): Int {
-        return when (serviceType) {
-            Const.MINIBAR -> R.drawable.ic_minibar
-            Const.WIFI -> R.drawable.ic_wifi
-            Const.BATHROOM_SUPPLIES -> R.drawable.ic_towel
-            Const.RESTAURANT -> R.drawable.ic_restaurant
-            Const.TV -> R.drawable.ic_tv
-            Const.NO_SMOKING -> R.drawable.ic_no_smoking
-            Const.AIR_CONDITIONER -> R.drawable.ic_air_conditioner
-            Const.REFRIGERATOR -> R.drawable.ic_refrigerator
-            Const.SHOWER_ROOM -> R.drawable.ic_shower_room
-            Const.DRYER -> R.drawable.ic_dryer
-            Const.CAFE -> R.drawable.ic_cafe
-            Const.FREE_PARKING -> R.drawable.ic_parking
-            Const.PARKING_LOT -> R.drawable.ic_parking
-            else -> R.drawable.bg_white
-        }
     }
 
     fun convertDayOfWeek(day: String): Int {

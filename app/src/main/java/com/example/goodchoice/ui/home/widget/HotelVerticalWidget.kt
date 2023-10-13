@@ -65,10 +65,10 @@ fun HotelVerticalWidget(
                 modifier = Modifier
                     .fillMaxWidth(),
                 state = scrollState,
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                horizontalArrangement = Arrangement.spacedBy(dp10)
             ) {
                 itemsIndexed(items = stayList) { index, item ->
-                    if (index == 0) Spacer(Modifier.width(15.dp))
+                    if (index == 0) Spacer(Modifier.width(dp15))
                     if (item is StayItem) {
                         if (type == Const.TODAY_HOTEL || type == Const.HOT_HOTEL) {
                             KoreaStayItemWidget(
@@ -82,7 +82,7 @@ fun HotelVerticalWidget(
                     } else if (item is OverseaSpecialItem) {
                         OverseaStayItemWidget(item)
                     }
-                    if (index == stayList.lastIndex) Spacer(Modifier.width(15.dp))
+                    if (index == stayList.lastIndex) Spacer(Modifier.width(dp15))
                 }
             }
         }
@@ -123,7 +123,7 @@ fun HotelVerticalWidget(
             ) {
                 ImageButtonWidget(
                     title = text,
-                    borderWidth = 1.dp,
+                    borderWidth = dp1,
                     isLeftImage = false,
                     shape = dp30,
                     style = MaterialTheme.typography.labelSmall,

@@ -28,8 +28,8 @@ fun RightImageButtonWidget(
     innerPadding: PaddingValues = PaddingValues(horizontal = dp10, vertical = dp12),
     title: Any? = null,
     hasEndPadding: Boolean = true,
-    endPadding: Dp = 10.dp,
-    shape: Dp = 10.dp,
+    endPadding: Dp = dp10,
+    shape: Dp = dp10,
     borderWidth: Dp = 1.5.dp,
     containerColor: Color = Theme.colorScheme.white,
     contentColor: Color = Theme.colorScheme.darkGray,
@@ -59,7 +59,7 @@ fun RightImageButtonWidget(
                 if (it is String) {
                     TextWidget(
                         modifier = Modifier
-                            .padding(end = if (hasEndPadding) endPadding else 0.dp)
+                            .padding(end = if (hasEndPadding) endPadding else dp0)
                             .weight(1f, fill = false),
                         text = it,
                         color = contentColor,
@@ -69,7 +69,7 @@ fun RightImageButtonWidget(
                 } else {
                     TextWidget(
                         modifier = Modifier
-                            .padding(end = if (hasEndPadding) endPadding else 0.dp)
+                            .padding(end = if (hasEndPadding) endPadding else dp0)
                             .weight(1f, fill = false),
                         text = it as AnnotatedString,
                         color = contentColor,

@@ -47,14 +47,14 @@ fun StickyHeaderWidget(
                 for (i in 0..3) {
                     val item = categoryItem[i]
                     CategoryItemWidget(
-                        icon = item.icon,
+                        painter = painterResource(id = item.icon),
                         name = item.name,
                         height = CategoryItemHeight
                     )
                 }
                 Divider(
                     modifier = Modifier
-                        .width(1.dp)
+                        .width(dp1)
                         .height(dp20), color = Theme.colorScheme.gray
                 )
                 IconButton(modifier = Modifier
@@ -68,7 +68,7 @@ fun StickyHeaderWidget(
                 for (i in categoryItem.indices) {
                     val item = categoryItem[i]
                     CategoryItemWidget(
-                        icon = item.icon,
+                        painter = painterResource(id = item.icon),
                         name = item.name,
                         height = CategoryItemHeight
                     )

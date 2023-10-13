@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
+import com.example.goodchoice.utils.ServerConst
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class StayDetailViewModel : ViewModel() {
     //서버 조회 완료와 에러시 TopAppBar 가 다르기 때문에 두개를 만들어야 해서 하나로 통일하기 위함
     var stayItemTitle = ""
 
-    var payList : List<PayData> = emptyList()
+    var payList: List<PayData> = emptyList()
 
     var detailUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
 
@@ -230,23 +231,23 @@ class StayDetailViewModel : ViewModel() {
                 message = "양양 최상급 온천이 샘솟는 더 앤 리조트 & 스파는 자연에 둘러싸여 계절의 소리를 들으며 편안한 휴식을 즐길 수 있습니다\n" +
                         "또한 전 객실에 천연 온천수 공급 및 모든 시설이 자연 친화적이며 최첨단 건강 소재와 세련된 인테리어로 안락한 휴식이 가능한 호텔입니다",
                 service = arrayListOf(
-                    ServiceData(type = Const.MINIBAR, name = "미니바"),
-                    ServiceData(type = Const.WIFI, name = "와이파이"),
-                    ServiceData(type = Const.BATHROOM_SUPPLIES, name = "욕실용품"),
-                    ServiceData(type = Const.RESTAURANT, name = "레스토랑"),
-                    ServiceData(type = Const.TV, name = "TV"),
-                    ServiceData(type = Const.NO_SMOKING, name = "금연"),
-                    ServiceData(type = Const.AIR_CONDITIONER, name = "에어컨"),
-                    ServiceData(type = Const.REFRIGERATOR, name = "냉장고"),
-                    ServiceData(type = Const.SHOWER_ROOM, name = "객실샤워실"),
-                    ServiceData(type = Const.DRYER, name = "드라이기"),
-                    ServiceData(type = Const.CAFE, name = "카페"),
-                    ServiceData(type = Const.FREE_PARKING, name = "무료주차"),
-                    ServiceData(type = Const.PARKING_LOT, name = "주차장")
+                    ServiceData(type = ServerConst.MINIBAR, name = "미니바"),
+                    ServiceData(type = ServerConst.WIFI, name = "와이파이"),
+                    ServiceData(type = ServerConst.BATHROOM_SUPPLIES, name = "욕실용품"),
+                    ServiceData(type = ServerConst.RESTAURANT, name = "레스토랑"),
+                    ServiceData(type = ServerConst.TV, name = "TV"),
+                    ServiceData(type = ServerConst.NO_SMOKING, name = "금연"),
+                    ServiceData(type = ServerConst.AIR_CONDITIONER, name = "에어컨"),
+                    ServiceData(type = ServerConst.REFRIGERATOR, name = "냉장고"),
+                    ServiceData(type = ServerConst.SHOWER_ROOM, name = "객실샤워실"),
+                    ServiceData(type = ServerConst.DRYER, name = "드라이기"),
+                    ServiceData(type = ServerConst.CAFE, name = "카페"),
+                    ServiceData(type = ServerConst.FREE_PARKING, name = "무료주차"),
+                    ServiceData(type = ServerConst.PARKING_LOT, name = "주차장")
                 )
             )
         }
-        payList = data.payList?: emptyList()
+        payList = data.payList ?: emptyList()
         detailUiState.value = ConnectInfo.Available(data)
     }
 }

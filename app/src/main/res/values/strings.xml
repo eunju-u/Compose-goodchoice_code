@@ -124,6 +124,9 @@
     <string name="str_search_korea_area">지역, 지하철역, 숙소</string>
     <string name="str_search_oversea_area">여행지, 숙소</string>
     <string name="str_search_reisure_area">여행지, 액티비티, 티켓</string>
-    <string name="str_search_recommend">추천 검색어</string>
+    <string name="str_search_recommend_word">추천 검색어</string>
+    <string name="str_search_my_arround">내 주변에서 검색</string>
+    <string name="str_search_rank">여기어때 검색 순위</string>
+    <string name="str_search_recommend_area">추천 지역</string>
 
 </resources>

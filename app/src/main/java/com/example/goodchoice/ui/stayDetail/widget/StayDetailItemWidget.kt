@@ -21,6 +21,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.RoomItem
 import com.example.goodchoice.ui.components.CardWidget
+import com.example.goodchoice.ui.components.RowTwoWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil
 import com.example.goodchoice.utils.StringUtil
@@ -177,7 +178,7 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                 ) {
                     Column {
                         if (info.isNotEmpty()) {
-                            InfoWidget(
+                            RowTwoWidget(
                                 leftText = "객실정보",
                                 rightText = info,
                                 leftColor = Theme.colorScheme.gray,
@@ -186,7 +187,7 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                             )
                         }
                         if (addInfo.isNotEmpty()) {
-                            InfoWidget(
+                            RowTwoWidget(
                                 modifier = Modifier.padding(top = dp5),
                                 leftText = "추가정보",
                                 rightText = addInfo,
@@ -200,7 +201,6 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
             }
 
         }
-
     }
 }
 

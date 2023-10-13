@@ -25,8 +25,8 @@ fun LeftImageButtonWidget(
     innerPadding: PaddingValues = PaddingValues(horizontal = dp12, vertical = dp10),
     title: Any? = null,
     hasEndPadding: Boolean = true,
-    endPadding: Dp = 5.dp,
-    shape: Dp = 10.dp,
+    endPadding: Dp = dp5,
+    shape: Dp = dp10,
     borderWidth: Dp = 1.5.dp,
     containerColor: Color = Theme.colorScheme.white,
     contentColor: Color = Theme.colorScheme.darkGray,
@@ -57,7 +57,7 @@ fun LeftImageButtonWidget(
                 if (content != null) {
                     Box(
                         modifier = Modifier
-                            .padding(end = if (hasEndPadding) endPadding else 0.dp),
+                            .padding(end = if (hasEndPadding) endPadding else dp0),
                         contentAlignment = Alignment.Center
                     ) { content() }
                 }

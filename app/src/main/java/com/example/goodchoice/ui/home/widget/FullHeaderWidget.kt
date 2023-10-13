@@ -13,15 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.api.data.CategoryItem
-import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.components.CategoryItemWidget
-import com.example.goodchoice.ui.theme.CategoryItemHeight
+import com.example.goodchoice.ui.theme.*
 
 @SuppressLint("RememberReturnType")
 @Composable
@@ -67,20 +67,20 @@ fun FullHeaderWidget(
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(max = (fullHeight * ratio).dp)
-                        .padding(10.dp),
+                        .padding(dp10),
                     columns = GridCells.Fixed(count = row),
-                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                    verticalArrangement = Arrangement.spacedBy(dp2),
                 ) {
                     items(items = categoryItem) { item ->
                         CategoryItemWidget(
-                            icon = item.icon,
+                            painter = painterResource(id = item.icon),
                             name = item.name,
                             height = CategoryItemHeight
                         )
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(dp15))
 
             RoundCloseWidget(modifier = Modifier.clickable { onClickClose() })
         }

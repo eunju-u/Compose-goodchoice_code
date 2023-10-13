@@ -49,7 +49,7 @@ fun KoreaStayItemWidget(
 
     //해상도에 따라 호텔 item view 가로 조정
     LaunchedEffect(key1 = screenWidth) {
-        itemWidth = if (screenWidth < 400.dp) {
+        itemWidth = if (screenWidth < dp400) {
             width * fontLargeSizeRatio
         } else {
             width
@@ -61,7 +61,7 @@ fun KoreaStayItemWidget(
             .width(itemWidth.dp)
             .height(IntrinsicSize.Min)
             .border(
-                width = 1.dp, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(dp10)
+                width = dp1, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(dp10)
             )
             .clip(RoundedCornerShape(dp10))
             .clickable {
