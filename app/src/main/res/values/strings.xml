@@ -73,7 +73,8 @@
     <string name="str_no_alarm">알림이 없어요.</string>
 
     <!--  달력  -->
-    <string name="str_select_date">날짜 선택하기</string>
+    <string name="str_select"><xliff:g id="select">%s</xliff:g> 선택하기</string>
+    <string name="str_date">날짜</string>
     <string name="str_monday">월</string>
     <string name="str_tuesday">화</string>
     <string name="str_wednesday">수</string>

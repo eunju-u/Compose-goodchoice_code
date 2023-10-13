@@ -218,7 +218,8 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
                             for (i in topMenuList.indices) {
                                 //텍스트, 이미지 사이즈 확인 필요
                                 val item = topMenuList[i]
-                                CategoryItemWidget(icon = item.icon, name = item.name)
+                                CategoryItemWidget(
+                                    painter = painterResource(id = item.icon), name = item.name)
                             }
                         }
                     }

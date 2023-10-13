@@ -47,8 +47,13 @@ private fun CalendarContent(
         backgroundColor = Theme.colorScheme.white,
         contentColor = Theme.colorScheme.darkGray,
         topBar = {
+            val date = stringResource(id = R.string.str_date)
+            val person = stringResource(id = R.string.str_person)
             TopAppBarWidget(
-                title = stringResource(id = R.string.str_select_date),
+                title = stringResource(
+                    id = R.string.str_select,
+                    if (type.value == CalendarType.CALENDAR) date else person
+                ),
                 onFinish = { onFinish() },
                 isCloseButton = true
             )
