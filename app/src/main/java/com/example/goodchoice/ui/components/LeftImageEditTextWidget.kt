@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
@@ -52,119 +52,128 @@ fun LeftImageEditTextWidget(
     borderColor: Color = Color.Transparent,
     style: TextStyle = MaterialTheme.typography.labelSmall,
     @DrawableRes vectorImageId: Int? = null,
+    keyboardController: SoftwareKeyboardController? = null,
+    isVisibleShadow: Boolean = false,
     focusChanged: (Boolean) -> Unit = {},
     onInputChanged: (String) -> Unit = {},
     isShowDialog: (Boolean) -> Unit = {},
     content: @Composable @UiComposable (() -> Unit)? = null
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
     var textFieldState by rememberSaveable(stateSaver = TextFieldValue.Saver) {
         mutableStateOf(
             TextFieldValue()
         )
     }
+    val pureGrayColor = Theme.colorScheme.pureGray
     val grayColor = Theme.colorScheme.gray
     val darkColor = Theme.colorScheme.darkGray
-    var iconColor by remember { mutableStateOf(grayColor) }
+    var iconColor by remember { mutableStateOf(pureGrayColor) }
     var isShowClose by remember { mutableStateOf(false) }
     val imageVector = ImageVector.vectorResource(id = R.drawable.ic_circle_close)
 
-    Surface(
-        modifier = modifier
-            .wrapContentHeight()
-            .padding(outerPadding)
-            .background(
-                color = containerColor, shape = RoundedCornerShape(shape)
-            )
-            .border(shape = RoundedCornerShape(shape), width = borderWidth, color = borderColor)
-            .clip(shape = RoundedCornerShape(shape))
-            .padding(innerPadding)
-            .onFocusChanged {
-                focusChanged(it.hasFocus)
-                //포커스가 가게 되면 아이콘 색상이 변경됨
-                iconColor = if (it.hasFocus) darkColor else grayColor
-                isShowClose = it.hasFocus
-                if (!it.hasFocus) {
-                    keyboardController?.hide()
-                }
-            },
-        color = containerColor
+    CardWidget(
+        modifier = modifier,
+        innerPadding = outerPadding,
+        isVisibleShadow = isVisibleShadow,
+        shadowOffsetY = dp8,
+        onItemClick = {}
     ) {
-        //** 가장자리에 아이콘 제외하고 나머지 부분 Text 로 채우기
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            if (vectorImageId != null) {
-                Icon(
-                    modifier = Modifier.size(24.dp, 24.dp),
-                    painter = painterResource(id = vectorImageId),
-                    tint = iconColor,
-                    contentDescription = null
+        Surface(
+            modifier = modifier
+                .wrapContentHeight()
+                .background(
+                    color = containerColor, shape = RoundedCornerShape(shape)
                 )
-                Spacer(Modifier.width(8.dp))
-            }
-            if (content != null) {
-                Box(
-                    modifier = Modifier
-                        .padding(end = if (hasEndPadding) endPadding else dp0),
-                    contentAlignment = Alignment.Center
-                ) { content() }
-            }
-            Row(
-                modifier = Modifier.weight(1f)
-            ) {
-                BasicTextField(
-                    value = textFieldState,
-                    onValueChange = {
-                        textFieldState = it
-                        onInputChanged(textFieldState.text)
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = ImeAction.Go
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onGo = {
-                            // 두글자 미만시 다이얼로그 노출
-                            if (textFieldState.text.length < 2) {
-                                isShowDialog(true)
-                            } else {
-                                onInputChanged(textFieldState.text)
-                                keyboardController?.hide()
-                            }
-                        }
-                    ),
-                    textStyle = style.copy(color = Theme.colorScheme.darkGray),
-                    cursorBrush = SolidColor(LocalContentColor.current),
-                    decorationBox = { innerTextField ->
-                        if (hint.isNotEmpty() && textFieldState.text.isEmpty()) {
-                            Text(
-                                text = hint,
-                                style = style,
-                                color = Theme.colorScheme.gray
-                            )
-                        }
-                        innerTextField()
+                .border(shape = RoundedCornerShape(shape), width = borderWidth, color = borderColor)
+                .clip(shape = RoundedCornerShape(shape))
+                .padding(innerPadding)
+                .onFocusChanged {
+                    focusChanged(it.hasFocus)
+                    //포커스가 가게 되면 아이콘 색상이 변경됨
+                    iconColor = if (it.hasFocus) darkColor else grayColor
+                    isShowClose = it.hasFocus
+                    if (!it.hasFocus) {
+                        keyboardController?.hide()
                     }
-                )
-            }
-
-            if (isShowClose) {
-                Icon(
-                    modifier = Modifier
-                        .width(dp20)
-                        .height(dp20)
-                        .clickable {
-                            //키보드 내리기
-                            keyboardController?.hide()
-                            //포커스 강제 해제하기
-                            focusManager.clearFocus()
+                },
+            color = containerColor
+        ) {
+            //** 가장자리에 아이콘 제외하고 나머지 부분 Text 로 채우기
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                if (vectorImageId != null) {
+                    Icon(
+                        modifier = Modifier.size(24.dp, 24.dp),
+                        painter = painterResource(id = vectorImageId),
+                        tint = iconColor,
+                        contentDescription = null
+                    )
+                    Spacer(Modifier.width(8.dp))
+                }
+                if (content != null) {
+                    Box(
+                        modifier = Modifier
+                            .padding(end = if (hasEndPadding) endPadding else dp0),
+                        contentAlignment = Alignment.Center
+                    ) { content() }
+                }
+                Row(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    BasicTextField(
+                        value = textFieldState,
+                        onValueChange = {
+                            textFieldState = it
+                            onInputChanged(textFieldState.text)
                         },
-                    imageVector = imageVector,
-                    contentDescription = null,
-                    tint = Theme.colorScheme.gray
-                )
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            imeAction = ImeAction.Go
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onGo = {
+                                // 두글자 미만시 다이얼로그 노출
+                                if (textFieldState.text.length < 2) {
+                                    isShowDialog(true)
+                                } else {
+                                    onInputChanged(textFieldState.text)
+                                    keyboardController?.hide()
+                                }
+                            }
+                        ),
+                        textStyle = style.copy(color = Theme.colorScheme.darkGray),
+                        cursorBrush = SolidColor(LocalContentColor.current),
+                        decorationBox = { innerTextField ->
+                            if (hint.isNotEmpty() && textFieldState.text.isEmpty()) {
+                                Text(
+                                    text = hint,
+                                    style = style,
+                                    color = Theme.colorScheme.gray
+                                )
+                            }
+                            innerTextField()
+                        }
+                    )
+                }
+
+                if (isShowClose) {
+                    Icon(
+                        modifier = Modifier
+                            .width(dp20)
+                            .height(dp20)
+                            .clickable {
+                                //키보드 내리기
+                                keyboardController?.hide()
+                                //포커스 강제 해제하기
+                                focusManager.clearFocus()
+                            },
+                        imageVector = imageVector,
+                        contentDescription = null,
+                        tint = Theme.colorScheme.gray
+                    )
+                }
             }
         }
     }

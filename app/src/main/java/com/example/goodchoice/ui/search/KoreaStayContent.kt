@@ -69,6 +69,7 @@ fun KoreaStayContent(
                     contentColor = Theme.colorScheme.darkGray,
                     shape = dp10,
                     style = MaterialTheme.typography.labelLarge,
+                    isCenterHorizontalArrangement = false,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     innerPadding = innerPadding,
@@ -91,6 +92,7 @@ fun KoreaStayContent(
                     contentColor = Theme.colorScheme.darkGray,
                     shape = dp10,
                     style = MaterialTheme.typography.labelLarge,
+                    isCenterHorizontalArrangement = false,
                     innerPadding = innerPadding,
                     content = {
                         Image(

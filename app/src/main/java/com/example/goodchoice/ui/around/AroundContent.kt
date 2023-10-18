@@ -282,12 +282,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                         //TODO eunju 네트워크 연결 안됐을 때 노출되는 화면
                     } else {
                         when (homeUiState.value) {
-                            is ConnectInfo.Available -> {
-                                val data =
-                                    (homeUiState.value as ConnectInfo.Available).data as List<StayItem>
-
-
-                            }
+                            is ConnectInfo.Available -> {}
                             is ConnectInfo.Error -> {}
                             else -> {}
                         }

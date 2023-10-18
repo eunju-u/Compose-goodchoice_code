@@ -6,24 +6,24 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.FilterItem
-import com.example.goodchoice.ui.components.AlertDialogWidget
-import com.example.goodchoice.ui.components.LeftImageEditTextWidget
-import com.example.goodchoice.ui.components.RowTwoWidget
-import com.example.goodchoice.ui.components.TopAppBarWidget
+import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.search.detailSearch.widget.SearchResultWidget
 import com.example.goodchoice.ui.theme.*
-import java.util.regex.Pattern
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DetailSearchContent(
     viewModel: DetailSearchViewModel,
@@ -34,39 +34,60 @@ fun DetailSearchContent(
     var isShowDialog by remember { mutableStateOf(false) }
     var isShowResult by remember { mutableStateOf(false) }
     var keyWord by remember { mutableStateOf("") }
+    // 키보드 컨트롤
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val scrollState = rememberLazyListState()
 
-    Column {
+    // 키보드 떠있는 상태에서 스크롤 할 경우 자판기가 내려가야 하므로 아래 내용 추가.
+    // lazyColumn 에 detectDragGestures , focus 등등 으로 확인 했지만 되지 않습니다.
+    val isScrolling by remember {
+        derivedStateOf {
+            scrollState.isScrollInProgress
+        }
+    }
+    LaunchedEffect(key1 = isScrolling) {
+        if (isScrolling) {
+            keyboardController?.hide()
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Theme.colorScheme.white)
+    ) {
         TopAppBarWidget(
             title = stringResource(id = R.string.navi_search),
             isCloseButton = true,
             onFinish = onFinish
         )
+
+        LeftImageEditTextWidget(
+            modifier = Modifier.fillMaxWidth(),
+            outerPadding = PaddingValues(top = dp15, start = dp20, end = dp20, bottom = dp15),
+            containerColor = Theme.colorScheme.pureGray,
+            shape = dp10,
+            style = MaterialTheme.typography.labelMedium,
+            hint = stringResource(id = R.string.str_search_area_stay),
+            vectorImageId = R.drawable.ic_nav_search,
+            keyboardController = keyboardController,
+            isVisibleShadow = true, //TODO eunju : index == 0 인 상태에서 스크롤 내릴 경우만 ture 여야 한다.
+            isShowDialog = {
+                isShowDialog = it
+            },
+            onInputChanged = {
+                keyWord = it
+                viewModel.requestResultSearchData(it)
+            },
+            focusChanged = {
+                isShowResult = it
+            }
+        )
+
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .background(color = Theme.colorScheme.white)
+                .fillMaxSize(), state = scrollState
         ) {
-            item {
-                LeftImageEditTextWidget(
-                    modifier = Modifier.fillMaxWidth(),
-                    outerPadding = PaddingValues(top = dp15, start = dp20, end = dp20),
-                    containerColor = Theme.colorScheme.pureGray,
-                    shape = dp10,
-                    style = MaterialTheme.typography.labelMedium,
-                    hint = stringResource(id = R.string.str_search_area_stay),
-                    vectorImageId = R.drawable.ic_nav_search,
-                    isShowDialog = {
-                        isShowDialog = it
-                    },
-                    onInputChanged = {
-                        keyWord = it
-                        viewModel.requestResultSearchData(it)
-                    },
-                    focusChanged = {
-                        isShowResult = it
-                    }
-                )
-            }
             if (uiState is ConnectInfo.Available) {
                 if (!isShowResult) {
                     val list = (uiState as ConnectInfo.Available).data as List<FilterItem>
