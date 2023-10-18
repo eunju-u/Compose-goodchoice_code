@@ -23,7 +23,7 @@ fun OverSeaWidget(item: OverSeaCityItem) {
     val painter =
         rememberAsyncImagePainter(
             model = item.cityImage,
-            error = painterResource(id = ConvertUtil.convertOverSeaImage(item.id))
+            error = painterResource(id = ConvertUtil.convertOverSeaImage(item.code ?: ""))
         )
 
     Column(
@@ -32,7 +32,8 @@ fun OverSeaWidget(item: OverSeaCityItem) {
     ) {
         RoundImageWidget(
             imageModifier = Modifier
-                .width(dp50).height(dp50), painter = painter
+                .width(dp50)
+                .height(dp50), painter = painter
         )
         TextWidget(
             modifier = Modifier
@@ -48,5 +49,5 @@ fun OverSeaWidget(item: OverSeaCityItem) {
 @Preview
 @Composable
 fun PreviewOverSeaWidget() {
-    OverSeaWidget(OverSeaCityItem(id = 11000, cityName = "오사카"))
+    OverSeaWidget(OverSeaCityItem(cityName = "오사카"))
 }

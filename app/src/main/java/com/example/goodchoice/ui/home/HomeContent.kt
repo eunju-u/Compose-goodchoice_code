@@ -26,6 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.components.TextWidget
@@ -146,7 +147,9 @@ fun HomeContent(
                 if (!viewModel.firstSplash) {
                     if (categoryList.isNotEmpty()) {
                         //나라 타입
-                        itemsIndexed(items = categoryList) { index, item ->
+                        itemsIndexed(
+                            items = categoryList,
+                            key = { index, item -> item.countryType ?: "" }) { index, item ->
                             val categoryItemList = item.categoryList
                             if (item.countryType == Const.OVERSEA) {
                                 Row(
@@ -188,11 +191,15 @@ fun HomeContent(
                                     verticalArrangement = Arrangement.spacedBy(dp2),
                                     userScrollEnabled = false
                                 ) {
-                                    itemsIndexed(items = categoryItemList) { index, item ->
+                                    itemsIndexed(items = categoryItemList,
+                                        key = { index, item -> item.id ?: "" }) { index, item ->
                                         CategoryItemWidget(
-                                            painter = painterResource(id = item.icon),
-                                            name = item.name,
-                                            height = CategoryItemHeight
+                                            painter = painterResource(
+                                                id = item.icon ?: R.drawable.bg_white
+                                            ),
+                                            name = item.name ?: "",
+                                            height = CategoryItemHeight,
+                                            onItemClick = {}
                                         )
                                     }
                                 }
@@ -251,7 +258,9 @@ fun HomeContent(
                         }
                     }
                     if (stayList.isNotEmpty()) {
-                        items(items = stayList) { stayData ->
+                        items(
+                            items = stayList,
+                            key = { item: StayData -> item.type ?: "" }) { stayData ->
                             HotelVerticalWidget(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -289,7 +298,9 @@ fun HomeContent(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(dp10)
                                 ) {
-                                    itemsIndexed(items = overSeaCityList) { index, item ->
+                                    itemsIndexed(
+                                        items = overSeaCityList,
+                                        key = { index, item -> item.id ?: "" }) { index, item ->
                                         if (index == 0) Spacer(Modifier.width(dp15))
                                         Column(
                                             modifier = Modifier

@@ -47,8 +47,8 @@ fun StickyHeaderWidget(
                 for (i in 0..3) {
                     val item = categoryItem[i]
                     CategoryItemWidget(
-                        painter = painterResource(id = item.icon),
-                        name = item.name,
+                        painter = painterResource(id = item.icon ?: R.drawable.bg_white),
+                        name = item.name ?: "",
                         height = CategoryItemHeight
                     )
                 }
@@ -68,8 +68,8 @@ fun StickyHeaderWidget(
                 for (i in categoryItem.indices) {
                     val item = categoryItem[i]
                     CategoryItemWidget(
-                        painter = painterResource(id = item.icon),
-                        name = item.name,
+                        painter = painterResource(id = item.icon ?: R.drawable.bg_white),
+                        name = item.name ?: "",
                         height = CategoryItemHeight
                     )
                 }
@@ -82,6 +82,6 @@ fun StickyHeaderWidget(
 @Composable
 fun PreviewStickyHeaderWidget() {
     StickyHeaderWidget(
-        categoryItem = listOf(CategoryItem(5, "캠핑*글램핑", R.drawable.ic_airplane))
+        categoryItem = listOf(CategoryItem("", "캠핑*글램핑", R.drawable.ic_airplane))
     ) {}
 }

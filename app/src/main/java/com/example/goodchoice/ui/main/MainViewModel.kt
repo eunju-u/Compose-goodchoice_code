@@ -117,27 +117,98 @@ class MainViewModel : ViewModel() {
                 categoryList = listOf(
                     CategoryData(
                         countryType = Const.KOREA, categoryList = listOf(
-                            CategoryItem(0, Const.C_PREMIUM_BLACK, R.drawable.img_premium),
-                            CategoryItem(1, Const.C_MOTEL, R.drawable.img_bed),
-                            CategoryItem(2, Const.C_HOTEL_AND_RESORT, R.drawable.img_hotel),
-                            CategoryItem(3, Const.C_PENSION_AND_PULL_VILLA, R.drawable.img_pull),
-                            CategoryItem(4, Const.C_HOUSE_AND_VILLA, R.drawable.img_house),
-                            CategoryItem(5, Const.C_CAMPING_AND_GLAMPING, R.drawable.img_camping),
-                            CategoryItem(6, Const.C_GUESTHOUSE, R.drawable.img_guest_house),
-                            CategoryItem(7, Const.C_SPACE_RENTAL, R.drawable.img_hotel_inside),
-                            CategoryItem(8, Const.C_KOREA_AIRPLANE, R.drawable.img_airplane),
-                            CategoryItem(9, Const.C_RENTAL_CAR, R.drawable.img_car),
-                            CategoryItem(10, Const.C_LEISURE_AND_TICKET, R.drawable.img_cablecar),
-                            CategoryItem(11, Const.C_GOOD_FOOD, R.drawable.img_food)
+                            CategoryItem(
+                                id = "c_1_1",
+                                name = "프리미엄블랙",
+                                icon = R.drawable.img_premium,
+                                code = Const.C_PREMIUM_BLACK
+                            ),
+                            CategoryItem(
+                                id = "c_1_2",
+                                name = "모텔",
+                                icon = R.drawable.img_bed,
+                                code = Const.C_MOTEL
+                            ),
+                            CategoryItem(
+                                id = "c_1_3",
+                                name = "호텔*리조트",
+                                icon = R.drawable.img_hotel,
+                                code = Const.C_HOTEL_AND_RESORT
+                            ),
+                            CategoryItem(
+                                id = "c_1_4",
+                                name = "펜션*풀빌라",
+                                icon = R.drawable.img_pull,
+                                code = Const.C_PENSION_AND_PULL_VILLA
+                            ),
+                            CategoryItem(
+                                id = "c_1_5",
+                                name = "홈&빌라",
+                                icon = R.drawable.img_house,
+                                code = Const.C_HOUSE_AND_VILLA
+                            ),
+                            CategoryItem(
+                                id = "c_1_6",
+                                name = "캠핑*글램핑",
+                                R.drawable.img_camping,
+                                code = Const.C_CAMPING_AND_GLAMPING
+                            ),
+                            CategoryItem(
+                                id = "c_1_7",
+                                name = "게하*한옥",
+                                icon = R.drawable.img_guest_house,
+                                code = Const.C_GUESTHOUSE
+                            ),
+                            CategoryItem(
+                                id = "c_1_8",
+                                name = "공간대여",
+                                icon = R.drawable.img_hotel_inside,
+                                code = Const.C_SPACE_RENTAL
+                            ),
+                            CategoryItem(
+                                id = "c_1_9",
+                                name = "국내 항공",
+                                icon = R.drawable.img_airplane,
+                                code = Const.C_KOREA_AIRPLANE
+                            ),
+                            CategoryItem(
+                                id = "c_1_10",
+                                name = "렌터카",
+                                icon = R.drawable.img_car,
+                                code = Const.C_RENTAL_CAR
+                            ),
+                            CategoryItem(
+                                id = "c_1_11",
+                                name = "레저*티켓",
+                                icon = R.drawable.img_cablecar,
+                                code = Const.C_LEISURE_AND_TICKET
+                            ),
+                            CategoryItem(
+                                id = "c_1_12",
+                                name = "맛집",
+                                icon = R.drawable.img_food,
+                                code = Const.C_GOOD_FOOD
+                            )
                         )
                     ), CategoryData(
                         countryType = Const.OVERSEA, categoryList = listOf(
                             CategoryItem(
-                                0, Const.C_OVERSEA_AIRPLANE, R.drawable.img_oversea_airplane
+                                id = "c_2_1",
+                                name = "해외 항공",
+                                icon = R.drawable.img_oversea_airplane,
+                                code = Const.C_OVERSEA_AIRPLANE
                             ),
-                            CategoryItem(1, Const.C_OVERSEA_STAY, R.drawable.img_oversea_house),
                             CategoryItem(
-                                2, Const.C_OVERSEA_AIRPLANE_AND_STAY, R.drawable.img_oversea
+                                id = "c_2_2",
+                                name = "해외 숙소",
+                                icon = R.drawable.img_oversea_house,
+                                code = Const.C_OVERSEA_STAY
+                            ),
+                            CategoryItem(
+                                id = "c_2_3",
+                                name = "항공+숙소",
+                                icon = R.drawable.img_oversea,
+                                code = Const.C_OVERSEA_AIRPLANE_AND_STAY
                             )
                         )
                     )
@@ -318,12 +389,12 @@ class MainViewModel : ViewModel() {
                         )
                     )
                 ), overSeaCityList = listOf(
-                    OverSeaCityItem(id = 11000, cityName = "오사카"),
-                    OverSeaCityItem(id = 11001, cityName = "후쿠오카"),
-                    OverSeaCityItem(id = 11002, cityName = "도쿄"),
-                    OverSeaCityItem(id = 11003, cityName = "다낭"),
-                    OverSeaCityItem(id = 11004, cityName = "교토"),
-                    OverSeaCityItem(id = 11005, cityName = "싱가포르")
+                    OverSeaCityItem(id = "o_1_1", cityName = "오사카", code = Const.OSAKA),
+                    OverSeaCityItem(id = "o_1_2", cityName = "후쿠오카", code = Const.FUKUOKA),
+                    OverSeaCityItem(id = "o_1_3", cityName = "도쿄", code = Const.TOKYO),
+                    OverSeaCityItem(id = "o_1_4", cityName = "다낭", code = Const.DANANG),
+                    OverSeaCityItem(id = "o_1_5", cityName = "교토", code = Const.KYOTO),
+                    OverSeaCityItem(id = "o_1_6", cityName = "싱가포르", code = Const.SINGAPORE)
                 ),
                 overseaSpecialList = listOf(
                     OverseaSpecialItem(
@@ -585,10 +656,10 @@ class MainViewModel : ViewModel() {
 
         val test = MyInfoData(
             topMenuList = listOf(
-                CategoryItem(id = 0, name = "최근 본 상품", icon = R.drawable.ic_myinfo_recent),
-                CategoryItem(id = 1, name = "할인·혜택", icon = R.drawable.ic_myinfo_discount),
-                CategoryItem(id = 2, name = "내 리뷰", icon = R.drawable.ic_myinfo_review),
-                CategoryItem(id = 3, name = "알림함", icon = R.drawable.ic_myinfo_noti)
+                CategoryItem(id = "m_1", name = "최근 본 상품", icon = R.drawable.ic_myinfo_recent),
+                CategoryItem(id = "m_2", name = "할인·혜택", icon = R.drawable.ic_myinfo_discount),
+                CategoryItem(id = "m_3", name = "내 리뷰", icon = R.drawable.ic_myinfo_review),
+                CategoryItem(id = "m_4", name = "알림함", icon = R.drawable.ic_myinfo_noti)
             ), menuList = listOf(
                 MyMenuData(
                     id = 0, title = "예약내역", list = listOf(

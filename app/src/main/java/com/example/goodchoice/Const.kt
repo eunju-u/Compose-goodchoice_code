@@ -7,22 +7,22 @@ object Const {
     const val LIKE = "Like"
     const val MY_INFO = "MyInfo"
 
-    //카테고리 Text
-    const val C_PREMIUM_BLACK = "프리미엄블랙"
-    const val C_MOTEL = "모텔"
-    const val C_HOTEL_AND_RESORT = "호텔*리조트"
-    const val C_PENSION_AND_PULL_VILLA = "펜션*풀빌라"
-    const val C_HOUSE_AND_VILLA = "홈&빌라"
-    const val C_CAMPING_AND_GLAMPING = "캠핑*글램핑"
-    const val C_GUESTHOUSE = "게하*한옥"
-    const val C_SPACE_RENTAL = "공간대여"
-    const val C_KOREA_AIRPLANE = "국내 항공"
-    const val C_RENTAL_CAR = "렌터카"
-    const val C_LEISURE_AND_TICKET = "레저*티켓"
-    const val C_GOOD_FOOD = "맛집"
-    const val C_OVERSEA_AIRPLANE = "해외 항공"
-    const val C_OVERSEA_STAY = "해외 숙소"
-    const val C_OVERSEA_AIRPLANE_AND_STAY = "항공+숙소"
+    //카테고리 code
+    const val C_PREMIUM_BLACK = "premium_black"
+    const val C_MOTEL = "motel"
+    const val C_HOTEL_AND_RESORT = "hotel_and_resort"
+    const val C_PENSION_AND_PULL_VILLA = "pension_and_pull_villa"
+    const val C_HOUSE_AND_VILLA = "house_and_villa"
+    const val C_CAMPING_AND_GLAMPING = "camping_and_glamping"
+    const val C_GUESTHOUSE = "guesthouse"
+    const val C_SPACE_RENTAL = "space_rental"
+    const val C_KOREA_AIRPLANE = "korea_airplane"
+    const val C_RENTAL_CAR = "rental_car"
+    const val C_LEISURE_AND_TICKET = "leisure_and_ticket"
+    const val C_GOOD_FOOD = "good_food"
+    const val C_OVERSEA_AIRPLANE = "oversea_airplane"
+    const val C_OVERSEA_STAY = "oversea_stay"
+    const val C_OVERSEA_AIRPLANE_AND_STAY = "oversea_airplane_and_stay"
 
     // 나라 타입
     const val KOREA = "Korea" //국내여행
@@ -36,13 +36,13 @@ object Const {
     const val HOT_HOTEL = 124 //이번 주 HOT 인기 펜션
     const val OVERSEA_SPECIAL = 125 //해외 항공 + 숙소 이번주 특가
 
-    //해외 도시
-    const val OSAKA = 11000
-    const val FUKUOKA = 11001
-    const val TOKYO = 11002
-    const val DANANG = 11003
-    const val KYOTO = 11004
-    const val SINGAPORE = 11005
+    //해외 도시 code
+    const val OSAKA = "osaka"
+    const val FUKUOKA = "fukuoka"
+    const val TOKYO = "tokyo"
+    const val DANANG = "danang"
+    const val KYOTO = "kyoto"
+    const val SINGAPORE = "singapore"
 
     //로그인 방법
     const val KAKAO = "KAKAO"

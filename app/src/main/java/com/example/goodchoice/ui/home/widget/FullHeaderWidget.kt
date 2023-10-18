@@ -73,8 +73,8 @@ fun FullHeaderWidget(
                 ) {
                     items(items = categoryItem) { item ->
                         CategoryItemWidget(
-                            painter = painterResource(id = item.icon),
-                            name = item.name,
+                            painter = painterResource(id = item.icon ?: R.drawable.bg_white),
+                            name = item.name ?: "",
                             height = CategoryItemHeight
                         )
                     }
@@ -92,8 +92,8 @@ fun FullHeaderWidget(
 fun PreviewFullHeaderWidget() {
     FullHeaderWidget(
         listOf(
-            CategoryItem(0, "프리미엄블랙", R.drawable.ic_airplane),
-            CategoryItem(1, "모텔", R.drawable.ic_airplane)
+            CategoryItem("", "프리미엄블랙", R.drawable.ic_airplane),
+            CategoryItem("", "모텔", R.drawable.ic_airplane)
         )
     ) {}
 }

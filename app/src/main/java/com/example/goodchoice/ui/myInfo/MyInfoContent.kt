@@ -79,7 +79,7 @@ import com.example.goodchoice.ui.theme.*
 * */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
+fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
     //액티비티 호출
     val context = LocalContext.current
@@ -87,8 +87,8 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
 
     //가져올때
     val myInfoData = viewModel.myInfoData.collectAsStateWithLifecycle().value
-    val topMenuList : List<CategoryItem> = myInfoData.topMenuList ?: emptyList()
-    val menuList : List<MyMenuData> = myInfoData.menuList ?: emptyList()
+    val topMenuList: List<CategoryItem> = myInfoData.topMenuList ?: emptyList()
+    val menuList: List<MyMenuData> = myInfoData.menuList ?: emptyList()
 
     val lazyColumnListState = rememberLazyListState()
 
@@ -101,11 +101,11 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
     )
     var textStyle by remember { mutableStateOf(style) }
 
-    Box(modifier = Modifier){
+    Box(modifier = Modifier) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             state = lazyColumnListState
-        ){
+        ) {
             item {
                 /** 내 정보 > 상단 내 정보 (임시) */
                 Column(
@@ -114,11 +114,12 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
 //                        .background(Theme.colorScheme.pureGray)
                 ) {
                     /** 이미지 및 회원가입/로그인 버튼 */
-                    Row(modifier = Modifier
-                        .height(IntrinsicSize.Min)
-                        .padding(dp5)
-                        .fillMaxWidth()
-                        .background(Theme.colorScheme.white),
+                    Row(
+                        modifier = Modifier
+                            .height(IntrinsicSize.Min)
+                            .padding(dp5)
+                            .fillMaxWidth()
+                            .background(Theme.colorScheme.white),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Image(
@@ -129,7 +130,7 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
                             contentDescription = "내 정보"
                         )
 
-                        SpaceBetweenRowWidget (
+                        SpaceBetweenRowWidget(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(dp10)
@@ -145,7 +146,7 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
                                 Column(
                                     modifier = Modifier
                                         .weight(1f),
-                                ){
+                                ) {
                                     Text(
                                         textAlign = TextAlign.Start,
                                         text = "회원가입/로그인",
@@ -158,7 +159,8 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
                                         textAlign = TextAlign.Start,
                                         color = Theme.colorScheme.blue,
                                         text = "여기 어때 회원가입하고 엘리트 혜택 받으세요!",
-                                        style = MaterialTheme.typography.bodySmall)
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
                                 }
                                 Image(
                                     colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
@@ -171,47 +173,49 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
 
                     /** 포인트/쿠폰 버튼 */
 //                    Surface(shape = MaterialTheme.shapes.medium, elevation = 10.dp) {
-                        Row(modifier = Modifier
+                    Row(
+                        modifier = Modifier
                             .fillMaxWidth()
                             .height(IntrinsicSize.Min)
                             .background(Theme.colorScheme.pureBlue),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
 
-                            ButtonWidget(
-                                modifier = Modifier.width(dp150),
-                                shape = 0.dp,
+                        ButtonWidget(
+                            modifier = Modifier.width(dp150),
+                            shape = 0.dp,
 //                                borderColor = Theme.colorScheme.gray,
-                                onItemClick = { /*TODO*/ },
-                                content = {Text(text = "포인트")}
-                            )
+                            onItemClick = { /*TODO*/ },
+                            content = { Text(text = "포인트") }
+                        )
 
-                            Divider(
-                                modifier = Modifier
-                                    .width(1.dp)
-                                    .height(dp40),
-                                color = Theme.colorScheme.gray
-                            )
+                        Divider(
+                            modifier = Modifier
+                                .width(1.dp)
+                                .height(dp40),
+                            color = Theme.colorScheme.gray
+                        )
 
-                            ButtonWidget(
-                                modifier = Modifier.width(dp150),
-                                shape = 0.dp,
+                        ButtonWidget(
+                            modifier = Modifier.width(dp150),
+                            shape = 0.dp,
 //                                borderColor = Theme.colorScheme.gray,
-                                onItemClick = { /*TODO*/ },
-                                content = {Text(text = "쿠폰")}
-                            )
-                        }
+                            onItemClick = { /*TODO*/ },
+                            content = { Text(text = "쿠폰") }
+                        )
+                    }
 
 //                    }
 
                     /** 카테고리 (최근 본 상품, 할인*혜택, 내 리뷰, 알림함) 버튼 */
                     // 카테고리 뷰
-                    if (topMenuList.isNotEmpty()){
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .selectableGroup()
-                            .padding(top = dp10, bottom = dp10, start = dp30, end = dp30),
+                    if (topMenuList.isNotEmpty()) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .selectableGroup()
+                                .padding(top = dp10, bottom = dp10, start = dp30, end = dp30),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
@@ -219,7 +223,10 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
                                 //텍스트, 이미지 사이즈 확인 필요
                                 val item = topMenuList[i]
                                 CategoryItemWidget(
-                                    painter = painterResource(id = item.icon), name = item.name)
+                                    painter = painterResource(
+                                        id = item.icon ?: R.drawable.bg_white
+                                    ), name = item.name ?: ""
+                                )
                             }
                         }
                     }
@@ -227,16 +234,17 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
             }
 
 
-            if (menuList.isNotEmpty()){
+            if (menuList.isNotEmpty()) {
                 /** 예약내역*/
-                items(menuList){
+                items(menuList) {
                     Column(
                         modifier = Modifier.padding(dp5)
                     ) {
-                        if (it.title != ""){
+                        if (it.title != "") {
                             TextWidget(
                                 text = it.title,
-                                style = MaterialTheme.typography.titleLarge)
+                                style = MaterialTheme.typography.titleLarge
+                            )
                         }
 
 //                        if (it.path != ""){
@@ -247,8 +255,8 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
 //                            )
 //                        }
 
-                        if(it.list!!.isNotEmpty()){
-                            for (listItem in it.list){
+                        if (it.list!!.isNotEmpty()) {
+                            for (listItem in it.list) {
                                 MenuItemWidget(menuItem = listItem)
                             }
                         }
@@ -257,7 +265,6 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel){
             }
         }
     }
-
 
 
 }

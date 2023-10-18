@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 object ConvertUtil {
-    fun convertOverSeaImage(cityId: Int): Int {
+    fun convertOverSeaImage(cityId: String): Int {
         return when (cityId) {
             Const.OSAKA -> R.drawable.img_osaka
             Const.FUKUOKA -> R.drawable.img_fukuoka
