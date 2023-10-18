@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
-import com.example.goodchoice.utils.ServerConst
+import com.example.goodchoice.ServerConst
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

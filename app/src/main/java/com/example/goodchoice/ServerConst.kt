@@ -1,4 +1,4 @@
-package com.example.goodchoice.utils
+package com.example.goodchoice
 
 //서버가 없어서 저장해 놓은 Const! data 의 code 값이라 보면 된다.
 object ServerConst {

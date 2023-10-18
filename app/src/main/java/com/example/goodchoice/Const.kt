@@ -95,6 +95,12 @@ object Const {
     //검색 Tab
     const val KOREA_STAY = "국내숙소"
     const val OVERSEA_STAY = "해외숙소"
+
+    //검색 결과 > KoreaSearch type (장소인지 역인지)
+    const val PLACE = "place"
+    const val STATION = "station"
+    const val STAY = "stay"
+
 }
 
 // 숙박, 대실

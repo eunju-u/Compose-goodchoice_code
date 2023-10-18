@@ -2,6 +2,7 @@ package com.example.goodchoice.utils
 
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
+import com.example.goodchoice.ServerConst
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

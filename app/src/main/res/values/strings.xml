@@ -129,5 +129,10 @@
     <string name="str_search_my_arround">내 주변에서 검색</string>
     <string name="str_search_rank">여기어때 검색 순위</string>
     <string name="str_search_recommend_area">추천 지역</string>
+    <string name="str_search_area_stay">지역이나 숙소를 검색해보세요</string>
+    <string name="str_search_a_lot">지금 많이 찾고 있어요</string>
+
+    <!--  다이얼로그  -->
+    <string name="str_dialog_more_two_word">정확한 검색을 위해\n두 글자 이상 검색어를 입력해 주세요</string>
 
 </resources>

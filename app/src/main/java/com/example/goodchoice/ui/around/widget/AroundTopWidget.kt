@@ -16,6 +16,7 @@ import com.example.goodchoice.RoomType
 import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.ImageButtonWidget
+import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
 
 @Composable
@@ -48,7 +49,11 @@ fun AroundTopWidget(
                         contentColor = Theme.colorScheme.darkGray,
                         title = stringResource(id = R.string.str_search_local_stay),
                         style = MaterialTheme.typography.labelMedium,
-                        onItemClick = {},
+                        onItemClick = {
+                            context.startActivity(
+                                Intent(context, DetailSearchActivity::class.java)
+                            )
+                        },
                         content = {
                             Image(
                                 modifier = Modifier.size(dp15),

@@ -39,14 +39,14 @@ fun AlertDialogWidget(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(PaddingValues(start = dp20, end = dp20)),
+                        .padding(PaddingValues(start = dp25, end = dp25)),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     if (title.isNotEmpty()) {
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = dp20),
+                                .padding(top = dp25),
                             text = title,
                             style = MaterialTheme.typography.labelLarge,
                             color = textColor
@@ -95,12 +95,11 @@ fun OneButton(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
-        CardWidget(
+        ButtonWidget(
             modifier = Modifier
                 .fillMaxWidth(),
             onItemClick = onConfirm,
             containerColor = color,
-            cornerShape = RoundedCornerShape(dp0),
             content = {
                 Text(
                     text = buttonText,
@@ -124,13 +123,11 @@ fun TwoButton(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(space = dp10)
     ) {
-        CardWidget(
+        ButtonWidget(
             modifier = Modifier
                 .weight(1f),
             onItemClick = onDismiss,
             containerColor = Theme.colorScheme.pureGray,
-            alignment = Alignment.Center,
-            cornerShape = RoundedCornerShape(dp10),
             content = {
                 Text(
                     text = oneButtonText,
