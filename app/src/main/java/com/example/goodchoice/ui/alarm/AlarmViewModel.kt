@@ -3,7 +3,6 @@ package com.example.goodchoice.ui.alarm
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.AlarmItem
 import com.example.goodchoice.preference.GoodChoicePreference
 import kotlinx.coroutines.delay
@@ -12,11 +11,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AlarmViewModel : ViewModel() {
-    var alarmUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
+    var alarmUiState = MutableStateFlow<AlarmConnectInfo>(AlarmConnectInfo.Init)
 
     fun requestAlarmData(context: Context) = viewModelScope.launch {
         val pref = GoodChoicePreference(context)
-        alarmUiState.value = ConnectInfo.Loading
+        alarmUiState.value = AlarmConnectInfo.Loading
 
         if (pref.isLogin) {
             withContext(coroutineContext) {
@@ -33,6 +32,13 @@ class AlarmViewModel : ViewModel() {
             )
         )
 
-        alarmUiState.value = ConnectInfo.Available(data)
+        alarmUiState.value = AlarmConnectInfo.Available(data)
     }
+}
+
+sealed interface AlarmConnectInfo {
+    object Init : AlarmConnectInfo
+    object Loading : AlarmConnectInfo
+    data class Available(val data: List<AlarmItem>) : AlarmConnectInfo
+    data class Error(val message: String? = null) : AlarmConnectInfo
 }

@@ -88,9 +88,9 @@ fun DetailSearchContent(
             modifier = Modifier
                 .fillMaxSize(), state = scrollState
         ) {
-            if (uiState is ConnectInfo.Available) {
+            if (uiState is DetailSearchConnectInfo.Available) {
                 if (!isShowResult) {
-                    val list = (uiState as ConnectInfo.Available).data as List<FilterItem>
+                    val list = (uiState as DetailSearchConnectInfo.Available).data
                     item {
                         Text(
                             modifier = Modifier.padding(

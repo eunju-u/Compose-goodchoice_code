@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DetailSearchViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
-    val uiState: MutableStateFlow<ConnectInfo>
+    private val _uiState = MutableStateFlow<DetailSearchConnectInfo>(DetailSearchConnectInfo.Init)
+    val uiState: MutableStateFlow<DetailSearchConnectInfo>
         get() = _uiState
 
     private val _searchData = MutableStateFlow<List<KoreaSearchData>>(listOf())
@@ -29,7 +29,7 @@ class DetailSearchViewModel : ViewModel() {
     )
 
     fun requestSearchUiData() = viewModelScope.launch {
-        _uiState.value = ConnectInfo.Loading
+        _uiState.value = DetailSearchConnectInfo.Loading
         withContext(coroutineContext) {
             delay(200)
         }
@@ -48,7 +48,7 @@ class DetailSearchViewModel : ViewModel() {
             FilterItem(filterCode = "l1_1_10", filterTitle = "춘천")
         )
 
-        _uiState.value = ConnectInfo.Available(list)
+        _uiState.value = DetailSearchConnectInfo.Available(list)
     }
 
     fun requestResultSearchData(newKey: String = "") = viewModelScope.launch {
@@ -58,4 +58,11 @@ class DetailSearchViewModel : ViewModel() {
             emptyList()
         }
     }
+}
+
+sealed interface DetailSearchConnectInfo {
+    object Init : DetailSearchConnectInfo
+    object Loading : DetailSearchConnectInfo
+    data class Available(val data: List<FilterItem>) : DetailSearchConnectInfo
+    data class Error(val message: String? = null) : DetailSearchConnectInfo
 }

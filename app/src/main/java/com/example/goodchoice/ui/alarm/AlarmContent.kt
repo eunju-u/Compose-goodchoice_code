@@ -15,8 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.AlarmItem
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.alarm.widget.AlarmItemWidget
 import com.example.goodchoice.ui.components.GoToWidget
@@ -39,7 +37,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                 isCloseButton = false,
                 onFinish = { onFinish() })
 
-            if (alarmUiState.value is ConnectInfo.Available) {
+            if (alarmUiState.value is AlarmConnectInfo.Available) {
                 if (!pref.isLogin) {
                     GoToWidget(modifier = Modifier.fillMaxSize(),
                         firstText = stringResource(id = R.string.str_no_see_alarm),
@@ -62,8 +60,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                             .padding(start = dp20, end = dp20),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        val data =
-                            (alarmUiState.value as ConnectInfo.Available).data as List<AlarmItem>
+                        val data = (alarmUiState.value as AlarmConnectInfo.Available).data
                         //알림 리스트가 없는 경우
                         if (data.isEmpty()) {
                             item {

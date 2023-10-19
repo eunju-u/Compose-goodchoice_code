@@ -461,7 +461,7 @@ class MainViewModel : ViewModel() {
     private fun requestSearchData() = viewModelScope.launch {
         homeUiState.value = ConnectInfo.Loading
         withContext(coroutineContext) {
-            delay(400)
+            delay(200)
         }
 
         // 국내숙소 > 검색 순위
@@ -547,7 +547,7 @@ class MainViewModel : ViewModel() {
             homeUiState.value = ConnectInfo.Loading
 
             withContext(coroutineContext) {
-                delay(400)
+                delay(200)
             }
         }
 
