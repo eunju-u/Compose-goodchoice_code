@@ -55,11 +55,7 @@ fun CardWidget(
             )
             .border(shape = cornerShape, width = borderWidth, color = borderColor)
             .clip(shape = cornerShape)
-            .clickable(enabled = onItemClick != null) {
-                if (onItemClick != null) {
-                    onItemClick()
-                }
-            }
+            .then(if (onItemClick != null) Modifier.clickable { onItemClick() } else Modifier)
             .padding(innerPadding),
         contentAlignment = alignment
     ) {

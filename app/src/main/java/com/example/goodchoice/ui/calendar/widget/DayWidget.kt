@@ -17,7 +17,7 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
-import com.example.goodchoice.ui.calendar.model.CalendarUiState
+import com.example.goodchoice.ui.calendar.model.KoreaCalendarUiState
 import com.example.goodchoice.ui.components.ShapeButton
 import com.example.goodchoice.ui.theme.*
 import java.time.LocalDate
@@ -87,7 +87,7 @@ internal fun Day(
     day: LocalDate,
     today: LocalDate,
     sunday: LocalDate,
-    calendarState: CalendarUiState,
+    calendarState: KoreaCalendarUiState,
     onDayClicked: (LocalDate) -> Unit,
     modifier: Modifier = Modifier
 ) {

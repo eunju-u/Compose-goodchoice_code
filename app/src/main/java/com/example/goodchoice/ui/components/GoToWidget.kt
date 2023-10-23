@@ -1,6 +1,5 @@
 package com.example.goodchoice.ui.components
 
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -13,7 +12,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.dp10
 
