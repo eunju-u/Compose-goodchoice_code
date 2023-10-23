@@ -230,7 +230,11 @@ fun Calendar(
                         onItemClick = {
                             pref.koreaPersonCount = personCount
                             pref.koreaStartDate = calendarUiState.selectedStartDate.toString()
-                            pref.koreaEndDate = calendarUiState.selectedEndDate.toString()
+                            pref.koreaEndDate = if (calendarUiState.selectedEndDate != null) {
+                                calendarUiState.selectedEndDate.toString()
+                            } else {
+                                calendarUiState.selectedStartDate?.plusDays(1).toString()
+                            }
                             (context as CalendarActivity).finish()
                         })
                 }
