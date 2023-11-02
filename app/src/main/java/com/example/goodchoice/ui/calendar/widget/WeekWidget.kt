@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.ui.calendar.model.KoreaCalendarUiState
+import com.example.goodchoice.ui.calendar.model.CalendarUiState
 import com.example.goodchoice.ui.calendar.model.Week
 import com.example.goodchoice.utils.ConvertUtil.convertDayOfWeek
 import java.time.DayOfWeek
@@ -35,7 +35,7 @@ internal fun DaysOfWeek(modifier: Modifier = Modifier) {
 
 @Composable
 internal fun Week(
-    koreaCalendarUiState: KoreaCalendarUiState,
+    calendarUiState: CalendarUiState,
     week: Week,
     onDayClicked: (LocalDate) -> Unit,
     modifier: Modifier = Modifier
@@ -55,7 +55,7 @@ internal fun Week(
             for (i in 0..6) {
                 if (currentDay.month == week.yearMonth.month) {
                     Day(
-                        calendarState = koreaCalendarUiState,
+                        calendarState = calendarUiState,
                         day = currentDay,
                         today = today,
                         sunday = sunday,

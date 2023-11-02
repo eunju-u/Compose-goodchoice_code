@@ -12,8 +12,8 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.ui.calendar.model.KoreaCalendarState
-import com.example.goodchoice.ui.calendar.model.KoreaCalendarUiState
+import com.example.goodchoice.ui.calendar.model.CalendarState
+import com.example.goodchoice.ui.calendar.model.CalendarUiState
 import com.example.goodchoice.ui.calendar.model.Week
 import com.example.goodchoice.ui.theme.Theme
 import java.time.LocalDate
@@ -25,7 +25,7 @@ import java.time.LocalDate
 fun WeekSelectionPill(
     week: Week,
     currentWeekStart: LocalDate,
-    state: KoreaCalendarUiState,
+    state: CalendarUiState,
     selectedPercentageTotalProvider: () -> Float,
     modifier: Modifier = Modifier,
     widthPerDay: Dp = 48.dp,
@@ -66,7 +66,7 @@ fun WeekSelectionPill(
  */
 private fun getOffsetAndSize(
     width: Float,
-    state: KoreaCalendarUiState,
+    state: CalendarUiState,
     currentWeekStart: LocalDate,
     week: Week,
     widthPerDayPx: Float,
@@ -76,7 +76,7 @@ private fun getOffsetAndSize(
     val numberDaysSelected = state.getNumberSelectedDaysInWeek(currentWeekStart, week.yearMonth)
     val monthOverlapDelay = state.monthOverlapSelectionDelay(currentWeekStart, week)
     val dayDelay = state.dayDelay(currentWeekStart)
-    val edgePadding = (width - widthPerDayPx * KoreaCalendarState.DAYS_IN_WEEK) / 2
+    val edgePadding = (width - widthPerDayPx * CalendarState.DAYS_IN_WEEK) / 2
 
     val percentagePerDay = 1f / state.numberSelectedDays
     val startPercentage = (dayDelay + monthOverlapDelay) * percentagePerDay

@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
 import java.time.LocalDate
-import com.example.goodchoice.ui.calendar.model.KoreaCalendarState
+import com.example.goodchoice.ui.calendar.model.CalendarState
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.ui.theme.Theme
 
@@ -20,12 +20,12 @@ fun CalendarContent(
     viewModel: CalendarViewModel,
     onFinish: () -> Unit = {}
 ) {
-    val calendarState = remember { viewModel.koreaCalendarState }
+    val calendarState = remember { viewModel.calendarState }
     val type = remember { viewModel.type }
 
     CalendarContent(
         type = type,
-        koreaCalendarState = calendarState,
+        calendarState = calendarState,
         onDayClicked = { dateClicked ->
             viewModel.onDaySelected(dateClicked)
         },
@@ -36,7 +36,7 @@ fun CalendarContent(
 @Composable
 private fun CalendarContent(
     type: MutableState<CalendarType> = mutableStateOf(CalendarType.CALENDAR),
-    koreaCalendarState: KoreaCalendarState,
+    calendarState: CalendarState,
     onDayClicked: (LocalDate) -> Unit = {},
     onFinish: () -> Unit = {}
 ) {
@@ -62,7 +62,7 @@ private fun CalendarContent(
     ) { contentPadding ->
         Calendar(
             calendarType = type,
-            koreaCalendarState = koreaCalendarState,
+            calendarState = calendarState,
             onDayClicked = onDayClicked,
             contentPadding = contentPadding
         )
@@ -70,8 +70,8 @@ private fun CalendarContent(
 }
 
 @Composable
-private fun CalendarTopAppBar(koreaCalendarState: KoreaCalendarState, onBackPressed: () -> Unit) {
-    val calendarUiState = koreaCalendarState.koreaCalendarUiState.value
+private fun CalendarTopAppBar(calendarState: CalendarState, onBackPressed: () -> Unit) {
+    val calendarUiState = calendarState.calendarUiState.value
     Column {
         Spacer(
             modifier = Modifier

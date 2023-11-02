@@ -25,8 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.calendar.model.KoreaCalendarState
-import com.example.goodchoice.ui.calendar.model.KoreaCalendarUiState
+import com.example.goodchoice.ui.calendar.model.CalendarState
+import com.example.goodchoice.ui.calendar.model.CalendarUiState
 import com.example.goodchoice.ui.calendar.model.Month
 import com.example.goodchoice.ui.calendar.widget.*
 import com.example.goodchoice.ui.calendar.widget.CELL_SIZE
@@ -46,7 +46,7 @@ import java.time.temporal.WeekFields
 fun Calendar(
     modifier: Modifier = Modifier,
     calendarType: MutableState<CalendarType> = mutableStateOf(CalendarType.CALENDAR),
-    koreaCalendarState: KoreaCalendarState,
+    calendarState: CalendarState,
     onDayClicked: (date: LocalDate) -> Unit = {},
     contentPadding: PaddingValues = PaddingValues()
 ) {
@@ -54,7 +54,7 @@ fun Calendar(
     val pref = GoodChoicePreference(context)
 
     val type = calendarType.value
-    val calendarUiState = koreaCalendarState.koreaCalendarUiState.value
+    val calendarUiState = calendarState.calendarUiState.value
     val numberSelectedDays = calendarUiState.numberSelectedDays.toInt()
     var personCount by remember { mutableStateOf(pref.koreaPersonCount) }
 
@@ -158,7 +158,7 @@ fun Calendar(
                     contentPadding = contentPadding,
                     modifier = Modifier.padding(bottom = dp70),
                 ) {
-                    koreaCalendarState.listMonths.forEach { month ->
+                    calendarState.listMonths.forEach { month ->
                         itemsCalendarMonth(
                             calendarUiState,
                             onDayClicked,
@@ -243,7 +243,7 @@ fun Calendar(
 }
 
 private fun LazyListScope.itemsCalendarMonth(
-    koreaCalendarUiState: KoreaCalendarUiState,
+    calendarUiState: CalendarUiState,
     onDayClicked: (LocalDate) -> Unit = {},
     selectedPercentageProvider: () -> Float,
     month: Month,
@@ -267,13 +267,13 @@ private fun LazyListScope.itemsCalendarMonth(
         // 일요일 부터 시작
         val currentDay = beginningWeek.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
 
-        if (koreaCalendarUiState.hasSelectedPeriodOverlap(
+        if (calendarUiState.hasSelectedPeriodOverlap(
                 currentDay, currentDay.plusDays(6)
             )
         ) {
             //날짜 선택
             WeekSelectionPill(
-                state = koreaCalendarUiState,
+                state = calendarUiState,
                 currentWeekStart = currentDay,
                 widthPerDay = CELL_SIZE,
                 week = week,
@@ -281,7 +281,7 @@ private fun LazyListScope.itemsCalendarMonth(
             )
         }
         Week(
-            koreaCalendarUiState = koreaCalendarUiState,
+            calendarUiState = calendarUiState,
             modifier = weekModifier,
             week = week,
             onDayClicked = onDayClicked
@@ -296,6 +296,6 @@ internal val CALENDAR_STARTS_ON = WeekFields.ISO
 @Composable
 fun PreviewCalendar() {
     TestTheme {
-        Calendar(koreaCalendarState = KoreaCalendarState(), onDayClicked = { })
+        Calendar(calendarState = CalendarState(), onDayClicked = { })
     }
 }

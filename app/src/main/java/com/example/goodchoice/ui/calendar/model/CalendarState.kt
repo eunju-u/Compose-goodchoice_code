@@ -8,12 +8,12 @@ import java.time.LocalDate
 import java.time.Period
 import java.time.YearMonth
 
-class KoreaCalendarState {
+class CalendarState {
 
     val pref = GoodChoicePreference(GoodChoiceApplication.context())
 
-    val koreaCalendarUiState = mutableStateOf(
-        KoreaCalendarUiState(
+    val calendarUiState = mutableStateOf(
+        CalendarUiState(
             selectedStartDate = LocalDate.parse(pref.koreaStartDate),
             selectedEndDate = LocalDate.parse(pref.koreaEndDate)
         )
@@ -53,11 +53,11 @@ class KoreaCalendarState {
     }
 
     fun setSelectedDay(newDate: LocalDate) {
-        koreaCalendarUiState.value = updateSelectedDay(newDate)
+        calendarUiState.value = updateSelectedDay(newDate)
     }
 
-    private fun updateSelectedDay(newDate: LocalDate): KoreaCalendarUiState {
-        val currentState = koreaCalendarUiState.value
+    private fun updateSelectedDay(newDate: LocalDate): CalendarUiState {
+        val currentState = calendarUiState.value
         val selectedStartDate = currentState.selectedStartDate
         val selectedEndDate = currentState.selectedEndDate
 
@@ -71,7 +71,7 @@ class KoreaCalendarState {
                 } else {
                     AnimationDirection.FORWARDS
                 }
-                this.koreaCalendarUiState.value = currentState.copy(
+                this.calendarUiState.value = currentState.copy(
                     selectedStartDate = null,
                     selectedEndDate = null,
                     animateDirection = animationDirection

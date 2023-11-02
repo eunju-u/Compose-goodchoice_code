@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import kotlin.math.abs
 
-data class KoreaCalendarUiState(
+data class CalendarUiState(
     val selectedStartDate: LocalDate? = null,
     val selectedEndDate: LocalDate? = null,
     val animateDirection: AnimationDirection? = null
@@ -57,7 +57,7 @@ data class KoreaCalendarUiState(
     fun getNumberSelectedDaysInWeek(currentWeekStartDate: LocalDate, month: YearMonth): Int {
         var countSelected = 0
         var currentDate = currentWeekStartDate
-        for (i in 0 until KoreaCalendarState.DAYS_IN_WEEK) {
+        for (i in 0 until CalendarState.DAYS_IN_WEEK) {
             if (isDateInSelectedPeriod(currentDate) && currentDate.month == month.month) {
                 countSelected++
             }
@@ -73,7 +73,7 @@ data class KoreaCalendarUiState(
         return if (animateDirection == null || animateDirection.isForwards()) {
             var startDate = currentWeekStartDate
             var startOffset = 0
-            for (i in 0 until KoreaCalendarState.DAYS_IN_WEEK) {
+            for (i in 0 until CalendarState.DAYS_IN_WEEK) {
                 if (!isDateInSelectedPeriod(startDate) || startDate.month != yearMonth.month) {
                     startOffset++
                 } else {
@@ -86,7 +86,7 @@ data class KoreaCalendarUiState(
             var startDate = currentWeekStartDate.plusDays(6)
             var startOffset = 0
 
-            for (i in 0 until KoreaCalendarState.DAYS_IN_WEEK) {
+            for (i in 0 until CalendarState.DAYS_IN_WEEK) {
                 if (!isDateInSelectedPeriod(startDate) || startDate.month != yearMonth.month) {
                     startOffset++
                 } else {
@@ -165,7 +165,7 @@ data class KoreaCalendarUiState(
             if (isStartInADifferentMonth) {
                 var currentDate = endWeek
                 var offset = 0
-                for (i in 0 until KoreaCalendarState.DAYS_IN_WEEK) {
+                for (i in 0 until CalendarState.DAYS_IN_WEEK) {
                     if (currentDate.month.value != week.yearMonth.month.value &&
                         isDateInSelectedPeriod(currentDate)
                     ) {
@@ -182,7 +182,7 @@ data class KoreaCalendarUiState(
             return if (isStartInADifferentMonth) {
                 var currentDate = currentWeekStartDate
                 var offset = 0
-                for (i in 0 until KoreaCalendarState.DAYS_IN_WEEK) {
+                for (i in 0 until CalendarState.DAYS_IN_WEEK) {
                     if (currentDate.month.value != week.yearMonth.month.value &&
                         isDateInSelectedPeriod(currentDate)
                     ) {
@@ -197,7 +197,7 @@ data class KoreaCalendarUiState(
         }
     }
 
-    fun setDates(newFrom: LocalDate?, newTo: LocalDate?): KoreaCalendarUiState {
+    fun setDates(newFrom: LocalDate?, newTo: LocalDate?): CalendarUiState {
         return if (newTo == null) {
             copy(selectedStartDate = newFrom)
         } else {
