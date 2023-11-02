@@ -133,9 +133,13 @@ object ConvertUtil {
      */
     fun formatDate(dateString: String?): String {
         return dateString?.run {
-            val date = LocalDate.parse(dateString)
-            val formatter = DateTimeFormatter.ofPattern("M.d")
-            date.format(formatter)
+            if (this.isNotEmpty()) {
+                val date = LocalDate.parse(dateString)
+                val formatter = DateTimeFormatter.ofPattern("M.d")
+                date.format(formatter)
+            } else {
+                ""
+            }
         } ?: ""
     }
 }

@@ -44,7 +44,6 @@ internal fun Week(
     var currentDay = beginningWeek.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
     val sunday = beginningWeek.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
     val today = LocalDate.now()
-
     Box {
         Row(modifier = modifier) {
             Spacer(
@@ -59,6 +58,7 @@ internal fun Week(
                         day = currentDay,
                         today = today,
                         sunday = sunday,
+                        onClickEnabled = currentDay >= today,
                         onDayClicked = onDayClicked,
                     )
                 } else {

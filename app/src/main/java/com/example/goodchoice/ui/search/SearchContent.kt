@@ -100,7 +100,7 @@ fun SearchContent(
                                                 context,
                                                 CalendarActivity::class.java
                                             ).apply {
-                                                putExtra(Const.DATA, CalendarType.CALENDAR)
+                                                putExtra(Const.TYPE, CalendarType.CALENDAR)
                                             }
                                         )
                                     },
@@ -110,7 +110,7 @@ fun SearchContent(
                                                 context,
                                                 CalendarActivity::class.java
                                             ).apply {
-                                                putExtra(Const.DATA, CalendarType.PERSON)
+                                                putExtra(Const.TYPE, CalendarType.PERSON)
                                             }
                                         )
                                     })

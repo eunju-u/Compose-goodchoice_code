@@ -74,7 +74,8 @@ private fun DayContainer(
         if (isToday) {
             Column(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter).padding(bottom = dp8)
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = dp8)
             ) {
                 ShapeButton(size = dp6, normalColor = Theme.colorScheme.blue)
             }
@@ -84,27 +85,33 @@ private fun DayContainer(
 
 @Composable
 internal fun Day(
+    modifier: Modifier = Modifier,
     day: LocalDate,
     today: LocalDate,
     sunday: LocalDate,
+    onClickEnabled: Boolean = true,
     calendarState: CalendarUiState,
     onDayClicked: (LocalDate) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     val selected = calendarState.isDateInSelectedPeriod(day)
     DayContainer(
         modifier = modifier,
         selected = selected,
-        onClick = { onDayClicked(day) },
+        onClickEnabled = onClickEnabled,
+        onClick = {
+            if (onClickEnabled) {
+                onDayClicked(day)
+            }
+        },
         onClickLabel = "select",
-        isToday = day == today
+        isToday = day == today,
     ) {
         Text(
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center),
             text = day.dayOfMonth.toString(),
-            color = if (sunday == day) Theme.colorScheme.red else Theme.colorScheme.darkGray,
+            color = if (sunday == day) Theme.colorScheme.red else if (onClickEnabled) Theme.colorScheme.darkGray else Theme.colorScheme.pureGray,
             style = MaterialTheme.typography.labelSmall
         )
     }

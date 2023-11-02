@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.search
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -7,10 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
+import com.example.goodchoice.ui.calendar.CalendarActivity
+import com.example.goodchoice.ui.calendar.CalendarType
 import com.example.goodchoice.ui.components.ButtonWidget
 import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.theme.*
@@ -22,6 +27,7 @@ fun OverSeaContent(
     personCount: Int = 2,
     onItemClick: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val innerPadding = PaddingValues(horizontal = dp20, vertical = dp15)
 
     Column(
@@ -67,6 +73,17 @@ fun OverSeaContent(
                     painter = painterResource(id = R.drawable.ic_calendar),
                     colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
                     contentDescription = null
+                )
+            },
+            onItemClick = {
+                context.startActivity(
+                    Intent(
+                        context,
+                        CalendarActivity::class.java
+                    ).apply {
+                        putExtra(Const.TYPE, CalendarType.CALENDAR)
+                        putExtra(Const.DATA, Const.OVERSEA)
+                    }
                 )
             }
         )

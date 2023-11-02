@@ -13,11 +13,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.goodchoice.R
 import com.example.goodchoice.RoomType
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
+import com.example.goodchoice.utils.ConvertUtil
 
 @Composable
 fun AroundTopWidget(
@@ -25,6 +27,8 @@ fun AroundTopWidget(
     onItemClick: (roomType: RoomType) -> Unit = {}
 ) {
     val context = LocalContext.current
+    val pref = GoodChoicePreference(context)
+
     // 숙박
     val isSleepRoom = selectedRoomType == RoomType.SLEEP_ROOM
     // 대실
@@ -63,11 +67,17 @@ fun AroundTopWidget(
                             )
                         })
                     ImageButtonWidget(
-                        modifier = Modifier.weight(1f),
                         isCenterHorizontalArrangement = false,
                         containerColor = Theme.colorScheme.pureGray,
                         contentColor = Theme.colorScheme.darkGray,
-                        title = "",
+                        title = ConvertUtil.formatDate(pref.koreaStartDate) +
+                                " - ${ConvertUtil.formatDate(pref.koreaEndDate)}" +
+                                " / ${
+                                    stringResource(
+                                        id = R.string.str_person_count,
+                                        pref.koreaPersonCount
+                                    )
+                                }",
                         style = MaterialTheme.typography.labelMedium,
                         onItemClick = {
                             context.startActivity(

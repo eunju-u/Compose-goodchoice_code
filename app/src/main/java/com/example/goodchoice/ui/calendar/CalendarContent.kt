@@ -24,6 +24,7 @@ fun CalendarContent(
     val type = remember { viewModel.type }
 
     CalendarContent(
+        isKoreaTravel = viewModel.isKoreaTravel,
         type = type,
         calendarState = calendarState,
         onDayClicked = { dateClicked ->
@@ -35,6 +36,7 @@ fun CalendarContent(
 
 @Composable
 private fun CalendarContent(
+    isKoreaTravel: Boolean = true,
     type: MutableState<CalendarType> = mutableStateOf(CalendarType.CALENDAR),
     calendarState: CalendarState,
     onDayClicked: (LocalDate) -> Unit = {},
@@ -61,6 +63,7 @@ private fun CalendarContent(
         }
     ) { contentPadding ->
         Calendar(
+            isKoreaTravel = isKoreaTravel,
             calendarType = type,
             calendarState = calendarState,
             onDayClicked = onDayClicked,

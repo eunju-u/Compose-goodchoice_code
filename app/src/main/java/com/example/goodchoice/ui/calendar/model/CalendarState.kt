@@ -8,14 +8,16 @@ import java.time.LocalDate
 import java.time.Period
 import java.time.YearMonth
 
-class CalendarState {
+class CalendarState(isKoreaCalendar: Boolean = true) {
 
     val pref = GoodChoicePreference(GoodChoiceApplication.context())
 
     val calendarUiState = mutableStateOf(
         CalendarUiState(
-            selectedStartDate = LocalDate.parse(pref.koreaStartDate),
-            selectedEndDate = LocalDate.parse(pref.koreaEndDate)
+            selectedStartDate = if (isKoreaCalendar) LocalDate.parse(pref.koreaStartDate)
+            else LocalDate.parse(pref.overseaStartDate),
+            selectedEndDate = if (isKoreaCalendar) LocalDate.parse(pref.koreaEndDate)
+            else LocalDate.parse(pref.overseaEndDate),
         )
     )
     val listMonths: List<Month>

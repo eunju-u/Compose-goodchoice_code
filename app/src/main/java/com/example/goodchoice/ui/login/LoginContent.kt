@@ -125,6 +125,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             Image(
                                 modifier = iconModifier,
                                 painter = painterResource(id = R.drawable.ic_kakao),
+                                colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
                                 contentDescription = null
                             )
                         },

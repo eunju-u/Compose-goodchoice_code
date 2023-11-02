@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.goodchoice.Const
+import com.example.goodchoice.ui.calendar.model.CalendarState
 import com.example.goodchoice.ui.theme.TestTheme
 
 class CalendarActivity : ComponentActivity() {
@@ -16,8 +17,13 @@ class CalendarActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        intent.getSerializableExtra(Const.DATA)?.let {
+        intent.getSerializableExtra(Const.TYPE)?.let {
             viewModel.type.value = it as CalendarType
+        }
+        //TODO 해외 캘린더인지 국내 캘린더인지 intent 받기
+        intent.getStringExtra(Const.DATA)?.let {
+            viewModel.isKoreaTravel = it == Const.KOREA
+            viewModel.calendarState = CalendarState(it == Const.KOREA)
         }
 
         setContent {

@@ -77,7 +77,6 @@ fun LeftImageEditTextWidget(
         innerPadding = outerPadding,
         isVisibleShadow = isVisibleShadow,
         shadowOffsetY = dp8,
-        onItemClick = {}
     ) {
         Surface(
             modifier = modifier

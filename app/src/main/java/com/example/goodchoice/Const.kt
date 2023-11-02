@@ -91,6 +91,7 @@ object Const {
     const val ITEM_ID = "ITEM_ID"
     const val ITEM_TITLE = "ITEM_TITLE"
     const val DATA = "DATA"
+    const val TYPE = "TYPE"
 
     //검색 Tab
     const val KOREA_STAY = "국내숙소"

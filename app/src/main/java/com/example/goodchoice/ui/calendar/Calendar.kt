@@ -45,6 +45,7 @@ import java.time.temporal.WeekFields
 @Composable
 fun Calendar(
     modifier: Modifier = Modifier,
+    isKoreaTravel: Boolean = true,
     calendarType: MutableState<CalendarType> = mutableStateOf(CalendarType.CALENDAR),
     calendarState: CalendarState,
     onDayClicked: (date: LocalDate) -> Unit = {},
@@ -98,20 +99,36 @@ fun Calendar(
                     .padding(start = dp20, end = dp20),
                 horizontalArrangement = Arrangement.spacedBy(dp10)
             ) {
+                val startCalendarDate =
+                    if (isKoreaTravel) pref.koreaStartDate else pref.overseaStartDate
+                val endCalendarDate = if (isKoreaTravel) pref.koreaEndDate else pref.overseaEndDate
                 val startDate =
-                    (calendarUiState.selectedStartDate ?: pref.koreaStartDate).toString()
-                val endDate = (calendarUiState.selectedEndDate ?: pref.koreaEndDate).toString()
+                    (calendarUiState.selectedStartDate ?: startCalendarDate).toString()
+                //select 한 start 가 없으면 오늘 날짜로 start가 되고 end 는 오늘 날짜 다음 날짜가 된다.
+                //select 한 start 가 있으면 end 은 빈값이 되어야 한다.
+                val firstEndData =
+                    if (calendarUiState.selectedStartDate == LocalDate.parse(startCalendarDate)) endCalendarDate else ""
+                val endDate = (calendarUiState.selectedEndDate ?: firstEndData).toString()
                 val startDateFormat = ConvertUtil.formatDate(startDate)
                 val endDateFormat = ConvertUtil.formatDate(endDate)
-                val startDayOfWeek =
-                    ConvertUtil.convertDayOfWeek(LocalDate.parse(startDate).dayOfWeek.name)
-                val endDayOfWeek =
-                    ConvertUtil.convertDayOfWeek(LocalDate.parse(endDate).dayOfWeek.name)
+                val startTitle =
+                    if (startDate.isNotEmpty())
+                        "$startDateFormat " + stringResource(
+                            id = ConvertUtil.convertDayOfWeek(
+                                LocalDate.parse(startDate).dayOfWeek.name
+                            )
+                        ) else ""
+                val endTitle =
+                    if (endDate.isNotEmpty())
+                        "$endDateFormat " + stringResource(
+                            id = ConvertUtil.convertDayOfWeek(
+                                LocalDate.parse(endDate).dayOfWeek.name
+                            )
+                        ) else ""
 
                 LeftImageButtonWidget(
                     modifier = Modifier.weight(0.6f),
-                    title = "$startDateFormat ${stringResource(id = startDayOfWeek)} " +
-                            "- $endDateFormat ${stringResource(id = endDayOfWeek)}",
+                    title = "$startTitle - $endTitle",
                     borderColor = calendarBorderColor,
                     contentColor = calendarContentColor,
                     shape = dp20,
@@ -130,23 +147,32 @@ fun Calendar(
                     onItemClick = { calendarType.value = CalendarType.CALENDAR }
                 )
                 val person = if (personCount == 10) "$personCount+" else personCount.toString()
-                LeftImageButtonWidget(
-                    title = stringResource(id = R.string.str_person_count, person),
-                    borderColor = personBorderColor,
-                    contentColor = personContentColor,
-                    shape = dp20,
-                    style = MaterialTheme.typography.labelLarge,
-                    innerPadding = PaddingValues(horizontal = dp30, vertical = dp15),
-                    content = {
-                        Image(
-                            modifier = Modifier.size(dp15),
-                            painter = painterResource(id = R.drawable.ic_nav_my_page),
-                            colorFilter = ColorFilter.tint(personContentColor),
-                            contentDescription = null
-                        )
-                    },
-                    onItemClick = { calendarType.value = CalendarType.PERSON }
-                )
+                if (isKoreaTravel) {
+                    LeftImageButtonWidget(
+                        title = stringResource(id = R.string.str_person_count, person),
+                        borderColor = personBorderColor,
+                        contentColor = personContentColor,
+                        shape = dp20,
+                        style = MaterialTheme.typography.labelLarge,
+                        innerPadding = PaddingValues(horizontal = dp30, vertical = dp15),
+                        content = {
+                            Image(
+                                modifier = Modifier.size(dp15),
+                                painter = painterResource(id = R.drawable.ic_nav_my_page),
+                                colorFilter = ColorFilter.tint(personContentColor),
+                                contentDescription = null
+                            )
+                        },
+                        onItemClick = { calendarType.value = CalendarType.PERSON }
+                    )
+                } else {
+                    PersonButtonWidget(
+                        borderColor = personBorderColor,
+                        contentColor = personContentColor,
+                        leftText = "",
+                        rightText = "",
+                    )
+                }
             }
 
             if (type == CalendarType.CALENDAR) {
@@ -228,12 +254,21 @@ fun Calendar(
                             )
                         },
                         onItemClick = {
-                            pref.koreaPersonCount = personCount
-                            pref.koreaStartDate = calendarUiState.selectedStartDate.toString()
-                            pref.koreaEndDate = if (calendarUiState.selectedEndDate != null) {
-                                calendarUiState.selectedEndDate.toString()
+                            if (isKoreaTravel) {
+                                pref.koreaPersonCount = personCount
+                                pref.koreaStartDate = calendarUiState.selectedStartDate.toString()
+                                pref.koreaEndDate = if (calendarUiState.selectedEndDate != null) {
+                                    calendarUiState.selectedEndDate.toString()
+                                } else {
+                                    calendarUiState.selectedStartDate?.plusDays(1).toString()
+                                }
                             } else {
-                                calendarUiState.selectedStartDate?.plusDays(1).toString()
+                                pref.overseaStartDate = calendarUiState.selectedStartDate.toString()
+                                pref.overseaEndDate = if (calendarUiState.selectedEndDate != null) {
+                                    calendarUiState.selectedEndDate.toString()
+                                } else {
+                                    calendarUiState.selectedStartDate?.plusDays(1).toString()
+                                }
                             }
                             (context as CalendarActivity).finish()
                         })
