@@ -108,3 +108,7 @@ object Const {
 enum class RoomType {
     SLEEP_ROOM, RENTAL_ROOM
 }
+
+enum class CalendarPersonType {
+    GUEST_ROOM, ADULT, KID
+}

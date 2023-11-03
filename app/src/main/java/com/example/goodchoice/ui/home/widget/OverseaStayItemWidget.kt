@@ -62,7 +62,7 @@ fun OverseaStayItemWidget(
         val name = stayItem.name ?: ""
         val discountPer = stayItem.discountPer ?: 0
         val defaultPrice = stayItem.defaultPrice ?: ""
-        val discountPrice = stayItem.discountPrice ?: "" //다른 날짜 확인 of 120000
+        val discountPrice = stayItem.discountPrice ?: "" //다른 날짜 확인 or 120000
         val isDefaultPriceNumber = defaultPrice.toIntOrNull() != null // 숫자로 변경 가능
         val isDiscountPriceNumber = discountPrice.toIntOrNull() != null // 숫자로 변경 가능
 

@@ -24,7 +24,7 @@ import com.example.goodchoice.ui.theme.*
 fun OverSeaContent(
     modifier: Modifier = Modifier,
     date: String = "",
-    personCount: Int = 2,
+    text: String = "",
     onItemClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -92,10 +92,7 @@ fun OverSeaContent(
             outerPadding = PaddingValues(start = dp20, bottom = dp15, end = dp20),
             innerPadding = innerPadding,
             isCenterHorizontalArrangement = false,
-            title = stringResource(
-                id = R.string.str_person_count,
-                personCount
-            ),
+            title = text,
             containerColor = Theme.colorScheme.pureGray,
             contentColor = Theme.colorScheme.darkGray,
             shape = dp10,
@@ -106,6 +103,17 @@ fun OverSeaContent(
                     painter = painterResource(id = R.drawable.ic_nav_my_page),
                     colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
                     contentDescription = null
+                )
+            },
+            onItemClick = {
+                context.startActivity(
+                    Intent(
+                        context,
+                        CalendarActivity::class.java
+                    ).apply {
+                        putExtra(Const.TYPE, CalendarType.PERSON)
+                        putExtra(Const.DATA, Const.OVERSEA)
+                    }
                 )
             }
         )

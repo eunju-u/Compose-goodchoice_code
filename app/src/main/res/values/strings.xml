@@ -73,7 +73,7 @@
     <string name="str_no_alarm">알림이 없어요.</string>
 
     <!--  달력  -->
-    <string name="str_select"><xliff:g id="select">%s</xliff:g> 선택하기</string>
+    <string name="str_select"><xliff:g id="select">%s</xliff:g> 선택</string>
     <string name="str_date">날짜</string>
     <string name="str_monday">월</string>
     <string name="str_tuesday">화</string>
@@ -87,6 +87,15 @@
     <string name="str_person_count"><xliff:g id="count">%s</xliff:g>명</string>
     <string name="str_person">인원</string>
     <string name="str_person_sub">유아 및 아동도 인원수에\n포함해 주세요.</string>
+    <string name="str_guest_room_count">객실 <xliff:g id="count">%s</xliff:g>개</string>
+    <string name="str_adult_count">성인 <xliff:g id="count">%s</xliff:g>명</string>
+    <string name="str_kid_count">아동 <xliff:g id="count">%s</xliff:g>명</string>
+    <string name="str_schedule">일정</string>
+    <string name="str_person_and_guest_room">인원 및 객실</string>
+    <string name="str_guest_room">객실</string>
+    <string name="str_guest_room_one_person_select">객실마다 1명 이상 필수 선택</string>
+    <string name="str_adult">성인</string>
+    <string name="str_kid">아동</string>
 
     <!--  숙소 상세  -->
     <string name="str_see_review">리뷰 <xliff:g id="count">%s</xliff:g>개 보기</string>
@@ -120,6 +129,8 @@
     <string name="str_cancel">취소</string>
     <string name="str_ok">확인</string>
     <string name="str_reset">초기화</string>
+    <string name="str_count">개</string>
+    <string name="str_per_person">명</string>
 
     <!--  검색  -->
     <string name="str_search_korea_area">지역, 지하철역, 숙소</string>

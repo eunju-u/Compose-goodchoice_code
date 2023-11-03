@@ -13,7 +13,10 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
     private val OVERSEA_START_DATE = "overseaStartDate"   //해외 여행 시작 날짜
     private val OVERSEA_END_DATE = "overseaEndDate"    //해외 여행 마지막 날짜
     private val KOREA_PERSON_COUNT = "koreaPersonCount"   //국내 여행 인원수
-    private val OVERSEA_PERSON_COUNT = "overseaPersonCount"   //해외 여행 인원수
+    private val OVERSEA_STAY_COUNT = "overseaStayCount"   //해외 여행 숙소갯수
+    private val OVERSEA_ADULT_COUNT = "overseaAdultCount"   //해외 여행 성인수
+    private val OVERSEA_KID_COUNT = "overseaKidCount"   //해외 여행 아동수
+
 
     //로그인 여부색
     var isLogin: Boolean
@@ -86,11 +89,27 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
             return getPreferenceInt(KOREA_PERSON_COUNT, 2)
         }
 
-    var overseaPersonCount: Int
+    var overseaStayCount: Int
         set(value) {
-            setPreference(OVERSEA_PERSON_COUNT, value)
+            setPreference(OVERSEA_STAY_COUNT, value)
         }
         get() {
-            return getPreferenceInt(OVERSEA_PERSON_COUNT, 2)
+            return getPreferenceInt(OVERSEA_STAY_COUNT, 1)
+        }
+
+    var overseaAdultCount: Int
+        set(value) {
+            setPreference(OVERSEA_ADULT_COUNT, value)
+        }
+        get() {
+            return getPreferenceInt(OVERSEA_ADULT_COUNT, 2)
+        }
+
+    var overseaKidCount: Int
+        set(value) {
+            setPreference(OVERSEA_KID_COUNT, value)
+        }
+        get() {
+            return getPreferenceInt(OVERSEA_KID_COUNT, 0)
         }
 }

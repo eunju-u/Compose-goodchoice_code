@@ -18,6 +18,9 @@ import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.theme.*
 
+/**
+ * 해외 여행 캘린더
+ */
 @Composable
 fun PersonButtonWidget(
     modifier: Modifier = Modifier,
@@ -44,38 +47,46 @@ fun PersonButtonWidget(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
-            Image(
+            Box(
                 modifier = Modifier
-                    .size(dp15)
-                    .padding(end = dp15),
-                painter = painterResource(id = R.drawable.ic_hotel),
-                colorFilter = ColorFilter.tint(contentColor),
-                contentDescription = null
-            )
+                    .padding(end = dp8),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    modifier = Modifier
+                        .size(dp15),
+                    painter = painterResource(id = R.drawable.ic_hotel),
+                    colorFilter = ColorFilter.tint(contentColor),
+                    contentDescription = null
+                )
+            }
 
             TextWidget(
                 modifier = Modifier
                     .weight(1f, fill = false)
-                    .padding(end = dp15),
+                    .padding(end = dp8),
                 text = leftText,
                 style = MaterialTheme.typography.labelLarge,
                 color = contentColor,
                 textAlign = TextAlign.Center
             )
 
-            Image(
+            Box(
                 modifier = Modifier
-                    .size(dp15)
-                    .padding(end = dp15),
-                painter = painterResource(id = R.drawable.ic_nav_my_page),
-                colorFilter = ColorFilter.tint(contentColor),
-                contentDescription = null
-            )
-
+                    .padding(end = dp8),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    modifier = Modifier
+                        .size(dp15),
+                    painter = painterResource(id = R.drawable.ic_nav_my_page),
+                    colorFilter = ColorFilter.tint(contentColor),
+                    contentDescription = null
+                )
+            }
             TextWidget(
                 modifier = Modifier
-                    .weight(1f, fill = false)
-                    .padding(end = dp15),
+                    .weight(1f, fill = false),
                 text = rightText,
                 style = MaterialTheme.typography.labelLarge,
                 color = contentColor,

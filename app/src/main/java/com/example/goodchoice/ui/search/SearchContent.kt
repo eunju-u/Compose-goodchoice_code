@@ -24,6 +24,7 @@ import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil
 import java.time.LocalDate
+import com.example.goodchoice.R
 
 private val menus = listOf(
     TabData.KOREA_STAY, TabData.OVERSEA_STAY, TabData.LEISURE
@@ -129,11 +130,25 @@ fun SearchContent(
                                 val date =
                                     "$startDateFormat ${stringResource(id = startDayOfWeek)} " +
                                             "- $endDateFormat ${stringResource(id = endDayOfWeek)}"
-
+                                val stayCount = stringResource(
+                                    id = R.string.str_guest_room_count,
+                                    pref.overseaStayCount
+                                )
+                                val adultCount =
+                                    stringResource(
+                                        id = R.string.str_adult_count,
+                                        pref.overseaAdultCount
+                                    )
+                                val kidCount =
+                                    stringResource(
+                                        id = R.string.str_kid_count,
+                                        pref.overseaKidCount
+                                    )
                                 // 해외숙소
                                 OverSeaContent(
                                     modifier = pageModifier, date = date,
-                                    personCount = pref.overseaPersonCount,
+                                    text = "${stayCount}, ${adultCount}, $kidCount"
+
                                 )
                             }
 

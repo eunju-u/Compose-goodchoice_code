@@ -51,11 +51,20 @@ private fun CalendarContent(
         topBar = {
             val date = stringResource(id = R.string.str_date)
             val person = stringResource(id = R.string.str_person)
-            TopAppBarWidget(
-                title = stringResource(
+            val schedule = stringResource(id = R.string.str_schedule)
+            val personAndStay = stringResource(id = R.string.str_person_and_guest_room)
+            val title = if (isKoreaTravel) {
+                stringResource(
                     id = R.string.str_select,
                     if (type.value == CalendarType.CALENDAR) date else person
-                ),
+                )
+            } else {
+                if (type.value == CalendarType.CALENDAR)
+                    stringResource(id = R.string.str_select, schedule)
+                else personAndStay
+            }
+            TopAppBarWidget(
+                title = title,
                 onFinish = { onFinish() },
                 isCloseButton = true
             )

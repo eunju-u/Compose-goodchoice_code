@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.goodchoice.CalendarPersonType
 import com.example.goodchoice.R
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.model.CalendarState
@@ -57,7 +58,14 @@ fun Calendar(
     val type = calendarType.value
     val calendarUiState = calendarState.calendarUiState.value
     val numberSelectedDays = calendarUiState.numberSelectedDays.toInt()
-    var personCount by remember { mutableStateOf(pref.koreaPersonCount) }
+    //국내 여행 인원수
+    var koreaPersonCount by remember { mutableStateOf(pref.koreaPersonCount) }
+    //해외 여행 객실 수
+    var overSeaStayCount by remember { mutableStateOf(pref.overseaStayCount) }
+    //해외 여행 성인 수
+    var overseaAdultCount by remember { mutableStateOf(pref.overseaAdultCount) }
+    //해외 여행 아동 수
+    var overseaKidCount by remember { mutableStateOf(pref.overseaKidCount) }
 
     val selectedAnimationPercentage = remember(numberSelectedDays) {
         Animatable(0f)
@@ -127,7 +135,7 @@ fun Calendar(
                         ) else ""
 
                 LeftImageButtonWidget(
-                    modifier = Modifier.weight(0.6f),
+                    modifier = Modifier.weight(1f),
                     title = "$startTitle - $endTitle",
                     borderColor = calendarBorderColor,
                     contentColor = calendarContentColor,
@@ -146,8 +154,10 @@ fun Calendar(
                     },
                     onItemClick = { calendarType.value = CalendarType.CALENDAR }
                 )
-                val person = if (personCount == 10) "$personCount+" else personCount.toString()
+                //국내 여행 캘린더
                 if (isKoreaTravel) {
+                    val person =
+                        if (koreaPersonCount == 10) "$koreaPersonCount+" else koreaPersonCount.toString()
                     LeftImageButtonWidget(
                         title = stringResource(id = R.string.str_person_count, person),
                         borderColor = personBorderColor,
@@ -165,12 +175,17 @@ fun Calendar(
                         },
                         onItemClick = { calendarType.value = CalendarType.PERSON }
                     )
-                } else {
+                }
+                //해외 여행 캘린더
+                else {
+                    val count = stringResource(id = R.string.str_count)
+                    val perPerson = stringResource(id = R.string.str_per_person)
                     PersonButtonWidget(
                         borderColor = personBorderColor,
                         contentColor = personContentColor,
-                        leftText = "",
-                        rightText = "",
+                        leftText = "$overSeaStayCount $count",
+                        rightText = "${overseaAdultCount + overseaKidCount} $perPerson",
+                        onItemClick = { calendarType.value = CalendarType.PERSON }
                     )
                 }
             }
@@ -203,11 +218,47 @@ fun Calendar(
                     }
                 }
             } else {
-                PersonWidget(
-                    contentPadding = contentPadding,
-                    personCount = personCount,
-                    onLeftItemClick = { if (personCount > 1) personCount-- },
-                    onRightItemClick = { if (personCount < 10) personCount++ })
+                if (isKoreaTravel) {
+                    KoreaPersonWidget(
+                        contentPadding = contentPadding,
+                        personCount = koreaPersonCount,
+                        onLeftItemClick = { if (koreaPersonCount > 1) koreaPersonCount-- },
+                        onRightItemClick = { if (koreaPersonCount < 10) koreaPersonCount++ }
+                    )
+                } else {
+                    OverseaPersonWidget(
+                        contentPadding = contentPadding,
+                        stayCount = overSeaStayCount,
+                        adultCount = overseaAdultCount,
+                        kidCount = overseaKidCount,
+                        onLeftItemClick = { type ->
+                            when (type) {
+                                CalendarPersonType.GUEST_ROOM -> {
+                                    if (overSeaStayCount > 1) overseaAdultCount--
+                                }
+                                CalendarPersonType.ADULT -> {
+                                    if (overseaAdultCount > 1) overseaAdultCount--
+                                }
+                                CalendarPersonType.KID -> {
+                                    if (overseaKidCount > 0) overseaKidCount--
+                                }
+                            }
+                        },
+                        onRightItemClick = { type ->
+                            when (type) {
+                                CalendarPersonType.GUEST_ROOM -> {
+                                    if (overSeaStayCount < 9) overSeaStayCount++
+                                }
+                                CalendarPersonType.ADULT -> {
+                                    if (overseaAdultCount < 36) overseaAdultCount++
+                                }
+                                CalendarPersonType.KID -> {
+                                    if (overseaKidCount < 9) overseaKidCount++
+                                }
+                            }
+                        }
+                    )
+                }
             }
         }
 
@@ -255,7 +306,7 @@ fun Calendar(
                         },
                         onItemClick = {
                             if (isKoreaTravel) {
-                                pref.koreaPersonCount = personCount
+                                pref.koreaPersonCount = koreaPersonCount
                                 pref.koreaStartDate = calendarUiState.selectedStartDate.toString()
                                 pref.koreaEndDate = if (calendarUiState.selectedEndDate != null) {
                                     calendarUiState.selectedEndDate.toString()
@@ -269,6 +320,9 @@ fun Calendar(
                                 } else {
                                     calendarUiState.selectedStartDate?.plusDays(1).toString()
                                 }
+                                pref.overseaStayCount = overSeaStayCount
+                                pref.overseaAdultCount = overseaAdultCount
+                                pref.overseaKidCount = overseaKidCount
                             }
                             (context as CalendarActivity).finish()
                         })
