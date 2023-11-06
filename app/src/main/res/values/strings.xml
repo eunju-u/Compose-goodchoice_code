@@ -96,6 +96,7 @@
     <string name="str_guest_room_one_person_select">객실마다 1명 이상 필수 선택</string>
     <string name="str_adult">성인</string>
     <string name="str_kid">아동</string>
+    <string name="str_oversea_add_day">+ <xliff:g id="count">%s</xliff:g>박</string>
 
     <!--  숙소 상세  -->
     <string name="str_see_review">리뷰 <xliff:g id="count">%s</xliff:g>개 보기</string>

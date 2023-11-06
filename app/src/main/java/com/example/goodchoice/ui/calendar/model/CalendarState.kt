@@ -58,6 +58,21 @@ class CalendarState(isKoreaCalendar: Boolean = true) {
         calendarUiState.value = updateSelectedDay(newDate)
     }
 
+    fun resetSelectedDay(startDate: LocalDate, endDate: LocalDate) {
+        val currentState = calendarUiState.value
+        calendarUiState.value = currentState.copy(animateDirection = AnimationDirection.FORWARDS)
+            .setDates(startDate, endDate)
+    }
+
+    fun plusDay(startDate: LocalDate?, endDate: LocalDate) {
+        val currentState = calendarUiState.value
+        if (startDate != null) {
+            calendarUiState.value =
+                currentState.copy(animateDirection = AnimationDirection.FORWARDS)
+                    .setDates(startDate, endDate)
+        }
+    }
+
     private fun updateSelectedDay(newDate: LocalDate): CalendarUiState {
         val currentState = calendarUiState.value
         val selectedStartDate = currentState.selectedStartDate

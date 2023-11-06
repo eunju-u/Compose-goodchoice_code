@@ -35,7 +35,7 @@ fun CardWidget(
     shadowColor: Color = Theme.colorScheme.pureGray,
     borderWidth: Dp = 1.5.dp,
     borderColor: Color = Color.Transparent,
-    containerColor: Color = Theme.colorScheme.white,
+    containerColor: Color = Color.Transparent,
     cornerShape: RoundedCornerShape = RoundedCornerShape(dp0),
     alignment: Alignment = Alignment.TopStart,
     onItemClick: (() -> Unit)? = null,

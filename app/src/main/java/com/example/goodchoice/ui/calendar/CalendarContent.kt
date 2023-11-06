@@ -73,6 +73,7 @@ private fun CalendarContent(
     ) { contentPadding ->
         Calendar(
             isKoreaTravel = isKoreaTravel,
+            overseaStayList = listOf(2, 4, 7, 14),
             calendarType = type,
             calendarState = calendarState,
             onDayClicked = onDayClicked,
