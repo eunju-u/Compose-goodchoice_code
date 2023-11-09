@@ -17,14 +17,15 @@ import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.ImageButtonWidget
-import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil
 
 @Composable
 fun AroundTopWidget(
-    selectedRoomType: RoomType = RoomType.SLEEP_ROOM,
-    onItemClick: (roomType: RoomType) -> Unit = {}
+    selectedRoomType: RoomType = RoomType.SLEEP_ROOM, //숙박 인지 대실인지
+    onRoomTypeClick: (roomType: RoomType) -> Unit = {}, //선택한 숙박/대실 상위로 보내기 위한 콜백
+    selectedSearchText: String = "", //검색한 text
+    onSearchClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
@@ -33,6 +34,9 @@ fun AroundTopWidget(
     val isSleepRoom = selectedRoomType == RoomType.SLEEP_ROOM
     // 대실
     val isRentalRoom = selectedRoomType == RoomType.RENTAL_ROOM
+
+    val localAndStaySearch =
+        selectedSearchText.ifEmpty { stringResource(id = R.string.str_search_local_stay) }
 
     CardWidget(
         modifier = Modifier.fillMaxWidth(),
@@ -52,12 +56,10 @@ fun AroundTopWidget(
                         isCenterHorizontalArrangement = false,
                         containerColor = Theme.colorScheme.pureGray,
                         contentColor = Theme.colorScheme.darkGray,
-                        title = stringResource(id = R.string.str_search_local_stay),
+                        title = localAndStaySearch,
                         style = MaterialTheme.typography.labelMedium,
                         onItemClick = {
-                            context.startActivity(
-                                Intent(context, DetailSearchActivity::class.java)
-                            )
+                            onSearchClick()
                         },
                         content = {
                             Image(
@@ -111,7 +113,7 @@ fun AroundTopWidget(
                         shape = dp30,
                         title = stringResource(id = R.string.str_sleep_room),
                         style = MaterialTheme.typography.labelMedium,
-                        onItemClick = { onItemClick(RoomType.SLEEP_ROOM) },
+                        onItemClick = { onRoomTypeClick(RoomType.SLEEP_ROOM) },
                         content = {
                             Image(
                                 modifier = Modifier.size(dp15),
@@ -128,7 +130,7 @@ fun AroundTopWidget(
                         shape = dp30,
                         title = stringResource(id = R.string.str_rental_room),
                         style = MaterialTheme.typography.labelMedium,
-                        onItemClick = { onItemClick(RoomType.RENTAL_ROOM) },
+                        onItemClick = { onRoomTypeClick(RoomType.RENTAL_ROOM) },
                         content = {
                             Image(
                                 modifier = Modifier.size(dp15),

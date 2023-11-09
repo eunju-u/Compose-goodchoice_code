@@ -34,6 +34,7 @@ import com.example.goodchoice.ui.filter.FilterActivity
 import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.DeviceUtil
 import kotlinx.coroutines.launch
@@ -56,19 +57,31 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
     val aroundFilterSelect = viewModel.aroundFilterSelect
     val filterList = viewModel.filterList.collectAsStateWithLifecycle()
+    val selectSearchItem = viewModel.selectSearchItem
 
     Box(modifier = modifier) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            AroundTopWidget(selectedRoomType = selectRoomType.value, onItemClick = { roomType ->
-                viewModel.selectRoomType.value = roomType
-                // 룸타입이 변경되면 필터값 초기화
-                selectFilter = ""
-                selectFilterData = AroundFilterData()
-                viewModel.aroundFilterSelect = AroundFilterSelectedData()
-                viewModel.requestAroundData()
-            })
+            AroundTopWidget(
+                selectedRoomType = selectRoomType.value,
+                onRoomTypeClick = { roomType ->
+                    viewModel.selectRoomType.value = roomType
+                    // 룸타입이 변경되면 필터값 초기화
+                    selectFilter = ""
+                    selectFilterData = AroundFilterData()
+                    viewModel.aroundFilterSelect = AroundFilterSelectedData()
+                    viewModel.requestAroundData()
+                },
+                selectedSearchText = selectSearchItem.value.name ?: "",
+                onSearchClick = {
+                    (context as MainActivity).activityForSearchResult.launch(
+                        Intent(
+                            context,
+                            DetailSearchActivity::class.java
+                        )
+                    )
+                })
         }
         //TODO Map 넣기
 
@@ -186,7 +199,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 selectDepthItem.value = AroundFilterItem()
                                             }
                                         } else if (item.type == Const.FILTER) {
-                                            (context as MainActivity).activityForResult.launch(
+                                            (context as MainActivity).activityForFilterResult.launch(
                                                 Intent(
                                                     context,
                                                     FilterActivity::class.java

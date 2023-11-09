@@ -14,6 +14,7 @@ import com.example.goodchoice.api.data.search.RecommendAreaData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.home.model.MutableRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
+import com.example.goodchoice.ui.search.data.KoreaSearchData
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.*
@@ -38,9 +39,20 @@ class MainViewModel : ViewModel() {
     //스플래쉬에서 메인화면으로 처음 진입시 플래그 설정
     var firstSplash = false
 
+    //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
+    var isShowFullHeader = mutableStateOf(false)
+
+    //현재 navi가 보고 있는 루트
+    var currentRoute = MutableStateFlow("")
+
+    //서버가 없어, 최근 본 상품 삭제 하기 위한 플래그
+    //홈 처음 진입시 최근 본 상품 목록이 보여야 하고, 최근 목록 함에 있어야 하며, 전체 삭제시 리스트 삭제되어야 함.
+    var isRemoveRecentList = false
+
     // 최근 본 상품
     var recentData: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
 
+    /** 찜 화면 **/
     // 찜 > 국내 여행
     var koreaLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
 
@@ -52,7 +64,9 @@ class MainViewModel : ViewModel() {
 
     // 찜 > 레저 티켓
     var leisureLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
+    /************/
 
+    /** 검색 화면 **/
     // 검색 > 국내 숙소 (검색 순위)
     var koreaSearchRankData: List<FilterItem> = listOf()
 
@@ -61,24 +75,19 @@ class MainViewModel : ViewModel() {
 
     // 검색 > 레저 티켓 (추천 지역)
     var leisureSearchAreaData: List<RecommendAreaData> = listOf()
+    /************/
 
-    // 내 정보
-    var myInfoData = MutableStateFlow(MyInfoData())
-
-    //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
-    var isShowFullHeader = mutableStateOf(false)
-
-    var currentRoute = MutableStateFlow("")
-
-    //서버가 없어, 최근 본 상품 삭제 하기 위한 플래그
-    //홈 처음 진입시 최근 본 상품 목록이 보여야 하고, 최근 목록 함에 있어야 하며, 전체 삭제시 리스트 삭제되어야 함.
-    var isRemoveRecentList = false
-
+    /** 주변 화면 **/
     //주변 서버 조회 시 state
     var filterList = MutableStateFlow(listOf(AroundFilterData()))
     var aroundFilterSelect = AroundFilterSelectedData()
-
     val selectRoomType = mutableStateOf(RoomType.SLEEP_ROOM)
+    val selectSearchItem = mutableStateOf(KoreaSearchData())
+    /************/
+
+    /** 내 정보 화면 **/
+    var myInfoData = MutableStateFlow(MyInfoData())
+    /************/
 
     fun getCurrentViewData(context: Context) {
         when (currentRoute.value) {

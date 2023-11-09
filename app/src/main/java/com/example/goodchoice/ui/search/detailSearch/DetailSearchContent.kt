@@ -17,9 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.FilterItem
 import com.example.goodchoice.ui.components.*
+import com.example.goodchoice.ui.search.data.KoreaSearchData
 import com.example.goodchoice.ui.search.detailSearch.widget.SearchResultWidget
 import com.example.goodchoice.ui.theme.*
 
@@ -27,7 +26,8 @@ import com.example.goodchoice.ui.theme.*
 @Composable
 fun DetailSearchContent(
     viewModel: DetailSearchViewModel,
-    onFinish: () -> Unit = {}
+    onFinish: () -> Unit = {},
+    onSearchClick: (item: KoreaSearchData) -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val searchData by viewModel.searchData.collectAsStateWithLifecycle()
@@ -62,6 +62,7 @@ fun DetailSearchContent(
             onFinish = onFinish
         )
 
+        //검색
         LeftImageEditTextWidget(
             modifier = Modifier.fillMaxWidth(),
             outerPadding = PaddingValues(top = dp15, start = dp20, end = dp20, bottom = dp15),
@@ -84,6 +85,7 @@ fun DetailSearchContent(
             }
         )
 
+        //검색 결과
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize(), state = scrollState
@@ -127,7 +129,7 @@ fun DetailSearchContent(
                         SearchResultWidget(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {}
+                                .clickable { onSearchClick(item) }
                                 .padding(start = dp20, end = dp20, top = dp15),
                             item = item,
                             targetText = keyWord
