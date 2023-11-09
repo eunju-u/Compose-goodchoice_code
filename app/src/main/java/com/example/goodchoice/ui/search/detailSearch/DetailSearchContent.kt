@@ -71,7 +71,7 @@ fun DetailSearchContent(
             hint = stringResource(id = R.string.str_search_area_stay),
             vectorImageId = R.drawable.ic_nav_search,
             keyboardController = keyboardController,
-            isVisibleShadow = true, //TODO eunju : index == 0 인 상태에서 스크롤 내릴 경우만 ture 여야 한다.
+//            isVisibleShadow = true, //TODO eunju : index == 0 인 상태에서 스크롤 내릴 경우만 ture 여야 한다.
             isShowDialog = {
                 isShowDialog = it
             },

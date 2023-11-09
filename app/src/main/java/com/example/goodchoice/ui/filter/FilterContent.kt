@@ -203,6 +203,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
         }
 
         CardWidget(modifier = Modifier.align(Alignment.BottomEnd),
+            containerColor = Theme.colorScheme.white,
             isVisibleShadow = true,
             shadowOffsetY = -dp5,
             content = {

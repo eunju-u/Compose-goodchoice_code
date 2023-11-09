@@ -50,6 +50,7 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
         outerPadding = PaddingValues(dp10),
         innerPadding = PaddingValues(top = dp15, start = dp10, end = dp10, bottom = dp7),
         cornerShape = RoundedCornerShape(dp15),
+        containerColor = Theme.colorScheme.white,
         shadowColor = Theme.colorScheme.gray
     ) {
         Column {

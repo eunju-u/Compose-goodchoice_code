@@ -228,8 +228,8 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                         Spacer(modifier = Modifier.height(dp10))
                         Divider()
 
-                        val filterList = selectFilterData.filterList ?: listOf()
-                        if (selectFilter != "" && selectFilter == selectFilterData.type && filterList.isNotEmpty()) {
+                        val list = selectFilterData.filterList ?: listOf()
+                        if (selectFilter != "" && selectFilter == selectFilterData.type && list.isNotEmpty()) {
 
                             val select = when (selectFilterData.type) {
                                 Const.FILTER -> aroundFilterSelect.selectedFilter

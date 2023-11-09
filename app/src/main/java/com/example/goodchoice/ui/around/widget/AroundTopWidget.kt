@@ -38,6 +38,7 @@ fun AroundTopWidget(
         modifier = Modifier.fillMaxWidth(),
         isVisibleShadow = true,
         innerPadding = PaddingValues(vertical = dp20, horizontal = dp20),
+        containerColor = Theme.colorScheme.white,
         content = {
             Column(modifier = Modifier.fillMaxWidth()) {
                 Row(
