@@ -220,7 +220,7 @@ fun Calendar(
                         onLeftItemClick = { type ->
                             when (type) {
                                 CalendarPersonType.GUEST_ROOM -> {
-                                    if (overSeaStayCount > 1) overseaAdultCount--
+                                    if (overSeaStayCount > 1) overSeaStayCount--
                                 }
                                 CalendarPersonType.ADULT -> {
                                     if (overseaAdultCount > 1) overseaAdultCount--
@@ -248,46 +248,48 @@ fun Calendar(
             }
         }
 
+        //해외 캘린더 + 박 적용
         Column(modifier = Modifier.align(Alignment.BottomEnd)) {
-            if (calendarUiState.selectedStartDate != null && calendarUiState.selectedEndDate == null) {
-                LazyRow(
-                    modifier = Modifier.padding(bottom = dp20),
-                    horizontalArrangement = Arrangement.spacedBy(dp15),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    itemsIndexed(overseaStayList) { index, item ->
-                        if (index == 0) Spacer(modifier = Modifier.width(dp20))
-                        ButtonWidget(
-                            hasOutline = true,
-                            borderColor = Theme.colorScheme.blue,
-                            containerColor = Theme.colorScheme.pureBlue,
-                            shape = dp20,
-                            onItemClick = {
-                                calendarUiState.selectedStartDate.plusDays(item.toLong())?.let {
-                                    calendarState.plusDay(
-                                        calendarUiState.selectedStartDate,
-                                        it
+            if (!isKoreaTravel) {
+                if (calendarUiState.selectedStartDate != null && calendarUiState.selectedEndDate == null) {
+                    LazyRow(
+                        modifier = Modifier.padding(bottom = dp20),
+                        horizontalArrangement = Arrangement.spacedBy(dp15),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        itemsIndexed(overseaStayList) { index, item ->
+                            if (index == 0) Spacer(modifier = Modifier.width(dp20))
+                            ButtonWidget(
+                                hasOutline = true,
+                                borderColor = Theme.colorScheme.blue,
+                                containerColor = Theme.colorScheme.pureBlue,
+                                shape = dp20,
+                                onItemClick = {
+                                    calendarUiState.selectedStartDate.plusDays(item.toLong())?.let {
+                                        calendarState.plusDay(
+                                            calendarUiState.selectedStartDate,
+                                            it
+                                        )
+                                    }
+                                },
+                                content = {
+                                    Text(
+                                        text = stringResource(
+                                            id = R.string.str_oversea_add_day, item.toString()
+                                        ),
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = Theme.colorScheme.blue
                                     )
                                 }
-                            },
-                            content = {
-                                Text(
-                                    text = stringResource(
-                                        id = R.string.str_oversea_add_day, item.toString()
-                                    ),
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = Theme.colorScheme.blue
-                                )
-                            }
-                        )
-                        if (index == overseaStayList.lastIndex)
-                            Spacer(
-                                modifier = Modifier.width(dp20)
                             )
+                            if (index == overseaStayList.lastIndex)
+                                Spacer(
+                                    modifier = Modifier.width(dp20)
+                                )
+                        }
                     }
                 }
             }
-
 
             //초기화 & 적용 뷰
             CardWidget(
