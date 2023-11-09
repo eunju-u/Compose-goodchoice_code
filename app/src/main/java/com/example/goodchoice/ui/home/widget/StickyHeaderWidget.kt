@@ -1,22 +1,20 @@
 package com.example.goodchoice.ui.home.widget
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.*
 import androidx.compose.material3.Divider
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.theme.*
+import androidx.compose.ui.graphics.ColorFilter
 
 /**
  * 홈 스크롤시 상단에 노출되는 뷰
@@ -55,15 +53,15 @@ fun StickyHeaderWidget(
                 Divider(
                     modifier = Modifier
                         .width(dp1)
-                        .height(dp20), color = Theme.colorScheme.gray
+                        .height(dp30), color = Theme.colorScheme.pureGray
                 )
-                IconButton(modifier = Modifier
-                    .size(dp30), onClick = { onClickMore() }) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_more),
-                        contentDescription = stringResource(id = R.string.str_more)
-                    )
-                }
+                CategoryItemWidget(
+                    painter = painterResource(id = R.drawable.ic_more),
+                    name = stringResource(id = R.string.str_more),
+                    colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
+                    height = CategoryItemHeight,
+                    onItemClick = { onClickMore() }
+                )
             } else {
                 for (i in categoryItem.indices) {
                     val item = categoryItem[i]
