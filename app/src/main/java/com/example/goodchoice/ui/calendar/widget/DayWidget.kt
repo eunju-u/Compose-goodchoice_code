@@ -111,7 +111,7 @@ internal fun Day(
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center),
             text = day.dayOfMonth.toString(),
-            color = if (sunday == day) Theme.colorScheme.red else if (onClickEnabled) Theme.colorScheme.darkGray else Theme.colorScheme.pureGray,
+            color = if (!onClickEnabled) Theme.colorScheme.pureGray else if (sunday == day) Theme.colorScheme.red else Theme.colorScheme.darkGray,
             style = MaterialTheme.typography.labelSmall
         )
     }
