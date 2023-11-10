@@ -119,49 +119,48 @@ fun LeftImageEditTextWidget(
                         contentAlignment = Alignment.Center
                     ) { content() }
                 }
-                Row(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    BasicTextField(
-                        value = textFieldState,
-                        onValueChange = {
-                            textFieldState = it
-                            onInputChanged(textFieldState.text)
-                        },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            imeAction = ImeAction.Go
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onGo = {
-                                // 두글자 미만시 다이얼로그 노출
-                                if (textFieldState.text.length < 2) {
-                                    isShowDialog(true)
-                                } else {
-                                    onInputChanged(textFieldState.text)
-                                    keyboardController?.hide()
-                                }
-                            }
-                        ),
-                        textStyle = style.copy(color = Theme.colorScheme.darkGray),
-                        cursorBrush = SolidColor(LocalContentColor.current),
-                        decorationBox = { innerTextField ->
-                            if (hint.isNotEmpty() && textFieldState.text.isEmpty()) {
-                                Text(
-                                    text = hint,
-                                    style = style,
-                                    color = Theme.colorScheme.gray
-                                )
-                            }
-                            innerTextField()
-                        }
-                    )
-                }
 
+                BasicTextField(modifier = Modifier.weight(1f),
+                    value = textFieldState,
+                    onValueChange = {
+                        textFieldState = it
+                        onInputChanged(textFieldState.text)
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Go
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onGo = {
+                            // 두글자 미만시 다이얼로그 노출
+                            if (textFieldState.text.length < 2) {
+                                isShowDialog(true)
+                            } else {
+                                onInputChanged(textFieldState.text)
+                                keyboardController?.hide()
+                            }
+                        }
+                    ),
+                    textStyle = style.copy(color = Theme.colorScheme.darkGray),
+                    cursorBrush = SolidColor(LocalContentColor.current),
+                    decorationBox = { innerTextField ->
+                        if (hint.isNotEmpty() && textFieldState.text.isEmpty()) {
+                            Text(
+                                text = hint,
+                                style = style,
+                                color = Theme.colorScheme.gray
+                            )
+                        }
+                        innerTextField()
+                    }
+                )
+
+                //검색 닫기 뷰
                 if (isShowClose) {
                     Icon(
                         modifier = Modifier
                             .width(dp20)
                             .height(dp20)
+                            .clip(shape = RoundedCornerShape(dp50))
                             .clickable {
                                 //키보드 내리기
                                 keyboardController?.hide()
