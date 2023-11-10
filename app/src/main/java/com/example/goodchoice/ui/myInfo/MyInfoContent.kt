@@ -2,59 +2,38 @@ package com.example.goodchoice.ui.myInfo
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.Icon
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.platform.InspectableModifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.api.data.MyMenuData
-import com.example.goodchoice.ui.components.ButtonWidget
-import com.example.goodchoice.ui.components.CategoryItemWidget
-import com.example.goodchoice.ui.components.LeftImageButtonWidget
-import com.example.goodchoice.ui.components.RightImageButtonWidget
-import com.example.goodchoice.ui.components.SpaceBetweenRowWidget
-import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
 import com.example.goodchoice.ui.theme.GMarketSansFamily
 import com.example.goodchoice.ui.theme.Theme
@@ -99,140 +78,115 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
         fontFamily = GMarketSansFamily,
         fontWeight = FontWeight.Medium,
     )
-    var textStyle by remember { mutableStateOf(style) }
 
-    Box(modifier = Modifier) {
+    //미정님 myInfo 에서 설정 화면이 안나오는 이유는 Box의 modifier 을 Modifier로 새로 정의해서 그래요!
+    //MyInfoContent 의 modifier 을 써야 해요
+    //MyInfoContent 의 modifier 는 main 에서 navi bottom 뷰 제외하고 준거라 크기가 맞게 됩니다~
+    Box(modifier = modifier) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             state = lazyColumnListState
         ) {
             item {
-                /** 내 정보 > 상단 내 정보 (임시) */
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-//                        .background(Theme.colorScheme.pureGray)
-                ) {
-                    /** 이미지 및 회원가입/로그인 버튼 */
-                    Row(
-                        modifier = Modifier
-                            .height(IntrinsicSize.Min)
-                            .padding(dp5)
-                            .fillMaxWidth()
-                            .background(Theme.colorScheme.white),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            modifier = Modifier
-                                .size(dp90)
-                                .padding(dp10),
-                            painter = painterResource(id = R.drawable.bg_teal),
-                            contentDescription = "내 정보"
-                        )
-
-                        SpaceBetweenRowWidget(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(dp10)
-                                .clickable {
-                                    context.startActivity(
-                                        Intent(
-                                            context,
-                                            LoginActivity::class.java
-                                        )
-                                    )
-                                },
-                            content = {
-                                Column(
+                CardWidget(
+                    isVisibleShadow = true,
+                    shadowOffsetY = dp20,
+                    shadowColor = Theme.colorScheme.pureGray,
+                    outerPadding = PaddingValues(bottom = dp20),
+                    innerPadding = PaddingValues(vertical = dp20, horizontal = dp20),
+                    containerColor = Theme.colorScheme.white,
+                    content = {
+                        /** 내 정보 > 상단 내 정보 (임시) */
+                        Column(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            /** 이미지 및 회원가입/로그인 버튼 */
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(IntrinsicSize.Min),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Icon(
                                     modifier = Modifier
-                                        .weight(1f),
-                                ) {
-                                    Text(
-                                        textAlign = TextAlign.Start,
-                                        text = "회원가입/로그인",
-                                        style = MaterialTheme.typography.titleMedium,
-                                    )
-                                    Text(
-                                        modifier = Modifier
-                                            .padding(top = dp5)
-                                            .background(Theme.colorScheme.pureBlue),
-                                        textAlign = TextAlign.Start,
-                                        color = Theme.colorScheme.blue,
-                                        text = "여기 어때 회원가입하고 엘리트 혜택 받으세요!",
-                                        style = MaterialTheme.typography.bodySmall
-                                    )
-                                }
-                                Image(
-                                    colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                                    painter = painterResource(id = R.drawable.ic_right),
-                                    contentDescription = null
+                                        .size(dp90)
+                                        .padding(dp10),
+                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
+                                    tint = Theme.colorScheme.red,
+                                    contentDescription = "내 정보"
+                                )
+
+                                SpaceBetweenRowWidget(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(dp10)
+                                        .clickable {
+                                            context.startActivity(
+                                                Intent(
+                                                    context,
+                                                    LoginActivity::class.java
+                                                )
+                                            )
+                                        },
+                                    content = {
+                                        Column(
+                                            modifier = Modifier.weight(1f),
+                                        ) {
+                                            Text(
+                                                textAlign = TextAlign.Start,
+                                                text = stringResource(id = R.string.str_join_and_login),
+                                                style = MaterialTheme.typography.displaySmall,
+                                            )
+                                            Text(
+                                                modifier = Modifier
+                                                    .padding(top = dp5)
+                                                    .background(Theme.colorScheme.pureBlue)
+                                                    .padding(dp5),
+                                                textAlign = TextAlign.Start,
+                                                color = Theme.colorScheme.blue,
+                                                text = stringResource(id = R.string.str_join_and_login_sub),
+                                                style = MaterialTheme.typography.labelMedium
+                                            )
+                                        }
+                                        Icon(
+                                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_right),
+                                            tint = Theme.colorScheme.darkGray,
+                                            contentDescription = null
+                                        )
+                                    }
                                 )
                             }
-                        )
-                    }
 
-                    /** 포인트/쿠폰 버튼 */
-//                    Surface(shape = MaterialTheme.shapes.medium, elevation = 10.dp) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(IntrinsicSize.Min)
-                            .background(Theme.colorScheme.pureBlue),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
+                            /** 포인트/쿠폰 버튼 */
+                            CouponWidget(onLeftClick = {}, onRightClick = {})
 
-                        ButtonWidget(
-                            modifier = Modifier.width(dp150),
-                            shape = 0.dp,
-//                                borderColor = Theme.colorScheme.gray,
-                            onItemClick = { /*TODO*/ },
-                            content = { Text(text = "포인트") }
-                        )
-
-                        Divider(
-                            modifier = Modifier
-                                .width(1.dp)
-                                .height(dp40),
-                            color = Theme.colorScheme.gray
-                        )
-
-                        ButtonWidget(
-                            modifier = Modifier.width(dp150),
-                            shape = 0.dp,
-//                                borderColor = Theme.colorScheme.gray,
-                            onItemClick = { /*TODO*/ },
-                            content = { Text(text = "쿠폰") }
-                        )
-                    }
-
-//                    }
-
-                    /** 카테고리 (최근 본 상품, 할인*혜택, 내 리뷰, 알림함) 버튼 */
-                    // 카테고리 뷰
-                    if (topMenuList.isNotEmpty()) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .selectableGroup()
-                                .padding(top = dp10, bottom = dp10, start = dp30, end = dp30),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            for (i in topMenuList.indices) {
-                                //텍스트, 이미지 사이즈 확인 필요
-                                val item = topMenuList[i]
-                                CategoryItemWidget(
-                                    painter = painterResource(
-                                        id = item.icon ?: R.drawable.bg_white
-                                    ), name = item.name ?: ""
-                                )
+                            /** 카테고리 (최근 본 상품, 할인*혜택, 내 리뷰, 알림함) 버튼 */
+                            if (topMenuList.isNotEmpty()) {
+                                LazyRow(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = dp20, bottom = dp10),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    items(items = topMenuList) { item ->
+                                        CategoryItemWidget(
+                                            imageSize = dp20,
+                                            painter = painterResource(
+                                                id = item.icon ?: R.drawable.bg_white
+                                            ),
+                                            name = item.name ?: "",
+                                            bottomPadding = dp10,
+                                            colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
+                                            onItemClick = {}
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
-                }
+                )
             }
-
 
             if (menuList.isNotEmpty()) {
                 /** 예약내역*/

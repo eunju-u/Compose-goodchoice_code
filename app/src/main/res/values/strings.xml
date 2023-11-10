@@ -49,6 +49,10 @@
 
 
     <!--  내 정보  -->
+    <string name="str_join_and_login">회원가입 / 로그인</string>
+    <string name="str_join_and_login_sub">여기 어때 회원가입하고 엘리트 혜택 받으세요!</string>
+    <string name="str_point">포인트</string>
+
 
     <!--  최근 본 상품  -->
     <string name="str_empty_recent_seen_item_title">최근 본 상품이 없어요</string>

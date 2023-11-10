@@ -656,7 +656,7 @@ class MainViewModel : ViewModel() {
         homeUiState.value = ConnectInfo.Available()
     }
 
-    private fun requestMyInfoData() = viewModelScope.async {
+    private fun requestMyInfoData() = viewModelScope.launch {
         /*
         * viewModelScope
         * homeUiState
