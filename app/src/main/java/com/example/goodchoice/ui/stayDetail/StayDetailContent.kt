@@ -53,7 +53,6 @@ fun StayDetailContent(
     val lazyColumnListState = rememberLazyListState()
 
     val detailUiState = viewModel.detailUiState.collectAsStateWithLifecycle()
-    val isChangeTopWidget = false
 
     //바텀시트
     val sheetState: MyBottomSheetState =
@@ -61,6 +60,13 @@ fun StayDetailContent(
             initialValue = ModalBottomSheetValue.Hidden,
             skipHalfExpanded = true
         )
+
+    //상단 app bar 숙소 이름 노출 및 색상 변경 플래그
+    val isChangeTopWidget by remember {
+        derivedStateOf {
+            lazyColumnListState.firstVisibleItemIndex > 0
+        }
+    }
 
     val rememberScope = rememberCoroutineScope()
 
@@ -81,7 +87,7 @@ fun StayDetailContent(
                                 .height(dp300)
                                 .clickable {},
                             contentScale = ContentScale.FillHeight,
-                            painter = if (item.imageList.isNotEmpty() == true)
+                            painter = if (item.imageList.isNotEmpty())
                                 rememberAsyncImagePainter(
                                     model = item.imageList[0],
                                     painterResource(id = R.drawable.bg_white)
