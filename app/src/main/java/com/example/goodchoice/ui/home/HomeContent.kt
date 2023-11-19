@@ -147,9 +147,7 @@ fun HomeContent(
                 if (!viewModel.firstSplash) {
                     if (categoryList.isNotEmpty()) {
                         //나라 타입
-                        itemsIndexed(
-                            items = categoryList,
-                            key = { index, item -> item.countryType ?: "" }) { index, item ->
+                        itemsIndexed(items = categoryList) { index, item ->
                             val categoryItemList = item.categoryList
                             if (item.countryType == Const.OVERSEA) {
                                 Row(
@@ -191,8 +189,7 @@ fun HomeContent(
                                     verticalArrangement = Arrangement.spacedBy(dp2),
                                     userScrollEnabled = false
                                 ) {
-                                    itemsIndexed(items = categoryItemList,
-                                        key = { index, item -> item.id ?: "" }) { index, item ->
+                                    itemsIndexed(items = categoryItemList) { index, item ->
                                         CategoryItemWidget(
                                             painter = painterResource(
                                                 id = item.icon ?: R.drawable.bg_white
@@ -256,30 +253,24 @@ fun HomeContent(
                                 Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
                             }
                         }
-                    }
-                    if (stayList.isNotEmpty()) {
-                        items(
-                            items = stayList,
-                            key = { item: StayData -> item.type ?: "" }) { stayData ->
-                            HotelVerticalWidget(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                type = stayData.type ?: 0,
-                                title = stayData.title ?: "",
-                                stayList = stayData.stayList ?: listOf(),
-                                recentStay = recentData
-                            )
-                        }
-                        item {
+
+                        if (stayList.isNotEmpty()) {
+                            stayList.forEach { stayData ->
+                                HotelVerticalWidget(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    type = stayData.type ?: 0,
+                                    title = stayData.title ?: "",
+                                    stayList = stayData.stayList ?: listOf(),
+                                    recentStay = recentData
+                                )
+                            }
                             Spacer(modifier = Modifier.height(dp5))
                         }
-                    }
 
-                    item {
                         Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
-                    }
-                    if (overSeaCityList.isNotEmpty()) {
-                        item {
+
+                        if (overSeaCityList.isNotEmpty()) {
                             Column(Modifier.background(color = Theme.colorScheme.pureGray)) {
                                 Text(
                                     modifier = Modifier.padding(
@@ -291,16 +282,16 @@ fun HomeContent(
                                         originText = stringResource(id = R.string.str_over_sea_row_price),
                                         targetText = "최저가 숙소"
                                     ),
-                                    style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+                                    style = MaterialTheme.typography.displaySmall.copy(
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 )
                                 LazyRow(
                                     modifier = Modifier.fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(dp10)
                                 ) {
-                                    itemsIndexed(
-                                        items = overSeaCityList,
-                                        key = { index, item -> item.id ?: "" }) { index, item ->
+                                    itemsIndexed(items = overSeaCityList) { index, item ->
                                         if (index == 0) Spacer(Modifier.width(dp15))
                                         Column(
                                             modifier = Modifier
@@ -328,10 +319,8 @@ fun HomeContent(
                                 }
                             }
                         }
-                    }
 
-                    if (overseaSpecialList.isNotEmpty()) {
-                        item {
+                        if (overseaSpecialList.isNotEmpty()) {
                             HotelVerticalWidget(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -340,9 +329,7 @@ fun HomeContent(
                                 stayList = overseaSpecialList
                             )
                         }
-                    }
 
-                    item {
                         Spacer(modifier = Modifier.height(dp20))
                         CompanyInfoWidget()
                         Spacer(modifier = Modifier.height(dp30))
@@ -354,20 +341,24 @@ fun HomeContent(
 
 
     if (isShowHeader && viewModel.allCategoryList.isNotEmpty()) {
-        StickyHeaderWidget(
-            modifier = Modifier
-                .fillMaxWidth(),
-            viewModel.allCategoryList,
-            onClickMore = {
-                viewModel.isShowFullHeader.value = true
-            })
+        Box {
+            StickyHeaderWidget(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                viewModel.allCategoryList,
+                onClickMore = {
+                    viewModel.isShowFullHeader.value = true
+                })
+        }
     }
 
     if (isShowFullHeader.value) {
-        FullHeaderWidget(
-            categoryItem = viewModel.allCategoryList,
-            onClickClose = {
-                viewModel.isShowFullHeader.value = false
-            })
+        Box {
+            FullHeaderWidget(
+                categoryItem = viewModel.allCategoryList,
+                onClickClose = {
+                    viewModel.isShowFullHeader.value = false
+                })
+        }
     }
 }

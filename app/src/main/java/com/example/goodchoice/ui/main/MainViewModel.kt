@@ -671,7 +671,9 @@ class MainViewModel : ViewModel() {
                 CategoryItem(id = "m_4", name = "알림함", icon = R.drawable.ic_myinfo_noti)
             ), menuList = listOf(
                 MyMenuData(
-                    id = 0, title = "예약내역", list = listOf(
+                    id = 0,
+                    title = "예약내역",
+                    list = listOf(
                         MyMenuItem(id = 0, name = "국내 숙소"),
                         MyMenuItem(id = 1, name = "해외 숙소"),
                         MyMenuItem(id = 2, name = "공간대여"),
@@ -680,8 +682,11 @@ class MainViewModel : ViewModel() {
                         MyMenuItem(id = 5, name = "항공"),
                         MyMenuItem(id = 6, name = "항공+숙소 결합상품")
                     )
-                ), MyMenuData(
-                    id = 1, title = "고객센터", list = listOf(
+                ),
+                MyMenuData(
+                    id = 1,
+                    title = "고객센터",
+                    list = listOf(
                         MyMenuItem(id = 0, icon = R.drawable.ic_myinfo_question, name = "자주 묻는 질문"),
                         MyMenuItem(
                             id = 1,
@@ -701,7 +706,9 @@ class MainViewModel : ViewModel() {
                  * banner (?)
                  * */
                 MyMenuData(
-                    id = 2, path = "banner_path", list = listOf(
+                    id = 2,
+                    path = "banner_path",
+                    list = listOf(
                         MyMenuItem(id = 0, name = "공지사항"),
                         MyMenuItem(id = 1, name = "여기어때 상품권 잔액조회"),
                         MyMenuItem(id = 2, name = "리서치 참여"),
@@ -712,7 +719,8 @@ class MainViewModel : ViewModel() {
                         MyMenuItem(id = 7, name = "혜택 QR")
                     )
                 ), MyMenuData(
-                    id = 3, list = listOf(
+                    id = 3,
+                    list = listOf(
                         MyMenuItem(id = 0, name = "설정")
                     )
                 )
