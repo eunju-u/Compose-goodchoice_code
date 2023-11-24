@@ -50,7 +50,7 @@ fun SpaceBetweenRowWidget(
     ) {
         text?.let {
             if (it is String) {
-                Text(
+                TextWidget(
                     modifier = Modifier
                         .fillMaxHeight()
                         .then(textModifier)
@@ -60,7 +60,7 @@ fun SpaceBetweenRowWidget(
                     color = textColor
                 )
             } else {
-                Text(
+                TextWidget(
                     modifier = Modifier
                         .fillMaxHeight()
                         .then(textModifier)

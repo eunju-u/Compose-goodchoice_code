@@ -48,7 +48,7 @@ fun CardWidget(
             .coloredShadow(
                 color = if (isVisibleShadow) shadowColor else Color.Transparent,
                 blur = dp10,
-                offsetY = shadowOffsetY
+                offsetY = if (isVisibleShadow) shadowOffsetY else dp0
             )
             .background(
                 color = containerColor, shape = cornerShape

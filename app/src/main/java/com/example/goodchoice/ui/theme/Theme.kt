@@ -1,13 +1,11 @@
 package com.example.goodchoice.ui.theme
 
 import android.app.Activity
-import android.content.res.Configuration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -79,6 +77,8 @@ class ThemeColorScheme(
     panoramaBlue: Color,
     green: Color,
     lightPink: Color,
+    mediumPurple: Color,
+    darkPurple: Color,
 ) {
     var blue by mutableStateOf(blue)
         private set
@@ -102,6 +102,10 @@ class ThemeColorScheme(
         private set
     var lightPink by mutableStateOf(lightPink)
         private set
+    var mediumPurple by mutableStateOf(mediumPurple)
+        private set
+    var darkPurple by mutableStateOf(darkPurple)
+        private set
 
     fun copy(): ThemeColorScheme = ThemeColorScheme(
         blue = blue,
@@ -115,6 +119,8 @@ class ThemeColorScheme(
         panoramaBlue = panoramaBlue,
         green = green,
         lightPink = lightPink,
+        mediumPurple = mediumPurple,
+        darkPurple = darkPurple,
     )
 
     fun update(other: ThemeColorScheme) {
@@ -129,6 +135,8 @@ class ThemeColorScheme(
         panoramaBlue = other.panoramaBlue
         green = other.green
         lightPink = other.lightPink
+        mediumPurple = other.mediumPurple
+        darkPurple = other.darkPurple
     }
 }
 
@@ -144,6 +152,8 @@ val LightColorScheme = ThemeColorScheme(
     panoramaBlue = PanoramaBlue,
     green = Green,
     lightPink = LightPink,
+    mediumPurple = MediumPurple,
+    darkPurple = DarkPurple
 )
 
 private val DarkColorScheme = ThemeColorScheme(
@@ -158,7 +168,9 @@ private val DarkColorScheme = ThemeColorScheme(
     panoramaBlue = PanoramaBlue,
     green = Green,
     lightPink = LightPink,
-    )
+    mediumPurple = MediumPurple,
+    darkPurple = DarkPurple
+)
 
 fun mappingColorScheme() = ColorScheme(
     primary = White,

@@ -1,84 +1,93 @@
 package com.example.goodchoice.ui.myInfo.widget
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.MyMenuItem
+import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.SpaceBetweenRowWidget
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp10
-import com.example.goodchoice.ui.theme.dp20
-
+import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.ui.theme.*
 
 @Composable
-/**
- * 내 정보 >> LazyColumn Custom Item
- *
- * "질문 있어요!"
- *
- * */
-fun MenuItemWidget(menuItem: MyMenuItem){
+        /**
+         * 내 정보 >> LazyColumn Custom Item
+         *
+         * "질문 있어요!"
+         *
+         * */
+fun MenuItemWidget(menuItem: MyMenuItem) {
+    val textMediumStyle = MaterialTheme.typography.labelMedium
     SpaceBetweenRowWidget(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = dp10, end = dp10)
-            .background(Theme.colorScheme.pureBlue)
-            .clickable {  },
-//        text = menuItem.name,
-//        textStyle = textStyle,
+            .height(dp45)
+            .clickable { }
+            .padding(start = dp25, end = dp15, top = dp5, bottom = dp5),
+        text = if (menuItem.icon == 0) menuItem.name else null,
+        textStyle = textMediumStyle,
         content = {
-            Row(
-                modifier = Modifier
-//                    .background(Theme.colorScheme.white)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                if(menuItem.icon != 0){
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically,
-//                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Image(
-                            modifier = Modifier.size(dp20),
-                            painter = painterResource(id = menuItem.icon),
-                            contentDescription = null
-                        )
-                        Text(
-                            text = menuItem.name
-                        )
-                        if (menuItem.subText != ""){
-                            Text(
-                                text = menuItem.subText,
-                                fontSize = 9.sp,
-                            )
-                        }
-                    }
-                }else {
-                    Text(
-                        text = menuItem.name
+            if (menuItem.icon != 0) {
+                var secondModifier: Modifier = Modifier
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        modifier = Modifier.size(dp20),
+                        tint = Theme.colorScheme.gray,
+                        contentDescription = null,
+                        imageVector = ImageVector.vectorResource(id = menuItem.icon)
+                    )
+                    TextWidget(
+                        modifier = Modifier
+                            .padding(start = dp15),
+                        text = menuItem.name,
+                        color = Theme.colorScheme.darkGray,
+                        style = textMediumStyle
                     )
                 }
-                Image(
-                    colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                    painter = painterResource(id = R.drawable.ic_right),
-                    contentDescription = null
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (menuItem.subText != "") {
+                        secondModifier = Modifier.padding(start = dp5)
+                        CardWidget(
+                            innerPadding = PaddingValues(horizontal = dp10, vertical = dp7),
+                            containerColor = Theme.colorScheme.pureGray,
+                            cornerShape = RoundedCornerShape(dp15),
+                            content = {
+                                TextWidget(
+                                    text = menuItem.subText,
+                                    color = Theme.colorScheme.gray,
+                                    style = MaterialTheme.typography.labelSmall
+                                )
+                            })
+
+                    }
+                    Icon(
+                        modifier = Modifier.then(secondModifier),
+                        tint = Theme.colorScheme.gray,
+                        contentDescription = null,
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_right)
+                    )
+                }
+
+            } else {
+                Icon(
+                    tint = Theme.colorScheme.gray,
+                    contentDescription = null,
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_right)
                 )
             }
         }

@@ -10,7 +10,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,20 +22,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.api.data.MyMenuData
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
-import com.example.goodchoice.ui.theme.GMarketSansFamily
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.*
 
@@ -63,6 +60,7 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     //액티비티 호출
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
+    val pref = GoodChoicePreference(context)
 
     //가져올때
     val myInfoData = viewModel.myInfoData.collectAsStateWithLifecycle().value
@@ -70,14 +68,6 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val menuList: List<MyMenuData> = myInfoData.menuList ?: emptyList()
 
     val lazyColumnListState = rememberLazyListState()
-
-    //폰트 관련
-    val style = TextStyle(
-        fontSize = 12.sp,
-        lineHeight = 10.sp,
-        fontFamily = GMarketSansFamily,
-        fontWeight = FontWeight.Medium,
-    )
 
     //미정님 myInfo 에서 설정 화면이 안나오는 이유는 Box의 modifier 을 Modifier로 새로 정의해서 그래요!
     //MyInfoContent 의 modifier 을 써야 해요
@@ -92,69 +82,72 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                     isVisibleShadow = true,
                     shadowOffsetY = dp20,
                     shadowColor = Theme.colorScheme.pureGray,
-                    outerPadding = PaddingValues(bottom = dp20),
-                    innerPadding = PaddingValues(vertical = dp20, horizontal = dp20),
+                    innerPadding = PaddingValues(start = dp20, end = dp20, top = dp20),
                     containerColor = Theme.colorScheme.white,
                     content = {
                         /** 내 정보 > 상단 내 정보 (임시) */
                         Column(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            /** 이미지 및 회원가입/로그인 버튼 */
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(IntrinsicSize.Min),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Icon(
-                                    modifier = Modifier
-                                        .size(dp90)
-                                        .padding(dp10),
-                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
-                                    tint = Theme.colorScheme.red,
-                                    contentDescription = "내 정보"
-                                )
-
-                                SpaceBetweenRowWidget(
+                            if (!pref.isLogin) {
+                                /** 이미지 및 회원가입/로그인 버튼 */
+                                Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(dp10)
-                                        .clickable {
-                                            context.startActivity(
-                                                Intent(
-                                                    context,
-                                                    LoginActivity::class.java
+                                        .height(IntrinsicSize.Min),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Icon(
+                                        modifier = Modifier
+                                            .size(dp80),
+                                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
+                                        tint = Theme.colorScheme.red,
+                                        contentDescription = "내 정보"
+                                    )
+
+                                    SpaceBetweenRowWidget(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(dp10)
+                                            .clickable {
+                                                context.startActivity(
+                                                    Intent(
+                                                        context,
+                                                        LoginActivity::class.java
+                                                    )
                                                 )
-                                            )
-                                        },
-                                    content = {
-                                        Column(
-                                            modifier = Modifier.weight(1f),
-                                        ) {
-                                            Text(
-                                                textAlign = TextAlign.Start,
-                                                text = stringResource(id = R.string.str_join_and_login),
-                                                style = MaterialTheme.typography.displaySmall,
-                                            )
-                                            Text(
-                                                modifier = Modifier
-                                                    .padding(top = dp5)
-                                                    .background(Theme.colorScheme.pureBlue)
-                                                    .padding(dp5),
-                                                textAlign = TextAlign.Start,
-                                                color = Theme.colorScheme.blue,
-                                                text = stringResource(id = R.string.str_join_and_login_sub),
-                                                style = MaterialTheme.typography.labelMedium
+                                            },
+                                        content = {
+                                            Column(
+                                                modifier = Modifier.weight(1f),
+                                            ) {
+                                                TextWidget(
+                                                    textAlign = TextAlign.Start,
+                                                    text = stringResource(id = R.string.str_join_and_login),
+                                                    style = MaterialTheme.typography.displaySmall,
+                                                )
+                                                TextWidget(
+                                                    modifier = Modifier
+                                                        .padding(top = dp5)
+                                                        .background(Theme.colorScheme.mediumPurple)
+                                                        .padding(dp3),
+                                                    textAlign = TextAlign.Start,
+                                                    color = Theme.colorScheme.darkPurple,
+                                                    maxLines = 2,
+                                                    text = stringResource(id = R.string.str_join_and_login_sub),
+                                                    style = MaterialTheme.typography.labelMedium
+                                                )
+                                            }
+                                            Icon(
+                                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_right),
+                                                tint = Theme.colorScheme.darkGray,
+                                                contentDescription = null
                                             )
                                         }
-                                        Icon(
-                                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_right),
-                                            tint = Theme.colorScheme.darkGray,
-                                            contentDescription = null
-                                        )
-                                    }
-                                )
+                                    )
+                                }
+                            } else {
+
                             }
 
                             /** 포인트/쿠폰 버튼 */
@@ -162,44 +155,60 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
                             /** 카테고리 (최근 본 상품, 할인*혜택, 내 리뷰, 알림함) 버튼 */
                             if (topMenuList.isNotEmpty()) {
+                                val weigh = (100 / topMenuList.size) * 0.01
+
                                 LazyRow(
                                     modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(top = dp20, bottom = dp10),
+                                        .fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     items(items = topMenuList) { item ->
-                                        CategoryItemWidget(
-                                            imageSize = dp20,
-                                            painter = painterResource(
-                                                id = item.icon ?: R.drawable.bg_white
-                                            ),
-                                            name = item.name ?: "",
-                                            bottomPadding = dp10,
-                                            colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
-                                            onItemClick = {}
-                                        )
+                                        Column(
+                                            modifier = Modifier
+                                                .fillParentMaxWidth(weigh.toFloat())
+                                                .clickable { }
+                                                .padding(top = dp20, bottom = dp20),
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            CategoryItemWidget(
+                                                imageSize = dp20,
+                                                painter = painterResource(
+                                                    id = item.icon ?: R.drawable.bg_white
+                                                ),
+                                                name = item.name ?: "",
+                                                bottomPadding = dp10,
+                                                colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
+                                            )
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 )
-            }
 
-            if (menuList.isNotEmpty()) {
-                /** 예약내역*/
-                items(menuList) {
-                    Column(
-                        modifier = Modifier.padding(dp5)
-                    ) {
-                        if (it.title != "") {
-                            TextWidget(
-                                text = it.title,
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
+                if (menuList.isNotEmpty()) {
+                    /** 예약내역*/
+                    // items(menuList) 로 했을 때 스크롤시 버벅임!!
+                    // LazyColumn 안에 리스트 성 위젯 말고 다른 위젯이 포함되어있다면 for 문 써서 하기
+                    Spacer(modifier = Modifier.padding(top = dp15))
+                    menuList.forEachIndexed { index, item ->
+                        Column {
+                            if (item.title != "") {
+                                TextWidget(
+                                    modifier = Modifier.padding(
+                                        start = dp25,
+                                        end = dp25,
+                                        bottom = dp15,
+                                        top = dp15
+                                    ),
+                                    text = item.title,
+                                    style = MaterialTheme.typography.labelLarge,
+                                    color = Theme.colorScheme.darkGray
+                                )
+                            }
 
 //                        if (it.path != ""){
 //                            Image(
@@ -209,9 +218,19 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 //                            )
 //                        }
 
-                        if (it.list!!.isNotEmpty()) {
-                            for (listItem in it.list) {
-                                MenuItemWidget(menuItem = listItem)
+                            item.list?.let {
+                                it.forEach { menuItem ->
+                                    MenuItemWidget(menuItem = menuItem)
+                                }
+                            }
+
+                            if (index != menuList.lastIndex) {
+                                //선
+                                Divider(
+                                    modifier = Modifier.padding(top = dp15, bottom = dp15),
+                                    thickness = dp2,
+                                    color = Theme.colorScheme.pureGray
+                                )
                             }
                         }
                     }
@@ -219,6 +238,4 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
             }
         }
     }
-
-
 }
