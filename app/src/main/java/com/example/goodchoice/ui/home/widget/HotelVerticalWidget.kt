@@ -30,7 +30,7 @@ import com.example.goodchoice.utils.StringUtil
 @Composable
 fun HotelVerticalWidget(
     modifier: Modifier = Modifier,
-    type: Int = 0,
+    type: String = "",
     title: String = "",
     stayList: List<Any> = listOf(),
 ) {

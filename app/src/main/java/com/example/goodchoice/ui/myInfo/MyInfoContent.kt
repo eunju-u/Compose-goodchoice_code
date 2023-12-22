@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.api.data.MyMenuData
@@ -33,6 +34,7 @@ import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
+import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.*
 
@@ -180,6 +182,16 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 name = item.name ?: "",
                                                 bottomPadding = dp10,
                                                 colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
+                                                onItemClick = {
+                                                    if (item.code == Const.RECENT_HOTEL) {
+                                                        context.startActivity(
+                                                            Intent(
+                                                                context,
+                                                                RecentSeenActivity::class.java
+                                                            )
+                                                        )
+                                                    }
+                                                }
                                             )
                                         }
                                     }

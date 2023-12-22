@@ -256,7 +256,7 @@ fun HomeContent(
                                 HotelVerticalWidget(
                                     modifier = Modifier
                                         .fillMaxWidth(),
-                                    type = stayData.type ?: 0,
+                                    type = stayData.type ?: "",
                                     title = stayData.title ?: "",
                                     stayList = stayData.stayList ?: listOf()
                                 )

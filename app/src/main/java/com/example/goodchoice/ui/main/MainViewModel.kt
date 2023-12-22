@@ -663,7 +663,12 @@ class MainViewModel : ViewModel() {
 
         val test = MyInfoData(
             topMenuList = listOf(
-                CategoryItem(id = "m_1", name = "최근 본 상품", icon = R.drawable.ic_myinfo_recent),
+                CategoryItem(
+                    id = "m_1",
+                    name = "최근 본 상품",
+                    icon = R.drawable.ic_myinfo_recent,
+                    code = Const.RECENT_HOTEL
+                ),
                 CategoryItem(id = "m_2", name = "할인·혜택", icon = R.drawable.ic_myinfo_discount),
                 CategoryItem(id = "m_3", name = "내 리뷰", icon = R.drawable.ic_myinfo_review),
                 CategoryItem(id = "m_4", name = "알림함", icon = R.drawable.ic_myinfo_noti)

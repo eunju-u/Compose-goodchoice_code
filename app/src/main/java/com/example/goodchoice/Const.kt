@@ -31,10 +31,10 @@ object Const {
     const val LEISURE_AND_TICKET = "Leisure_and_Ticket" //레저, 티켓
 
     //홈에 노출되는 숙소 타입
-    const val RECENT_HOTEL = 122 //최근 본 상품
-    const val TODAY_HOTEL = 123 //오늘 체크인 호텔 특가
-    const val HOT_HOTEL = 124 //이번 주 HOT 인기 펜션
-    const val OVERSEA_SPECIAL = 125 //해외 항공 + 숙소 이번주 특가
+    const val RECENT_HOTEL = "RECENT_HOTEL" //최근 본 상품
+    const val TODAY_HOTEL = "TODAY_HOTEL" //오늘 체크인 호텔 특가
+    const val HOT_HOTEL = "HOT_HOTEL" //이번 주 HOT 인기 펜션
+    const val OVERSEA_SPECIAL = "OVERSEA_SPECIAL" //해외 항공 + 숙소 이번주 특가
 
     //해외 도시 code
     const val OSAKA = "osaka"

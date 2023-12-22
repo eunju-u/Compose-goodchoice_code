@@ -38,7 +38,7 @@ import kotlinx.coroutines.*
  */
 @Composable
 fun KoreaStayItemWidget(
-    stayDataType: Int = Const.TODAY_HOTEL,
+    stayDataType: String = Const.TODAY_HOTEL,
     stayItem: StayItem = StayItem()
 ) {
     val context = LocalContext.current
@@ -83,7 +83,7 @@ fun KoreaStayItemWidget(
                     }
                     //room db 는 특정 위치 insert 기능이 있지 않아, 최근 본 상품이 0번째로 오지 않아 추가됨.
                     //맨 앞으로 넣어야 할 item 제외하고 리스트 저장해 놓음 -> DB 모두 제거 후 -> 맨 앞에 넣어야할 item insert -> 저장해 둔 리스트 insert
-                    val allList =  recentDb?.userDao()?.getAll()
+                    val allList = recentDb?.userDao()?.getAll()
                     recentDb?.userDao()?.deleteAll()
                     val item = stayItem.generateData()
                     recentDb?.userDao()?.insert(item)
