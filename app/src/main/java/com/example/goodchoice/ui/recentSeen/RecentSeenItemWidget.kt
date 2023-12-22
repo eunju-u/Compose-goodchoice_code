@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.recentSeen
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -7,12 +8,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberAsyncImagePainter
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.RoundImageWidget
+import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.*
 
 /**
@@ -20,10 +24,19 @@ import com.example.goodchoice.ui.theme.*
  */
 @Composable
 fun RecentSeenItemWidget(stayItem: StayItem) {
+    val context = LocalContext.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable {}
+            .clickable {
+                context.startActivity(
+                    Intent(context, StayDetailActivity::class.java).apply {
+                        putExtra(Const.ITEM_ID, stayItem.id)
+                        putExtra(Const.ITEM_TITLE, stayItem.name)
+                    }
+                )
+            }
             .padding(start = dp25, end = dp25, top = dp10, bottom = dp10),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(dp15)

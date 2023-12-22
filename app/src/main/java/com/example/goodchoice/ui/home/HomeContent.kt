@@ -26,7 +26,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.StayData
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.components.TextWidget
@@ -57,7 +56,7 @@ fun HomeContent(
     val categoryList = homeData.categoryList ?: emptyList()
     val bannerList = homeData.bannerList ?: emptyList()
     val stayList = homeData.stayList ?: emptyList()
-    val recentData = viewModel.recentData
+    val recentDbData = viewModel.recentDbData
     val overSeaCityList = homeData.overSeaCityList ?: emptyList()
     val overseaSpecialList = homeData.overseaSpecialList ?: emptyList()
     val row = 4
@@ -241,17 +240,15 @@ fun HomeContent(
 
                         //지금 신규가입하면~
 
-                        recentData.value.stayList?.let {
-                            if (it.isNotEmpty()) {
-                                HotelVerticalWidget(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
-                                    type = Const.RECENT_HOTEL,
-                                    title = "최근 본 상품",
-                                    stayList = recentData.value.stayList!!
-                                )
-                                Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
-                            }
+                        if (recentDbData.isNotEmpty()) {
+                            HotelVerticalWidget(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                type = Const.RECENT_HOTEL,
+                                title = "최근 본 상품",
+                                stayList = recentDbData,
+                            )
+                            Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
                         }
 
                         if (stayList.isNotEmpty()) {
@@ -261,8 +258,7 @@ fun HomeContent(
                                         .fillMaxWidth(),
                                     type = stayData.type ?: 0,
                                     title = stayData.title ?: "",
-                                    stayList = stayData.stayList ?: listOf(),
-                                    recentStay = recentData
+                                    stayList = stayData.stayList ?: listOf()
                                 )
                             }
                             Spacer(modifier = Modifier.height(dp5))

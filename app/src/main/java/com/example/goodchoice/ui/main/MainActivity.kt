@@ -9,6 +9,9 @@ import androidx.activity.viewModels
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import com.example.goodchoice.ui.theme.TestTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     companion object {
@@ -30,6 +33,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        CoroutineScope(Dispatchers.IO).launch {
+            //홈 -> 최근 본 상품 -> 전체 삭제 -> 홈 이동시 최근 본 상품 갱신하기 위함.
+            viewModel.recentDb(this@MainActivity)
+        }
     }
 
     override fun onDestroy() {

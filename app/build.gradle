@@ -73,4 +73,7 @@ dependencies {
     //compose 용 웹뷰
     implementation("com.google.accompanist:accompanist-webview:0.30.0")
 
+    //room db
+    implementation "androidx.room:room-runtime:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
 }

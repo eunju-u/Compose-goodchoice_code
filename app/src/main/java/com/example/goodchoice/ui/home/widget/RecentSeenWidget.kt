@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.home.widget
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,14 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
+import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.RoundImageWidget
 import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.*
 
 /**
@@ -26,6 +30,8 @@ import com.example.goodchoice.ui.theme.*
  */
 @Composable
 fun RecentSeenWidget(stayItem: StayItem) {
+    val context = LocalContext.current
+
     val painter = if (stayItem.mainImage?.isNotEmpty() == true) rememberAsyncImagePainter(
         model = stayItem.mainImage, painterResource(id = R.drawable.bg_white)
     )
@@ -35,7 +41,14 @@ fun RecentSeenWidget(stayItem: StayItem) {
         modifier = Modifier
             .width(dp120)
             .clip(RoundedCornerShape(dp10))
-            .clickable { }
+            .clickable {
+                context.startActivity(
+                    Intent(context, StayDetailActivity::class.java).apply {
+                        putExtra(Const.ITEM_ID, stayItem.id)
+                        putExtra(Const.ITEM_TITLE, stayItem.name)
+                    }
+                )
+            }
             .padding(bottom = dp20),
         verticalArrangement = Arrangement.Center,
     ) {

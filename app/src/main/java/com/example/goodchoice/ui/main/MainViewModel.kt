@@ -11,8 +11,9 @@ import com.example.goodchoice.RoomType
 import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.*
 import com.example.goodchoice.api.data.search.RecommendAreaData
+import com.example.goodchoice.db.RecentDb
+import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.home.model.MutableRecentData
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import kotlinx.coroutines.*
@@ -45,12 +46,8 @@ class MainViewModel : ViewModel() {
     //현재 navi가 보고 있는 루트
     var currentRoute = MutableStateFlow("")
 
-    //서버가 없어, 최근 본 상품 삭제 하기 위한 플래그
-    //홈 처음 진입시 최근 본 상품 목록이 보여야 하고, 최근 목록 함에 있어야 하며, 전체 삭제시 리스트 삭제되어야 함.
-    var isRemoveRecentList = false
-
     // 최근 본 상품
-    var recentData: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
+    var recentDbData = listOf<StayItem>()
 
     /** 찜 화면 **/
     // 찜 > 국내 여행
@@ -92,8 +89,9 @@ class MainViewModel : ViewModel() {
     fun getCurrentViewData(context: Context) {
         when (currentRoute.value) {
             NavItem.Home.route -> {
-                CoroutineScope(Dispatchers.Default).launch {
+                CoroutineScope(Dispatchers.IO).launch {
                     requestHomeData()
+                    recentDb(context)
                 }
             }
             NavItem.Search.route -> {
@@ -732,4 +730,15 @@ class MainViewModel : ViewModel() {
         homeUiState.value = ConnectInfo.Available()
 
     }
+
+    /** DB 에서 가져온 최근 본 상품 리스트 **/
+    fun recentDb(context: Context) =
+        CoroutineScope(Dispatchers.IO).launch {
+            val recentDb = RecentDb.getInstance(context)
+            val list = recentDb?.userDao()?.getAll()
+            val recentList = list?.map {
+                it.generateData()
+            }
+            recentDbData = recentList ?: listOf()
+        }
 }

@@ -26,10 +26,12 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.R
-import com.example.goodchoice.ui.home.model.MutableRecentData
+import com.example.goodchoice.db.RecentDb
+import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil
+import kotlinx.coroutines.*
 
 /**
  * 홈의 국내 숙소 item 뷰
@@ -37,8 +39,7 @@ import com.example.goodchoice.utils.ConvertUtil
 @Composable
 fun KoreaStayItemWidget(
     stayDataType: Int = Const.TODAY_HOTEL,
-    stayItem: StayItem = StayItem(),
-    recentStay: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
+    stayItem: StayItem = StayItem()
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -71,11 +72,26 @@ fun KoreaStayItemWidget(
                         putExtra(Const.ITEM_TITLE, stayItem.name)
                     }
                 )
-                recentStay.value.stayList?.let {
-                    if (it.contains(stayItem)) {
-                        it.remove(stayItem)
+
+                val recentDb = RecentDb.getInstance(context)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    val isExistId = recentDb?.userDao()?.isExistId(stayItem.id ?: "") ?: false
+                    if (isExistId) {
+                        val item = stayItem.generateData()
+                        recentDb?.userDao()?.delete(item)
                     }
-                    it.add(0, stayItem)
+                    //room db 는 특정 위치 insert 기능이 있지 않아, 최근 본 상품이 0번째로 오지 않아 추가됨.
+                    //맨 앞으로 넣어야 할 item 제외하고 리스트 저장해 놓음 -> DB 모두 제거 후 -> 맨 앞에 넣어야할 item insert -> 저장해 둔 리스트 insert
+                    val allList =  recentDb?.userDao()?.getAll()
+                    recentDb?.userDao()?.deleteAll()
+                    val item = stayItem.generateData()
+                    recentDb?.userDao()?.insert(item)
+                    allList?.let {
+                        for (dbItem in it) {
+                            recentDb.userDao().insert(dbItem)
+                        }
+                    }
                 }
             }, verticalArrangement = Arrangement.Center
     ) {

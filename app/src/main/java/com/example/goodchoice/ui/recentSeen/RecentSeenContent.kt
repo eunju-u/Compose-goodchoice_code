@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.recentSeen
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,8 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -19,10 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.ui.components.ButtonWidget
 import com.example.goodchoice.ui.components.CardWidget
-import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*
 
 /**
@@ -30,11 +27,9 @@ import com.example.goodchoice.ui.theme.*
  */
 @SuppressLint("StateFlowValueCalledInComposition", "UnrememberedMutableState")
 @Composable
-fun RecentSeenContent(viewModel: MainViewModel) {
+fun RecentSeenContent(viewModel: RecentSeenViewModel) {
     val context = LocalContext.current
-    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
-    val homeData = viewModel.homeData.value
-    val stayList = viewModel.recentData.value.stayList ?: mutableStateListOf()
+    val stayList = viewModel.recentDbList.collectAsStateWithLifecycle()
 
     Column {
         TopAppBarWidget(
@@ -43,8 +38,20 @@ fun RecentSeenContent(viewModel: MainViewModel) {
                 modifier = Modifier
                     .fillMaxHeight()
                     .clickable {
-                        viewModel.isRemoveRecentList = true
-                        stayList.clear()
+                        var str = R.string.str_recent_seen_all_remove_not_list
+                        if(stayList.value.isNotEmpty()) {
+                            str = R.string.str_recent_seen_all_remove
+                            //최근 본 상품 DB 내용 삭제
+                            viewModel.deleteRecentDb(context)
+                            viewModel.recentDb(context)
+                        }
+                        Toast
+                            .makeText(
+                                context,
+                                str,
+                                Toast.LENGTH_SHORT
+                            )
+                            .show()
                     }
                     .padding(start = dp5, end = dp5)
                     .wrapContentHeight(Alignment.CenterVertically),
@@ -55,61 +62,57 @@ fun RecentSeenContent(viewModel: MainViewModel) {
             )
         }
 
-        when (homeUiState.value) {
-            is ConnectInfo.Available -> {
-                LazyColumn(
-                    Modifier
-                        .fillMaxSize()
-                        .background(Theme.colorScheme.white)
-                ) {
-                    if (stayList.size > 0) {
-                        item {
-                            Text(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(start = dp20, top = dp20, bottom = dp15),
-                                text = viewModel.recentData.value.title ?: "",
-                                style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
-                            )
-                        }
-                        itemsIndexed(items = stayList) { index, item ->
-                            RecentSeenItemWidget(item)
-                        }
-                    } else {
-                        item {
-                            Text(
-                                text = stringResource(id = R.string.str_empty_recent_seen_item_title),
-                                color = Theme.colorScheme.gray,
-                                style = MaterialTheme.typography.labelSmall
-                            )
-
-                            Spacer(modifier = Modifier.height(dp10))
-                            Text(
-                                text = stringResource(id = R.string.str_empty_recent_seen_item_sub),
-                                color = Theme.colorScheme.pureGray,
-                                style = MaterialTheme.typography.labelSmall
-                            )
-                            Spacer(modifier = Modifier.height(dp10))
-
-                            CardWidget(content = {
-                                Text(
-                                    text = stringResource(id = R.string.str_see_item),
-                                    color = Theme.colorScheme.panoramaBlue,
-                                    style = MaterialTheme.typography.labelSmall
-                                )
-                            }, onItemClick = {
-                            })
-                        }
-                    }
+        val modifier = Modifier
+            .fillMaxSize()
+            .background(Theme.colorScheme.white)
+        if (stayList.value.isNotEmpty()) {
+            LazyColumn(
+                modifier = modifier
+            ) {
+                item {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = dp20, top = dp20, bottom = dp15),
+                        text = context.getString(R.string.str_recent_seen_item),
+                        style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
+                itemsIndexed(items = stayList.value) { index, item ->
+                    RecentSeenItemWidget(item)
                 }
             }
-            is ConnectInfo.Loading -> {
+        } else {
+            Column(
+                modifier = modifier.padding(dp30),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = R.string.str_empty_recent_seen_item_title),
+                    color = Theme.colorScheme.darkGray,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.labelLarge
+                )
 
-            }
-            is ConnectInfo.Error -> {
+                Spacer(modifier = Modifier.height(dp10))
+                Text(
+                    text = stringResource(id = R.string.str_empty_recent_seen_item_sub),
+                    color = Theme.colorScheme.gray,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.labelMedium
+                )
 
+                Spacer(modifier = Modifier.height(dp10))
+                CardWidget(content = {
+                    Text(
+                        text = stringResource(id = R.string.str_see_item),
+                        color = Theme.colorScheme.panoramaBlue,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }, onItemClick = {
+                })
             }
-            else -> {}
         }
     }
 }

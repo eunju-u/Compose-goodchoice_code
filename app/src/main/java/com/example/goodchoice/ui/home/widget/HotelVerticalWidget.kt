@@ -17,14 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.api.data.OverseaSpecialItem
 import com.example.goodchoice.api.data.StayItem
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.home.model.MutableRecentData
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil
@@ -35,7 +33,6 @@ fun HotelVerticalWidget(
     type: Int = 0,
     title: String = "",
     stayList: List<Any> = listOf(),
-    recentStay: MutableState<MutableRecentData> = mutableStateOf(MutableRecentData())
 ) {
     val context = LocalContext.current
     val scrollState = rememberLazyListState()
@@ -73,8 +70,7 @@ fun HotelVerticalWidget(
                         if (type == Const.TODAY_HOTEL || type == Const.HOT_HOTEL) {
                             KoreaStayItemWidget(
                                 stayDataType = type,
-                                stayItem = item,
-                                recentStay = recentStay
+                                stayItem = item
                             )
                         } else if (type == Const.RECENT_HOTEL) {
                             RecentSeenWidget(stayItem = item)
