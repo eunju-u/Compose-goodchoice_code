@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,13 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.ui.theme.*
 
 @Composable
-fun LoginContent(onFinish: () -> Unit = {}) {
+fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit = {}) {
     val style = MaterialTheme.typography.labelMedium
     val iconModifier = Modifier.size(dp15)
     val endPadding = dp10
@@ -40,10 +38,6 @@ fun LoginContent(onFinish: () -> Unit = {}) {
     val innerPadding = PaddingValues(horizontal = dp15, vertical = dp15)
     val widgetSize = Modifier
         .fillMaxWidth()
-
-    val context = LocalContext.current
-    val pref = GoodChoicePreference(context)
-    val isLoginWay = pref.loginWay
 
     var plusPadding by remember { mutableStateOf(58.5.dp) }
 
@@ -74,7 +68,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
             .background(Theme.colorScheme.white)
     ) {
         Column {
-            TopAppBarWidget(isCloseButton = true, onFinish = { onFinish() }) {}
+            TopAppBarWidget(isCloseButton = true, onFinish = { onFinish("") }) {}
             LazyColumn(
                 Modifier.padding(start = dp20, end = dp20),
                 verticalArrangement = Arrangement.Center,
@@ -116,7 +110,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
-                        title = stringResource(id = R.string.str_login_kakao),
+                        title = stringResource(id = R.string.str_start_login_kakao),
                         containerColor = Theme.colorScheme.yellow,
                         contentColor = Theme.colorScheme.darkGray,
                         style = style,
@@ -130,15 +124,13 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.isLogin = true
-                            pref.loginWay = Const.KAKAO
-                            onFinish()
+                            onFinish(Const.KAKAO)
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
-                        title = stringResource(id = R.string.str_login_naver),
+                        title = stringResource(id = R.string.str_start_login_naver),
                         containerColor = Theme.colorScheme.green,
                         contentColor = Theme.colorScheme.white,
                         style = style,
@@ -152,15 +144,13 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.isLogin = true
-                            pref.loginWay = Const.NAVER
-                            onFinish()
+                            onFinish(Const.NAVER)
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
-                        title = stringResource(id = R.string.str_login_facebook),
+                        title = stringResource(id = R.string.str_start_login_facebook),
                         containerColor = Theme.colorScheme.blue,
                         contentColor = Theme.colorScheme.white,
                         style = style,
@@ -173,15 +163,13 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.isLogin = true
-                            pref.loginWay = Const.FACEBOOK
-                            onFinish()
+                            onFinish(Const.FACEBOOK)
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
-                        title = stringResource(id = R.string.str_login_google),
+                        title = stringResource(id = R.string.str_start_login_google),
                         contentColor = Theme.colorScheme.darkGray,
                         borderColor = Theme.colorScheme.pureGray,
                         style = style,
@@ -194,15 +182,13 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.isLogin = true
-                            pref.loginWay = Const.APPLE
-                            onFinish()
+                            onFinish(Const.GOOGLE)
                         })
                     LeftImageButtonWidget(
                         modifier = widgetSize,
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
-                        title = stringResource(id = R.string.str_login_email),
+                        title = stringResource(id = R.string.str_start_login_email),
                         containerColor = Theme.colorScheme.pureBlue,
                         contentColor = Theme.colorScheme.blue,
                         style = style,
@@ -216,9 +202,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
                             )
                         },
                         onItemClick = {
-                            pref.isLogin = true
-                            pref.loginWay = Const.EMAIL
-                            onFinish()
+                            onFinish(Const.EMAIL)
                         })
                 }
             }
@@ -242,7 +226,7 @@ fun LoginContent(onFinish: () -> Unit = {}) {
             recentViewTopPadding += plusPadding * 1
         } else if (isLoginWay == Const.FACEBOOK) {
             recentViewTopPadding += plusPadding * 2
-        } else if (isLoginWay == Const.APPLE) {
+        } else if (isLoginWay == Const.GOOGLE) {
             recentViewTopPadding += plusPadding * 3
         } else if (isLoginWay == Const.EMAIL) {
             recentViewTopPadding += plusPadding * 4

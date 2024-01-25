@@ -131,4 +131,20 @@ object StringUtil {
             }
         }
     }
+
+    /**
+     * 영문자열 + 숫자 랜덤한 값으로 반환 (GC1234567891)
+     * **/
+    fun randomUserName(letterCount: Int = 2, numberCount: Int = 10): String {
+        val letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        val letterStr = (1..letterCount).map {
+            letters.random()
+        }.joinToString("")
+
+        val numberStr = (1..numberCount)
+            .map { (0..9).random() }
+            .joinToString("")
+
+        return letterStr + numberStr
+    }
 }

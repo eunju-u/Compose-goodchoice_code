@@ -48,7 +48,7 @@ object Const {
     const val KAKAO = "KAKAO"
     const val NAVER = "NAVER"
     const val FACEBOOK = "FACEBOOK"
-    const val APPLE = "APPLE"
+    const val GOOGLE = "GOOGLE"
     const val EMAIL = "EMAIL"
 
     //주변 > 필터 type

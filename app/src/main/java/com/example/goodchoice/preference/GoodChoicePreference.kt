@@ -7,6 +7,8 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
 
     private val IS_LOGIN = "isLogin"
     private val LOGIN_WAY = "loginWay"
+    private val USER_NAME = "userName"
+
 
     private val KOREA_START_DATE = "koreaStartDate"   //국내 여행 시작 날짜
     private val KOREA_END_DATE = "koreaEndDate"    //국내 여행 마지막 날짜
@@ -54,7 +56,10 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
             }
         }
         get() {
-            return getPreferenceString(KOREA_END_DATE, LocalDate.parse(koreaStartDate).plusDays(1).toString())
+            return getPreferenceString(
+                KOREA_END_DATE,
+                LocalDate.parse(koreaStartDate).plusDays(1).toString()
+            )
                 ?: LocalDate.parse(koreaStartDate).plusDays(1).toString()
         }
 
@@ -77,7 +82,10 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
             }
         }
         get() {
-            return getPreferenceString(OVERSEA_END_DATE, LocalDate.parse(overseaStartDate).plusDays(1).toString())
+            return getPreferenceString(
+                OVERSEA_END_DATE,
+                LocalDate.parse(overseaStartDate).plusDays(1).toString()
+            )
                 ?: LocalDate.parse(overseaStartDate).plusDays(1).toString()
         }
 
@@ -111,5 +119,13 @@ class GoodChoicePreference(context: Context) : DefaultPreference(context) {
         }
         get() {
             return getPreferenceInt(OVERSEA_KID_COUNT, 0)
+        }
+
+    var userName: String
+        set(value) {
+            setPreference(USER_NAME, value)
+        }
+        get() {
+            return getPreferenceString(USER_NAME) ?: ""
         }
 }

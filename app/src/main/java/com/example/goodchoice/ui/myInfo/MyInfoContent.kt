@@ -31,7 +31,9 @@ import com.example.goodchoice.api.data.MyMenuData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
+import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
@@ -63,6 +65,8 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val pref = GoodChoicePreference(context)
+    val isLogin = pref.isLogin
+    val userName = pref.userName
 
     //가져올때
     val myInfoData = viewModel.myInfoData.collectAsStateWithLifecycle().value
@@ -91,65 +95,85 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                         Column(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            if (!pref.isLogin) {
-                                /** 이미지 및 회원가입/로그인 버튼 */
-                                Row(
+                            val topText =
+                                if (isLogin) userName else stringResource(id = R.string.str_join_and_login)
+                            val subText =
+                                if (isLogin) "엘리트 회원" else stringResource(id = R.string.str_join_and_login_sub)
+
+                            val iconModifier = if (isLogin) {
+                                Modifier.clickable {
+                                    //TODO 사진 로직 추가
+
+                                }
+                            } else Modifier
+
+
+                            /** 이미지 및 회원가입/로그인 버튼 */
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(IntrinsicSize.Min)
+                                    .clickable {
+                                        context.startActivity(
+                                            Intent(context, MyInfoDetailActivity::class.java)
+                                        )
+                                    },
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Icon(
+                                    modifier = Modifier
+                                        .size(dp80)
+                                        .then(iconModifier),
+                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
+                                    tint = Theme.colorScheme.red,
+                                    contentDescription = "내 정보",
+                                )
+
+                                SpaceBetweenRowWidget(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(IntrinsicSize.Min),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                ) {
-                                    Icon(
-                                        modifier = Modifier
-                                            .size(dp80),
-                                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
-                                        tint = Theme.colorScheme.red,
-                                        contentDescription = "내 정보"
-                                    )
-
-                                    SpaceBetweenRowWidget(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(dp10)
-                                            .clickable {
-                                                context.startActivity(
+                                        .padding(dp10)
+                                        .clickable {
+                                            if (isLogin) {
+                                            } else {
+                                                (context as MainActivity).startActivity(
                                                     Intent(
                                                         context,
                                                         LoginActivity::class.java
                                                     )
                                                 )
-                                            },
-                                        content = {
-                                            Column(
-                                                modifier = Modifier.weight(1f),
-                                            ) {
-                                                TextWidget(
-                                                    textAlign = TextAlign.Start,
-                                                    text = stringResource(id = R.string.str_join_and_login),
-                                                    style = MaterialTheme.typography.displaySmall,
-                                                )
-                                                TextWidget(
-                                                    modifier = Modifier
-                                                        .padding(top = dp5)
-                                                        .background(Theme.colorScheme.mediumPurple)
-                                                        .padding(dp3),
-                                                    textAlign = TextAlign.Start,
-                                                    color = Theme.colorScheme.darkPurple,
-                                                    maxLines = 2,
-                                                    text = stringResource(id = R.string.str_join_and_login_sub),
-                                                    style = MaterialTheme.typography.labelMedium
-                                                )
                                             }
+                                        },
+                                    content = {
+                                        Column(
+                                            modifier = Modifier.weight(1f),
+                                        ) {
+                                            TextWidget(
+                                                textAlign = TextAlign.Start,
+                                                text = topText,
+                                                style = MaterialTheme.typography.displaySmall,
+                                            )
+                                            TextWidget(
+                                                modifier = Modifier
+                                                    .padding(top = dp5)
+                                                    .background(Theme.colorScheme.mediumPurple)
+                                                    .padding(dp3),
+                                                textAlign = TextAlign.Start,
+                                                color = Theme.colorScheme.darkPurple,
+                                                maxLines = 2,
+                                                text = subText,
+                                                style = MaterialTheme.typography.labelMedium
+                                            )
+                                        }
+                                        if (isLogin) {
                                             Icon(
                                                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_right),
                                                 tint = Theme.colorScheme.darkGray,
                                                 contentDescription = null
                                             )
                                         }
-                                    )
-                                }
-                            } else {
-
+                                    }
+                                )
                             }
 
                             /** 포인트/쿠폰 버튼 */
