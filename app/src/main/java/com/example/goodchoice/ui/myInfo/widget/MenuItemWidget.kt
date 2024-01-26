@@ -25,13 +25,17 @@ import com.example.goodchoice.ui.theme.*
          * "질문 있어요!"
          *
          * */
-fun MenuItemWidget(menuItem: MyMenuItem) {
+fun MenuItemWidget(
+    menuItem: MyMenuItem, isOnlyText: Boolean = false, onItemClick: () -> Unit = {},
+) {
     val textMediumStyle = MaterialTheme.typography.labelMedium
     SpaceBetweenRowWidget(
         modifier = Modifier
             .fillMaxWidth()
             .height(dp45)
-            .clickable { }
+            .clickable {
+                onItemClick()
+            }
             .padding(start = dp25, end = dp15, top = dp5, bottom = dp5),
         text = if (menuItem.icon == 0) menuItem.name else null,
         textStyle = textMediumStyle,
@@ -75,6 +79,7 @@ fun MenuItemWidget(menuItem: MyMenuItem) {
                             })
 
                     }
+
                     Icon(
                         modifier = Modifier.then(secondModifier),
                         tint = Theme.colorScheme.gray,
@@ -84,11 +89,13 @@ fun MenuItemWidget(menuItem: MyMenuItem) {
                 }
 
             } else {
-                Icon(
-                    tint = Theme.colorScheme.gray,
-                    contentDescription = null,
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_right)
-                )
+                if (!isOnlyText) {
+                    Icon(
+                        tint = Theme.colorScheme.gray,
+                        contentDescription = null,
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_right)
+                    )
+                }
             }
         }
     )

@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
+import com.example.goodchoice.api.ConnectInfo
 import com.example.goodchoice.api.data.CategoryItem
 import com.example.goodchoice.api.data.MyMenuData
 import com.example.goodchoice.preference.GoodChoicePreference
@@ -33,7 +34,6 @@ import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
-import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
@@ -73,7 +73,9 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val topMenuList: List<CategoryItem> = myInfoData.topMenuList ?: emptyList()
     val menuList: List<MyMenuData> = myInfoData.menuList ?: emptyList()
 
+    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
     val lazyColumnListState = rememberLazyListState()
+    var isShowDialog by remember { mutableStateOf(false) }
 
     //미정님 myInfo 에서 설정 화면이 안나오는 이유는 Box의 modifier 을 Modifier로 새로 정의해서 그래요!
     //MyInfoContent 의 modifier 을 써야 해요
@@ -84,167 +86,165 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
             state = lazyColumnListState
         ) {
             item {
-                CardWidget(
-                    isVisibleShadow = true,
-                    shadowOffsetY = dp20,
-                    shadowColor = Theme.colorScheme.pureGray,
-                    innerPadding = PaddingValues(start = dp20, end = dp20, top = dp20),
-                    containerColor = Theme.colorScheme.white,
-                    content = {
-                        /** 내 정보 > 상단 내 정보 (임시) */
-                        Column(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            val topText =
-                                if (isLogin) userName else stringResource(id = R.string.str_join_and_login)
-                            val subText =
-                                if (isLogin) "엘리트 회원" else stringResource(id = R.string.str_join_and_login_sub)
-
-                            val iconModifier = if (isLogin) {
-                                Modifier.clickable {
-                                    //TODO 사진 로직 추가
-
-                                }
-                            } else Modifier
-
-
-                            /** 이미지 및 회원가입/로그인 버튼 */
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(IntrinsicSize.Min)
-                                    .clickable {
-                                        context.startActivity(
-                                            Intent(context, MyInfoDetailActivity::class.java)
-                                        )
-                                    },
-                                verticalAlignment = Alignment.CenterVertically,
+                if (homeUiState.value is ConnectInfo.Available) {
+                    CardWidget(
+                        isVisibleShadow = true,
+                        shadowOffsetY = dp20,
+                        shadowColor = Theme.colorScheme.pureGray,
+                        innerPadding = PaddingValues(start = dp20, end = dp20, top = dp20),
+                        containerColor = Theme.colorScheme.white,
+                        content = {
+                            /** 내 정보 > 상단 내 정보 (임시) */
+                            Column(
+                                modifier = Modifier.fillMaxWidth()
                             ) {
-                                Icon(
-                                    modifier = Modifier
-                                        .size(dp80)
-                                        .then(iconModifier),
-                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
-                                    tint = Theme.colorScheme.red,
-                                    contentDescription = "내 정보",
-                                )
+                                val topText =
+                                    if (isLogin) userName else stringResource(id = R.string.str_join_and_login)
+                                val subText =
+                                    if (isLogin) "엘리트 회원" else stringResource(id = R.string.str_join_and_login_sub)
 
-                                SpaceBetweenRowWidget(
+                                val iconModifier = if (isLogin) {
+                                    Modifier.clickable {
+                                        //TODO 사진 로직 추가
+
+                                    }
+                                } else Modifier
+
+
+                                /** 이미지 및 회원가입/로그인 버튼 */
+                                Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(dp10)
+                                        .height(IntrinsicSize.Min)
                                         .clickable {
-                                            if (isLogin) {
-                                            } else {
-                                                (context as MainActivity).startActivity(
-                                                    Intent(
-                                                        context,
-                                                        LoginActivity::class.java
+                                        },
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Icon(
+                                        modifier = Modifier
+                                            .size(dp80)
+                                            .then(iconModifier),
+                                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
+                                        tint = Theme.colorScheme.red,
+                                        contentDescription = "내 정보",
+                                    )
+
+                                    SpaceBetweenRowWidget(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(dp10)
+                                            .clickable {
+                                                if (isLogin) {
+                                                } else {
+                                                    (context as MainActivity).startActivity(
+                                                        Intent(
+                                                            context,
+                                                            LoginActivity::class.java
+                                                        )
                                                     )
+                                                }
+                                            },
+                                        content = {
+                                            Column(
+                                                modifier = Modifier.weight(1f),
+                                            ) {
+                                                TextWidget(
+                                                    textAlign = TextAlign.Start,
+                                                    text = topText,
+                                                    style = MaterialTheme.typography.displaySmall,
+                                                )
+                                                TextWidget(
+                                                    modifier = Modifier
+                                                        .padding(top = dp5)
+                                                        .background(Theme.colorScheme.mediumPurple)
+                                                        .padding(dp3),
+                                                    textAlign = TextAlign.Start,
+                                                    color = Theme.colorScheme.darkPurple,
+                                                    maxLines = 2,
+                                                    text = subText,
+                                                    style = MaterialTheme.typography.labelMedium
                                                 )
                                             }
-                                        },
-                                    content = {
-                                        Column(
-                                            modifier = Modifier.weight(1f),
-                                        ) {
-                                            TextWidget(
-                                                textAlign = TextAlign.Start,
-                                                text = topText,
-                                                style = MaterialTheme.typography.displaySmall,
-                                            )
-                                            TextWidget(
+                                            if (isLogin) {
+                                                Icon(
+                                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_right),
+                                                    tint = Theme.colorScheme.darkGray,
+                                                    contentDescription = null
+                                                )
+                                            }
+                                        }
+                                    )
+                                }
+
+                                /** 포인트/쿠폰 버튼 */
+                                CouponWidget(onLeftClick = {}, onRightClick = {})
+
+                                /** 카테고리 (최근 본 상품, 할인*혜택, 내 리뷰, 알림함) 버튼 */
+                                if (topMenuList.isNotEmpty()) {
+                                    val weigh = (100 / topMenuList.size) * 0.01
+
+                                    LazyRow(
+                                        modifier = Modifier
+                                            .fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        items(items = topMenuList) { item ->
+                                            Column(
                                                 modifier = Modifier
-                                                    .padding(top = dp5)
-                                                    .background(Theme.colorScheme.mediumPurple)
-                                                    .padding(dp3),
-                                                textAlign = TextAlign.Start,
-                                                color = Theme.colorScheme.darkPurple,
-                                                maxLines = 2,
-                                                text = subText,
-                                                style = MaterialTheme.typography.labelMedium
-                                            )
-                                        }
-                                        if (isLogin) {
-                                            Icon(
-                                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_right),
-                                                tint = Theme.colorScheme.darkGray,
-                                                contentDescription = null
-                                            )
-                                        }
-                                    }
-                                )
-                            }
-
-                            /** 포인트/쿠폰 버튼 */
-                            CouponWidget(onLeftClick = {}, onRightClick = {})
-
-                            /** 카테고리 (최근 본 상품, 할인*혜택, 내 리뷰, 알림함) 버튼 */
-                            if (topMenuList.isNotEmpty()) {
-                                val weigh = (100 / topMenuList.size) * 0.01
-
-                                LazyRow(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-                                    items(items = topMenuList) { item ->
-                                        Column(
-                                            modifier = Modifier
-                                                .fillParentMaxWidth(weigh.toFloat())
-                                                .clickable { }
-                                                .padding(top = dp20, bottom = dp20),
-                                            verticalArrangement = Arrangement.Center,
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            CategoryItemWidget(
-                                                imageSize = dp20,
-                                                painter = painterResource(
-                                                    id = item.icon ?: R.drawable.bg_white
-                                                ),
-                                                name = item.name ?: "",
-                                                bottomPadding = dp10,
-                                                colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
-                                                onItemClick = {
-                                                    if (item.code == Const.RECENT_HOTEL) {
-                                                        context.startActivity(
-                                                            Intent(
-                                                                context,
-                                                                RecentSeenActivity::class.java
+                                                    .fillParentMaxWidth(weigh.toFloat())
+                                                    .clickable { }
+                                                    .padding(top = dp20, bottom = dp20),
+                                                verticalArrangement = Arrangement.Center,
+                                                horizontalAlignment = Alignment.CenterHorizontally
+                                            ) {
+                                                CategoryItemWidget(
+                                                    imageSize = dp20,
+                                                    painter = painterResource(
+                                                        id = item.icon ?: R.drawable.bg_white
+                                                    ),
+                                                    name = item.name ?: "",
+                                                    bottomPadding = dp10,
+                                                    colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
+                                                    onItemClick = {
+                                                        if (item.code == Const.RECENT_HOTEL) {
+                                                            context.startActivity(
+                                                                Intent(
+                                                                    context,
+                                                                    RecentSeenActivity::class.java
+                                                                )
                                                             )
-                                                        )
+                                                        }
                                                     }
-                                                }
-                                            )
+                                                )
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-                )
+                    )
 
-                if (menuList.isNotEmpty()) {
-                    /** 예약내역*/
-                    // items(menuList) 로 했을 때 스크롤시 버벅임!!
-                    // LazyColumn 안에 리스트 성 위젯 말고 다른 위젯이 포함되어있다면 for 문 써서 하기
-                    Spacer(modifier = Modifier.padding(top = dp15))
-                    menuList.forEachIndexed { index, item ->
-                        Column {
-                            if (item.title != "") {
-                                TextWidget(
-                                    modifier = Modifier.padding(
-                                        start = dp25,
-                                        end = dp25,
-                                        bottom = dp15,
-                                        top = dp15
-                                    ),
-                                    text = item.title,
-                                    style = MaterialTheme.typography.labelLarge,
-                                    color = Theme.colorScheme.darkGray
-                                )
-                            }
+                    if (menuList.isNotEmpty()) {
+                        /** 예약내역*/
+                        // items(menuList) 로 했을 때 스크롤시 버벅임!!
+                        // LazyColumn 안에 리스트 성 위젯 말고 다른 위젯이 포함되어있다면 for 문 써서 하기
+                        Spacer(modifier = Modifier.padding(top = dp15))
+                        menuList.forEachIndexed { index, item ->
+                            Column {
+                                if (item.title != "") {
+                                    TextWidget(
+                                        modifier = Modifier.padding(
+                                            start = dp25,
+                                            end = dp25,
+                                            bottom = dp15,
+                                            top = dp15
+                                        ),
+                                        text = item.title,
+                                        style = MaterialTheme.typography.labelLarge,
+                                        color = Theme.colorScheme.darkGray
+                                    )
+                                }
 
 //                        if (it.path != ""){
 //                            Image(
@@ -254,24 +254,53 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 //                            )
 //                        }
 
-                            item.list?.let {
-                                it.forEach { menuItem ->
-                                    MenuItemWidget(menuItem = menuItem)
-                                }
-                            }
+                                item.list?.let {
+                                    it.forEach { menuItem ->
+                                        var isShow = true
+                                        val isLogoutMenu = menuItem.name == Const.LOGOUT
+                                        if (!pref.isLogin && isLogoutMenu) {
+                                            isShow = false
+                                        }
 
-                            if (index != menuList.lastIndex) {
-                                //선
-                                Divider(
-                                    modifier = Modifier.padding(top = dp15, bottom = dp15),
-                                    thickness = dp2,
-                                    color = Theme.colorScheme.pureGray
-                                )
+                                        if (isShow) {
+                                            MenuItemWidget(
+                                                menuItem = menuItem,
+                                                isOnlyText = isLogoutMenu,
+                                                onItemClick = {
+                                                    if (isLogoutMenu) {
+                                                        isShowDialog = true
+                                                    }
+                                                }
+                                            )
+                                        }
+                                    }
+                                }
+
+                                if (index != menuList.lastIndex) {
+                                    //선
+                                    Divider(
+                                        modifier = Modifier.padding(top = dp15, bottom = dp15),
+                                        thickness = dp2,
+                                        color = Theme.colorScheme.pureGray
+                                    )
+                                }
                             }
                         }
                     }
                 }
             }
         }
+    }
+    if (isShowDialog) {
+        AlertDialogWidget(
+            title = stringResource(id = R.string.str_logout_check),
+            oneButtonText = stringResource(id = R.string.str_cancel),
+            twoButtonText = stringResource(id = R.string.str_logout),
+            onDismiss = { isShowDialog = false },
+            onConfirm = {
+                pref.isLogin = false
+                viewModel.requestMyInfoData()
+                isShowDialog = false
+            })
     }
 }

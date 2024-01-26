@@ -654,7 +654,7 @@ class MainViewModel : ViewModel() {
         homeUiState.value = ConnectInfo.Available()
     }
 
-    private fun requestMyInfoData() = viewModelScope.launch {
+    fun requestMyInfoData() = viewModelScope.launch {
         /*
         * viewModelScope
         * homeUiState
@@ -724,7 +724,8 @@ class MainViewModel : ViewModel() {
                 ), MyMenuData(
                     id = 3,
                     list = listOf(
-                        MyMenuItem(id = 0, name = "설정")
+                        MyMenuItem(id = 0, name = "설정"),
+                        MyMenuItem(id = 1, name = Const.LOGOUT)
                     )
                 )
             )

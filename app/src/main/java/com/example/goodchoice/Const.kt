@@ -102,6 +102,8 @@ object Const {
     const val STATION = "station"
     const val STAY = "stay"
 
+    const val LOGOUT = "로그아웃"
+
 }
 
 // 숙박, 대실
