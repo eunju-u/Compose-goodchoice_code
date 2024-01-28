@@ -24,8 +24,11 @@ class LoginActivity : ComponentActivity() {
                     onFinish = {
                         if (it.isNotEmpty()) {
                             pref.isLogin = true
+                            // 로그인 방법이 변경 됐을 경우만 userName 변경
+                            if (pref.loginWay != it) {
+                                pref.userName = StringUtil.randomUserName()
+                            }
                             pref.loginWay = it
-                            pref.userName = StringUtil.randomUserName()
                         }
                         this.finish()
                     })
