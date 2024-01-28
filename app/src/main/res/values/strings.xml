@@ -54,7 +54,12 @@
     <string name="str_point">포인트</string>
     <string name="str_logout">로그아웃</string>
     <string name="str_logout_check">로그아웃할까요?</string>
-
+    <string name="str_my_info_manager">내 정보 관리</string>
+    <string name="str_login_kakao">KAKAO 로그인</string>
+    <string name="str_login_naver">네이버 로그인</string>
+    <string name="str_login_facebook">페이스북 로그인</string>
+    <string name="str_login_google">구글 로그인</string>
+    <string name="str_login_email">이메일로 로그인</string>
 
     <!--  최근 본 상품  -->
     <string name="str_empty_recent_seen_item_title">최근 본 상품이 없어요</string>

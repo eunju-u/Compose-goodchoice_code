@@ -60,6 +60,19 @@ object ConvertUtil {
     }
 
     /**
+     * 로그인 방법에 따라 string 반환
+     * **/
+    fun convertLoginState(code: String): Int {
+        return when (code) {
+            Const.KAKAO -> R.string.str_login_kakao
+            Const.NAVER -> R.string.str_login_naver
+            Const.FACEBOOK -> R.string.str_login_facebook
+            Const.GOOGLE -> R.string.str_login_google
+            else -> R.string.str_login_email
+        }
+    }
+
+    /**
      * 콤마 변환 20000 -> 20,000
      */
     fun convertCommaString(source: Any?): String {

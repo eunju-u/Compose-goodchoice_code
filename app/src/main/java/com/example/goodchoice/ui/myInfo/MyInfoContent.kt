@@ -34,6 +34,7 @@ import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
@@ -117,6 +118,9 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         .fillMaxWidth()
                                         .height(IntrinsicSize.Min)
                                         .clickable {
+                                            context.startActivity(
+                                                Intent(context, MyInfoDetailActivity::class.java)
+                                            )
                                         },
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
@@ -135,6 +139,12 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                             .padding(dp10)
                                             .clickable {
                                                 if (isLogin) {
+                                                    (context as MainActivity).startActivity(
+                                                        Intent(
+                                                            context,
+                                                            MyInfoDetailActivity::class.java
+                                                        )
+                                                    )
                                                 } else {
                                                     (context as MainActivity).startActivity(
                                                         Intent(
