@@ -1,4 +1,4 @@
-package com.example.goodchoice.api.data
+package com.example.goodchoice.data.dto
 
 data class MyInfoData (
     //내정보 > 상단 메뉴 (최근 본 상품)

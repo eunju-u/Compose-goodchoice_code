@@ -13,8 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.components.TagWidget
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.PayData
-import com.example.goodchoice.api.data.PayItem
+import com.example.goodchoice.data.dto.PayData
+import com.example.goodchoice.data.dto.PayItem
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.StringUtil

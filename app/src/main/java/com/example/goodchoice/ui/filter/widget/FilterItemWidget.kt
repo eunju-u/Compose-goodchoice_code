@@ -5,7 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.goodchoice.api.data.FilterItem
+import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.ui.components.TagWidget
 import com.example.goodchoice.ui.theme.Theme
 import com.example.goodchoice.ui.theme.dp10

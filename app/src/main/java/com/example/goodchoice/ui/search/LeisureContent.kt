@@ -17,8 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.FilterItem
-import com.example.goodchoice.api.data.search.RecommendAreaData
+import com.example.goodchoice.data.dto.FilterItem
+import com.example.goodchoice.data.dto.RecommendAreaData
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.components.LeftImageButtonWidget
 import com.example.goodchoice.ui.components.TagWidget

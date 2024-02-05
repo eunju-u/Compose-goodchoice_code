@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.ServiceData
+import com.example.goodchoice.data.dto.ServiceData
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil

@@ -19,8 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.OverseaSpecialItem
-import com.example.goodchoice.api.data.StayItem
+import com.example.goodchoice.data.dto.OverseaSpecialItem
+import com.example.goodchoice.data.dto.StayItem
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity

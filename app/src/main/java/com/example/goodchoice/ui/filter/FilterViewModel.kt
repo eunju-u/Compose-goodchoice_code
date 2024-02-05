@@ -4,10 +4,10 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.FilterData
-import com.example.goodchoice.api.data.FilterItem
-import com.example.goodchoice.api.data.FilterListData
+import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.data.dto.FilterData
+import com.example.goodchoice.data.dto.FilterItem
+import com.example.goodchoice.data.dto.FilterListData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

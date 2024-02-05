@@ -2,7 +2,7 @@ package com.example.goodchoice.ui.recentSeen
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.goodchoice.api.data.StayItem
+import com.example.goodchoice.data.dto.StayItem
 import com.example.goodchoice.db.RecentDb
 import com.example.goodchoice.mapper.generateData
 import kotlinx.coroutines.CoroutineScope

@@ -3,7 +3,7 @@ package com.example.goodchoice.ui.alarm
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.api.data.AlarmItem
+import com.example.goodchoice.data.dto.AlarmItem
 import com.example.goodchoice.preference.GoodChoicePreference
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

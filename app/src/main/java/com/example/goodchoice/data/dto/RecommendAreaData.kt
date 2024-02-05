@@ -1,4 +1,4 @@
-package com.example.goodchoice.api.data.search
+package com.example.goodchoice.data.dto
 
 data class RecommendAreaData(
     val code: String? = "",

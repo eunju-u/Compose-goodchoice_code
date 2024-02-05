@@ -3,9 +3,9 @@ package com.example.goodchoice.ui.stayDetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.*
+import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.ServerConst
+import com.example.goodchoice.data.dto.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

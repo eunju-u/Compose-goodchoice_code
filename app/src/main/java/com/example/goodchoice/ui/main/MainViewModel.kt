@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.RoomType
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.*
-import com.example.goodchoice.api.data.search.RecommendAreaData
+import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.data.dto.RecommendAreaData
+import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.db.RecentDb
 import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.preference.GoodChoicePreference
@@ -705,6 +705,9 @@ class MainViewModel : ViewModel() {
                         ),
                     )
                 ),
+                /**
+                 * banner (?)
+                 * */
                 /**
                  * banner (?)
                  * */

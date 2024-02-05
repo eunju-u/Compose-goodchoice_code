@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.MyMenuItem
+import com.example.goodchoice.data.dto.MyMenuItem
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.SpaceBetweenRowWidget
 import com.example.goodchoice.ui.components.TextWidget

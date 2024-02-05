@@ -1,4 +1,4 @@
-package com.example.goodchoice.api.data
+package com.example.goodchoice.data.dto
 
 data class HomeData(
     val categoryList: List<CategoryData>? = emptyList(), //카테고리

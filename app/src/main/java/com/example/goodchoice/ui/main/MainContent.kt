@@ -1,12 +1,8 @@
 package com.example.goodchoice.ui.main
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.res.Configuration
-import android.util.Log
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
@@ -24,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.ui.components.LoadingWidget
 import com.example.goodchoice.ui.main.nav.NavGraph
 import com.example.goodchoice.ui.main.nav.NavItem

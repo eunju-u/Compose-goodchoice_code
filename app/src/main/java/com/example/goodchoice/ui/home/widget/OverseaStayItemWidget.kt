@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.goodchoice.api.data.OverseaSpecialItem
+import com.example.goodchoice.data.dto.OverseaSpecialItem
 import com.example.goodchoice.ui.components.RoundImageWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.R

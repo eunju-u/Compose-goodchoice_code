@@ -1,4 +1,4 @@
-package com.example.goodchoice.api.data
+package com.example.goodchoice.data.dto
 
 import java.io.Serializable
 

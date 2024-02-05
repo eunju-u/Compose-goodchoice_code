@@ -1,6 +1,6 @@
 package com.example.goodchoice.mapper
 
-import com.example.goodchoice.api.data.StayItem
+import com.example.goodchoice.data.dto.StayItem
 import com.example.goodchoice.db.RecentDbItem
 
 fun RecentDbItem.generateData(): StayItem {

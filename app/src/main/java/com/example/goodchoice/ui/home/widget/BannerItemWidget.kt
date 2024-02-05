@@ -23,7 +23,7 @@ import androidx.compose.ui.text.withStyle
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.api.data.BannerData
+import com.example.goodchoice.data.dto.BannerData
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.ui.webview.WebViewActivity
 

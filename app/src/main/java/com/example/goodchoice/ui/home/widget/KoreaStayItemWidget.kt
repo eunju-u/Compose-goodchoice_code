@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
-import com.example.goodchoice.api.data.StayItem
+import com.example.goodchoice.data.dto.StayItem
 import com.example.goodchoice.R
 import com.example.goodchoice.db.RecentDb
 import com.example.goodchoice.mapper.generateData

@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.AroundFilterData
-import com.example.goodchoice.api.data.AroundFilterItem
+import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.data.dto.AroundFilterData
+import com.example.goodchoice.data.dto.AroundFilterItem
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.LeftImageButtonWidget

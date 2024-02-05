@@ -1,4 +1,4 @@
-package com.example.goodchoice.api
+package com.example.goodchoice
 
 sealed interface ConnectInfo {
 

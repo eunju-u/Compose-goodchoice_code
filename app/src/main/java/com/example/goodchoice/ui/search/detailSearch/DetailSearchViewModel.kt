@@ -2,8 +2,7 @@ package com.example.goodchoice.ui.search.detailSearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.FilterItem
+import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.ui.search.*
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import kotlinx.coroutines.delay

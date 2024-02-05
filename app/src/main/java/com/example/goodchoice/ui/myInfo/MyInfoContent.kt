@@ -26,9 +26,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.CategoryItem
-import com.example.goodchoice.api.data.MyMenuData
+import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.data.dto.CategoryItem
+import com.example.goodchoice.data.dto.MyMenuData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity

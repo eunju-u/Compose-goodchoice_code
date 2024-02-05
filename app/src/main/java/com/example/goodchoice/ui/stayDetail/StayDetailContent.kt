@@ -26,8 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.StayDetailData
+import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.data.dto.StayDetailData
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState

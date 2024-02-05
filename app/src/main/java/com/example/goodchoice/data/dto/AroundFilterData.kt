@@ -1,4 +1,4 @@
-package com.example.goodchoice.api.data
+package com.example.goodchoice.data.dto
 
 // 주변 화면에서 사용되는 필터, 추천순, 숙소유형 ...
 data class AroundFilterData(

@@ -21,9 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
-import com.example.goodchoice.api.data.FilterData
-import com.example.goodchoice.api.data.FilterItem
+import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.data.dto.FilterData
+import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.filter.widget.FilterItemWidget
 import com.example.goodchoice.ui.theme.*

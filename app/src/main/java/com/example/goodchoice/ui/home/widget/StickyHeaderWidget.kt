@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.goodchoice.api.data.CategoryItem
+import com.example.goodchoice.data.dto.CategoryItem
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.theme.*

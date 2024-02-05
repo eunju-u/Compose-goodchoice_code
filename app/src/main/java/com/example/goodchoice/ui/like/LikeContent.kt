@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
-import com.example.goodchoice.api.ConnectInfo
+import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.TabData
 import com.example.goodchoice.ui.components.GoToWidget
