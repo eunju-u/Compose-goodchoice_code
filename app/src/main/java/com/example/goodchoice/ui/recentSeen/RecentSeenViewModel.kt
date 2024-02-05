@@ -28,5 +28,6 @@ class RecentSeenViewModel : ViewModel() {
     fun deleteRecentDb(context: Context) = CoroutineScope(Dispatchers.IO).launch {
         val recentDb = RecentDb.getInstance(context)
         recentDb?.userDao()?.deleteAll()
+        recentDb(context)
     }
 }
