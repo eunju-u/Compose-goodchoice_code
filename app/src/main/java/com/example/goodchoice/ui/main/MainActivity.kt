@@ -9,10 +9,12 @@ import androidx.activity.viewModels
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import com.example.goodchoice.ui.theme.TestTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     companion object {
         val TAG: String = MainActivity::class.java.simpleName

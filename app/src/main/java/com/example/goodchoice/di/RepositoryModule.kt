@@ -1,8 +1,8 @@
 package com.example.goodchoice.di
 
-import com.example.goodchoice.data.dataSource.RecentSeenDataSource
-import com.example.goodchoice.data.repository.RecentSeenRepositoryImpl
-import com.example.goodchoice.domain.repository.RecentSeenRepository
+import com.example.goodchoice.data.dataSource.*
+import com.example.goodchoice.data.repository.*
+import com.example.goodchoice.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +11,26 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 object RepositoryModule {
+    @Provides
+    fun provideHomeRepository(
+        dataSource: HomeDataSource
+    ): HomeRepository = HomeRepositoryImpl(dataSource = dataSource)
+
+    @Provides
+    fun provideSearchRepository(
+        dataSource: SearchDataSource
+    ): SearchRepository = SearchRepositoryImpl(dataSource = dataSource)
+
+    @Provides
+    fun provideAroundRepository(
+        dataSource: AroundDataSource
+    ): AroundRepository = AroundRepositoryImpl(dataSource = dataSource)
+
+    @Provides
+    fun provideMyInfoRepository(
+        dataSource: MyInfoDataSource
+    ): MyInfoRepository = MyInfoRepositoryImpl(dataSource = dataSource)
+
     @Provides
     fun provideRecentSeenRepository(
         dataSource: RecentSeenDataSource
