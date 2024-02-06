@@ -2,7 +2,9 @@ package com.example.goodchoice
 
 import android.app.Application
 import android.content.Context
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class GoodChoiceApplication : Application() {
     companion object {
         lateinit var instance: GoodChoiceApplication

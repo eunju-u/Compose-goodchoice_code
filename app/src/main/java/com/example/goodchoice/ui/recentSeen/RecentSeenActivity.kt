@@ -5,10 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.goodchoice.ui.theme.TestTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 최근 본 상품 activity
  */
+@AndroidEntryPoint
 class RecentSeenActivity : ComponentActivity() {
     companion object {
         val TAG: String = RecentSeenActivity::class.java.simpleName
@@ -19,7 +21,7 @@ class RecentSeenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.recentDb(this)
+        viewModel.recentDb()
         setContent {
             TestTheme {
                 RecentSeenContent(viewModel = viewModel)

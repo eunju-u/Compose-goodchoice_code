@@ -42,7 +42,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
                         if(stayList.value.isNotEmpty()) {
                             str = R.string.str_recent_seen_all_remove
                             //최근 본 상품 DB 내용 삭제
-                            viewModel.deleteRecentDb(context)
+                            viewModel.deleteRecentDb()
                         }
                         Toast
                             .makeText(
