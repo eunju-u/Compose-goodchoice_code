@@ -35,4 +35,9 @@ object RepositoryModule {
     fun provideRecentSeenRepository(
         dataSource: RecentSeenDataSource
     ): RecentSeenRepository = RecentSeenRepositoryImpl(dataSource = dataSource)
+
+    @Provides
+    fun provideStayDetailRepository(
+        dataSource: StayDetailDataSource
+    ): StayDetailRepository = StayDetailRepositoryImpl(dataSource = dataSource)
 }
