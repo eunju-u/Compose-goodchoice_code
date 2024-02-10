@@ -46,4 +46,9 @@ object RepositoryModule {
     fun provideStayDetailRepository(
         dataSource: StayDetailDataSource
     ): StayDetailRepository = StayDetailRepositoryImpl(dataSource = dataSource)
+
+    @Provides
+    fun provideAlarmRepository(
+        dataSource: AlarmDataSource
+    ): AlarmRepository = AlarmRepositoryImpl(dataSource = dataSource)
 }

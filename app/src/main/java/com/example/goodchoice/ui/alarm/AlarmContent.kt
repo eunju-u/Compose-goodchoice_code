@@ -18,6 +18,7 @@ import com.example.goodchoice.R
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.alarm.widget.AlarmItemWidget
 import com.example.goodchoice.ui.components.GoToWidget
+import com.example.goodchoice.ui.components.LoadingWidget
 import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.theme.*
@@ -90,6 +91,10 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                     }
                 }
             }
+        }
+
+        if (alarmUiState.value is AlarmConnectInfo.Loading) {
+            LoadingWidget()
         }
     }
 }

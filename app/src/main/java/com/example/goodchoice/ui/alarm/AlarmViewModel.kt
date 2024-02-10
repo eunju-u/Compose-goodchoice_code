@@ -4,13 +4,17 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.data.dto.AlarmItem
+import com.example.goodchoice.domain.usecase.AlarmUseCase
 import com.example.goodchoice.preference.GoodChoicePreference
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AlarmViewModel : ViewModel() {
+@HiltViewModel
+class AlarmViewModel @Inject constructor(private val useCase: AlarmUseCase) : ViewModel() {
     var alarmUiState = MutableStateFlow<AlarmConnectInfo>(AlarmConnectInfo.Init)
 
     fun requestAlarmData(context: Context) = viewModelScope.launch {
@@ -23,15 +27,7 @@ class AlarmViewModel : ViewModel() {
             }
         }
 
-        val data = listOf(
-            AlarmItem(
-                alarmIdx = 0,
-                title = "알림함이 새롭게 단장되었어요!",
-                content = "이제 예약부터 할인 * 혜택 소식까지 알림함에서 모두 확인 할 수 있어요",
-                date = "2023-08-26"
-            )
-        )
-
+        val data = useCase.getAlarmData()
         alarmUiState.value = AlarmConnectInfo.Available(data)
     }
 }
