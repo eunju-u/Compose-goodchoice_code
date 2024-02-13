@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
 import com.example.goodchoice.RoomType
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.MainBottomSheetType
 import com.example.goodchoice.data.dto.RecommendAreaData
 import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.db.RecentDb
@@ -50,11 +51,14 @@ class MainViewModel @Inject constructor(
     //스플래쉬에서 메인화면으로 처음 진입시 플래그 설정
     var firstSplash = false
 
+    //바텀 시트 타입
+    var bottomSheetType = MutableStateFlow(MainBottomSheetType.NONE)
+
     //fullHeader 가 있는 상태 에서 navigation 이동시 유지 되도록 하는 플래그
-    var isShowFullHeader = mutableStateOf(false)
+    var isShowFullHeader = mutableStateOf(false) //collect 사용 불가능.
 
     //현재 navi가 보고 있는 루트
-    var currentRoute = MutableStateFlow("")
+    var currentRoute = MutableStateFlow("") //collect 사용 가능.
 
     // 최근 본 상품
     var recentDbData = listOf<StayItem>()

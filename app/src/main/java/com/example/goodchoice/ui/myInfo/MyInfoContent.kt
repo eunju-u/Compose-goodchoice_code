@@ -27,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.MainBottomSheetType
 import com.example.goodchoice.data.dto.CategoryItem
 import com.example.goodchoice.data.dto.MyMenuData
 import com.example.goodchoice.preference.GoodChoicePreference
@@ -116,18 +117,18 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(IntrinsicSize.Min)
-                                        .clickable {
-                                            context.startActivity(
-                                                Intent(context, MyInfoDetailActivity::class.java)
-                                            )
-                                        },
+                                        .height(IntrinsicSize.Min),
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
                                     Icon(
                                         modifier = Modifier
                                             .size(dp80)
-                                            .then(iconModifier),
+                                            .then(iconModifier)
+                                            .clickable {
+                                                if (isLogin) {
+                                                    viewModel.bottomSheetType.value = MainBottomSheetType.PROFILE
+                                                }
+                                            },
                                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
                                         tint = Theme.colorScheme.red,
                                         contentDescription = "내 정보",

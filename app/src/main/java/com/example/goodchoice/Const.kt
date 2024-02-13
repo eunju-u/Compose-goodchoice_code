@@ -114,3 +114,8 @@ enum class RoomType {
 enum class CalendarPersonType {
     GUEST_ROOM, ADULT, KID
 }
+
+enum class MainBottomSheetType {
+    NONE,
+    PROFILE // 내 정보 -> 프로필 사진 변경
+}

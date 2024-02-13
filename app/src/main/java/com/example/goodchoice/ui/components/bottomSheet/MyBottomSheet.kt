@@ -64,6 +64,8 @@ class MyBottomSheetState constructor(
     val targetValue: ModalBottomSheetValue
         get() = mySwipeableState.targetValue
 
+    val isVisible: Boolean
+        get() = mySwipeableState.currentValue != ModalBottomSheetValue.Hidden
 
     internal val hasHalfExpandedState: Boolean
         get() = mySwipeableState.hasAnchorForValue(ModalBottomSheetValue.HalfExpanded)
@@ -202,8 +204,9 @@ fun MyBottomSheetLayout(
     sheetContentColor: Color = contentColorFor(sheetBackgroundColor),
     hiddenHeight: Float = 0.0f,
     isFullExpand: Boolean = true,
-    isScrim: Boolean = true //바텀 시트 뒤 어두운 배경 넣을건지
-) {
+    isScrim: Boolean = true, //바텀 시트 뒤 어두운 배경 넣을건지
+    onDismiss: () -> Unit = {},
+    ) {
     val scope = rememberCoroutineScope()
     val orientation = Orientation.Vertical
     val anchorChangeHandler = remember(sheetState, scope) {
@@ -227,6 +230,7 @@ fun MyBottomSheetLayout(
                     color = Theme.colorScheme.darkGray.copy(alpha = 0.3f),
                     onDismiss = {
                         if (sheetState.mySwipeableState.confirmValueChange(ModalBottomSheetValue.Hidden)) {
+                            onDismiss()
                             scope.launch { sheetState.hide() }
                         }
                     },

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.material.*
@@ -21,14 +22,16 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.MainBottomSheetType
 import com.example.goodchoice.ui.components.LoadingWidget
+import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
+import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
+import com.example.goodchoice.ui.main.bottomSheet.ProfileContent
 import com.example.goodchoice.ui.main.nav.NavGraph
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.ui.main.nav.navigation
 import com.example.goodchoice.ui.main.state.rememberMainState
-import com.example.goodchoice.ui.theme.GMarketSansFamily
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp50
+import com.example.goodchoice.ui.theme.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -54,12 +57,25 @@ fun MainContent(viewModel: MainViewModel) {
     )
     var textStyle by remember { mutableStateOf(style) }
 
+    var bottomSheetType by remember { mutableStateOf(MainBottomSheetType.NONE) }
 
     /** route 값이 변경되면 데이터 조회함  **/
     LaunchedEffect(Unit) {
         viewModel.currentRoute.collectLatest {
             if (it.isNotEmpty()) {
                 viewModel.getCurrentViewData(context)
+            }
+        }
+    }
+
+    /** 바텀 시트 상태값이 변경되면 노출됨. **/
+    LaunchedEffect(Unit) {
+        viewModel.bottomSheetType.collectLatest {
+            bottomSheetType = it
+            if (it != MainBottomSheetType.NONE) {
+                with(mainState) {
+                    scope.launch { bottomSheetState.show() }
+                }
             }
         }
     }
@@ -128,6 +144,7 @@ fun MainContent(viewModel: MainViewModel) {
             BackHandler {
                 if (mainState.bottomSheetState.isVisible) {
                     mainState.scope.launch {
+                        viewModel.bottomSheetType.value = MainBottomSheetType.NONE
                         mainState.bottomSheetState.hide()
                     }
                 } else {
@@ -146,6 +163,22 @@ fun MainContent(viewModel: MainViewModel) {
                 viewModel = viewModel
             )
         }
+
+        //바텀시트 노출
+        MyBottomSheetLayout(
+            sheetState = mainState.bottomSheetState,
+            sheetContent = {
+                if (bottomSheetType == MainBottomSheetType.PROFILE) {
+                    SheetWidget(
+                        shape = RoundedCornerShape(topStart = dp100, topEnd = dp100),
+                        content = {
+                            ProfileContent()
+                        })
+                }
+            },
+            onDismiss = {
+                viewModel.bottomSheetType.value = MainBottomSheetType.NONE
+            })
 
         if (homeUiState.value is ConnectInfo.Loading) {
             LoadingWidget()
