@@ -11,7 +11,7 @@ import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.MainBottomSheetType
 import com.example.goodchoice.data.dto.RecommendAreaData
 import com.example.goodchoice.data.dto.*
-import com.example.goodchoice.db.RecentDb
+import com.example.goodchoice.db.recent.RecentDb
 import com.example.goodchoice.domain.usecase.AroundUseCase
 import com.example.goodchoice.domain.usecase.HomeUseCase
 import com.example.goodchoice.domain.usecase.MyInfoUseCase

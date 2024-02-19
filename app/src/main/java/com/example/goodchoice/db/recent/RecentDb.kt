@@ -1,4 +1,4 @@
-package com.example.goodchoice.db
+package com.example.goodchoice.db.recent
 
 import android.content.Context
 import androidx.room.Database
@@ -19,7 +19,7 @@ abstract class RecentDb : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         RecentDb::class.java,
-                        "user-database"
+                        "RecentDb"
                     ).build()
                 }
             }

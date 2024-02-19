@@ -1,6 +1,6 @@
 package com.example.goodchoice.domain.usecase
 
-import com.example.goodchoice.db.RecentDbItem
+import com.example.goodchoice.db.recent.RecentDbItem
 import com.example.goodchoice.domain.repository.RecentSeenRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

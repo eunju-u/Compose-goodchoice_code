@@ -26,7 +26,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
 import com.example.goodchoice.data.dto.StayItem
 import com.example.goodchoice.R
-import com.example.goodchoice.db.RecentDb
+import com.example.goodchoice.db.recent.RecentDb
 import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.*

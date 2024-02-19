@@ -450,12 +450,17 @@ fun StayDetailContent(
                             contentDescription = "공유"
                         )
                     }
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        viewModel.isLike.value = !viewModel.isLike.value
+                    }) {
                         Icon(
                             modifier = Modifier
                                 .size(dp20),
-                            painter = painterResource(id = R.drawable.ic_like),
-                            tint = if (isChangeTopWidget) Theme.colorScheme.darkGray else Theme.colorScheme.pureGray,
+                            painter =
+                            if (viewModel.isLike.value) painterResource(id = R.drawable.ic_like_full)
+                            else painterResource(id = R.drawable.ic_like),
+                            tint =
+                            if (viewModel.isLike.value) Theme.colorScheme.red else if (isChangeTopWidget) Theme.colorScheme.darkGray else Theme.colorScheme.pureGray,
                             contentDescription = "하트"
                         )
                     }

@@ -1,4 +1,4 @@
-package com.example.goodchoice.db
+package com.example.goodchoice.db.recent
 
 import androidx.room.*
 

@@ -20,7 +20,7 @@ class StayDetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         viewModel.stayItemId = intent.getStringExtra(Const.ITEM_ID) ?: ""
         viewModel.stayItemTitle = intent.getStringExtra(Const.ITEM_TITLE) ?: ""
-        viewModel.requestStayDetail()
+        viewModel.requestStayDetail(this)
 
         setContent {
             TestTheme {
@@ -28,6 +28,13 @@ class StayDetailActivity : ComponentActivity() {
                     viewModel = viewModel,
                     onFinish = { this.finish() })
             }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (viewModel.isLike.value) {
+            viewModel.saveLike(this)
         }
     }
 }

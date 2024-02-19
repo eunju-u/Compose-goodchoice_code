@@ -1,7 +1,7 @@
 package com.example.goodchoice.mapper
 
 import com.example.goodchoice.data.dto.StayItem
-import com.example.goodchoice.db.RecentDbItem
+import com.example.goodchoice.db.recent.RecentDbItem
 
 fun RecentDbItem.generateData(): StayItem {
     val item = this@generateData

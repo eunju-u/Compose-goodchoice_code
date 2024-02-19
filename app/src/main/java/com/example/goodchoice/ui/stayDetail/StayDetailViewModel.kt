@@ -1,5 +1,8 @@
 package com.example.goodchoice.ui.stayDetail
 
+import android.content.Context
+import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.Const
@@ -33,11 +36,21 @@ class StayDetailViewModel @Inject constructor(
 
     var detailUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
 
-    fun requestStayDetail() = viewModelScope.launch {
+    var isLike = mutableStateOf(false)
+
+    fun requestStayDetail(context: Context) = viewModelScope.launch {
         detailUiState.value = ConnectInfo.Loading
 
+
         val data = useCase.getDetailData(stayItemId)
+        isLike.value = useCase.hasLikeData(context, stayItemId)
+        Log.d("eunju: ", "isLike.value: ${isLike.value}")
+
         payList = data.payList ?: emptyList()
         detailUiState.value = ConnectInfo.Available(data)
+    }
+
+    fun saveLike(context: Context) = viewModelScope.launch {
+       useCase.insertLikeData(context, stayItemId)
     }
 }

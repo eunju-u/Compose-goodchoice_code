@@ -1,8 +1,12 @@
 package com.example.goodchoice.data.dataSource
 
+import android.content.Context
+import android.util.Log
 import com.example.goodchoice.Const
 import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.*
+import com.example.goodchoice.db.like.LikeDb
+import com.example.goodchoice.db.like.LikeDbItem
 import javax.inject.Inject
 
 class StayDetailDataSource @Inject constructor() {
@@ -223,5 +227,26 @@ class StayDetailDataSource @Inject constructor() {
             )
         }
         return data
+    }
+
+    fun hasLikeData(context: Context, stayItemId: String): Boolean {
+        val likeDb = LikeDb.getInstance(context)
+
+        val dd=  likeDb?.userDao()?.getAll()
+        Log.d("eunju: ", "get all :  ${dd}")
+
+        val count = likeDb?.userDao()?.hasLike(stayItemId) ?: 0
+        return count > 0
+    }
+
+    fun insertLikeData(context: Context, item: LikeDbItem) {
+        Log.d("eunju: ", "insertLikeData")
+
+        val likeDb = LikeDb.getInstance(context)
+        likeDb?.userDao()?.insert(item)
+
+
+
+
     }
 }

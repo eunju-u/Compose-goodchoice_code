@@ -1,7 +1,7 @@
 package com.example.goodchoice.data.repository
 
 import com.example.goodchoice.data.dataSource.RecentSeenDataSource
-import com.example.goodchoice.db.RecentDbItem
+import com.example.goodchoice.db.recent.RecentDbItem
 import com.example.goodchoice.domain.repository.RecentSeenRepository
 import javax.inject.Inject
 
