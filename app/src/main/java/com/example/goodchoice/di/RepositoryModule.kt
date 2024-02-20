@@ -27,6 +27,11 @@ object RepositoryModule {
     ): AroundRepository = AroundRepositoryImpl(dataSource = dataSource)
 
     @Provides
+    fun provideLikeRepository(
+        dataSource: LikeDataSource
+    ): LikeRepository = LikeRepositoryImpl(dataSource = dataSource)
+
+    @Provides
     fun provideMyInfoRepository(
         dataSource: MyInfoDataSource
     ): MyInfoRepository = MyInfoRepositoryImpl(dataSource = dataSource)

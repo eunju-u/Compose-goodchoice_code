@@ -20,6 +20,7 @@ import com.example.goodchoice.ui.TabData
 import com.example.goodchoice.ui.components.GoToWidget
 import com.example.goodchoice.ui.components.TabWidget
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
+import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.Theme
@@ -89,7 +90,7 @@ fun LikeContent(
                                                 value = stringResource(id = R.string.str_stay),
                                                 onClick = {})
                                         } else {
-
+                                            KoreaStayLikeContent()
                                         }
                                     }
                                 }

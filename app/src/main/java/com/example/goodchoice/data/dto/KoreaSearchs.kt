@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.search
+package com.example.goodchoice.data.dto
 
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 

@@ -4,16 +4,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import com.example.goodchoice.ui.components.CardWidget
 import com.example.goodchoice.ui.components.KoreaDateWidget
 
 @Composable
 fun KoreaStayLikeContent() {
+    val context = LocalContext.current
+
     LazyColumn(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally, content = {
             item {
-//                CardWidget(content = { KoreaDateWidget() })
+                CardWidget(content = { KoreaDateWidget(context) })
             }
         })
 }

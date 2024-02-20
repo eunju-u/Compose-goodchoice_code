@@ -3,7 +3,7 @@ package com.example.goodchoice.ui.search.detailSearch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.ui.search.*
+import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

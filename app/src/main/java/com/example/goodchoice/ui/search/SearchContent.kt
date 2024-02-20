@@ -1,6 +1,5 @@
 package com.example.goodchoice.ui.search
 
-import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,12 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.goodchoice.Const
 import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.TabData
-import com.example.goodchoice.ui.calendar.CalendarActivity
-import com.example.goodchoice.ui.calendar.CalendarType
 import com.example.goodchoice.ui.components.TabWidget
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.theme.*

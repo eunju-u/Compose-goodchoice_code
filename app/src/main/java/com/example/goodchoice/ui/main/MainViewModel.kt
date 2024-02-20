@@ -12,10 +12,7 @@ import com.example.goodchoice.MainBottomSheetType
 import com.example.goodchoice.data.dto.RecommendAreaData
 import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.db.recent.RecentDb
-import com.example.goodchoice.domain.usecase.AroundUseCase
-import com.example.goodchoice.domain.usecase.HomeUseCase
-import com.example.goodchoice.domain.usecase.MyInfoUseCase
-import com.example.goodchoice.domain.usecase.SearchUseCase
+import com.example.goodchoice.domain.usecase.*
 import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.nav.NavItem
@@ -42,6 +39,7 @@ class MainViewModel @Inject constructor(
     private val homeUseCase: HomeUseCase,
     private val searchUseCase: SearchUseCase,
     private val aroundUseCase: AroundUseCase,
+    private val likeUseCase: LikeUseCase,
     private val myInfoUseCase: MyInfoUseCase
 ) : ViewModel() {
     var homeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
@@ -65,7 +63,7 @@ class MainViewModel @Inject constructor(
 
     /** 찜 화면 **/
     // 찜 > 국내 여행
-    var koreaLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
+    var koreaLikeData = listOf<StayItem>()
 
     // 찜 > 해외 여행
     var overseaLikeData: SnapshotStateList<StayItem> = mutableStateListOf()
@@ -220,7 +218,7 @@ class MainViewModel @Inject constructor(
                 delay(200)
             }
         }
-
+        koreaLikeData = likeUseCase.getLikeData()
         homeUiState.value = ConnectInfo.Available()
     }
 
