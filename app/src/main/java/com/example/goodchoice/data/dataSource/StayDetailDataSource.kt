@@ -14,6 +14,7 @@ class StayDetailDataSource @Inject constructor() {
         var data = StayDetailData()
         if (stayItemId == "s_1") {
             data = StayDetailData(
+                id = "s_1",
                 label = "호텔.리조트",
                 name = "양양 더 앤 리조트 호텔&스파",
                 star = "8.7",
@@ -244,9 +245,5 @@ class StayDetailDataSource @Inject constructor() {
 
         val likeDb = LikeDb.getInstance(context)
         likeDb?.userDao()?.insert(item)
-
-
-
-
     }
 }

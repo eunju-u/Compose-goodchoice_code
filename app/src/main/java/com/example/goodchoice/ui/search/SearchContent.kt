@@ -77,44 +77,11 @@ fun SearchContent(
                     if (homeUiState.value is ConnectInfo.Available) {
                         when (menus[page].route) {
                             TabData.KOREA_STAY.route -> {
-                                val startDate = pref.koreaStartDate
-                                val endDate = pref.koreaEndDate
-
-                                val startDateFormat = ConvertUtil.formatDate(startDate)
-                                val endDateFormat = ConvertUtil.formatDate(endDate)
-                                val startDayOfWeek =
-                                    ConvertUtil.convertDayOfWeek(LocalDate.parse(startDate).dayOfWeek.name)
-                                val endDayOfWeek =
-                                    ConvertUtil.convertDayOfWeek(LocalDate.parse(endDate).dayOfWeek.name)
-                                val date =
-                                    "$startDateFormat ${stringResource(id = startDayOfWeek)} " +
-                                            "- $endDateFormat ${stringResource(id = endDayOfWeek)}"
-
                                 // 국내숙소
-                                KoreaStayContent(modifier = pageModifier,
-                                    date = date,
-                                    personCount = pref.koreaPersonCount,
-                                    rankList = koreaSearchRankData,
-                                    onLeftItemClick = {
-                                        context.startActivity(
-                                            Intent(
-                                                context,
-                                                CalendarActivity::class.java
-                                            ).apply {
-                                                putExtra(Const.TYPE, CalendarType.CALENDAR)
-                                            }
-                                        )
-                                    },
-                                    onRightItemClick = {
-                                        context.startActivity(
-                                            Intent(
-                                                context,
-                                                CalendarActivity::class.java
-                                            ).apply {
-                                                putExtra(Const.TYPE, CalendarType.PERSON)
-                                            }
-                                        )
-                                    })
+                                KoreaStayContent(
+                                    modifier = pageModifier,
+                                    rankList = koreaSearchRankData
+                                )
                             }
 
                             TabData.OVERSEA_STAY.route -> {
