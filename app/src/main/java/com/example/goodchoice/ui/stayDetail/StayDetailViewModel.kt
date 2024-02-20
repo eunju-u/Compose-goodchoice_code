@@ -41,10 +41,8 @@ class StayDetailViewModel @Inject constructor(
     fun requestStayDetail(context: Context) = viewModelScope.launch {
         detailUiState.value = ConnectInfo.Loading
 
-
         val data = useCase.getDetailData(stayItemId)
         isLike.value = useCase.hasLikeData(context, stayItemId)
-        Log.d("eunju: ", "isLike.value: ${isLike.value}")
 
         payList = data.payList ?: emptyList()
         detailUiState.value = ConnectInfo.Available(data)

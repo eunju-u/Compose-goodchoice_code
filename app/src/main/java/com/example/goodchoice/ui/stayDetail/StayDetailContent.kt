@@ -39,6 +39,7 @@ import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
 import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.utils.ConvertUtil
 import com.example.goodchoice.utils.StringUtil
+import com.example.goodchoice.utils.ToastUtils
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -69,6 +70,11 @@ fun StayDetailContent(
     }
 
     val rememberScope = rememberCoroutineScope()
+
+
+    val toastStr = if (!viewModel.isLike.value) {
+        stringResource(id = R.string.str_add_like)
+    } else stringResource(id = R.string.str_remove_like)
 
     Box {
         if (detailUiState.value is ConnectInfo.Available) {
@@ -452,6 +458,7 @@ fun StayDetailContent(
                     }
                     IconButton(onClick = {
                         viewModel.isLike.value = !viewModel.isLike.value
+                        ToastUtils.showToast(toastStr)
                     }) {
                         Icon(
                             modifier = Modifier

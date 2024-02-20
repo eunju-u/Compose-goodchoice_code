@@ -123,6 +123,8 @@
     <string name="str_detail_more">자세히보기</string>
     <string name="str_pay_benefit_information">결제 혜택 안내</string>
     <string name="str_benefit">혜택</string>
+    <string name="str_add_like">찜 목록에 추가하였습니다.\n찜에서 확인해주세요.</string>
+    <string name="str_remove_like">찜을 해제하였습니다.</string>
 
     <!--  필터  -->
     <string name="str_filter">필터</string>
