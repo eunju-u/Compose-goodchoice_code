@@ -78,6 +78,7 @@
     <string name="str_start_login_email">이메일로 시작하기</string>
     <string name="str_login_business">비즈니스 로그인/회원가입</string>
     <string name="str_login_recent">최근에 로그인했어요</string>
+    <string name="str_need_login">먼저 로그인 하세요.</string>
 
     <!--  알림  -->
     <string name="str_alarm">알림함</string>

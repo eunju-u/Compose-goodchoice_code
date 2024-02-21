@@ -20,7 +20,6 @@ class StayDetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         viewModel.stayItemId = intent.getStringExtra(Const.ITEM_ID) ?: ""
         viewModel.stayItemTitle = intent.getStringExtra(Const.ITEM_TITLE) ?: ""
-        viewModel.requestStayDetail(this)
 
         setContent {
             TestTheme {
@@ -29,6 +28,11 @@ class StayDetailActivity : ComponentActivity() {
                     onFinish = { this.finish() })
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+       viewModel.requestStayDetail(this)
     }
 
     override fun onStop() {

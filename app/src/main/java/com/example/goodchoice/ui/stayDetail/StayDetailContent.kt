@@ -28,11 +28,13 @@ import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.data.dto.StayDetailData
+import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
+import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.stayDetail.service.ServiceActivity
 import com.example.goodchoice.ui.stayDetail.widget.PayWidget
 import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
@@ -49,11 +51,14 @@ fun StayDetailContent(
     onFinish: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val pref = GoodChoicePreference(context)
     val configuration = LocalConfiguration.current
     val fullWith = configuration.screenWidthDp
     val lazyColumnListState = rememberLazyListState()
 
     val detailUiState = viewModel.detailUiState.collectAsStateWithLifecycle()
+
+    var isShowDialog by remember { mutableStateOf(false) }
 
     //바텀시트
     val sheetState: MyBottomSheetState =
@@ -457,8 +462,13 @@ fun StayDetailContent(
                         )
                     }
                     IconButton(onClick = {
-                        viewModel.isLike.value = !viewModel.isLike.value
-                        ToastUtils.showToast(toastStr)
+                        if (pref.isLogin) {
+                            viewModel.isLike.value = !viewModel.isLike.value
+                            ToastUtils.showToast(toastStr)
+                        } else {
+                            isShowDialog = true
+                        }
+
                     }) {
                         Icon(
                             modifier = Modifier
@@ -501,6 +511,18 @@ fun StayDetailContent(
                         }
                     })
             })
+
+        if (isShowDialog) {
+            AlertDialogWidget(
+                title = stringResource(id = R.string.str_need_login),
+                oneButtonText = stringResource(id = R.string.str_close),
+                twoButtonText = stringResource(id = R.string.str_login),
+                onDismiss = { isShowDialog = false },
+                onConfirm = {
+                    isShowDialog = false
+                    context.startActivity(Intent(context, LoginActivity::class.java))
+                })
+        }
 
         // 로딩바
         if (detailUiState.value is ConnectInfo.Loading) {
