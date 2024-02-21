@@ -90,7 +90,12 @@ fun LikeContent(
                                                 value = stringResource(id = R.string.str_stay),
                                                 onClick = {})
                                         } else {
-                                            KoreaStayLikeContent()
+                                            KoreaStayLikeContent(
+                                                koreaLikeData,
+                                                clickLike = {
+                                                    viewModel.checkLikeData(it)
+                                                },
+                                                onItemClick = {})
                                         }
                                     }
                                 }

@@ -32,13 +32,13 @@ class StayDetailActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-       viewModel.requestStayDetail(this)
+       viewModel.requestStayDetail()
     }
 
     override fun onStop() {
         super.onStop()
         if (viewModel.isLike.value) {
-            viewModel.saveLike(this)
+            viewModel.saveLike()
         }
     }
 }

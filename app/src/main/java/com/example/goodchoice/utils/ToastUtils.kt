@@ -18,6 +18,20 @@ object ToastUtils {
         toast?.show()
     }
 
+    fun showToast(resource: Int) {
+        toast?.cancel()
+        if (toast == null) {
+            toast = Toast.makeText(
+                GoodChoiceApplication.instance,
+                GoodChoiceApplication.instance.getText(resource),
+                Toast.LENGTH_LONG
+            )
+        } else {
+            toast?.setText(GoodChoiceApplication.instance.getText(resource))
+        }
+        toast?.show()
+    }
+
     fun cancelToast() {
         toast?.cancel()
     }

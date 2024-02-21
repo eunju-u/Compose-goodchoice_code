@@ -1,25 +1,21 @@
 package com.example.goodchoice.ui.stayDetail
 
-import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.Const
 import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.*
+import com.example.goodchoice.domain.usecase.LikeUseCase
 import com.example.goodchoice.domain.usecase.StayDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class StayDetailViewModel @Inject constructor(
-    private val useCase: StayDetailUseCase
+    private val useCase: StayDetailUseCase,
+    private val likeUseCase: LikeUseCase
 ) : ViewModel() {
     //서버 찌를 경우 보낼 request 파라미터 값
     var stayItemId = ""
@@ -38,17 +34,17 @@ class StayDetailViewModel @Inject constructor(
 
     var isLike = mutableStateOf(false)
 
-    fun requestStayDetail(context: Context) = viewModelScope.launch {
+    fun requestStayDetail() = viewModelScope.launch {
         detailUiState.value = ConnectInfo.Loading
 
         val data = useCase.getDetailData(stayItemId)
-        isLike.value = useCase.hasLikeData(context, stayItemId)
+        isLike.value = likeUseCase.hasLikeData(stayItemId)
 
         payList = data.payList ?: emptyList()
         detailUiState.value = ConnectInfo.Available(data)
     }
 
-    fun saveLike(context: Context) = viewModelScope.launch {
-       useCase.insertLikeData(context, stayItemId)
+    fun saveLike() = viewModelScope.launch {
+        likeUseCase.insertLikeData(stayItemId)
     }
 }

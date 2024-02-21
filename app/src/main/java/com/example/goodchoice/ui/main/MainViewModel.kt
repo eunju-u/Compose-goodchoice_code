@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.main
 
 import android.content.Context
+import com.example.goodchoice.R
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.ui.search.data.KoreaSearchData
+import com.example.goodchoice.utils.ToastUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -220,6 +222,16 @@ class MainViewModel @Inject constructor(
         }
         koreaLikeData = likeUseCase.getLikeData()
         homeUiState.value = ConnectInfo.Available()
+    }
+
+    fun checkLikeData(stayId: String) = viewModelScope.launch {
+        if (likeUseCase.hasLikeData(stayId)) {
+            likeUseCase.deleteLikeData(stayId)
+            ToastUtils.showToast(R.string.str_remove_like)
+        } else {
+            likeUseCase.insertLikeData(stayId)
+            ToastUtils.showToast(R.string.str_add_like)
+        }
     }
 
     fun requestMyInfoData() = viewModelScope.launch {

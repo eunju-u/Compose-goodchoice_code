@@ -28,6 +28,7 @@ fun RoundImageWidget(
     painter: Painter, //이미지
     boxAlignment: Alignment = Alignment.BottomStart, //상위에 올라가는 뷰의 정렬
     contentScale: ContentScale = ContentScale.Crop,
+    contentDescription: String = "image",
     content: @Composable @UiComposable (() -> Unit)? = null
 ) {
     Box(
@@ -38,7 +39,7 @@ fun RoundImageWidget(
             modifier = imageModifier,
             painter = painter,
             contentScale = contentScale,
-            contentDescription = "image"
+            contentDescription = contentDescription
         )
 
         if (content != null) {
