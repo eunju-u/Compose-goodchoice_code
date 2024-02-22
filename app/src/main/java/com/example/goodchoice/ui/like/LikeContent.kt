@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.Const
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.TabData
 import com.example.goodchoice.ui.components.GoToWidget
@@ -23,6 +24,7 @@ import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
+import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import com.example.goodchoice.ui.theme.Theme
 
 private val menus = listOf(
@@ -95,7 +97,20 @@ fun LikeContent(
                                                 clickLike = {
                                                     viewModel.checkLikeData(it)
                                                 },
-                                                onItemClick = {})
+                                                onItemClick = { stayItem ->
+                                                    context.startActivity(
+                                                        Intent(
+                                                            context,
+                                                            StayDetailActivity::class.java
+                                                        ).apply {
+                                                            putExtra(Const.ITEM_ID, stayItem.id)
+                                                            putExtra(
+                                                                Const.ITEM_TITLE,
+                                                                stayItem.name
+                                                            )
+                                                        }
+                                                    )
+                                                })
                                         }
                                     }
                                 }

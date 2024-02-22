@@ -16,7 +16,7 @@ import com.example.goodchoice.ui.theme.Theme
 fun KoreaStayLikeContent(
     koreaLikeData: List<StayItem>,
     clickLike: (stayId: String) -> Unit = {},
-    onItemClick: () -> Unit = {},
+    onItemClick: (stayItem: StayItem) -> Unit = {},
 ) {
     val context = LocalContext.current
 
@@ -31,7 +31,10 @@ fun KoreaStayLikeContent(
             }
             item {
                 koreaLikeData.forEach { item ->
-                    KoreaStayItemWidget(item, { clickLike(item.id ?: "") }, onItemClick)
+                    KoreaStayItemWidget(
+                        item,
+                        { clickLike(item.id ?: "") },
+                        { onItemClick(item) })
                 }
             }
         })
