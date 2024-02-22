@@ -1,6 +1,6 @@
 package com.example.goodchoice.domain.usecase
 
-import com.example.goodchoice.db.recent.RecentDbItem
+import com.example.goodchoice.data.dto.StayItem
 import com.example.goodchoice.domain.repository.RecentSeenRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class RecentUseCase @Inject constructor(
     private val repository: RecentSeenRepository,
 ) {
-    suspend fun getList(): List<RecentDbItem> {
+    suspend fun getList(): List<StayItem> {
         return try {
             withContext(Dispatchers.IO) {
                 val resultDeferred = async {

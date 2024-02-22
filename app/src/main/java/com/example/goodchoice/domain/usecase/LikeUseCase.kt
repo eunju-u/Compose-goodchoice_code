@@ -53,12 +53,13 @@ class LikeUseCase @Inject constructor(
         }
     }
 
-    suspend fun deleteLikeData(stayId: String): Boolean {
+    suspend fun deleteLikeData(stayId: String) {
         return try {
-            repository.deleteLikeData(stayId)
+            withContext(Dispatchers.IO) {
+                repository.deleteLikeData(stayId)
+            }
         } catch (e: Exception) {
             //TODO 예외처리
-            false
         }
     }
 }

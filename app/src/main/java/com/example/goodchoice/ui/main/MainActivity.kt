@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         super.onResume()
         CoroutineScope(Dispatchers.IO).launch {
             //홈 -> 최근 본 상품 -> 전체 삭제 -> 홈 이동시 최근 본 상품 갱신하기 위함.
-            viewModel.recentDb(this@MainActivity)
+            viewModel.recentDb()
         }
     }
 

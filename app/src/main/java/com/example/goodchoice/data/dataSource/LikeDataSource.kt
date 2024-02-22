@@ -42,15 +42,18 @@ class LikeDataSource @Inject constructor() {
     }
 
     /** 찜 DB 에서 해당 내용 삭제 **/
-    suspend fun deleteLikeData(stayId: String): Boolean {
-        val resultDeferred =
-            CoroutineScope(Dispatchers.IO).async {
-                withTimeout(5000L) {
-                    val likeDb = LikeDb.getInstance(GoodChoiceApplication.instance)
-                    likeDb?.userDao()?.deleteLikeId(stayId)
-                    true
-                }
-            }
-        return resultDeferred.await()
+    fun deleteLikeData(stayId: String) {
+        val likeDb = LikeDb.getInstance(GoodChoiceApplication.instance)
+        likeDb?.userDao()?.deleteLikeId(stayId)
+
+//        val resultDeferred =
+//            CoroutineScope(Dispatchers.IO).async {
+//                withTimeout(5000L) {
+//                    val likeDb = LikeDb.getInstance(GoodChoiceApplication.instance)
+//                    likeDb?.userDao()?.deleteLikeId(stayId)
+//                    true
+//                }
+//            }
+//        return resultDeferred.await()
     }
 }

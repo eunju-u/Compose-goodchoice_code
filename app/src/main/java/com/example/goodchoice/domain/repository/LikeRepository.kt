@@ -6,5 +6,5 @@ interface LikeRepository {
     suspend fun getLikeData(): List<StayItem>
     suspend fun hasLikeData(stayItemId: String): Boolean
     suspend fun insertLikeData(stayItemId: String)
-    suspend fun deleteLikeData(stayId: String): Boolean
+    suspend fun deleteLikeData(stayId: String)
 }

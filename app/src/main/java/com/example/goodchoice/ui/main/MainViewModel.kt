@@ -42,7 +42,8 @@ class MainViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
     private val aroundUseCase: AroundUseCase,
     private val likeUseCase: LikeUseCase,
-    private val myInfoUseCase: MyInfoUseCase
+    private val myInfoUseCase: MyInfoUseCase,
+    private val recentUseCase: RecentUseCase
 ) : ViewModel() {
     var homeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
     var homeData = MutableStateFlow(HomeData())
@@ -106,7 +107,7 @@ class MainViewModel @Inject constructor(
             NavItem.Home.route -> {
                 CoroutineScope(Dispatchers.IO).launch {
                     requestHomeData()
-                    recentDb(context)
+                    recentDb()
                 }
             }
             NavItem.Search.route -> {
@@ -241,13 +242,7 @@ class MainViewModel @Inject constructor(
     }
 
     /** DB 에서 가져온 최근 본 상품 리스트 **/
-    fun recentDb(context: Context) =
-        CoroutineScope(Dispatchers.IO).launch {
-            val recentDb = RecentDb.getInstance(context)
-            val list = recentDb?.userDao()?.getAll()
-            val recentList = list?.map {
-                it.generateData()
-            }
-            recentDbData = recentList ?: listOf()
-        }
+    fun recentDb() = viewModelScope.launch {
+        recentDbData = recentUseCase.getList()
+    }
 }

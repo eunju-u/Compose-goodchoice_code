@@ -21,7 +21,7 @@ class LikeRepositoryImpl @Inject constructor(
         dataSource.insertLikeData(LikeDbItem(stayItemId))
     }
 
-    override suspend fun deleteLikeData(stayId: String): Boolean {
+    override suspend fun deleteLikeData(stayId: String) {
         return dataSource.deleteLikeData(stayId)
     }
 }
