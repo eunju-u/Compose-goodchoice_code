@@ -9,5 +9,6 @@ data class AroundFilterData(
 
 data class AroundFilterItem(
     val type: String? = "",
+    val code: String? = "",
     val text: String? = ""
 )

@@ -2,9 +2,11 @@ package com.example.goodchoice.ui.around
 
 import android.content.Intent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -168,7 +170,8 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                     else Theme.colorScheme.white
 
                                 if (index == 0) Spacer(Modifier.width(15.dp))
-                                ImageButtonWidget(title = if (isSelectDepth) selectDepthItem.value.text else item.text,
+                                ImageButtonWidget(
+                                    title = if (isSelectDepth) selectDepthItem.value.text else item.text,
                                     shape = dp30,
                                     containerColor = if (isSelectUpper && !hasDepthItem && isSelectDepth) Theme.colorScheme.blue
                                     else if (isSelectUpper && hasDepthItem) Theme.colorScheme.pureBlue
@@ -193,7 +196,8 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         if (selectFilterData.type == Const.RESERVATION) {
                                             if (selectDepthItem.value.type.isNullOrEmpty()) {
                                                 selectDepthItem.value = AroundFilterItem(
-                                                    selectFilterData.type, selectFilterData.text
+                                                    type = selectFilterData.type,
+                                                    text = selectFilterData.text
                                                 )
                                             } else {
                                                 selectDepthItem.value = AroundFilterItem()
@@ -234,7 +238,30 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 )
                                             }
                                         }
-                                    })
+                                    },
+                                    pointContent = when (item.type) {
+                                        Const.FILTER -> {
+                                            {
+                                                if (!viewModel.aroundFilterSelect.selectedRoom.value.type.isNullOrEmpty() ||
+                                                    !viewModel.aroundFilterSelect.selectedReservation.value.type.isNullOrEmpty() ||
+                                                    !viewModel.aroundFilterSelect.selectedPrice.value.type.isNullOrEmpty()
+                                                ) {
+                                                    Box(
+                                                        modifier = Modifier
+                                                            .size(width = dp5, height = dp5)
+                                                            .background(
+                                                                color = Theme.colorScheme.red,
+                                                                shape = CircleShape
+                                                            )
+                                                    )
+                                                }
+                                            }
+                                        }
+                                        else -> {
+                                            null
+                                        }
+                                    }
+                                )
                                 if (index == filterList.value.lastIndex) Spacer(Modifier.width(15.dp))
                             }
                         }
@@ -260,6 +287,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                             }
 
                             val filterDetailList = selectFilterData.filterList ?: listOf()
+                            // 필터 depth 뷰
                             FlowRow(
                                 modifier = Modifier.padding(
                                     start = dp30, end = dp30, top = dp15, bottom = dp5

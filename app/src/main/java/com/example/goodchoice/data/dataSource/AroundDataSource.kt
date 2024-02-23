@@ -12,6 +12,7 @@ class AroundDataSource @Inject constructor() {
             text = "필터",
             filterList = listOf(),
         ),
+
         AroundFilterData(
             type = Const.RECOMMEND, text = "추천순", filterList = listOf(
                 AroundFilterItem(type = Const.RECOMMEND, text = "추천순"),
@@ -22,6 +23,7 @@ class AroundDataSource @Inject constructor() {
                 AroundFilterItem(type = Const.HIGH_PRICE, text = "높은가격순")
             )
         ),
+
         AroundFilterData(
             type = Const.ROOM, text = "숙소유형", filterList = listOf(
                 AroundFilterItem(type = Const.MOTEL, text = "모텔"),
@@ -33,25 +35,27 @@ class AroundDataSource @Inject constructor() {
             )
         ),
         AroundFilterData(type = Const.RESERVATION, text = "예약가능", filterList = listOf()),
+
         AroundFilterData(
             type = Const.PRICE, text = "가격", filterList = listOf(
-                AroundFilterItem(type = Const.LESS_5, text = "~5만원"),
-                AroundFilterItem(type = Const.M5_L10, text = "5~10만원"),
-                AroundFilterItem(type = Const.M10_L15, text = "10만원~15만원"),
-                AroundFilterItem(type = Const.M15_L20, text = "15만원~20만원"),
-                AroundFilterItem(type = Const.M20_L25, text = "20만원~25만원"),
-                AroundFilterItem(type = Const.M25_L30, text = "25만원~30만원"),
-                AroundFilterItem(type = Const.MORE_30, text = "30만원 이상~")
+                AroundFilterItem(type = Const.LESS_5, code = "f4_1_1", text = "~5만원"),
+                AroundFilterItem(type = Const.M5_L10, code = "f4_1_2", text = "5~10만원"),
+                AroundFilterItem(type = Const.M10_L15, code = "f4_1_3", text = "10만원~15만원"),
+                AroundFilterItem(type = Const.M15_L20, code = "f4_1_4", text = "15만원~20만원"),
+                AroundFilterItem(type = Const.M20_L25, code = "f4_1_5", text = "20만원~25만원"),
+                AroundFilterItem(type = Const.M25_L30, code = "f4_1_6", text = "25만원~30만원"),
+                AroundFilterItem(type = Const.MORE_30, code = "f4_1_7", text = "30만원 이상~")
             )
         )
     )
 
-    fun getRentalData() =listOf(
+    fun getRentalData() = listOf(
         AroundFilterData(
             type = Const.FILTER,
             text = "필터",
             filterList = listOf(),
-        ), AroundFilterData(
+        ),
+        AroundFilterData(
             type = Const.RECOMMEND, text = "추천순", filterList = listOf(
                 AroundFilterItem(type = Const.RECOMMEND, text = "추천순"),
                 AroundFilterItem(type = Const.DISTANCE, text = "거리순"),

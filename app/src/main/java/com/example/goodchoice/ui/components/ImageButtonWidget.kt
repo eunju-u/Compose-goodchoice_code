@@ -15,10 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp0
-import com.example.goodchoice.ui.theme.dp10
-import com.example.goodchoice.ui.theme.dp12
+import com.example.goodchoice.ui.theme.*
 
 @Composable
 fun ImageButtonWidget(
@@ -38,6 +35,7 @@ fun ImageButtonWidget(
     isCenterHorizontalArrangement: Boolean = true,
     onItemClick: () -> Unit = {},
     content: @Composable @UiComposable (() -> Unit)? = null,
+    pointContent: @Composable @UiComposable (() -> Unit)? = null,
 ) {
     title?.let {
         CardWidget(
@@ -82,9 +80,20 @@ fun ImageButtonWidget(
                 if (!isLeftImage && content != null) {
                     Box(
                         modifier = Modifier
-                            .padding(start = if (hasEndPadding) endPadding else 0.dp),
+                            .padding(start = if (hasEndPadding) endPadding else dp0),
                         contentAlignment = Alignment.Center
                     ) { content() }
+                }
+
+                //주변 화면 filter 에서 사용되는 오른쪽 상단 point
+                if (pointContent != null) {
+                    Box(
+                        contentAlignment = Alignment.TopStart,
+                        modifier = Modifier
+                            .padding(start = dp1, bottom = dp10),
+                    ) {
+                        pointContent()
+                    }
                 }
             }
         }
