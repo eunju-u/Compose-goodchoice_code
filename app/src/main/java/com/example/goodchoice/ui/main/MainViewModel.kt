@@ -1,15 +1,12 @@
 package com.example.goodchoice.ui.main
 
 import android.content.Context
-import com.example.goodchoice.R
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.Const
-import com.example.goodchoice.RoomType
-import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.MainBottomSheetType
+import com.example.goodchoice.*
+import com.example.goodchoice.R
 import com.example.goodchoice.data.dto.RecommendAreaData
 import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.db.recent.RecentDb
@@ -188,7 +185,7 @@ class MainViewModel @Inject constructor(
         filterList.value =
             if (selectRoomType.value == RoomType.SLEEP_ROOM) listSleepType else listRentalType
 
-        filterList.value.find { it.type == Const.RECOMMEND }?.filterList?.let {
+        filterList.value.find { it.type == ServerConst.RECOMMEND }?.filterList?.let {
             //네비 메뉴 이동시 선택한 필터값 가지고 있어야 하며, 룸 타입(숙박, 대실) 클릭시 에만 초기화 필요하여 추가
             if (aroundFilterSelect.selectedRecommend.value.type.isNullOrEmpty()) {
                 aroundFilterSelect.selectedRecommend.value = it.first()

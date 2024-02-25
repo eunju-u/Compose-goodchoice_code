@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.FilterData
 import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.ui.components.*
@@ -119,7 +120,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                 ) {
                                     items(items = stayTypeList) { item ->
                                         //숙소 유형 '전체' 에 체크 표시 하도록 함
-                                        if (clickStayType.value.filterCode == "" && item.filterCode == "r_1") {
+                                        if (clickStayType.value.filterType == "" && item.filterType == ServerConst.ALL) {
                                             clickStayType.value = item
                                         }
                                         LeftImageButtonWidget(modifier = Modifier.height(dp50),
@@ -128,7 +129,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                             isCenterHorizontalArrangement = false,
                                             content = {
                                                 ShapeButton(
-                                                    isChecked = clickStayType.value.filterCode == item.filterCode,
+                                                    isChecked = clickStayType.value.filterType == item.filterType,
                                                     checkedColor = Theme.colorScheme.blue,
                                                 )
                                             },
@@ -213,7 +214,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                         .height(dp50)
                 ) {
                     val isChecked =
-                        selectFilterMap.values.isNotEmpty() || clickStayType.value.filterCode != "r_1"
+                        selectFilterMap.values.isNotEmpty() || clickStayType.value.filterType != ServerConst.ALL
                     LeftImageButtonWidget(modifier = Modifier
                         .weight(0.3f)
                         .fillMaxHeight(),
@@ -225,10 +226,13 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                         endPadding = dp10,
                         onItemClick = {
                             selectFilterMap.clear()
-                            val allData = stayTypeList.filter { item -> item.filterCode == "r_1" }
+                            val allData =
+                                stayTypeList.filter { item -> item.filterType == ServerConst.ALL }
                             if (allData.isNotEmpty()) {
                                 clickStayType.value =
-                                    stayTypeList.filter { item -> item.filterCode == "r_1" }[0]
+                                    stayTypeList.filter { item ->
+                                        item.filterType == ServerConst.ALL
+                                    }[0]
                             }
                         },
                         content = {

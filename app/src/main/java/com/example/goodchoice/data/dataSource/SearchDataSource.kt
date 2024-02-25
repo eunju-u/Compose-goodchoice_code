@@ -6,28 +6,28 @@ import javax.inject.Inject
 
 class SearchDataSource @Inject constructor() {
     fun getKoreaRankData() = listOf(
-        FilterItem(filterCode = "l1_1_1", filterTitle = "경주"),
-        FilterItem(filterCode = "l1_1_2", filterTitle = "여수"),
-        FilterItem(filterCode = "l1_1_3", filterTitle = "속초"),
-        FilterItem(filterCode = "l1_1_4", filterTitle = "전주"),
-        FilterItem(filterCode = "l1_1_5", filterTitle = "부산"),
-        FilterItem(filterCode = "l1_1_6", filterTitle = "제주도"),
-        FilterItem(filterCode = "l1_1_7", filterTitle = "강릉"),
-        FilterItem(filterCode = "l1_1_8", filterTitle = "순천"),
-        FilterItem(filterCode = "l1_1_9", filterTitle = "서울"),
-        FilterItem(filterCode = "l1_1_10", filterTitle = "춘천")
+        FilterItem(filterType = "l1_1_1", filterTitle = "경주"),
+        FilterItem(filterType = "l1_1_2", filterTitle = "여수"),
+        FilterItem(filterType = "l1_1_3", filterTitle = "속초"),
+        FilterItem(filterType = "l1_1_4", filterTitle = "전주"),
+        FilterItem(filterType = "l1_1_5", filterTitle = "부산"),
+        FilterItem(filterType = "l1_1_6", filterTitle = "제주도"),
+        FilterItem(filterType = "l1_1_7", filterTitle = "강릉"),
+        FilterItem(filterType = "l1_1_8", filterTitle = "순천"),
+        FilterItem(filterType = "l1_1_9", filterTitle = "서울"),
+        FilterItem(filterType = "l1_1_10", filterTitle = "춘천")
     )
 
     fun getRecommendWordData() = listOf(
-        FilterItem(filterCode = "l3_1_1", filterTitle = "웰니스 페스타"),
-        FilterItem(filterCode = "l3_1_2", filterTitle = "특가"),
-        FilterItem(filterCode = "l3_1_3", filterTitle = "테마파크"),
-        FilterItem(filterCode = "l3_1_4", filterTitle = "에버랜드"),
-        FilterItem(filterCode = "l3_1_5", filterTitle = "롯데월드"),
-        FilterItem(filterCode = "l3_1_6", filterTitle = "경주월드"),
-        FilterItem(filterCode = "l3_1_7", filterTitle = "아쿠아필드"),
-        FilterItem(filterCode = "l3_1_8", filterTitle = "패러글라이딩"),
-        FilterItem(filterCode = "l3_1_9", filterTitle = "유니버셜 스튜디오 재팬")
+        FilterItem(filterType = "l3_1_1", filterTitle = "웰니스 페스타"),
+        FilterItem(filterType = "l3_1_2", filterTitle = "특가"),
+        FilterItem(filterType = "l3_1_3", filterTitle = "테마파크"),
+        FilterItem(filterType = "l3_1_4", filterTitle = "에버랜드"),
+        FilterItem(filterType = "l3_1_5", filterTitle = "롯데월드"),
+        FilterItem(filterType = "l3_1_6", filterTitle = "경주월드"),
+        FilterItem(filterType = "l3_1_7", filterTitle = "아쿠아필드"),
+        FilterItem(filterType = "l3_1_8", filterTitle = "패러글라이딩"),
+        FilterItem(filterType = "l3_1_9", filterTitle = "유니버셜 스튜디오 재팬")
     )
 
     fun getAreaData() = listOf(

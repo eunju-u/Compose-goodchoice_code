@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.AroundFilterData
 import com.example.goodchoice.data.dto.AroundFilterItem
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
@@ -143,10 +144,10 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                             itemsIndexed(items = filterList.value) { index, item ->
                                 //선택된 필터 상세
                                 val selectDepthItem = when (item.type) {
-                                    Const.FILTER -> aroundFilterSelect.selectedFilter
-                                    Const.RECOMMEND -> aroundFilterSelect.selectedRecommend
-                                    Const.ROOM -> aroundFilterSelect.selectedRoom
-                                    Const.RESERVATION -> aroundFilterSelect.selectedReservation
+                                    ServerConst.FILTER -> aroundFilterSelect.selectedFilter
+                                    ServerConst.RECOMMEND -> aroundFilterSelect.selectedRecommend
+                                    ServerConst.ROOM -> aroundFilterSelect.selectedRoom
+                                    ServerConst.RESERVATION -> aroundFilterSelect.selectedReservation
                                     else -> aroundFilterSelect.selectedPrice
                                 }
 
@@ -182,7 +183,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         Color.Transparent
                                     } else if (isSelectUpper) Theme.colorScheme.blue
                                     else Color.Transparent,
-                                    isLeftImage = item.type == Const.FILTER,
+                                    isLeftImage = item.type == ServerConst.FILTER,
                                     onItemClick = {
                                         selectFilterData = item
 
@@ -193,7 +194,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         }
 
                                         //예약 가능 필터의 경우 select 할 필터가 없기 때문에 강제로 주입시킨다.
-                                        if (selectFilterData.type == Const.RESERVATION) {
+                                        if (selectFilterData.type == ServerConst.RESERVATION) {
                                             if (selectDepthItem.value.type.isNullOrEmpty()) {
                                                 selectDepthItem.value = AroundFilterItem(
                                                     type = selectFilterData.type,
@@ -202,7 +203,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                             } else {
                                                 selectDepthItem.value = AroundFilterItem()
                                             }
-                                        } else if (item.type == Const.FILTER) {
+                                        } else if (item.type == ServerConst.FILTER) {
                                             (context as MainActivity).activityForFilterResult.launch(
                                                 Intent(
                                                     context,
@@ -212,7 +213,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         }
                                     },
                                     content = when (item.type) {
-                                        Const.FILTER -> {
+                                        ServerConst.FILTER -> {
                                             {
                                                 Image(
                                                     modifier = Modifier.size(dp15),
@@ -222,7 +223,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 )
                                             }
                                         }
-                                        Const.RESERVATION -> {
+                                        ServerConst.RESERVATION -> {
                                             null
                                         }
                                         else -> {
@@ -240,7 +241,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         }
                                     },
                                     pointContent = when (item.type) {
-                                        Const.FILTER -> {
+                                        ServerConst.FILTER -> {
                                             {
                                                 if (!viewModel.aroundFilterSelect.selectedRoom.value.type.isNullOrEmpty() ||
                                                     !viewModel.aroundFilterSelect.selectedReservation.value.type.isNullOrEmpty() ||
@@ -272,17 +273,17 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                         if (selectFilter != "" && selectFilter == selectFilterData.type && list.isNotEmpty()) {
 
                             val select = when (selectFilterData.type) {
-                                Const.FILTER -> aroundFilterSelect.selectedFilter
-                                Const.RECOMMEND -> aroundFilterSelect.selectedRecommend
-                                Const.ROOM -> aroundFilterSelect.selectedRoom
-                                Const.RESERVATION -> aroundFilterSelect.selectedReservation
+                                ServerConst.FILTER -> aroundFilterSelect.selectedFilter
+                                ServerConst.RECOMMEND -> aroundFilterSelect.selectedRecommend
+                                ServerConst.ROOM -> aroundFilterSelect.selectedRoom
+                                ServerConst.RESERVATION -> aroundFilterSelect.selectedReservation
                                 else -> aroundFilterSelect.selectedPrice
                             }
 
                             //값이 지워진 경우 초기값 넣어줌
                             if (aroundFilterSelect.selectedRecommend.value.type.isNullOrEmpty()) {
                                 aroundFilterSelect.selectedRecommend.value = AroundFilterItem(
-                                    type = Const.RECOMMEND, text = "추천순"
+                                    type = ServerConst.RECOMMEND, text = "추천순"
                                 )
                             }
 

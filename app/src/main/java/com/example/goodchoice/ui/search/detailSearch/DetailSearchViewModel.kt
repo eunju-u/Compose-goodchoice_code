@@ -35,16 +35,16 @@ class DetailSearchViewModel : ViewModel() {
 
         // 국내숙소 > 검색 순위
         val list = listOf(
-            FilterItem(filterCode = "l1_1_1", filterTitle = "경주"),
-            FilterItem(filterCode = "l1_1_2", filterTitle = "여수"),
-            FilterItem(filterCode = "l1_1_3", filterTitle = "속초"),
-            FilterItem(filterCode = "l1_1_4", filterTitle = "전주"),
-            FilterItem(filterCode = "l1_1_5", filterTitle = "부산"),
-            FilterItem(filterCode = "l1_1_6", filterTitle = "제주도"),
-            FilterItem(filterCode = "l1_1_7", filterTitle = "강릉"),
-            FilterItem(filterCode = "l1_1_8", filterTitle = "순천"),
-            FilterItem(filterCode = "l1_1_9", filterTitle = "서울"),
-            FilterItem(filterCode = "l1_1_10", filterTitle = "춘천")
+            FilterItem(filterType = "l1_1_1", filterTitle = "경주"),
+            FilterItem(filterType = "l1_1_2", filterTitle = "여수"),
+            FilterItem(filterType = "l1_1_3", filterTitle = "속초"),
+            FilterItem(filterType = "l1_1_4", filterTitle = "전주"),
+            FilterItem(filterType = "l1_1_5", filterTitle = "부산"),
+            FilterItem(filterType = "l1_1_6", filterTitle = "제주도"),
+            FilterItem(filterType = "l1_1_7", filterTitle = "강릉"),
+            FilterItem(filterType = "l1_1_8", filterTitle = "순천"),
+            FilterItem(filterType = "l1_1_9", filterTitle = "서울"),
+            FilterItem(filterType = "l1_1_10", filterTitle = "춘천")
         )
 
         _uiState.value = DetailSearchConnectInfo.Available(list)
