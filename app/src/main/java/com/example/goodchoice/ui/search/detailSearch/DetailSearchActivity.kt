@@ -8,7 +8,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.theme.TestTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailSearchActivity : ComponentActivity() {
     companion object {
         val TAG: String = DetailSearchActivity::class.java.simpleName

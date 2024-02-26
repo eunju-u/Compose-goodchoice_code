@@ -56,4 +56,9 @@ object RepositoryModule {
     fun provideAlarmRepository(
         dataSource: AlarmDataSource
     ): AlarmRepository = AlarmRepositoryImpl(dataSource = dataSource)
+
+    @Provides
+    fun provideDetailSearchRepository(
+        dataSource: DetailSearchDataSource
+    ): DetailSearchRepository = DetailSearchRepositoryImpl(dataSource = dataSource)
 }
