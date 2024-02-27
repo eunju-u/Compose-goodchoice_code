@@ -104,4 +104,11 @@ object ServerConst {
     const val DISABLED_FACILITIES = "DISABLED_FACILITIES" //장애인편의시설
 
 
+    const val FAVOR = "FAVOR" //취향
+    const val DISCOUNT_BENEFITS = "DISCOUNT_BENEFITS" //할인혜택
+    const val RANK = "RANK" //등급
+    const val FACILITIES = "FACILITIES" //시설
+    const val PUBIC_FACILITIES = "PUBIC_FACILITIES" //공용시설
+    const val ROOM_FACILITIES = "ROOM_FACILITIES" //객실 내 시설
+    const val OTHER_FACILITIES = "OTHER_FACILITIES" //기타시설
 }

@@ -7,13 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.*
 import com.example.goodchoice.R
-import com.example.goodchoice.data.dto.RecommendAreaData
 import com.example.goodchoice.data.dto.*
-import com.example.goodchoice.db.recent.RecentDb
 import com.example.goodchoice.domain.usecase.*
-import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.nav.NavItem
+import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import com.example.goodchoice.utils.ToastUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -187,8 +185,14 @@ class MainViewModel @Inject constructor(
 
         filterList.value.find { it.type == ServerConst.RECOMMEND }?.filterList?.let {
             //네비 메뉴 이동시 선택한 필터값 가지고 있어야 하며, 룸 타입(숙박, 대실) 클릭시 에만 초기화 필요하여 추가
-            if (aroundFilterSelect.selectedRecommend.value.type.isNullOrEmpty()) {
-                aroundFilterSelect.selectedRecommend.value = it.first()
+            if (aroundFilterSelect.selectedRecommend.value.subType.isNullOrEmpty()) {
+                val filterItem = it.first()
+                val item = AroundFilterItem(
+                    mainType = ServerConst.RECOMMEND,
+                    subType = filterItem.type,
+                    text = filterItem.text
+                )
+                aroundFilterSelect.selectedRecommend.value = item
             }
         }
         requestFilterStayData()

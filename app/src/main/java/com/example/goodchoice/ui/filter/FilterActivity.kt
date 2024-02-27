@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.example.goodchoice.Const
+import com.example.goodchoice.domain.model.AroundFilterSelectedModel
 import com.example.goodchoice.ui.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,15 +19,17 @@ class FilterActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var data = AroundFilterSelectedModel()
+        if (intent.hasExtra(Const.DATA)) {
+            data = intent.getSerializableExtra(Const.DATA) as AroundFilterSelectedModel
+        }
+        viewModel.aroundSelectedData = data
+        viewModel.requestFilterData(true)
+
         setContent {
             TestTheme {
                 FilterContent(viewModel = viewModel, onFinish = { this.finish() })
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.requestFilterData()
     }
 }

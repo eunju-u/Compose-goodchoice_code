@@ -19,11 +19,11 @@ class FilterDataSource @Inject constructor() {
 
     fun getFilterData() = listOf(
         FilterData(
-            code = "f1",
+            code = ServerConst.FAVOR,
             title = "#취향",
             list = listOf(
                 FilterListData(
-                    code = "f1",
+                    code = ServerConst.FAVOR,
                     title = "#취향",
                     list = listOf(
                         FilterItem(filterType = ServerConst.FAMILY_ROOM, filterTitle = "#가족여행숙소"),
@@ -48,11 +48,11 @@ class FilterDataSource @Inject constructor() {
             )
         ),
         FilterData(
-            code = "f2",
+            code = ServerConst.DISCOUNT_BENEFITS,
             title = "할인혜택",
             list = listOf(
                 FilterListData(
-                    code = "f2",
+                    code = ServerConst.DISCOUNT_BENEFITS,
                     title = "할인혜택",
                     list = listOf(
                         FilterItem(filterType = ServerConst.COUPON_DISCOUNT, filterTitle = "쿠폰할인"),
@@ -63,11 +63,11 @@ class FilterDataSource @Inject constructor() {
             )
         ),
         FilterData(
-            code = "f3",
+            code = ServerConst.RANK,
             title = "등급",
             list = listOf(
                 FilterListData(
-                    code = "f3",
+                    code = ServerConst.RANK,
                     title = "등급",
                     list = listOf(
                         FilterItem(filterType = ServerConst.STAR_5, filterTitle = "5성급"),
@@ -79,11 +79,11 @@ class FilterDataSource @Inject constructor() {
             )
         ),
         FilterData(
-            code = "f4",
+            code = ServerConst.PRICE,
             title = "가격",
             list = listOf(
                 FilterListData(
-                    code = "f4",
+                    code = ServerConst.PRICE,
                     title = "가격",
                     list = listOf(
                         FilterItem(filterType = ServerConst.LESS_5, filterTitle = "~5만원"),
@@ -98,11 +98,11 @@ class FilterDataSource @Inject constructor() {
             )
         ),
         FilterData(
-            code = "f6",
+            code = ServerConst.FACILITIES,
             title = "시설",
             list = listOf(
                 FilterListData(
-                    code = "f6_1",
+                    code = ServerConst.PUBIC_FACILITIES,
                     title = "공용시설",
                     list = listOf(
                         FilterItem(filterType = ServerConst.BBQ, filterTitle = "BBQ"),
@@ -123,7 +123,7 @@ class FilterDataSource @Inject constructor() {
                     )
                 ),
                 FilterListData(
-                    code = "f6_2",
+                    code = ServerConst.ROOM_FACILITIES,
                     title = "객실 내 시설",
                     list = listOf(
                         FilterItem(filterType = ServerConst.WIFI, filterTitle = "와이파이"),
@@ -147,7 +147,7 @@ class FilterDataSource @Inject constructor() {
                     )
                 ),
                 FilterListData(
-                    code = "f6_3",
+                    code = ServerConst.OTHER_FACILITIES,
                     title = "기타시설",
                     list = listOf(
                         FilterItem(filterType = ServerConst.PICK_UP, filterTitle = "픽업가능"),

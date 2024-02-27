@@ -34,10 +34,10 @@ import java.util.LinkedList
 @Composable
 fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
     val context = LocalContext.current
-    var checkReservation by remember { mutableStateOf(false) }
+    var checkReservation by remember { viewModel.checkReservation }
     val clickStayType = viewModel.clickStayType
     // 다이얼로그 에서 확인 클릭시 clickStayType set 해야 하므로 추가
-    var clickFilterStayItem = FilterItem()
+    val clickFilterStayItem = remember { mutableStateOf(FilterItem()) }
 
     val stayTypeList = viewModel.stayTypeList
     var list = listOf(FilterData())
@@ -45,13 +45,13 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
 
     // key 에는 #취향, 할인혜택, 가격 등 상위 제목이 들어가고
     // value 에는 상위 title 에서 선택한 필터값이 list 로 들어간다.
-    val selectFilterMap = remember { mutableStateMapOf<String, LinkedList<FilterItem>>() }
+    val selectFilterMap = viewModel.selectFilterMap
 
     // selectFilterMap 의 value 를 MutableList 로 했는데, list add, remove 시 상태가 변경 (필터 클릭시 색상 변하지 않음.) 되지 않음
     // selectFilterMap 의 value 값이 변경되면 상태 변경(recomposition)할 수 있도록 Mutable list 를 사용한다.
     // selectFilterMap 의 value 는 기존 MutableList 였는데,
     // selectFilterList 추가 되었기 때문에 MutableList 로 사용할 필요성이 없어 LinkedList 로 대체함.
-    val selectFilterList = viewModel.selectFilterList
+    val selectFilterList = remember { viewModel.selectFilterList }
 
     // 필터한 숙소 갯수
     val stayCount = viewModel.stayCount
@@ -119,10 +119,6 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                     userScrollEnabled = false
                                 ) {
                                     items(items = stayTypeList) { item ->
-                                        //숙소 유형 '전체' 에 체크 표시 하도록 함
-                                        if (clickStayType.value.filterType == "" && item.filterType == ServerConst.ALL) {
-                                            clickStayType.value = item
-                                        }
                                         LeftImageButtonWidget(modifier = Modifier.height(dp50),
                                             title = item.filterTitle,
                                             style = MaterialTheme.typography.labelMedium,
@@ -134,7 +130,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                                 )
                                             },
                                             onItemClick = {
-                                                clickFilterStayItem = item
+                                                clickFilterStayItem.value = item
                                                 if (clickStayType.value != item && selectFilterMap.values.isNotEmpty()) {
                                                     isShowDialog = true
                                                 } else {
@@ -273,7 +269,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
             onDismiss = { isShowDialog = false },
             title = stringResource(id = R.string.str_filter_reset_dialog),
             onConfirm = {
-                clickStayType.value = clickFilterStayItem
+                clickStayType.value = clickFilterStayItem.value
                 selectFilterMap.clear()
                 isShowDialog = false
             },

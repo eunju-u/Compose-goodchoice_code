@@ -40,11 +40,11 @@ class AroundDataSource @Inject constructor() {
             type = ServerConst.PRICE, text = "가격", filterList = listOf(
                 AroundFilterItem(type = ServerConst.LESS_5, text = "~5만원"),
                 AroundFilterItem(type = ServerConst.M5_L10, text = "5~10만원"),
-                AroundFilterItem(type = ServerConst.M10_L15, text = "10만원~15만원"),
-                AroundFilterItem(type = ServerConst.M15_L20, text = "15만원~20만원"),
-                AroundFilterItem(type = ServerConst.M20_L25, text = "20만원~25만원"),
-                AroundFilterItem(type = ServerConst.M25_L30, text = "25만원~30만원"),
-                AroundFilterItem(type = ServerConst.MORE_30, text = "30만원 이상~")
+                AroundFilterItem(type = ServerConst.M10_L15, text = "10~15만원"),
+                AroundFilterItem(type = ServerConst.M15_L20, text = "15~20만원"),
+                AroundFilterItem(type = ServerConst.M20_L25, text = "20~25만원"),
+                AroundFilterItem(type = ServerConst.M25_L30, text = "25~30만원"),
+                AroundFilterItem(type = ServerConst.MORE_30, text = "30만원 이상~"),
             )
         )
     )

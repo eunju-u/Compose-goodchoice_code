@@ -20,12 +20,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.goodchoice.Const
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.Const
 import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.AroundFilterData
-import com.example.goodchoice.data.dto.AroundFilterItem
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
 import com.example.goodchoice.ui.components.ImageButtonWidget
 import com.example.goodchoice.ui.components.LeftImageButtonWidget
@@ -34,8 +33,10 @@ import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
 import com.example.goodchoice.ui.filter.FilterActivity
-import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainActivity
+import com.example.goodchoice.domain.model.AroundFilterItem
+import com.example.goodchoice.domain.model.AroundFilterSelectedModel
+import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
@@ -153,14 +154,14 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
                                 //추천순의 경우 하위 필터 "추천순" 이 선택되어 있지만 상위는 체크 되어있지 않아 예외처리
                                 val sameTypeFilterList =
-                                    item.filterList?.find { item.type == selectDepthItem.value.type }
+                                    item.filterList?.find { item.type == selectDepthItem.value.subType }
 
                                 //예약 가능의 경우 depth 가 없어 색상 다르게 해야 함.
                                 val hasDepthItem = !item.filterList.isNullOrEmpty()
                                 //상위 필터 선택한 경우
                                 val isSelectUpper = selectFilter == item.type
                                 //하위 필터 선택한 경우
-                                val isSelectDepth = !selectDepthItem.value.type.isNullOrEmpty()
+                                val isSelectDepth = !selectDepthItem.value.subType.isNullOrEmpty()
                                 //상위 필터와 하위 필터가 같은 type 일 경우
                                 val isSameType = !sameTypeFilterList?.type.isNullOrEmpty()
 
@@ -195,9 +196,11 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
                                         //예약 가능 필터의 경우 select 할 필터가 없기 때문에 강제로 주입시킨다.
                                         if (selectFilterData.type == ServerConst.RESERVATION) {
-                                            if (selectDepthItem.value.type.isNullOrEmpty()) {
+
+                                            if (selectDepthItem.value.subType.isNullOrEmpty()) {
                                                 selectDepthItem.value = AroundFilterItem(
-                                                    type = selectFilterData.type,
+                                                    mainType = selectFilterData.type,
+                                                    subType = selectFilterData.type,
                                                     text = selectFilterData.text
                                                 )
                                             } else {
@@ -208,7 +211,18 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 Intent(
                                                     context,
                                                     FilterActivity::class.java
-                                                )
+                                                ).apply {
+                                                    // viewModel.aroundFilterSelect 의 데이터는 mutable 타입이라 serialize 불가
+                                                    val selectedData = viewModel.aroundFilterSelect
+                                                    val data = AroundFilterSelectedModel(
+                                                        selectedData.selectedFilter.value,
+                                                        selectedData.selectedRecommend.value,
+                                                        selectedData.selectedRoom.value,
+                                                        selectedData.selectedReservation.value,
+                                                        selectedData.selectedPrice.value
+                                                    )
+                                                    putExtra(Const.DATA, data)
+                                                }
                                             )
                                         }
                                     },
@@ -243,9 +257,9 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                     pointContent = when (item.type) {
                                         ServerConst.FILTER -> {
                                             {
-                                                if (!viewModel.aroundFilterSelect.selectedRoom.value.type.isNullOrEmpty() ||
-                                                    !viewModel.aroundFilterSelect.selectedReservation.value.type.isNullOrEmpty() ||
-                                                    !viewModel.aroundFilterSelect.selectedPrice.value.type.isNullOrEmpty()
+                                                if (!viewModel.aroundFilterSelect.selectedRoom.value.subType.isNullOrEmpty() ||
+                                                    !viewModel.aroundFilterSelect.selectedReservation.value.subType.isNullOrEmpty() ||
+                                                    !viewModel.aroundFilterSelect.selectedPrice.value.subType.isNullOrEmpty()
                                                 ) {
                                                     Box(
                                                         modifier = Modifier
@@ -281,9 +295,9 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                             }
 
                             //값이 지워진 경우 초기값 넣어줌
-                            if (aroundFilterSelect.selectedRecommend.value.type.isNullOrEmpty()) {
+                            if (aroundFilterSelect.selectedRecommend.value.subType.isNullOrEmpty()) {
                                 aroundFilterSelect.selectedRecommend.value = AroundFilterItem(
-                                    type = ServerConst.RECOMMEND, text = "추천순"
+                                    subType = ServerConst.RECOMMEND, text = "추천순"
                                 )
                             }
 
@@ -295,7 +309,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                 ), horizontalArrangement = Arrangement.spacedBy(dp20)
                             ) {
                                 filterDetailList.forEach {
-                                    val isSelect = select.value.type == it.type
+                                    val isSelect = select.value.subType == it.type
                                     ImageButtonWidget(title = it.text,
                                         shape = dp30,
                                         outerPadding = PaddingValues(bottom = dp10),
@@ -305,8 +319,12 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         else Theme.colorScheme.darkGray,
                                         onItemClick = {
                                             //select 값이 초기값이나 클릭한 type 과 같지 않을 때
-                                            if (select.value.type.isNullOrEmpty() || select.value.type != it.type) {
-                                                select.value = it
+                                            if (select.value.subType.isNullOrEmpty() || select.value.subType != it.type) {
+                                                select.value = AroundFilterItem(
+                                                    mainType = selectFilterData.type,
+                                                    subType = it.type,
+                                                    text = it.text
+                                                )
                                             } else {
                                                 select.value = AroundFilterItem()
                                             }
