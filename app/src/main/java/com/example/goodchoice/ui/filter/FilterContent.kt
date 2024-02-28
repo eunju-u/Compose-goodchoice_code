@@ -25,6 +25,7 @@ import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.FilterData
 import com.example.goodchoice.data.dto.FilterItem
+import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.filter.widget.FilterItemWidget
 import com.example.goodchoice.ui.theme.*
@@ -92,7 +93,9 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                 content = {
                                     Switch(
                                         checked = checkReservation,
-                                        onCheckedChange = { checkReservation = it },
+                                        onCheckedChange = {
+                                            checkReservation = it
+                                        },
                                         colors = SwitchDefaults.colors(
                                             checkedTrackColor = Theme.colorScheme.blue,
                                             uncheckedTrackColor = Theme.colorScheme.pureGray,
@@ -169,15 +172,32 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                         selectList = if (selectFilterList.isNotEmpty()) selectFilterMap[filterListData.code]
                                             ?: LinkedList() else LinkedList(),
                                         onItemClick = { clickItem ->
-                                            val value = selectFilterMap[filterListData.code]
+                                            val selectItem = AroundFilterItem(
+                                                filterData.code,
+                                                clickItem.filterType,
+                                                clickItem.filterTitle
+                                            )
+
+                                            var value = selectFilterMap[filterListData.code]
                                                 ?: LinkedList()
-                                            if (!value.contains(clickItem)) {
+                                            //가격의 경우는 한개만 선택 가능함.
+                                            if (filterListData.code == ServerConst.PRICE) {
+                                                //map 의 value 값 초기화 하고 삽입
+                                                value = LinkedList()
+                                                selectFilterList.clear()
+
                                                 value.add(clickItem)
-                                                selectFilterList.add(clickItem)
+                                                selectFilterList.add(selectItem)
                                             } else {
-                                                value.remove(clickItem)
-                                                selectFilterList.remove(clickItem)
+                                                if (!value.contains(clickItem)) {
+                                                    value.add(clickItem)
+                                                    selectFilterList.add(selectItem)
+                                                } else {
+                                                    value.remove(clickItem)
+                                                    selectFilterList.remove(selectItem)
+                                                }
                                             }
+
                                             filterListData.code?.let {
                                                 selectFilterMap[it] = value
                                             }
@@ -186,13 +206,6 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
 
                                 Spacer(modifier = Modifier.height(dp20))
                             }
-
-//                            for ((key, value) in selectFilterMap) {
-//                                item {
-//                                    Text("Key: $key")
-//                                    Text("Values: ${value.joinToString()}")
-//                                }
-//                            }
                         }
                     }
                 }

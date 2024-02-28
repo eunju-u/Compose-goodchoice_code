@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.FilterItem
+import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.domain.model.AroundFilterSelectedModel
 import com.example.goodchoice.domain.usecase.FilterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +31,7 @@ class FilterViewModel @Inject constructor(
     //숙소 유형 리스트
     var stayTypeList = LinkedList<FilterItem>()
 
-    val selectFilterList = mutableStateListOf<FilterItem>()
+    val selectFilterList = mutableStateListOf<AroundFilterItem>()
 
     //필터 후 숙소 갯수
     var stayCount = 0
@@ -50,6 +51,8 @@ class FilterViewModel @Inject constructor(
      * firstEnter : 아이템 값 눌러 조회 시 주변 화면에서 받은 intent 로 인해 재 갱신이 되지 않아 플래그 추가 **/
     fun requestFilterData(firstEnter: Boolean = false) = viewModelScope.launch {
         filterUiState.value = ConnectInfo.Loading
+
+        selectFilterList.clear()
         requestRoomTypeData()
 
         //서버에 장소(locationCode), 숙소유형 (StayType), 필터 코드(filterCode)이 들어가야 함.
@@ -64,8 +67,14 @@ class FilterViewModel @Inject constructor(
             checkReservation.value = reservationData.subType?.isNotEmpty() ?: false
 
             //숙소 유형 체크 표시 하도록 함
-            if (roomData.subType != null && roomData.subType.isNotEmpty()) {
+            if (roomData.subType != null && roomData.subType!!.isNotEmpty()) {
                 clickStayType.value = FilterItem(roomData.subType, roomData.text)
+                val selectRoomItem = AroundFilterItem(
+                    roomData.mainType,
+                    roomData.subType,
+                    roomData.text
+                )
+                selectFilterList.add(selectRoomItem)
             } else {
                 //숙소 유형 '전체' 에 체크 표시 하도록 함
                 for (item in stayTypeList) {
@@ -76,18 +85,48 @@ class FilterViewModel @Inject constructor(
                 }
             }
 
-            if (priceData.subType != null && priceData.subType.isNotEmpty()) {
-                val item = FilterItem(filterType = priceData.subType, filterTitle = priceData.text)
+            if (priceData.subType != null && priceData.subType!!.isNotEmpty()) {
+                val filterItem =
+                    FilterItem(filterType = priceData.subType, filterTitle = priceData.text)
+
+                val selectPriceItem =
+                    AroundFilterItem(priceData.mainType, priceData.subType, priceData.text)
 
                 val value = selectFilterMap[priceData.mainType]
                     ?: LinkedList()
-                value.add(item)
+                value.add(filterItem)
 
                 priceData.mainType?.let {
-                    selectFilterList.add(item)
+                    selectFilterList.add(selectPriceItem)
                     selectFilterMap[it] = value
                 }
             }
+        }
+    }
+
+    //화면 이탈시 list 갱신하여 intent 보내기 위함
+    fun setSelectFilterList() {
+        val selectItem = AroundFilterItem(
+            mainType = ServerConst.RESERVATION,
+            subType = ServerConst.RESERVATION,
+            text = "예약가능"
+        )
+
+        if (!checkReservation.value) {
+            selectItem.subType = ""
+            selectItem.text = ""
+        }
+        selectFilterList.add(selectItem)
+
+        //숙소 유형
+        val clickStayType = clickStayType.value
+        if (clickStayType.filterType != ServerConst.ALL) {
+            val selectRoomItem = AroundFilterItem(
+                ServerConst.ROOM,
+                clickStayType.filterType,
+                clickStayType.filterTitle
+            )
+            selectFilterList.add(selectRoomItem)
         }
     }
 }

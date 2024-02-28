@@ -1,7 +1,10 @@
 package com.example.goodchoice.ui.filter
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.goodchoice.Const
@@ -28,8 +31,25 @@ class FilterActivity : ComponentActivity() {
 
         setContent {
             TestTheme {
-                FilterContent(viewModel = viewModel, onFinish = { this.finish() })
+                BackHandler(onBack = {
+                    viewModel.setSelectFilterList()
+                    sendForActivity()
+                    this.finish()
+                })
+                FilterContent(viewModel = viewModel, onFinish = {
+                    viewModel.setSelectFilterList()
+                    sendForActivity()
+                    this.finish()
+                })
             }
         }
+    }
+
+    private fun sendForActivity() {
+        // mutableStateListOf 를 intent 에 넣고 데이터 받기
+        val intent = Intent().apply {
+            this.putExtra(Const.DATA, ArrayList(viewModel.selectFilterList))
+        }
+        setResult(Activity.RESULT_OK, intent)
     }
 }

@@ -6,7 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.runtime.mutableStateOf
 import com.example.goodchoice.Const
+import com.example.goodchoice.ServerConst
+import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.ui.search.data.KoreaSearchData
 import com.example.goodchoice.ui.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,13 +48,33 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-    //주변 화면에서 필터 > 숙소보기 클릭시 호출되는 콜백
+    //주변 화면에서 필터 상세 > 주변화면 돌아올 경우 호출되는 콜백
     val activityForFilterResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
                 Activity.RESULT_OK -> {
                     result.data?.let {
-                        val isFiltered = it.getBooleanExtra("filtered", false)
+                        val data =
+                            it.getSerializableExtra(Const.DATA) as ArrayList<AroundFilterItem>?
+
+                        data?.let { list ->
+                            list.forEach { item ->
+                                val mutableItem = mutableStateOf(item)
+
+                                when (item.mainType) {
+                                    ServerConst.RESERVATION -> {
+                                        viewModel.aroundFilterSelect.selectedReservation =
+                                            mutableItem
+                                    }
+                                    ServerConst.PRICE -> {
+                                        viewModel.aroundFilterSelect.selectedPrice = mutableItem
+                                    }
+                                    ServerConst.ROOM -> {
+                                        viewModel.aroundFilterSelect.selectedRoom = mutableItem
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
