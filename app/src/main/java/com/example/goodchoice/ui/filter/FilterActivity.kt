@@ -32,12 +32,10 @@ class FilterActivity : ComponentActivity() {
         setContent {
             TestTheme {
                 BackHandler(onBack = {
-                    viewModel.setSelectFilterList()
                     sendForActivity()
                     this.finish()
                 })
                 FilterContent(viewModel = viewModel, onFinish = {
-                    viewModel.setSelectFilterList()
                     sendForActivity()
                     this.finish()
                 })
@@ -45,7 +43,10 @@ class FilterActivity : ComponentActivity() {
         }
     }
 
-    private fun sendForActivity() {
+    fun sendForActivity() {
+        //전달할 데이터 리스트 갱신
+        viewModel.setSelectFilterList()
+
         // mutableStateListOf 를 intent 에 넣고 데이터 받기
         val intent = Intent().apply {
             this.putExtra(Const.DATA, ArrayList(viewModel.selectFilterList))

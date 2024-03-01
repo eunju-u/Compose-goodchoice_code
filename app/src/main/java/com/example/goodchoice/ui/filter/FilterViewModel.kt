@@ -104,7 +104,7 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    //화면 이탈시 list 갱신하여 intent 보내기 위함
+    /** 화면 이탈시 list 갱신하여 intent 보내기 위함 **/
     fun setSelectFilterList() {
         val selectItem = AroundFilterItem(
             mainType = ServerConst.RESERVATION,

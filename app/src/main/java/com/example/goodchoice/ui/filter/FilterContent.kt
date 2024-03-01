@@ -234,6 +234,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                         style = MaterialTheme.typography.labelMedium,
                         endPadding = dp10,
                         onItemClick = {
+                            viewModel.checkReservation.value = false
                             selectFilterMap.clear()
                             val allData =
                                 stayTypeList.filter { item -> item.filterType == ServerConst.ALL }
@@ -265,7 +266,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                             )
                         }, onItemClick = {
                             (context as FilterActivity).apply {
-                                setResult(Activity.RESULT_OK)
+                                sendForActivity()
                                 finish()
                             }
                         })
@@ -282,6 +283,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
             onDismiss = { isShowDialog = false },
             title = stringResource(id = R.string.str_filter_reset_dialog),
             onConfirm = {
+                viewModel.checkReservation.value = false
                 clickStayType.value = clickFilterStayItem.value
                 selectFilterMap.clear()
                 isShowDialog = false
