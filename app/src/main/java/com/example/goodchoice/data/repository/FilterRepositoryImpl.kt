@@ -12,7 +12,7 @@ class FilterRepositoryImpl @Inject constructor(
     override suspend fun getTypeData(): List<FilterItem> {
         return dataSource.getTypeData()
     }
-    override suspend fun getFilterData(): List<FilterData> {
-        return dataSource.getFilterData()
+    override suspend fun getFilterData(stayType: String): List<FilterData> {
+        return dataSource.getFilterData(stayType)
     }
 }

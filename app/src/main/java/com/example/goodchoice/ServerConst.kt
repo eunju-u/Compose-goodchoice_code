@@ -102,7 +102,27 @@ object ServerConst {
     const val SMOKING = "SMOKING" //객실내흡연
     const val CAMPFIRE = "CAMPFIRE" //캠프파이어
     const val DISABLED_FACILITIES = "DISABLED_FACILITIES" //장애인편의시설
-
+    const val POWER_HOST = "POWER_HOST" //파워호스트
+    const val COZY = "COZY" //아늑한
+    const val MODERN = "MODERN" //모던한
+    const val RETRO = "RETRO" //레트로
+    const val FOREST = "FOREST" //숲속
+    const val STONE_HOUSE = "STONE_HOUSE" //돌담집
+    const val HANOK = "HANOK" //한옥
+    const val GARDEN = "GARDEN" //정원
+    const val OCEAN_VIEW = "OCEAN_VIEW" //오션뷰
+    const val FAMILY_TRAVEL_STAY = "FAMILY_TRAVEL_STAY" //가족여행숙소
+    const val STYLER = "STYLER" //스타일러
+    const val NEW_OPEN = "NEW_OPEN" //NEW오픈
+    const val WATER_PLAY = "WATER_PLAY" //물놀이가능
+    const val FOREST_VIEW = "FOREST_VIEW" //포레스트뷰
+    const val INDIVIDUAL_BATHROOM = "INDIVIDUAL_BATHROOM" //개별화장실
+    const val BULMEONG = "BULMEONG" //불멍
+    const val FOR_FAMILY = "FOR_FAMILY" //가족추천
+    const val CAMPING_CAR = "CAMPING_CAR" //캠핑카
+    const val AUTO_CAMPING = "AUTO_CAMPING" //오토캠핑
+    const val CARAVAN = "CARAVAN" //카라반
+    const val GLAMPING = "GLAMPING" //글램핑
 
     const val FAVOR = "FAVOR" //취향
     const val DISCOUNT_BENEFITS = "DISCOUNT_BENEFITS" //할인혜택
@@ -111,4 +131,6 @@ object ServerConst {
     const val PUBIC_FACILITIES = "PUBIC_FACILITIES" //공용시설
     const val ROOM_FACILITIES = "ROOM_FACILITIES" //객실 내 시설
     const val OTHER_FACILITIES = "OTHER_FACILITIES" //기타시설
+    const val DISCOUNT_FACILITIES = "DISCOUNT_FACILITIES" //할인 및 객실유형
+    const val CAMPING_TYPE = "CAMPING_TYPE" //캠핑유형
 }

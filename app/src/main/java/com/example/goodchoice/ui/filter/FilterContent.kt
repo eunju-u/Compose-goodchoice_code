@@ -285,7 +285,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
             onConfirm = {
                 viewModel.checkReservation.value = false
                 clickStayType.value = clickFilterStayItem.value
-                selectFilterMap.clear()
+                viewModel.requestFilterData()
                 isShowDialog = false
             },
             oneButtonText = stringResource(id = R.string.str_cancel),

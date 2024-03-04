@@ -5,5 +5,5 @@ import com.example.goodchoice.data.dto.FilterItem
 
 interface FilterRepository {
     suspend fun getTypeData(): List<FilterItem>
-    suspend fun getFilterData(): List<FilterData>
+    suspend fun getFilterData(stayType: String): List<FilterData>
 }

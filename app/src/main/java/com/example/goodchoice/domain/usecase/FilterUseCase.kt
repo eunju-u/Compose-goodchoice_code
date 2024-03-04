@@ -29,11 +29,11 @@ class FilterUseCase @Inject constructor(
         }
     }
 
-    suspend fun getFilterData(): List<FilterData> {
+    suspend fun getFilterData(stayType: String): List<FilterData> {
         return try {
             withContext(Dispatchers.IO) {
                 val resultDeferred = async {
-                    repository.getFilterData()
+                    repository.getFilterData(stayType)
                 }
                 delay(200)
                 val data = resultDeferred.await()

@@ -53,10 +53,12 @@ class FilterViewModel @Inject constructor(
         filterUiState.value = ConnectInfo.Loading
 
         selectFilterList.clear()
+        selectFilterMap.clear()
+
         requestRoomTypeData()
 
         //서버에 장소(locationCode), 숙소유형 (StayType), 필터 코드(filterCode)이 들어가야 함.
-        val data = filterUseCase.getFilterData()
+        val data = filterUseCase.getFilterData(clickStayType.value.filterType ?: "")
         filterUiState.value = ConnectInfo.Available(data)
 
         if (firstEnter) {
