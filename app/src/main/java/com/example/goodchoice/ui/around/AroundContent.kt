@@ -337,14 +337,10 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                         }
                     }
 
-                    if (DeviceUtil.isNetworkAvailable(context)) {
-                        //TODO eunju 네트워크 연결 안됐을 때 노출되는 화면
-                    } else {
-                        when (homeUiState.value) {
-                            is ConnectInfo.Available -> {}
-                            is ConnectInfo.Error -> {}
-                            else -> {}
-                        }
+                    when (homeUiState.value) {
+                        is ConnectInfo.Available -> {}
+                        is ConnectInfo.Error -> {}
+                        else -> {}
                     }
                 }
             })

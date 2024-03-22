@@ -28,7 +28,7 @@ class AlarmViewModel @Inject constructor(private val useCase: AlarmUseCase) : Vi
         }
 
         val data = useCase.getAlarmData()
-        alarmUiState.value = AlarmConnectInfo.Available(data)
+        alarmUiState.value = data
     }
 }
 

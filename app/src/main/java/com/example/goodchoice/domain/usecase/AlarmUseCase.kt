@@ -1,7 +1,8 @@
 package com.example.goodchoice.domain.usecase
 
-import com.example.goodchoice.data.dto.AlarmItem
 import com.example.goodchoice.domain.repository.AlarmRepository
+import com.example.goodchoice.ui.alarm.AlarmConnectInfo
+import com.example.goodchoice.utils.DeviceUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -9,19 +10,21 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AlarmUseCase @Inject constructor(private val repository: AlarmRepository) {
-    suspend fun getAlarmData(): List<AlarmItem> {
+    suspend fun getAlarmData(): AlarmConnectInfo {
         return try {
             withContext(Dispatchers.IO) {
                 val resultDeferred = async {
                     repository.getAlarmData()
                 }
                 delay(200)
+
+                if (!DeviceUtil.isNetworkAvailable()) throw Exception("network is not connected")
+
                 val data = resultDeferred.await()
-                data
+                AlarmConnectInfo.Available(data)
             }
         } catch (e: Exception) {
-            //TODO 예외처리
-            listOf()
+            AlarmConnectInfo.Error(e.message)
         }
     }
 }

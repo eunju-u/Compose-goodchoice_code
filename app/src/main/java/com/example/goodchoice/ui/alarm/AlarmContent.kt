@@ -6,20 +6,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.goodchoice.ui.components.TopAppBarWidget
 import com.example.goodchoice.R
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.alarm.widget.AlarmItemWidget
-import com.example.goodchoice.ui.components.GoToWidget
-import com.example.goodchoice.ui.components.LoadingWidget
-import com.example.goodchoice.ui.components.TextWidget
+import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.theme.*
 
@@ -28,6 +25,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
     val alarmUiState = viewModel.alarmUiState.collectAsStateWithLifecycle()
+    var isShowDialog by remember { mutableStateOf(false) }
 
     Box {
         Column(
@@ -93,8 +91,22 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
             }
         }
 
-        if (alarmUiState.value is AlarmConnectInfo.Loading) {
-            LoadingWidget()
+
+        when (alarmUiState.value) {
+            is AlarmConnectInfo.Loading -> LoadingWidget()
+            is AlarmConnectInfo.Error -> isShowDialog = true
+            else -> {}
         }
+    }
+
+    if (isShowDialog) {
+        AlertDialogWidget(
+            onDismiss = { isShowDialog = false },
+            title = stringResource(id = R.string.str_dialog_network_not_connect),
+            onConfirm = {
+                isShowDialog = false
+            },
+            oneButtonText = stringResource(id = R.string.str_ok),
+        )
     }
 }

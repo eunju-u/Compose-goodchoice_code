@@ -163,8 +163,9 @@
 
     <!--  다이얼로그  -->
     <string name="str_dialog_more_two_word">정확한 검색을 위해\n두 글자 이상 검색어를 입력해 주세요</string>
+    <string name="str_dialog_network_not_connect">네트워크 연결이 원할하지 않습니다.\n잠시 후 다시 이용해주세요.</string>
 
     <!--  최근 본 상품   -->
     <string name="str_recent_seen_all_remove">최근 본 상품이 모두 삭제되었습니다.</string>
-    <string name="str_recent_seen_all_remove_not_list">삭제할 내용이 없습니다.</string>
+    <string name="str_recent_seen_all_remove_not_list">삭제할 내용이 없습니다.</string>넷
 </resources>
