@@ -25,9 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.example.goodchoice.Const
+import com.example.goodchoice.DialogType
 import com.example.goodchoice.R
-import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.data.dto.StayDetailData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
@@ -58,7 +57,8 @@ fun StayDetailContent(
 
     val detailUiState = viewModel.detailUiState.collectAsStateWithLifecycle()
 
-    var isShowDialog by remember { mutableStateOf(false) }
+    val isShowDialog = viewModel.isShowDialog.collectAsStateWithLifecycle()
+    val dialogType = viewModel.dialogType.collectAsStateWithLifecycle()
 
     //바텀시트
     val sheetState: MyBottomSheetState =
@@ -82,8 +82,8 @@ fun StayDetailContent(
     } else stringResource(id = R.string.str_remove_like)
 
     Box {
-        if (detailUiState.value is ConnectInfo.Available) {
-            val item = (detailUiState.value as ConnectInfo.Available).data as StayDetailData
+        if (detailUiState.value is StayDetailConnectInfo.Available) {
+            val item = (detailUiState.value as StayDetailConnectInfo.Available).data
             val padding = PaddingValues(start = dp20, end = dp20)
             val innerPadding = PaddingValues(horizontal = dp8, vertical = dp8)
             LazyColumn(
@@ -466,7 +466,8 @@ fun StayDetailContent(
                             viewModel.isLike.value = !viewModel.isLike.value
                             ToastUtils.showToast(toastStr)
                         } else {
-                            isShowDialog = true
+                            viewModel.isShowDialog.value = true
+                            viewModel.dialogType.value = DialogType.NEED_LOGIN
                         }
 
                     }) {
@@ -512,20 +513,40 @@ fun StayDetailContent(
                     })
             })
 
-        if (isShowDialog) {
-            AlertDialogWidget(
-                title = stringResource(id = R.string.str_need_login),
-                oneButtonText = stringResource(id = R.string.str_close),
-                twoButtonText = stringResource(id = R.string.str_login),
-                onDismiss = { isShowDialog = false },
-                onConfirm = {
-                    isShowDialog = false
-                    context.startActivity(Intent(context, LoginActivity::class.java))
-                })
+        if (isShowDialog.value) {
+            when (dialogType.value) {
+                DialogType.NEED_LOGIN -> {
+                    AlertDialogWidget(
+                        title = stringResource(id = R.string.str_need_login),
+                        oneButtonText = stringResource(id = R.string.str_close),
+                        twoButtonText = stringResource(id = R.string.str_login),
+                        onDismiss = {
+                            viewModel.isShowDialog.value = false
+                        },
+                        onConfirm = {
+                            viewModel.isShowDialog.value = false
+                            context.startActivity(Intent(context, LoginActivity::class.java))
+                        })
+                }
+
+
+                DialogType.NETWORK_ERROR -> {
+                    AlertDialogWidget(
+                        onDismiss = {},
+                        title = stringResource(id = R.string.str_dialog_network_not_connect),
+                        oneButtonText = stringResource(id = R.string.str_ok),
+                        onConfirm = {
+                            viewModel.isShowDialog.value = false
+                            onFinish()
+                        },
+                    )
+                }
+                else -> {}
+            }
         }
 
         // 로딩바
-        if (detailUiState.value is ConnectInfo.Loading) {
+        if (detailUiState.value is StayDetailConnectInfo.Loading) {
             LoadingWidget()
         }
     }

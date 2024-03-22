@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodchoice.ConnectInfo
+import com.example.goodchoice.DialogType
 import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.domain.usecase.LikeUseCase
 import com.example.goodchoice.domain.usecase.StayDetailUseCase
@@ -30,21 +31,38 @@ class StayDetailViewModel @Inject constructor(
 
     var payList: List<PayData> = emptyList()
 
-    var detailUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
+    var detailUiState = MutableStateFlow<StayDetailConnectInfo>(StayDetailConnectInfo.Init)
 
     var isLike = mutableStateOf(false)
 
+    var isShowDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    var dialogType: MutableStateFlow<DialogType> = MutableStateFlow(DialogType.NONE)
+
     fun requestStayDetail() = viewModelScope.launch {
-        detailUiState.value = ConnectInfo.Loading
+        detailUiState.value = StayDetailConnectInfo.Loading
 
         val data = useCase.getDetailData(stayItemId)
         isLike.value = likeUseCase.hasLikeData(stayItemId)
 
-        payList = data.payList ?: emptyList()
-        detailUiState.value = ConnectInfo.Available(data)
+        when (data) {
+            is StayDetailConnectInfo.Available -> payList = data.data.payList ?: emptyList()
+            is StayDetailConnectInfo.Error -> {
+                isShowDialog.value = true
+                dialogType.value = DialogType.NETWORK_ERROR
+            }
+            else -> {}
+        }
+        detailUiState.value = data
     }
 
     fun saveLike() = viewModelScope.launch {
         likeUseCase.insertLikeData(stayItemId)
     }
+}
+
+sealed interface StayDetailConnectInfo {
+    object Init : StayDetailConnectInfo
+    object Loading : StayDetailConnectInfo
+    data class Available(val data: StayDetailData) : StayDetailConnectInfo
+    data class Error(val message: String? = null) : StayDetailConnectInfo
 }

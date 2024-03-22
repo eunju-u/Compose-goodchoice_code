@@ -93,3 +93,9 @@ enum class MainBottomSheetType {
     NONE,
     PROFILE // 내 정보 -> 프로필 사진 변경
 }
+
+enum class DialogType {
+    NONE,
+    NETWORK_ERROR,
+    NEED_LOGIN
+}
