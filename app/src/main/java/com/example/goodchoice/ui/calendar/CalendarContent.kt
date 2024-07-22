@@ -1,14 +1,10 @@
 package com.example.goodchoice.ui.calendar
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.goodchoice.R
 import java.time.LocalDate
 import com.example.goodchoice.ui.calendar.model.CalendarState
@@ -46,7 +42,7 @@ private fun CalendarContent(
         modifier = Modifier.windowInsetsPadding(
             WindowInsets.navigationBars.only(WindowInsetsSides.Start + WindowInsetsSides.End)
         ),
-        backgroundColor = Theme.colorScheme.white,
+        containerColor = Theme.colorScheme.white,
         contentColor = Theme.colorScheme.darkGray,
         topBar = {
             val date = stringResource(id = R.string.str_date)
@@ -81,42 +77,6 @@ private fun CalendarContent(
         )
     }
 }
-
-@Composable
-private fun CalendarTopAppBar(calendarState: CalendarState, onBackPressed: () -> Unit) {
-    val calendarUiState = calendarState.calendarUiState.value
-    Column {
-        Spacer(
-            modifier = Modifier
-                .windowInsetsTopHeight(WindowInsets.statusBars)
-                .fillMaxWidth()
-                .background(MaterialTheme.colors.primaryVariant)
-        )
-        TopAppBar(
-            title = {
-                Text(
-                    text = if (!calendarUiState.hasSelectedDates) {
-                        "Select Dates"
-                    } else {
-                        calendarUiState.selectedDatesFormatted
-                    }
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = { onBackPressed() }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = null,
-                        tint = MaterialTheme.colors.onSurface
-                    )
-                }
-            },
-            backgroundColor = MaterialTheme.colors.primaryVariant,
-            elevation = 0.dp
-        )
-    }
-}
-
 
 //    val state = rememberCalendarState(
 //        startMonth = YearMonth.now(),

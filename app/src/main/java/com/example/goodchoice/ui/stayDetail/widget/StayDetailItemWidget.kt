@@ -110,7 +110,7 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         if (discountPer > 0) {
-                            androidx.compose.material.Text(
+                            Text(
                                 text = "${discountPer}%",
                                 color = Theme.colorScheme.red,
                                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
@@ -119,7 +119,7 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                         }
                         if (isDiscountPriceNumber) {
                             if (discountPrice != "" && convertDefaultPrice != "") {
-                                androidx.compose.material.Text(
+                                Text(
                                     text = convertDefaultPrice,
                                     color = Theme.colorScheme.gray,
                                     textDecoration = TextDecoration.LineThrough, //취소선

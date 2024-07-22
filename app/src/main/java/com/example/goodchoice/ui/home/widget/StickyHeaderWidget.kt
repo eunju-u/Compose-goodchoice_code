@@ -2,8 +2,7 @@ package com.example.goodchoice.ui.home.widget
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.*
-import androidx.compose.material3.Divider
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +29,7 @@ fun StickyHeaderWidget(
         modifier = modifier,
         color = backgroundColor,
         contentColor = contentColorFor(backgroundColor),
-        elevation = dp20
+        shadowElevation = dp20
     ) {
         Row(
             modifier = Modifier

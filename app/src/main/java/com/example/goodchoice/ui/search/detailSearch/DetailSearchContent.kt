@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -22,7 +21,6 @@ import com.example.goodchoice.ui.search.data.KoreaSearchData
 import com.example.goodchoice.ui.search.detailSearch.widget.SearchResultWidget
 import com.example.goodchoice.ui.theme.*
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DetailSearchContent(
     viewModel: DetailSearchViewModel,
