@@ -31,7 +31,8 @@ fun DetailSearchContent(
     val searchData by viewModel.searchData.collectAsStateWithLifecycle()
     var isShowDialog by remember { mutableStateOf(false) }
     var isShowResult by remember { mutableStateOf(false) }
-    var keyWord by remember { mutableStateOf("") }
+    val keyWord by viewModel.keyWord.collectAsStateWithLifecycle()
+
     // 키보드 컨트롤
     val keyboardController = LocalSoftwareKeyboardController.current
     val scrollState = rememberLazyListState()
@@ -75,8 +76,7 @@ fun DetailSearchContent(
                 isShowDialog = it
             },
             onInputChanged = {
-                keyWord = it
-                viewModel.requestResultSearchData(it)
+                viewModel.onWordChanged(it)
             },
             focusChanged = {
                 isShowResult = it
