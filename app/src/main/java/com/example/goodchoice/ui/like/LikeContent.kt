@@ -46,7 +46,7 @@ fun LikeContent(
     val spaceRentalLikeData = viewModel.spaceRentalLikeData
     val leisureLikeData = viewModel.leisureLikeData
 
-    val pagerState = rememberPagerState(initialPage = 0)
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { menus.size })
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
 
     val pageModifier = Modifier
@@ -66,7 +66,6 @@ fun LikeContent(
             ) { state ->
                 HorizontalPager(
                     modifier = pageModifier,
-                    pageCount = menus.size,
                     state = state,
                     verticalAlignment = Alignment.Top
                 ) { page: Int ->
@@ -114,6 +113,7 @@ fun LikeContent(
                                         }
                                     }
                                 }
+
                                 TabData.OVERSEA.route -> {
                                     Column(
                                         modifier = pageModifier
@@ -127,6 +127,7 @@ fun LikeContent(
                                         }
                                     }
                                 }
+
                                 TabData.RENTAL.route -> {
                                     Column(
                                         modifier = pageModifier
@@ -135,11 +136,10 @@ fun LikeContent(
                                             EmptyDataWidget(
                                                 value = stringResource(id = R.string.str_space),
                                                 onClick = {})
-                                        } else {
-
                                         }
                                     }
                                 }
+
                                 TabData.LEISURE.route -> {
                                     Column(
                                         modifier = pageModifier
@@ -148,11 +148,10 @@ fun LikeContent(
                                             EmptyDataWidget(
                                                 value = stringResource(id = R.string.str_ticket),
                                                 onClick = {})
-                                        } else {
-
                                         }
                                     }
                                 }
+
                                 else -> {}
                             }
                         }

@@ -37,7 +37,7 @@ fun SearchContent(
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
-    val pagerState = rememberPagerState(initialPage = 0)
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { menus.size })
 
     val leisureSearchWordData = viewModel.leisureSearchWordData
     val leisureSearchAreaData = viewModel.leisureSearchAreaData
@@ -65,7 +65,6 @@ fun SearchContent(
             ) { state ->
                 HorizontalPager(
                     modifier = pageModifier,
-                    pageCount = menus.size,
                     state = state,
                     verticalAlignment = Alignment.Top,
                     userScrollEnabled = false

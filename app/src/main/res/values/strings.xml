@@ -14,6 +14,8 @@
     <string name="str_oversea_airplane_stay_more">항공 + 숙소 특가 더보기</string>
     <string name="str_over_sea_row_price">최저가 숙소로 누리는 해외 인기 도시</string>
     <string name="str_more">더보기</string>
+    <string name="str_row_price">최저가 숙소</string>
+    <string name="str_over_sea_week_special">해외 항공 + 숙소 이번 주 특가</string>
 
     <string name="str_coupon">쿠폰</string>
     <string name="str_advance_select">도전뽑기</string>

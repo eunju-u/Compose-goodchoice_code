@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -31,7 +32,7 @@ import com.example.goodchoice.ui.webview.WebViewActivity
 @Composable
 fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {
     val context = LocalContext.current
-    val pagerState = rememberPagerState(initialPage = 0)
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { Int.MAX_VALUE })
     val currentPage = pagerState.currentPage
     val listSize = bannerList.size
     val userScrollEnabled = listSize > 1
@@ -42,7 +43,6 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
 
         HorizontalPager(
             state = pagerState,
-            pageCount = Int.MAX_VALUE,
             userScrollEnabled = userScrollEnabled
         ) { page ->
             val index = page % listSize
@@ -102,7 +102,7 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
                 if (listSize > 25) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_round_add),
-                        contentDescription = "더보기",
+                        contentDescription = stringResource(id = R.string.str_more),
                     )
                 }
             }

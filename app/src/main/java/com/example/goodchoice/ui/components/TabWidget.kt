@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
+import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,7 +34,7 @@ fun TabWidget(
     unselectedTextStyle: TextStyle = MaterialTheme.typography.labelLarge,
     height: Dp = 1.5.dp,
     indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = { tabPositions ->
-        TabRowDefaults.Indicator(
+        SecondaryIndicator(
             modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
             height = height,
             color = selectedContentColor
@@ -73,13 +74,12 @@ fun TabWidget(
     content(pagerState)
 }
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
 fun TabWidgetPreview() {
     TabWidget(
-        pagerState = rememberPagerState(),
+        pagerState = rememberPagerState(pageCount = { 0 }),
         menus = listOf(
             TabData.KOREA, TabData.OVERSEA
         )

@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.BuildConfig
 import com.example.goodchoice.R
 import com.example.goodchoice.ui.theme.Theme
 
@@ -61,8 +60,7 @@ fun TopWebViewBarWidget(
                             }
                         })
 
-                    //debug 용 url
-                    if (BuildConfig.DEBUG && url.isNotEmpty()) {
+                    if (url.isNotEmpty()) {
                         Text(
                             modifier = Modifier.padding(top = 10.dp),
                             text = url,
