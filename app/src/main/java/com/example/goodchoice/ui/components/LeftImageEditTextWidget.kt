@@ -121,6 +121,7 @@ fun LeftImageEditTextWidget(
                         onInputChanged(textFieldState.text)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
+                        autoCorrectEnabled = null,
                         imeAction = ImeAction.Go
                     ),
                     keyboardActions = KeyboardActions(
