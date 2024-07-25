@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.around
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,9 +8,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,9 +42,16 @@ import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
+import com.naver.maps.map.compose.ExperimentalNaverMapApi
+import com.naver.maps.map.compose.LocationTrackingMode
+import com.naver.maps.map.compose.MapProperties
+import com.naver.maps.map.compose.NaverMap
+import com.naver.maps.map.compose.rememberCameraPositionState
+import com.naver.maps.map.compose.rememberFusedLocationSource
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
+@SuppressLint("UnrememberedMutableState")
+@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class, ExperimentalNaverMapApi::class)
 @Composable
 fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val context = LocalContext.current
@@ -62,8 +70,21 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val aroundFilterSelect = viewModel.aroundFilterSelect
     val filterList = viewModel.filterList.collectAsStateWithLifecycle()
     val selectSearchItem = viewModel.selectSearchItem
+    val cameraPositionState = rememberCameraPositionState()
 
     Box(modifier = modifier) {
+
+        //네이버 지도
+        NaverMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState, //현재 위치 표시
+            locationSource = rememberFusedLocationSource(isCompassEnabled = true),
+            properties = MapProperties(
+                locationTrackingMode = LocationTrackingMode.Follow,
+            ),
+            onLocationChange = { location ->  }
+        )
+
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -87,7 +108,6 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                     )
                 })
         }
-        //TODO Map 넣기
 
         // 목록보기 버튼 (Hidden 상태에서만 보여지도록 함.)
         if (sheetState.currentValue == ModalBottomSheetValue.Hidden) {
@@ -374,6 +394,5 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                 )
             }
         }
-
     }
 }
