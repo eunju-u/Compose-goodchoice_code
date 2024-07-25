@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,7 +63,9 @@ fun LikeContent(
                 pagerState = pagerState,
                 selectedContentColor = Theme.colorScheme.blue,
                 unselectedContentColor = Theme.colorScheme.gray,
-                divider = { Divider() }
+                divider = {
+                    HorizontalDivider(color = Theme.colorScheme.pureGray)
+                }
             ) { state ->
                 HorizontalPager(
                     modifier = pageModifier,

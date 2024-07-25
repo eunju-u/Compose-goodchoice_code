@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -280,7 +281,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                             }
                         }
                         Spacer(modifier = Modifier.height(dp10))
-                        Divider()
+                        HorizontalDivider(color = Theme.colorScheme.pureGray)
 
                         val list = selectFilterData.filterList ?: listOf()
                         if (selectFilter != "" && selectFilter == selectFilterData.type && list.isNotEmpty()) {
@@ -332,7 +333,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         })
                                 }
                             }
-                            Divider()
+                            HorizontalDivider(color = Theme.colorScheme.pureGray)
                         }
                     }
 
