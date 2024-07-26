@@ -1,7 +1,9 @@
 package com.example.goodchoice.ui.around
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.R
 import com.example.goodchoice.ConnectInfo
@@ -42,6 +45,9 @@ import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.goodchoice.ui.theme.*
+import com.google.android.gms.location.LocationServices
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.compose.ExperimentalNaverMapApi
 import com.naver.maps.map.compose.LocationTrackingMode
 import com.naver.maps.map.compose.MapProperties
@@ -71,7 +77,26 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val filterList = viewModel.filterList.collectAsStateWithLifecycle()
     val selectSearchItem = viewModel.selectSearchItem
     val cameraPositionState = rememberCameraPositionState()
+    val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
+    //위치 퍼미션 허용 여부
+    val checkPermission = ActivityCompat.checkSelfPermission(
+        context,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+        context,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    if (checkPermission) {
+        //초기 지도 로딩시 현재 위치로 카메라 전환이 느림.(현재 위치 바로 노출 하지 않고 내부 기본 위치값 노출 후 현재 위치로 이동됨.)
+        //내 위치 미리 저장해두고 현재 위치로 바로 이동할 수 있도록 함
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+            if (it != null) {
+                cameraPositionState.position = CameraPosition(LatLng(it), 14.0)
+            }
+        }
+    }
     Box(modifier = modifier) {
 
         //네이버 지도
