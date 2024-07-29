@@ -6,12 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -41,6 +41,8 @@ import com.example.goodchoice.ui.filter.FilterActivity
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.domain.model.AroundFilterSelectedModel
+import com.example.goodchoice.ui.components.RoundImageWidget
+import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetValue
 import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
@@ -48,12 +50,14 @@ import com.example.goodchoice.ui.theme.*
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.compose.ExperimentalNaverMapApi
 import com.naver.maps.map.compose.LocationTrackingMode
 import com.naver.maps.map.compose.MapProperties
 import com.naver.maps.map.compose.NaverMap
 import com.naver.maps.map.compose.rememberCameraPositionState
 import com.naver.maps.map.compose.rememberFusedLocationSource
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnrememberedMutableState")
@@ -66,7 +70,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val configuration = LocalConfiguration.current
     val fullHeight = configuration.screenHeightDp
     val sheetState: MyBottomSheetState =
-        rememberMyBottomSheetState(initialValue = ModalBottomSheetValue.HalfExpanded)
+        rememberMyBottomSheetState(initialValue = MyBottomSheetValue.HalfExpanded)
 
     //각 필터 클릭시 하위 필터 노출 여부
     var selectFilter by remember { mutableStateOf("") }
@@ -78,6 +82,8 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val selectSearchItem = viewModel.selectSearchItem
     val cameraPositionState = rememberCameraPositionState()
     val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+    var isClickedShowList by remember { mutableStateOf(false) } //목록보기 노출 여부
+    val isDragging by remember { sheetState.isDragging } //바텀시트 드래그 중인지 여부
 
     //위치 퍼미션 허용 여부
     val checkPermission = ActivityCompat.checkSelfPermission(
@@ -97,6 +103,16 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
             }
         }
     }
+
+    //currentValue 바뀌었을 때 목록보기 노출 여부 초기화
+    LaunchedEffect(sheetState.currentValue) {
+        snapshotFlow { sheetState.currentValue }
+            .distinctUntilChanged()
+            .collect {
+                isClickedShowList = false
+            }
+    }
+
     Box(modifier = modifier) {
 
         //네이버 지도
@@ -135,7 +151,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
         }
 
         // 목록보기 버튼 (Hidden 상태에서만 보여지도록 함.)
-        if (sheetState.currentValue == ModalBottomSheetValue.Hidden) {
+        if (sheetState.currentValue == MyBottomSheetValue.Hidden) {
             Box(
                 Modifier
                     .align(Alignment.BottomCenter)
@@ -167,12 +183,80 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
         // 바텀시트
         MyBottomSheetLayout(
             sheetState = sheetState,
-            hiddenHeight = 225f,
+            hiddenHeight = 430f,
             isScrim = false,
             sheetContent = {
+                if (sheetState.currentValue != MyBottomSheetValue.Expanded) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(dp70)
+                    ) {
+                        if (!(sheetState.targetValue == MyBottomSheetValue.Expanded && sheetState.dragValue == MyBottomSheetValue.DownToUp)) {
+                            RoundImageWidget(
+                                modifier = Modifier
+                                    .padding(
+                                        bottom = dp15,
+                                        start = dp15,
+                                        top = dp15  //top은 이미지에 shadow 넣기 위해
+                                    ),
+                                imageModifier = Modifier
+                                    .size(dp40)
+                                    .clickable {
+                                    },
+                                painter = painterResource(R.drawable.bg_white),
+                                roundShape = dp30,
+                                boxAlignment = Alignment.Center,
+                                isVisibleShadow = true,
+                                content = {
+                                    Image(
+                                        modifier = Modifier.size(dp25),
+                                        painter = painterResource(id = R.drawable.ic_location),
+                                        colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
+                                        contentDescription = null
+                                    )
+                                }
+                            )
+                        }
+
+                        // 목록보기 버튼 (바텀시트 위에 있는 현재 위치 아이콘으로 인해 하단 목록보기가 클릭이 되지 않아, 바텀시트에도 목록보기가 조건에 따라 노출 하도록 함.)
+                        //isClickedShowList : 바텀시트에 붙어있는 목록보기 클릭시 목록보기 미노출 하도록 함
+                        //isDragging : 드래그 중일때는 바텀시트에 붙어있는 목록보기 미노출함
+                        if (sheetState.currentValue == MyBottomSheetValue.Hidden
+                            && sheetState.dragValue != MyBottomSheetValue.DownToUp
+                            && !isClickedShowList && !isDragging
+                        ) {
+                            LeftImageButtonWidget(
+                                modifier = Modifier.align(Alignment.BottomCenter),
+                                outerPadding = PaddingValues(bottom = dp17),
+                                title = stringResource(id = R.string.str_show_list),
+                                style = MaterialTheme.typography.labelMedium,
+                                shape = dp30,
+                                containerColor = Theme.colorScheme.darkGray,
+                                contentColor = Theme.colorScheme.white,
+                                onItemClick = {
+                                    //목록보기 클릭시 바로 사라지지 않아 플래그 추가
+                                    isClickedShowList = true
+                                    scope.launch {
+                                        sheetState.halfExpand()
+                                    }
+                                },
+                                content = {
+                                    Image(
+                                        modifier = Modifier.size(dp15),
+                                        painter = painterResource(id = R.drawable.ic_list_menu),
+                                        colorFilter = ColorFilter.tint(Theme.colorScheme.white),
+                                        contentDescription = null
+                                    )
+                                }
+                            )
+                        }
+                    }
+                }
+
                 SheetWidget(
                     modifier = Modifier.wrapContentHeight(),
-                    hasIndicator = sheetState.currentValue != ModalBottomSheetValue.Expanded
+                    hasIndicator = sheetState.currentValue != MyBottomSheetValue.Expanded
                 ) {
                     Column(
                         Modifier
@@ -391,7 +475,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
             })
 
         //지도보기 버튼 (Expanded 상태에서만 보여지도록 함.)
-        if (sheetState.currentValue == ModalBottomSheetValue.Expanded) {
+        if (sheetState.currentValue == MyBottomSheetValue.Expanded) {
             Box(
                 Modifier
                     .align(Alignment.BottomCenter)

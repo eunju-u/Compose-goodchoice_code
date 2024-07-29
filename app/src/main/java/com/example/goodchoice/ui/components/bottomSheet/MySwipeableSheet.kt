@@ -10,7 +10,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.*
 import androidx.compose.ui.platform.InspectorInfo
@@ -87,22 +86,27 @@ internal class MySwipeableState<T>(
     initialValue: T,
     internal val animationSpec: AnimationSpec<Float> = MySwipeableSheetDefaults.AnimationSpec,
     internal val confirmValueChange: (newValue: T) -> Boolean = { true },
-    internal val positionalThreshold: Density.(totalDistance: Float) -> Float =
-        MySwipeableSheetDefaults.PositionalThreshold,
     internal val velocityThreshold: Dp = MySwipeableSheetDefaults.VelocityThreshold,
 ) {
 
     var currentValue: T by mutableStateOf(initialValue)
         private set
 
+    //아래에서 위로/위에서 아래로 드래그 시 value
+    var dragValue: MyBottomSheetValue by mutableStateOf(MyBottomSheetValue.None)
+
+    //Hidden 에서 half로 이동되는지 value
     val targetValue: T by derivedStateOf {
         animationTarget ?: run {
             val currentOffset = offset
             if (currentOffset != null) {
-                computeTarget(currentOffset, currentValue, velocity = 0f)
-            } else currentValue
+                return@derivedStateOf computeTarget(currentOffset, currentValue, velocity = 0f)
+            } else return@derivedStateOf currentValue
         }
     }
+
+    //드래그 중인지 여부
+    var isDragging = mutableStateOf(false)
 
     @get:Suppress("AutoBoxing")
     var offset: Float? by mutableStateOf(null)
@@ -121,20 +125,7 @@ internal class MySwipeableState<T>(
 
     val isAnimationRunning: Boolean get() = animationTarget != null
 
-
-    /*@FloatRange(from = 0f, to = 1f)*/
-    val progress: Float by derivedStateOf {
-        val a = anchors[currentValue] ?: 0f
-        val b = anchors[targetValue] ?: 0f
-        val distance = abs(b - a)
-        if (distance > 1e-6f) {
-            val progress = (this.requireOffset() - a) / (b - a)
-            // If we are very close to 0f or 1f, we round to the closest
-            if (progress < 1e-6f) 0f else if (progress > 1 - 1e-6f) 1f else progress
-        } else 1f
-    }
-
-    var lastVelocity: Float by mutableStateOf(0f)
+    var lastVelocity: Float by mutableFloatStateOf(0f)
         private set
 
     val minOffset by derivedStateOf { anchors.minOrNull() ?: Float.NEGATIVE_INFINITY }
@@ -142,8 +133,10 @@ internal class MySwipeableState<T>(
     val maxOffset by derivedStateOf { anchors.maxOrNull() ?: Float.POSITIVE_INFINITY }
 
     private var animationTarget: T? by mutableStateOf(null)
-    internal val draggableState = DraggableState {
+
+    val draggableState = DraggableState {
         offset = ((offset ?: 0f) + it).coerceIn(minOffset, maxOffset)
+        isDragging.value = true //드래그 중
     }
 
     internal var anchors by mutableStateOf(emptyMap<T, Float>())
@@ -222,7 +215,6 @@ internal class MySwipeableState<T>(
         if (confirmValueChange(targetValue)) {
             animateTo(targetValue, velocity)
         } else {
-            // If the user vetoed the state change, rollback to the previous state.
             animateTo(previousValue, velocity)
         }
     }
@@ -244,38 +236,30 @@ internal class MySwipeableState<T>(
         velocity: Float
     ): T {
         val currentAnchors = anchors
-        val currentAnchor = currentAnchors[currentValue]
+        val currentAnchor = currentAnchors[currentValue] //1822.0
+
         val currentDensity = requireDensity()
         val velocityThresholdPx = with(currentDensity) { velocityThreshold.toPx() }
         return if (currentAnchor == offset || currentAnchor == null) {
+            dragValue = MyBottomSheetValue.None
             currentValue
         } else if (currentAnchor < offset) {
-            // Swiping from lower to upper (positive).
+            //위 -> 아래
+            dragValue = MyBottomSheetValue.UpToDown
+
             if (velocity >= velocityThresholdPx) {
                 currentAnchors.closestAnchor(offset, true)
             } else {
-                val upper = currentAnchors.closestAnchor(offset, true)
-                val distance = abs(currentAnchors.getValue(upper) - currentAnchor)
-                val relativeThreshold = abs(positionalThreshold(currentDensity, distance))
-                val absoluteThreshold = abs(currentAnchor + relativeThreshold)
-                if (offset < absoluteThreshold) currentValue else upper
+                currentAnchors.closestAnchor(offset, true)
             }
         } else {
-            // Swiping from upper to lower (negative).
+            //아래 -> 위
+            dragValue = MyBottomSheetValue.DownToUp
+
             if (velocity <= -velocityThresholdPx) {
                 currentAnchors.closestAnchor(offset, false)
             } else {
-                val lower = currentAnchors.closestAnchor(offset, false)
-                val distance = abs(currentAnchor - currentAnchors.getValue(lower))
-                val relativeThreshold = abs(positionalThreshold(currentDensity, distance))
-                val absoluteThreshold = abs(currentAnchor - relativeThreshold)
-                if (offset < 0) {
-                    // For negative offsets, larger absolute thresholds are closer to lower anchors
-                    // than smaller ones.
-                    if (abs(offset) < absoluteThreshold) currentValue else lower
-                } else {
-                    if (offset > absoluteThreshold) currentValue else lower
-                }
+                currentAnchors.closestAnchor(offset, false)
             }
         }
     }
@@ -302,36 +286,9 @@ internal class MySwipeableState<T>(
                     initialValue = it,
                     animationSpec = animationSpec,
                     confirmValueChange = confirmValueChange,
-                    positionalThreshold = positionalThreshold,
                     velocityThreshold = velocityThreshold
                 )
             }
-        )
-    }
-}
-
-@Composable
-@ExperimentalMaterialApi
-internal fun <T : Any> rememberSwipeableV2State(
-    initialValue: T,
-    animationSpec: AnimationSpec<Float> = MySwipeableSheetDefaults.AnimationSpec,
-    confirmValueChange: (newValue: T) -> Boolean = { true }
-): MySwipeableState<T> {
-    return rememberSaveable(
-        initialValue, animationSpec, confirmValueChange,
-        saver = MySwipeableState.Saver(
-            animationSpec = animationSpec,
-            confirmValueChange = confirmValueChange,
-            positionalThreshold = MySwipeableSheetDefaults.PositionalThreshold,
-            velocityThreshold = MySwipeableSheetDefaults.VelocityThreshold
-        ),
-    ) {
-        MySwipeableState(
-            initialValue = initialValue,
-            animationSpec = animationSpec,
-            confirmValueChange = confirmValueChange,
-            positionalThreshold = MySwipeableSheetDefaults.PositionalThreshold,
-            velocityThreshold = MySwipeableSheetDefaults.VelocityThreshold
         )
     }
 }
@@ -340,12 +297,6 @@ internal fun <T : Any> rememberSwipeableV2State(
 internal fun fixedPositionalThreshold(threshold: Dp): Density.(distance: Float) -> Float = {
     threshold.toPx()
 }
-
-@ExperimentalMaterialApi
-internal fun fractionalPositionalThreshold(
-    fraction: Float
-): Density.(distance: Float) -> Float = { distance -> distance * fraction }
-
 
 @Stable
 @ExperimentalMaterialApi
@@ -416,14 +367,12 @@ private fun <T> Map<T, Float>.closestAnchor(
     searchUpwards: Boolean = false
 ): T {
     require(isNotEmpty()) { "The anchors were empty when trying to find the closest anchor" }
-    return minBy { (_, anchor) ->
+    val d = minBy { (_, anchor) ->
         val delta = if (searchUpwards) anchor - offset else offset - anchor
         if (delta < 0) Float.POSITIVE_INFINITY else delta
     }.key
+    return d
 }
 
 private fun <T> Map<T, Float>.minOrNull() = minOfOrNull { (_, offset) -> offset }
 private fun <T> Map<T, Float>.maxOrNull() = maxOfOrNull { (_, offset) -> offset }
-private fun <T> Map<T, Float>.requireAnchor(value: T) = requireNotNull(this[value]) {
-    "Required anchor $value was not found in anchors. Current anchors: ${this.toMap()}"
-}

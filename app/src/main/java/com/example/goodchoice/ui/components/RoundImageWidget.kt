@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.UiComposable
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -29,11 +29,16 @@ fun RoundImageWidget(
     boxAlignment: Alignment = Alignment.BottomStart, //상위에 올라가는 뷰의 정렬
     contentScale: ContentScale = ContentScale.Crop,
     contentDescription: String = "image",
+    isVisibleShadow: Boolean = false, //쉐도우 적용 여부
     content: @Composable @UiComposable (() -> Unit)? = null
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(roundShape)),
+            .shadow(
+                elevation = if (isVisibleShadow) dp15 else dp0,
+                shape = RoundedCornerShape(roundShape),
+                clip = true
+            ),
     ) {
         Image(
             modifier = imageModifier,

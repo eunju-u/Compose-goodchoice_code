@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,6 +29,7 @@ import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
+import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetValue
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
 import com.example.goodchoice.ui.login.LoginActivity
@@ -62,7 +62,7 @@ fun StayDetailContent(
     //바텀시트
     val sheetState: MyBottomSheetState =
         rememberMyBottomSheetState(
-            initialValue = ModalBottomSheetValue.Hidden,
+            initialValue = MyBottomSheetValue.Hidden,
             skipHalfExpanded = true
         )
 
