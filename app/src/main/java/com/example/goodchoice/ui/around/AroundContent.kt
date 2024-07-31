@@ -81,6 +81,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val filterList = viewModel.filterList.collectAsStateWithLifecycle()
     val selectSearchItem = viewModel.selectSearchItem
     val cameraPositionState = rememberCameraPositionState()
+    var currentLatLng by remember { mutableStateOf(LatLng(0.0, 0.0)) } //현재 위치 위도 경도 값
     val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
     var isClickedShowList by remember { mutableStateOf(false) } //목록보기 노출 여부
     val isDragging by remember { sheetState.isDragging } //바텀시트 드래그 중인지 여부
@@ -100,6 +101,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener {
             if (it != null) {
                 cameraPositionState.position = CameraPosition(LatLng(it), 14.0)
+                currentLatLng = cameraPositionState.position.target
             }
         }
     }
@@ -123,7 +125,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
             properties = MapProperties(
                 locationTrackingMode = LocationTrackingMode.Follow,
             ),
-            onLocationChange = { location ->  }
+            onLocationChange = { location -> }
         )
 
         Column(
@@ -203,6 +205,15 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                 imageModifier = Modifier
                                     .size(dp40)
                                     .clickable {
+                                        if (checkPermission) {
+                                            cameraPositionState.move(
+                                                CameraUpdate.toCameraPosition(
+                                                    CameraPosition(
+                                                        currentLatLng, 14.0, 0.0, 0.0
+                                                    )
+                                                )
+                                            )
+                                        }
                                     },
                                 painter = painterResource(R.drawable.bg_white),
                                 roundShape = dp30,
@@ -212,7 +223,10 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                     Image(
                                         modifier = Modifier.size(dp25),
                                         painter = painterResource(id = R.drawable.ic_location),
-                                        colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
+                                        colorFilter =
+                                        if ((currentLatLng != cameraPositionState.position.target) || !checkPermission) //퍼미션 체크 안되어있으면 그레이색상 노출
+                                            ColorFilter.tint(Theme.colorScheme.gray)
+                                        else ColorFilter.tint(Theme.colorScheme.blue),
                                         contentDescription = null
                                     )
                                 }
@@ -366,9 +380,11 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 )
                                             }
                                         }
+
                                         ServerConst.RESERVATION -> {
                                             null
                                         }
+
                                         else -> {
                                             {
                                                 Image(
@@ -401,6 +417,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 }
                                             }
                                         }
+
                                         else -> {
                                             null
                                         }
