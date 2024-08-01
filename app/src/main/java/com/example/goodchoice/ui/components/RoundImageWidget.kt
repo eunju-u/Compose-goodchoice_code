@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -30,6 +31,7 @@ fun RoundImageWidget(
     contentScale: ContentScale = ContentScale.Crop,
     contentDescription: String = "image",
     isVisibleShadow: Boolean = false, //쉐도우 적용 여부
+    imageColor: ColorFilter? = null,
     content: @Composable @UiComposable (() -> Unit)? = null
 ) {
     Box(
@@ -44,7 +46,8 @@ fun RoundImageWidget(
             modifier = imageModifier,
             painter = painter,
             contentScale = contentScale,
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            colorFilter = imageColor
         )
 
         if (content != null) {

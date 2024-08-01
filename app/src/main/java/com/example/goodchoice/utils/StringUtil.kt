@@ -19,30 +19,33 @@ object StringUtil {
     fun setTextColor(
         originText: String,
         targetText: String,
-        color: Color = Theme.colorScheme.blue
+        targetColor: Color = Theme.colorScheme.blue,
+        remainColor:Color =Theme.colorScheme.darkGray
     ): AnnotatedString {
         return buildAnnotatedString {
-            // for 문으로 하려고 했지만 oom 나서 수정함
-            val startIndex = originText.indexOf(targetText)
-            if (startIndex == -1) {
-                // 특정 문자열이 없으면 originText 으로 return.
-                append(originText)
-            } else {
-                val endIndex = startIndex + targetText.length
-                if (startIndex == 0) {
-                    withStyle(style = SpanStyle(color = color)) {
-                        append(originText.substring(startIndex, endIndex))
-                    }
-                    if (endIndex != originText.length) {
-                        append(originText.substring(endIndex, originText.length))
-                    }
+            withStyle(style = SpanStyle(color = remainColor)) {
+                // for 문으로 하려고 했지만 oom 나서 수정함
+                val startIndex = originText.indexOf(targetText)
+                if (startIndex == -1) {
+                    // 특정 문자열이 없으면 originText 으로 return.
+                    append(originText)
                 } else {
-                    append(originText.substring(0, startIndex))
-                    withStyle(style = SpanStyle(color = color)) {
-                        append(originText.substring(startIndex, endIndex))
-                    }
-                    if (endIndex != originText.length) {
-                        append(originText.substring(endIndex, originText.length))
+                    val endIndex = startIndex + targetText.length
+                    if (startIndex == 0) {
+                        withStyle(style = SpanStyle(color = targetColor)) {
+                            append(originText.substring(startIndex, endIndex))
+                        }
+                        if (endIndex != originText.length) {
+                            append(originText.substring(endIndex, originText.length))
+                        }
+                    } else {
+                        append(originText.substring(0, startIndex))
+                        withStyle(style = SpanStyle(color = targetColor)) {
+                            append(originText.substring(startIndex, endIndex))
+                        }
+                        if (endIndex != originText.length) {
+                            append(originText.substring(endIndex, originText.length))
+                        }
                     }
                 }
             }

@@ -51,11 +51,11 @@ fun PersonWidget(
                 size = dp40,
                 isChecked = count > min,
                 checkedColor = if (count > min) Theme.colorScheme.pureBlue else Theme.colorScheme.pureGray,
-                borderColor = if (count > min) Theme.colorScheme.blue else Theme.colorScheme.gray,
+                borderColor = if (count > min) Theme.colorScheme.blue1 else Theme.colorScheme.gray,
                 content = {
                     Image(
                         painter = painterResource(id = R.drawable.ic_round_remove),
-                        colorFilter = ColorFilter.tint(if (count > min) Theme.colorScheme.blue else Theme.colorScheme.gray),
+                        colorFilter = ColorFilter.tint(if (count > min) Theme.colorScheme.blue1 else Theme.colorScheme.gray),
                         contentDescription = "빼기",
                     )
                 },
@@ -69,11 +69,11 @@ fun PersonWidget(
                 size = dp40,
                 isChecked = count <= max,
                 checkedColor = if (count < max) Theme.colorScheme.pureBlue else Theme.colorScheme.pureGray,
-                borderColor = if (count < max) Theme.colorScheme.blue else Theme.colorScheme.gray,
+                borderColor = if (count < max) Theme.colorScheme.blue1 else Theme.colorScheme.gray,
                 content = {
                     Image(
                         painter = painterResource(id = R.drawable.ic_round_add),
-                        colorFilter = ColorFilter.tint(if (count < max) Theme.colorScheme.blue else Theme.colorScheme.gray),
+                        colorFilter = ColorFilter.tint(if (count < max) Theme.colorScheme.blue1 else Theme.colorScheme.gray),
                         contentDescription = "더하기",
                     )
                 },

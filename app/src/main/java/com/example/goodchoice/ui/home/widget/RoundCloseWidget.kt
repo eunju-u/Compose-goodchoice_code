@@ -27,6 +27,7 @@ fun RoundCloseWidget(modifier: Modifier = Modifier) {
         painter = painterResource(id = R.drawable.bg_white),
         roundShape = dp30,
         boxAlignment = Alignment.Center,
+        imageColor = ColorFilter.tint(Theme.colorScheme.white),
         content = {
             Column(
                 verticalArrangement = Arrangement.Center,

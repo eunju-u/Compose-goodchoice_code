@@ -211,7 +211,7 @@ fun HomeContent(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(dp120)
-                                    .background(color = Theme.colorScheme.pureGray),
+                                    .background(color = Theme.colorScheme.pureGray1),
                                 bannerList = bannerList
                             )
                         }

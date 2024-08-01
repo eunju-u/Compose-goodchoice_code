@@ -142,7 +142,8 @@ fun KoreaStayItemWidget(
                 text = name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = Theme.colorScheme.darkGray
             )
             Spacer(modifier = Modifier.height(dp3))
         }

@@ -2,12 +2,14 @@ package com.example.goodchoice.ui.home.widget
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +25,7 @@ import com.example.goodchoice.R
 import com.example.goodchoice.ui.components.CategoryItemWidget
 import com.example.goodchoice.ui.theme.*
 
-@SuppressLint("RememberReturnType")
+@SuppressLint("RememberReturnType", "UnusedBoxWithConstraintsScope")
 @Composable
 fun FullHeaderWidget(
     categoryItem: List<CategoryItem> = emptyList(),
@@ -36,7 +38,7 @@ fun FullHeaderWidget(
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
         Box(Modifier.fillMaxSize()) {
-            val color = Theme.colorScheme.darkGray
+            val color = Theme.colorScheme.dim
             Canvas(
                 Modifier
                     .fillMaxSize()
@@ -61,7 +63,9 @@ fun FullHeaderWidget(
         ) {
             Surface(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                color = Theme.colorScheme.white,
+                contentColor = contentColorFor(Theme.colorScheme.white),
             ) {
                 LazyVerticalGrid(
                     modifier = Modifier

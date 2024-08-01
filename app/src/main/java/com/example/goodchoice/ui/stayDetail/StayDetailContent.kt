@@ -213,7 +213,7 @@ fun StayDetailContent(
                                 originText = stringResource(
                                     id = R.string.str_max_add_discount,
                                     item.coupon
-                                ), targetText = item.coupon, color = Theme.colorScheme.red
+                                ), targetText = item.coupon, targetColor = Theme.colorScheme.red
                             ), textColor = Theme.colorScheme.darkGray,
                             textStyle = MaterialTheme.typography.labelMedium,
                             content = {

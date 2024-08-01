@@ -190,7 +190,7 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                         innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_start_login_email),
                         containerColor = Theme.colorScheme.pureBlue,
-                        contentColor = Theme.colorScheme.blue,
+                        contentColor = Theme.colorScheme.blue1,
                         style = style,
                         endPadding = endPadding,
                         content = {

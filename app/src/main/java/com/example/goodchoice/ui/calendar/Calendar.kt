@@ -79,17 +79,17 @@ fun Calendar(
     }
 
     val calendarBorderColor =
-        if (type == CalendarType.CALENDAR) Theme.colorScheme.blue else Theme.colorScheme.pureGray
+        if (type == CalendarType.CALENDAR) Theme.colorScheme.blue1 else Theme.colorScheme.pureGray
     val personBorderColor =
-        if (type == CalendarType.PERSON) Theme.colorScheme.blue else Theme.colorScheme.pureGray
+        if (type == CalendarType.PERSON) Theme.colorScheme.blue1 else Theme.colorScheme.pureGray
     val calendarContainerColor =
         if (type == CalendarType.CALENDAR) Theme.colorScheme.pureBlue else Theme.colorScheme.white
     val personContainerColor =
         if (type == CalendarType.PERSON) Theme.colorScheme.pureBlue else Theme.colorScheme.white
     val calendarContentColor =
-        if (type == CalendarType.CALENDAR) Theme.colorScheme.blue else Theme.colorScheme.gray
+        if (type == CalendarType.CALENDAR) Theme.colorScheme.blue1 else Theme.colorScheme.gray
     val personContentColor =
-        if (type == CalendarType.PERSON) Theme.colorScheme.blue else Theme.colorScheme.gray
+        if (type == CalendarType.PERSON) Theme.colorScheme.blue1 else Theme.colorScheme.gray
 
     //날짜 초기화 관련 변수
     val resetStartDate = if (isKoreaTravel) pref.koreaStartDate else pref.overseaStartDate
