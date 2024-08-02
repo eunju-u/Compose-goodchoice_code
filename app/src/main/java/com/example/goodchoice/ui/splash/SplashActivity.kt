@@ -1,10 +1,12 @@
 package com.example.goodchoice.ui.splash
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.goodchoice.Const
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.theme.TestTheme
@@ -26,10 +28,20 @@ class SplashActivity : ComponentActivity() {
                 SplashContent()
             }
         }
+
+        //permission 설정
+        requestPermission.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
     }
 
-    override fun onResume() {
-        super.onResume()
+    private val requestPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) {
+        //뷰 생성
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
             this@SplashActivity.startActivity(
