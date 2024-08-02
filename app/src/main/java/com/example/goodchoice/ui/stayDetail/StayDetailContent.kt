@@ -236,7 +236,7 @@ fun StayDetailContent(
                         )
                         Spacer(modifier = Modifier.height(dp15))
                     }
-                    Divider(thickness = dp10, color = Theme.colorScheme.pureGray)
+                    HorizontalDivider(thickness = dp10, color = Theme.colorScheme.pureGray)
 
                     if (!item.payList.isNullOrEmpty()) {
                         Column(modifier = Modifier
@@ -368,7 +368,7 @@ fun StayDetailContent(
                     }
 
                     if (!item.service.isNullOrEmpty()) {
-                        Divider(thickness = dp10, color = Theme.colorScheme.pureGray)
+                        HorizontalDivider(thickness = dp10, color = Theme.colorScheme.pureGray)
 
                         Column(modifier = Modifier
                             .fillMaxWidth()

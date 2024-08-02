@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -91,7 +92,7 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                                 .width(IntrinsicSize.Max)
                                 .padding(bottom = dp3)
                         ) {
-                            Divider(
+                            HorizontalDivider(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .align(Alignment.BottomEnd),

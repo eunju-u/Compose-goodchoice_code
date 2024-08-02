@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -89,7 +90,7 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                             .padding(top = dp25, bottom = dp25),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier.weight(1f, fill = false),
                             thickness = dp1,
                             color = Theme.colorScheme.pureGray
@@ -99,7 +100,7 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                             color = Theme.colorScheme.gray,
                             style = MaterialTheme.typography.labelMedium
                         )
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier.weight(1f, fill = false),
                             thickness = dp1,
                             color = Theme.colorScheme.pureGray

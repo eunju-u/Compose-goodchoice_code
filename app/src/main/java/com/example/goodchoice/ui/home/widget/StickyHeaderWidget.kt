@@ -49,7 +49,7 @@ fun StickyHeaderWidget(
                         height = CategoryItemHeight
                     )
                 }
-                Divider(
+                VerticalDivider(
                     modifier = Modifier
                         .width(dp1)
                         .height(dp30), color = Theme.colorScheme.pureGray

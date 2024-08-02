@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -161,7 +162,7 @@ fun HomeContent(
                                         color = Theme.colorScheme.blue,
                                         style = textStyle.copy(fontWeight = FontWeight.Bold)
                                     )
-                                    Divider(
+                                    HorizontalDivider(
                                         modifier = Modifier.weight(1f),
                                         thickness = dp2,
                                         color = Theme.colorScheme.pureGray
@@ -248,7 +249,7 @@ fun HomeContent(
                                 title = "최근 본 상품",
                                 stayList = recentDbData,
                             )
-                            Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
+                            HorizontalDivider(color = Theme.colorScheme.pureBlue, thickness = dp8)
                         }
 
                         if (stayList.isNotEmpty()) {
@@ -264,7 +265,7 @@ fun HomeContent(
                             Spacer(modifier = Modifier.height(dp5))
                         }
 
-                        Divider(color = Theme.colorScheme.pureBlue, thickness = dp8)
+                        HorizontalDivider(color = Theme.colorScheme.pureBlue, thickness = dp8)
 
                         if (overSeaCityList.isNotEmpty()) {
                             Column(Modifier.background(color = Theme.colorScheme.pureGray)) {

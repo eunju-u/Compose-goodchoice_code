@@ -62,7 +62,7 @@ fun SearchResultWidget(
                 )
             }
             Spacer(modifier = Modifier.height(dp15))
-            Divider(thickness = 1.5.dp, color = Theme.colorScheme.pureGray)
+            HorizontalDivider(thickness = 1.5.dp, color = Theme.colorScheme.pureGray)
         }
     }
 }

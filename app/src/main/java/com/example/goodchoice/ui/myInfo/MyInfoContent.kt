@@ -287,7 +287,7 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
                                 if (index != menuList.lastIndex) {
                                     //선
-                                    Divider(
+                                    HorizontalDivider(
                                         modifier = Modifier.padding(top = dp15, bottom = dp15),
                                         thickness = dp2,
                                         color = Theme.colorScheme.pureGray

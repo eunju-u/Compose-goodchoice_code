@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +42,7 @@ fun CouponWidget(
                     color = Theme.colorScheme.gray
                 )
 
-                Divider(
+                VerticalDivider(
                     modifier = Modifier
                         .width(dp1).height(dp15),
                     color = Theme.colorScheme.pureGray
