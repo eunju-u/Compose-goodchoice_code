@@ -66,9 +66,11 @@ class MainActivity : ComponentActivity() {
                                         viewModel.aroundFilterSelect.selectedReservation =
                                             mutableItem
                                     }
+
                                     ServerConst.PRICE -> {
                                         viewModel.aroundFilterSelect.selectedPrice = mutableItem
                                     }
+
                                     ServerConst.ROOM -> {
                                         viewModel.aroundFilterSelect.selectedRoom = mutableItem
                                     }
@@ -84,7 +86,7 @@ class MainActivity : ComponentActivity() {
     val activityForSearchResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
-                Activity.RESULT_OK -> {
+                RESULT_OK -> {
                     result.data?.let {
                         val data = it.getSerializableExtra(Const.DATA)
                         if (data != null) {
@@ -97,4 +99,19 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+    //위치 권한 팝업 클릭시 호출되는 콜백
+    val aroundRequestPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) {
+        var isDenied = false
+        for (entry in it.entries) {
+            isDenied = entry.value == false
+            break
+        }
+        if (isDenied) {
+            // 팝업 노출
+            viewModel.isShowDialog.value = true
+        }
+    }
 }

@@ -56,7 +56,6 @@ import com.naver.maps.map.compose.LocationTrackingMode
 import com.naver.maps.map.compose.MapProperties
 import com.naver.maps.map.compose.NaverMap
 import com.naver.maps.map.compose.rememberCameraPositionState
-import com.naver.maps.map.compose.rememberFusedLocationSource
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -86,13 +85,18 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     var isClickedShowList by remember { mutableStateOf(false) } //목록보기 노출 여부
     val isDragging by remember { sheetState.isDragging } //바텀시트 드래그 중인지 여부
 
+    val permissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+
     //위치 퍼미션 허용 여부
     val checkPermission = ActivityCompat.checkSelfPermission(
         context,
-        Manifest.permission.ACCESS_FINE_LOCATION
+        permissions[0]
     ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
         context,
-        Manifest.permission.ACCESS_COARSE_LOCATION
+        permissions[1]
     ) == PackageManager.PERMISSION_GRANTED
 
     if (checkPermission) {
@@ -121,7 +125,6 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
         NaverMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState, //현재 위치 표시
-            locationSource = rememberFusedLocationSource(isCompassEnabled = true),
             properties = MapProperties(
                 locationTrackingMode = LocationTrackingMode.Follow,
             ),
@@ -211,6 +214,15 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                     CameraPosition(
                                                         currentLatLng, 14.0, 0.0, 0.0
                                                     )
+                                                )
+                                            )
+                                        } else {
+                                            //위치 권한 없을 경우 권한 요청
+                                            val activity = context as MainActivity
+                                            activity.aroundRequestPermission.launch(
+                                                arrayOf(
+                                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                                    Manifest.permission.ACCESS_COARSE_LOCATION
                                                 )
                                             )
                                         }

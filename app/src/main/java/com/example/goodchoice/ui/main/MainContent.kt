@@ -1,7 +1,10 @@
 package com.example.goodchoice.ui.main
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
+import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +25,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.MainBottomSheetType
+import com.example.goodchoice.R
+import com.example.goodchoice.ui.components.AlertDialogWidget
 import com.example.goodchoice.ui.components.LoadingWidget
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
@@ -57,6 +62,8 @@ fun MainContent(viewModel: MainViewModel) {
     var textStyle by remember { mutableStateOf(style) }
 
     var bottomSheetType by remember { mutableStateOf(MainBottomSheetType.NONE) }
+
+    var isShowDialog = viewModel.isShowDialog.collectAsStateWithLifecycle()
 
     /** route 값이 변경되면 데이터 조회함  **/
     LaunchedEffect(Unit) {
@@ -182,5 +189,22 @@ fun MainContent(viewModel: MainViewModel) {
         if (homeUiState.value is ConnectInfo.Loading) {
             LoadingWidget()
         }
+    }
+
+    if (isShowDialog.value) {
+        AlertDialogWidget(
+            title = stringResource(id = R.string.str_allow_permission),
+            oneButtonText = stringResource(id = R.string.str_close),
+            twoButtonText = stringResource(id = R.string.str_set_permission),
+            onDismiss = {
+                viewModel.isShowDialog.value = false
+            },
+            onConfirm = {
+                viewModel.isShowDialog.value = false
+                //시스템 권한 설정으로 이동
+                context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", context.packageName, null)
+                })
+            })
     }
 }

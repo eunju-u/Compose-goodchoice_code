@@ -96,6 +96,8 @@ class MainViewModel @Inject constructor(
     var myInfoData = MutableStateFlow(MyInfoData())
 
     /************/
+    private val _isShowDialog = MutableStateFlow(false)
+    val isShowDialog: MutableStateFlow<Boolean> = _isShowDialog
 
     fun getCurrentViewData(context: Context) {
         when (currentRoute.value) {
