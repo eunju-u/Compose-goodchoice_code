@@ -5,8 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.*
+import com.example.common.theme.*
+import com.example.common.R
 
 //기존 여기어때 앱은 인원 선택 뷰에서 해상도 고려 하지 않고 있다!
 /**

@@ -22,9 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
-import com.example.goodchoice.Const
-import com.example.goodchoice.DialogType
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.DialogType
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.utils.ConvertUtil
+import com.example.common.utils.StringUtil
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
@@ -36,9 +41,6 @@ import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.stayDetail.service.ServiceActivity
 import com.example.goodchoice.ui.stayDetail.widget.PayWidget
 import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.ConvertUtil
-import com.example.goodchoice.utils.StringUtil
 import com.example.goodchoice.utils.ToastUtils
 import kotlinx.coroutines.launch
 

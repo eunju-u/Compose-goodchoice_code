@@ -9,13 +9,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.ui.calendar.model.CalendarState
 import com.example.goodchoice.ui.calendar.model.CalendarUiState
 import com.example.goodchoice.ui.calendar.model.Month
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp3
-import com.example.goodchoice.ui.theme.dp50
-import com.example.goodchoice.ui.theme.dp70
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters

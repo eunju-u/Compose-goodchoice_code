@@ -3,9 +3,9 @@ package com.example.goodchoice.ui.login
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.common.theme.TestTheme
+import com.example.common.utils.StringUtil
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.theme.TestTheme
-import com.example.goodchoice.utils.StringUtil
 
 class LoginActivity : ComponentActivity() {
     companion object {

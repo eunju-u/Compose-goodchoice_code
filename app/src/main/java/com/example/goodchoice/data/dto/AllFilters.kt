@@ -1,6 +1,6 @@
 package com.example.goodchoice.data.dto
 
-import com.example.goodchoice.ServerConst
+import com.example.common.ServerConst
 
 val ALL_FAVOR = FilterData(
     code = ServerConst.FAVOR,

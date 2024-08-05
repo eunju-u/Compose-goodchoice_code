@@ -2,7 +2,6 @@ package com.example.goodchoice.ui.home.widget
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,10 +19,11 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.common.components.*
 import com.example.goodchoice.data.dto.CategoryItem
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.CategoryItemWidget
-import com.example.goodchoice.ui.theme.*
+import com.example.common.R
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 
 @SuppressLint("RememberReturnType", "UnusedBoxWithConstraintsScope")
 @Composable

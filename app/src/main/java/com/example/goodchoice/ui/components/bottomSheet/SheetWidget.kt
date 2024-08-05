@@ -8,7 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.draw.clip
-import com.example.goodchoice.ui.theme.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 
 @Composable
 fun SheetWidget(

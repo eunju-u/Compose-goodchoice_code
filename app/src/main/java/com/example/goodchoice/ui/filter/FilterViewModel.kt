@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.ServerConst
 import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.domain.model.AroundFilterSelectedModel

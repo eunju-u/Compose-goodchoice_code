@@ -17,15 +17,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.components.TextWidget
+import com.example.common.utils.StringUtil
+import com.example.common.R
+import com.example.common.components.ImageButtonWidget
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.data.dto.OverseaSpecialItem
 import com.example.goodchoice.data.dto.StayItem
-import com.example.goodchoice.ui.components.ImageButtonWidget
-import com.example.goodchoice.ui.components.TextWidget
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.StringUtil
 
 @Composable
 fun HotelVerticalWidget(

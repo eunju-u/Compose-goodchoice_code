@@ -5,8 +5,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.MainBottomSheetType
+import com.example.common.RoomType
+import com.example.common.ServerConst
+import com.example.common.R
 import com.example.goodchoice.*
-import com.example.goodchoice.R
 import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.domain.usecase.*
 import com.example.goodchoice.preference.GoodChoicePreference

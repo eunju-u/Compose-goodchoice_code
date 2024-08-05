@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,19 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.goodchoice.R
+import com.example.common.R
+import com.example.common.data.TabData
 import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.Const
+import com.example.common.Const
+import com.example.common.components.GoToWidget
+import com.example.common.components.TabWidget
+import com.example.common.theme.Theme
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.TabData
-import com.example.goodchoice.ui.components.GoToWidget
-import com.example.goodchoice.ui.components.TabWidget
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
-import com.example.goodchoice.ui.theme.Theme
 
 private val menus = listOf(
     TabData.KOREA, TabData.OVERSEA, TabData.RENTAL, TabData.LEISURE

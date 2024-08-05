@@ -25,7 +25,8 @@ import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState.Compa
 import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.roundToInt
-import com.example.goodchoice.ui.theme.Theme
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 

@@ -9,14 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.goodchoice.Const
-import com.example.goodchoice.ui.components.TagWidget
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.R
+import com.example.common.components.CardWidget
+import com.example.common.components.TagWidget
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.utils.StringUtil
 import com.example.goodchoice.data.dto.PayData
 import com.example.goodchoice.data.dto.PayItem
-import com.example.goodchoice.ui.components.CardWidget
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.StringUtil
 
 @Composable
 fun PayWidget(data: PayData = PayData()) {

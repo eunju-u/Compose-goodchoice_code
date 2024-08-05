@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,11 +23,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.LeftImageButtonWidget
-import com.example.goodchoice.ui.components.TopAppBarWidget
-import com.example.goodchoice.ui.theme.*
+import com.example.common.Const
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.theme.*
 
 @Composable
 fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit = {}) {

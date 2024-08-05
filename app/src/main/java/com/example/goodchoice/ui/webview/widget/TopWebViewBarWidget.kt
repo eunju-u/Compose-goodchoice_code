@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.Theme
+import com.example.common.R
+import com.example.common.theme.Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

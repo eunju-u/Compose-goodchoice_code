@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.example.goodchoice.ui.theme.TestTheme
+import com.example.common.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

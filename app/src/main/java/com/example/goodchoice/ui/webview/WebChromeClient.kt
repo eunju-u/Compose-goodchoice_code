@@ -9,7 +9,7 @@ import android.webkit.*
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AlertDialog
 import com.google.accompanist.web.AccompanistWebChromeClient
-import com.example.goodchoice.R
+import com.example.common.R
 
 class WebChromeClient(
     var activity: WebViewActivity,

@@ -1,7 +1,7 @@
 package com.example.goodchoice.data.dataSource
 
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.R
 import com.example.goodchoice.data.dto.CategoryItem
 import com.example.goodchoice.data.dto.MyInfoData
 import com.example.goodchoice.data.dto.MyMenuData

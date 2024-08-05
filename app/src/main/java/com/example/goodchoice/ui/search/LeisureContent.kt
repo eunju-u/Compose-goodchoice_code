@@ -16,13 +16,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
-import com.example.goodchoice.R
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.data.dto.RecommendAreaData
-import com.example.goodchoice.ui.components.CategoryItemWidget
-import com.example.goodchoice.ui.components.LeftImageButtonWidget
-import com.example.goodchoice.ui.components.TagWidget
-import com.example.goodchoice.ui.theme.*
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

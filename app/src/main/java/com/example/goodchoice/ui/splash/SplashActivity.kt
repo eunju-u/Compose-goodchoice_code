@@ -7,9 +7,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.goodchoice.Const
+import com.example.common.Const
+import com.example.common.theme.TestTheme
 import com.example.goodchoice.ui.main.MainActivity
-import com.example.goodchoice.ui.theme.TestTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

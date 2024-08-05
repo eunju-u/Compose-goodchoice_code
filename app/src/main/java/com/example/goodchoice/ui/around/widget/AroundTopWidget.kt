@@ -11,14 +11,14 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.example.goodchoice.R
-import com.example.goodchoice.RoomType
+import com.example.common.RoomType
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.utils.ConvertUtil
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.CalendarActivity
-import com.example.goodchoice.ui.components.CardWidget
-import com.example.goodchoice.ui.components.ImageButtonWidget
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.ConvertUtil
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 
 @Composable
 fun AroundTopWidget(

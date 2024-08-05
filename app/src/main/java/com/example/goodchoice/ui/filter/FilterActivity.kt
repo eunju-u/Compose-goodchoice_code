@@ -1,15 +1,14 @@
 package com.example.goodchoice.ui.filter
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.example.goodchoice.Const
+import com.example.common.Const
+import com.example.common.theme.*
 import com.example.goodchoice.domain.model.AroundFilterSelectedModel
-import com.example.goodchoice.ui.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,6 +50,6 @@ class FilterActivity : ComponentActivity() {
         val intent = Intent().apply {
             this.putExtra(Const.DATA, ArrayList(viewModel.selectFilterList))
         }
-        setResult(Activity.RESULT_OK, intent)
+        setResult(RESULT_OK, intent)
     }
 }

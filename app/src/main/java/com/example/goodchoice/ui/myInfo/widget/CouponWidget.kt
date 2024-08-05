@@ -3,7 +3,6 @@ package com.example.goodchoice.ui.myInfo.widget
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -11,10 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.goodchoice.ui.components.CardWidget
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.theme.*
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 
 @Composable
 fun CouponWidget(

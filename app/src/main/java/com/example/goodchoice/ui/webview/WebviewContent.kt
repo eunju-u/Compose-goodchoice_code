@@ -12,9 +12,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp20
+import com.example.common.R
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.ui.webview.widget.TopWebViewBarWidget
 import com.google.accompanist.web.*
 

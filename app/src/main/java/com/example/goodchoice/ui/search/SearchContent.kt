@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,13 +14,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.TabData
-import com.example.goodchoice.ui.components.TabWidget
 import com.example.goodchoice.ui.main.MainViewModel
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.ConvertUtil
 import java.time.LocalDate
-import com.example.goodchoice.R
+import com.example.common.R
+import com.example.common.components.TabWidget
+import com.example.common.data.TabData
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.utils.ConvertUtil
 
 private val menus = listOf(
     TabData.KOREA_STAY, TabData.OVERSEA_STAY, TabData.LEISURE

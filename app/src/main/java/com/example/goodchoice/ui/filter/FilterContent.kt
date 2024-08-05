@@ -1,7 +1,6 @@
 package com.example.goodchoice.ui.filter
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,15 +19,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.goodchoice.R
+import com.example.common.ServerConst
+import com.example.common.components.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.R
 import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.ServerConst
 import com.example.goodchoice.data.dto.FilterData
 import com.example.goodchoice.data.dto.FilterItem
 import com.example.goodchoice.domain.model.AroundFilterItem
-import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.filter.widget.FilterItemWidget
-import com.example.goodchoice.ui.theme.*
 import java.util.LinkedList
 
 @SuppressLint("MutableCollectionMutableState")

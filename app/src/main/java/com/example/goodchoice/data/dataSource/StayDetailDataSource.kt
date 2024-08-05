@@ -1,7 +1,7 @@
 package com.example.goodchoice.data.dataSource
 
-import com.example.goodchoice.Const
-import com.example.goodchoice.ServerConst
+import com.example.common.Const
+import com.example.common.ServerConst
 import com.example.goodchoice.data.dto.*
 import javax.inject.Inject
 

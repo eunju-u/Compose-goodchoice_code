@@ -1,13 +1,12 @@
 package com.example.goodchoice.ui.search.detailSearch
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.example.goodchoice.Const
-import com.example.goodchoice.ui.theme.TestTheme
+import com.example.common.theme.TestTheme
+import com.example.common.Const
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +30,7 @@ class DetailSearchActivity : ComponentActivity() {
                         val intent = Intent().apply {
                             this.putExtra(Const.DATA, it)
                         }
-                        setResult(Activity.RESULT_OK, intent)
+                        setResult(RESULT_OK, intent)
                         this.finish()
                     })
             }

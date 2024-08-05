@@ -12,13 +12,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.R
+import com.example.common.components.*
+import com.example.common.R
 import com.example.goodchoice.data.dto.AlarmItem
-import com.example.goodchoice.ui.components.CardWidget
-import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp10
-import com.example.goodchoice.ui.theme.dp15
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 
 @Composable
 fun AlarmItemWidget(item: AlarmItem) {

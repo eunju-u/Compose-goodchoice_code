@@ -1,6 +1,6 @@
 package com.example.goodchoice.data.dataSource
 
-import com.example.goodchoice.ServerConst
+import com.example.common.ServerConst
 import com.example.goodchoice.data.dto.AroundFilterData
 import com.example.goodchoice.data.dto.AroundFilterItem
 import javax.inject.Inject

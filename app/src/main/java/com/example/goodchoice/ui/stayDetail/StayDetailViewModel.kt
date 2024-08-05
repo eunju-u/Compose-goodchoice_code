@@ -3,8 +3,7 @@ package com.example.goodchoice.ui.stayDetail
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.DialogType
+import com.example.common.DialogType
 import com.example.goodchoice.data.dto.*
 import com.example.goodchoice.domain.usecase.LikeUseCase
 import com.example.goodchoice.domain.usecase.StayDetailUseCase

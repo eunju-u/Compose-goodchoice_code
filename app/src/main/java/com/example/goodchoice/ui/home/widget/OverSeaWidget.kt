@@ -9,11 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
+import com.example.common.components.*
+import com.example.common.theme.*
+import com.example.common.utils.ConvertUtil
 import com.example.goodchoice.data.dto.OverSeaCityItem
-import com.example.goodchoice.ui.components.RoundImageWidget
-import com.example.goodchoice.ui.components.TextWidget
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.ConvertUtil
 
 /**
  * 홈 > 해외 도시

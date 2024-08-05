@@ -5,11 +5,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.goodchoice.R
+import com.example.common.R
+import com.example.common.theme.Theme
+import com.example.common.components.TopAppBarWidget
 import java.time.LocalDate
 import com.example.goodchoice.ui.calendar.model.CalendarState
-import com.example.goodchoice.ui.components.TopAppBarWidget
-import com.example.goodchoice.ui.theme.Theme
+
 
 @Composable
 fun CalendarContent(

@@ -5,11 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.common.components.TagWidget
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.ui.components.TagWidget
-import com.example.goodchoice.ui.theme.Theme
-import com.example.goodchoice.ui.theme.dp10
-import com.example.goodchoice.ui.theme.dp5
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

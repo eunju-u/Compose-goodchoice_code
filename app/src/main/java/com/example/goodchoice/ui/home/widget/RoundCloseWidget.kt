@@ -14,9 +14,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.goodchoice.ui.components.RoundImageWidget
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.theme.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.R
+import com.example.common.components.RoundImageWidget
 
 @Composable
 fun RoundCloseWidget(modifier: Modifier = Modifier) {

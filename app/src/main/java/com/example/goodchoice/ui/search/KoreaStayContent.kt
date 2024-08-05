@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.search
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,12 +15,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.R
+import com.example.common.components.KoreaDateWidget
+import com.example.common.components.LeftImageButtonWidget
+import com.example.common.components.RowTwoWidget
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.ui.components.KoreaDateWidget
-import com.example.goodchoice.ui.components.LeftImageButtonWidget
-import com.example.goodchoice.ui.components.RowTwoWidget
-import com.example.goodchoice.ui.theme.*
+import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.goodchoice.ui.calendar.CalendarActivity
+import com.example.goodchoice.ui.calendar.CalendarType
 
 @Composable
 fun KoreaStayContent(
@@ -27,6 +33,7 @@ fun KoreaStayContent(
     rankList: List<FilterItem> = emptyList(),
 ) {
     val context = LocalContext.current
+    val pref = GoodChoicePreference(context)
     val innerPadding = PaddingValues(horizontal = dp15, vertical = dp15)
 
     LazyColumn(
@@ -56,7 +63,31 @@ fun KoreaStayContent(
                 onItemClick = { }
             )
 
-            KoreaDateWidget(context)
+            KoreaDateWidget(
+                koreaPersonCount = pref.koreaPersonCount,
+                startDate = pref.koreaStartDate,
+                endDate = pref.koreaEndDate,
+                onLeftItemClick = {
+                    context.startActivity(
+                        Intent(
+                            context,
+                            CalendarActivity::class.java
+                        ).apply {
+                            putExtra(Const.TYPE, CalendarType.CALENDAR)
+                        }
+                    )
+                },
+                onRightItemClick = {
+                    context.startActivity(
+                        Intent(
+                            context,
+                            CalendarActivity::class.java
+                        ).apply {
+                            putExtra(Const.TYPE, CalendarType.PERSON)
+                        }
+                    )
+                }
+            )
 
             LeftImageButtonWidget(
                 title = stringResource(id = R.string.str_search_my_arround),

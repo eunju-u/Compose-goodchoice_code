@@ -10,10 +10,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodchoice.data.dto.CategoryItem
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.CategoryItemWidget
-import com.example.goodchoice.ui.theme.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.R
 import androidx.compose.ui.graphics.ColorFilter
+import com.example.common.components.CategoryItemWidget
 
 /**
  * 홈 스크롤시 상단에 노출되는 뷰

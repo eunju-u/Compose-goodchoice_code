@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.goodchoice.ui.calendar.model.CalendarState
 import com.example.goodchoice.ui.calendar.model.CalendarUiState
 import com.example.goodchoice.ui.calendar.model.Week
-import com.example.goodchoice.ui.theme.Theme
+import com.example.common.theme.Theme
 import java.time.LocalDate
 
 /**

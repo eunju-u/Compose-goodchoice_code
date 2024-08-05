@@ -15,9 +15,10 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.SpaceBetweenRowWidget
-import com.example.goodchoice.ui.theme.*
+import com.example.common.components.*
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.R
 
 @Composable
 fun CompanyInfoWidget() {

@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.example.goodchoice.Const
+import com.example.common.Const
+import com.example.common.theme.*
 import com.example.goodchoice.ui.calendar.model.CalendarState
-import com.example.goodchoice.ui.theme.TestTheme
 
 class CalendarActivity : ComponentActivity() {
     companion object {

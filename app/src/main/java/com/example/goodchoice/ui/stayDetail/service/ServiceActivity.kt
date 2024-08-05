@@ -14,13 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.example.goodchoice.Const
-import com.example.goodchoice.ui.components.TopAppBarWidget
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.theme.TestTheme
+import com.example.common.theme.*
+import com.example.common.utils.ConvertUtil
 import com.example.goodchoice.data.dto.ServiceData
-import com.example.goodchoice.ui.components.CategoryItemWidget
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.ConvertUtil
 
 class ServiceActivity : ComponentActivity() {
 

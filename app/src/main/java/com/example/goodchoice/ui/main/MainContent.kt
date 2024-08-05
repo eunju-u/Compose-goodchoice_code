@@ -23,11 +23,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.common.MainBottomSheetType
 import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.MainBottomSheetType
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.AlertDialogWidget
-import com.example.goodchoice.ui.components.LoadingWidget
+import com.example.common.R
+import com.example.common.components.*
+import com.example.common.theme.GMarketSansFamily
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.main.bottomSheet.ProfileContent
@@ -35,7 +37,6 @@ import com.example.goodchoice.ui.main.nav.NavGraph
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.ui.main.nav.navigation
 import com.example.goodchoice.ui.main.state.rememberMainState
-import com.example.goodchoice.ui.theme.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

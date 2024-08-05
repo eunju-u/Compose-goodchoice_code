@@ -89,4 +89,7 @@ dependencies {
     implementation("com.naver.maps:map-sdk:3.18.0")
     implementation 'io.github.fornewid:naver-map-compose:1.7.2'
     implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    //모듈화
+    implementation project(':common')
 }

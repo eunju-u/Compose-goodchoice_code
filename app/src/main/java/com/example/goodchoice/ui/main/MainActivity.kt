@@ -1,17 +1,16 @@
 package com.example.goodchoice.ui.main
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.runtime.mutableStateOf
-import com.example.goodchoice.Const
-import com.example.goodchoice.ServerConst
+import com.example.common.Const
+import com.example.common.ServerConst
+import com.example.common.theme.TestTheme
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.ui.search.data.KoreaSearchData
-import com.example.goodchoice.ui.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +51,7 @@ class MainActivity : ComponentActivity() {
     val activityForFilterResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
-                Activity.RESULT_OK -> {
+                RESULT_OK -> {
                     result.data?.let {
                         val data =
                             it.getSerializableExtra(Const.DATA) as ArrayList<AroundFilterItem>?

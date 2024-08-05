@@ -1,7 +1,6 @@
 package com.example.goodchoice.ui.home.widget
 
 import android.content.Intent
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,13 +21,13 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import coil.compose.rememberAsyncImagePainter
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
+import com.example.common.Const
+import com.example.common.R
+import com.example.common.theme.Theme
+import com.example.common.theme.*
 import com.example.goodchoice.data.dto.BannerData
-import com.example.goodchoice.ui.theme.*
 import com.example.goodchoice.ui.webview.WebViewActivity
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {
     val context = LocalContext.current

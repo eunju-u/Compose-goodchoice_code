@@ -9,12 +9,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.goodchoice.Const
-import com.example.goodchoice.R
-import com.example.goodchoice.ui.components.TextWidget
+import com.example.common.Const
+import com.example.common.R
+import com.example.common.components.TextWidget
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.utils.StringUtil
 import com.example.goodchoice.ui.search.data.KoreaSearchData
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.StringUtil
 
 @Composable
 fun SearchResultWidget(

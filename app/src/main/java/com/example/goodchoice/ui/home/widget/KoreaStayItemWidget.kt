@@ -22,14 +22,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.goodchoice.Const
+import com.example.common.Const
 import com.example.goodchoice.data.dto.StayItem
-import com.example.goodchoice.R
+import com.example.common.theme.Theme
+import com.example.common.theme.*
+import com.example.common.R
+import com.example.common.utils.ConvertUtil
 import com.example.goodchoice.db.recent.RecentDb
 import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
-import com.example.goodchoice.ui.theme.*
-import com.example.goodchoice.utils.ConvertUtil
 import kotlinx.coroutines.*
 
 /**
