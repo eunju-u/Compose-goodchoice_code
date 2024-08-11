@@ -31,7 +31,7 @@ import com.example.goodchoice.ui.webview.WebViewActivity
 @Composable
 fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {
     val context = LocalContext.current
-    val pagerState = rememberPagerState(initialPage = 0, pageCount = { Int.MAX_VALUE })
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { bannerList.size })
     val currentPage = pagerState.currentPage
     val listSize = bannerList.size
     val userScrollEnabled = listSize > 1
