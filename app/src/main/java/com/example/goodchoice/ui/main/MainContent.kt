@@ -24,12 +24,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.common.MainBottomSheetType
-import com.example.goodchoice.ConnectInfo
 import com.example.common.R
 import com.example.common.components.*
 import com.example.common.theme.GMarketSansFamily
 import com.example.common.theme.Theme
 import com.example.common.theme.*
+import com.example.domain.info.ConnectInfo
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.main.bottomSheet.ProfileContent

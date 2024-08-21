@@ -1,5 +1,6 @@
 package com.example.goodchoice.data.dataSource
 
+import com.example.domain.model.FilterItem
 import com.example.goodchoice.data.dto.*
 import javax.inject.Inject
 

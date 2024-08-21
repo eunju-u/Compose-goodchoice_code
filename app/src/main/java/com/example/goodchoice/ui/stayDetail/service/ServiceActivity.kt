@@ -20,7 +20,7 @@ import com.example.common.components.*
 import com.example.common.theme.TestTheme
 import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
-import com.example.goodchoice.data.dto.ServiceData
+import com.example.domain.model.ServiceData
 
 class ServiceActivity : ComponentActivity() {
 

@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.common.R
 import com.example.common.components.*
 import com.example.common.theme.*
-import com.example.goodchoice.data.dto.MyMenuItem
+import com.example.domain.model.MyMenuItem
 
 @Composable
         /**

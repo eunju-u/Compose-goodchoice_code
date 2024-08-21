@@ -20,8 +20,8 @@ import com.example.common.R
 import com.example.common.components.*
 import com.example.common.theme.Theme
 import com.example.common.theme.*
-import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.data.dto.RecommendAreaData
+import com.example.domain.model.FilterItem
+import com.example.domain.model.RecommendAreaData
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

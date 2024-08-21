@@ -1,6 +1,6 @@
 package com.example.goodchoice.data.dto
 
-import com.example.goodchoice.ui.search.data.KoreaSearchData
+import com.example.domain.model.KoreaSearchData
 
 val SEOUL = KoreaSearchData(
     name = "서울",

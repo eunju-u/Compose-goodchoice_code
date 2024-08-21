@@ -16,8 +16,8 @@ import com.example.common.components.TagWidget
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.utils.StringUtil
-import com.example.goodchoice.data.dto.PayData
-import com.example.goodchoice.data.dto.PayItem
+import com.example.domain.model.PayData
+import com.example.domain.model.PayItem
 
 @Composable
 fun PayWidget(data: PayData = PayData()) {

@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.StayItem
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.R
@@ -76,20 +76,32 @@ fun KoreaStayItemWidget(
                 val recentDb = RecentDb.getInstance(context)
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    val isExistId = recentDb?.userDao()?.isExistId(stayItem.id ?: "") ?: false
+                    val isExistId = recentDb
+                        ?.userDao()
+                        ?.isExistId(stayItem.id ?: "") ?: false
                     if (isExistId) {
                         val item = stayItem.generateData()
-                        recentDb?.userDao()?.delete(item)
+                        recentDb
+                            ?.userDao()
+                            ?.delete(item)
                     }
                     //room db 는 특정 위치 insert 기능이 있지 않아, 최근 본 상품이 0번째로 오지 않아 추가됨.
                     //맨 앞으로 넣어야 할 item 제외하고 리스트 저장해 놓음 -> DB 모두 제거 후 -> 맨 앞에 넣어야할 item insert -> 저장해 둔 리스트 insert
-                    val allList = recentDb?.userDao()?.getAll()
-                    recentDb?.userDao()?.deleteAll()
+                    val allList = recentDb
+                        ?.userDao()
+                        ?.getAll()
+                    recentDb
+                        ?.userDao()
+                        ?.deleteAll()
                     val item = stayItem.generateData()
-                    recentDb?.userDao()?.insert(item)
+                    recentDb
+                        ?.userDao()
+                        ?.insert(item)
                     allList?.let {
                         for (dbItem in it) {
-                            recentDb.userDao().insert(dbItem)
+                            recentDb
+                                .userDao()
+                                .insert(dbItem)
                         }
                     }
                 }
@@ -161,7 +173,7 @@ fun KoreaStayItemWidget(
                         contentDescription = "별점"
                     )
                     Text(
-                        text = stayItem.star,
+                        text = stayItem.star ?: "",
                         color = Theme.colorScheme.gray,
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                     )
@@ -175,7 +187,7 @@ fun KoreaStayItemWidget(
 
                 if (!stayItem.location.isNullOrEmpty()) {
                     Text(
-                        text = stayItem.location,
+                        text = stayItem.location ?: "",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Theme.colorScheme.gray,

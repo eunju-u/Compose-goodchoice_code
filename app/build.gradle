@@ -82,8 +82,8 @@ dependencies {
     kapt "androidx.room:room-compiler:2.6.1"
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "com.google.dagger:hilt-android:2.49"
+    kapt "com.google.dagger:hilt-compiler:2.48.1"
 
     // 네이버 지도 SDK
     implementation("com.naver.maps:map-sdk:3.18.0")
@@ -92,4 +92,5 @@ dependencies {
 
     //모듈화
     implementation project(':common')
+    implementation project(':domain')
 }

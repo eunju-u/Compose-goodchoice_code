@@ -1,17 +1,28 @@
 package com.example.goodchoice.data.dataSource
 
 import com.example.common.ServerConst
+import com.example.domain.model.FilterData
+import com.example.domain.model.FilterItem
 import com.example.goodchoice.data.dto.*
 import javax.inject.Inject
 
 class FilterDataSource @Inject constructor() {
     fun getTypeData() = listOf(
         FilterItem(filterType = ServerConst.ALL, filterTitle = "전체"),
-        FilterItem(filterType = ServerConst.HOUSE_AND_VILLA, filterTitle = "홈&빌라"),
+        FilterItem(
+            filterType = ServerConst.HOUSE_AND_VILLA,
+            filterTitle = "홈&빌라"
+        ),
         FilterItem(filterType = ServerConst.MOTEL, filterTitle = "모텔"),
         FilterItem(filterType = ServerConst.CAMPING, filterTitle = "캠핑"),
-        FilterItem(filterType = ServerConst.HOTEL_AND_RESORT, filterTitle = "호텔*리조트"),
-        FilterItem(filterType = ServerConst.GUESTHOUSE, filterTitle = "게하*한옥"),
+        FilterItem(
+            filterType = ServerConst.HOTEL_AND_RESORT,
+            filterTitle = "호텔*리조트"
+        ),
+        FilterItem(
+            filterType = ServerConst.GUESTHOUSE,
+            filterTitle = "게하*한옥"
+        ),
         FilterItem(filterType = ServerConst.PENSION, filterTitle = "펜션")
     )
 

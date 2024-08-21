@@ -20,6 +20,7 @@ import com.example.goodchoice.ui.alarm.widget.AlarmItemWidget
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.common.theme.Theme
 import com.example.common.theme.*
+import com.example.domain.info.AlarmConnectInfo
 
 @Composable
 fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {

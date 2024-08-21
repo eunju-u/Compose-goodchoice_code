@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.common.components.*
 import com.example.common.R
-import com.example.goodchoice.data.dto.AlarmItem
+import com.example.domain.model.AlarmItem
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 

@@ -24,9 +24,9 @@ import com.example.common.components.*
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.R
-import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.data.dto.FilterData
-import com.example.goodchoice.data.dto.FilterItem
+import com.example.domain.info.ConnectInfo
+import com.example.domain.model.FilterData
+import com.example.domain.model.FilterItem
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.ui.filter.widget.FilterItemWidget
 import java.util.LinkedList

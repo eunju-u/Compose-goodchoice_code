@@ -24,13 +24,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
 import com.example.common.R
-import com.example.goodchoice.ConnectInfo
 import com.example.common.MainBottomSheetType
 import com.example.common.components.*
 import com.example.common.theme.Theme
 import com.example.common.theme.*
-import com.example.goodchoice.data.dto.CategoryItem
-import com.example.goodchoice.data.dto.MyMenuData
+import com.example.domain.info.ConnectInfo
+import com.example.domain.model.CategoryItem
+import com.example.domain.model.MyMenuData
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity

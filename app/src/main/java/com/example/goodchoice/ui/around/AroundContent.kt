@@ -29,8 +29,7 @@ import com.example.common.Const
 import com.example.common.components.*
 import com.example.common.R
 import com.example.common.ServerConst
-import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.data.dto.AroundFilterData
+import com.example.domain.model.AroundFilterData
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
@@ -46,6 +45,7 @@ import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.common.theme.Theme
 import com.example.common.theme.*
+import com.example.domain.info.ConnectInfo
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition

@@ -1,8 +1,8 @@
 package com.example.goodchoice.data.repository
 
+import com.example.domain.model.AlarmItem
 import com.example.goodchoice.data.dataSource.AlarmDataSource
-import com.example.goodchoice.data.dto.AlarmItem
-import com.example.goodchoice.domain.repository.AlarmRepository
+import com.example.domain.repository.AlarmRepository
 import javax.inject.Inject
 
 class AlarmRepositoryImpl @Inject constructor(

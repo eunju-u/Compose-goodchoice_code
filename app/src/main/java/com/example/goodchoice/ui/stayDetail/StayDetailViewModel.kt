@@ -4,9 +4,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.DialogType
+import com.example.domain.info.StayDetailConnectInfo
+import com.example.domain.model.PayData
+import com.example.domain.usecase.LikeUseCase
+import com.example.domain.usecase.StayDetailUseCase
 import com.example.goodchoice.data.dto.*
-import com.example.goodchoice.domain.usecase.LikeUseCase
-import com.example.goodchoice.domain.usecase.StayDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -57,11 +59,4 @@ class StayDetailViewModel @Inject constructor(
     fun saveLike() = viewModelScope.launch {
         likeUseCase.insertLikeData(stayItemId)
     }
-}
-
-sealed interface StayDetailConnectInfo {
-    object Init : StayDetailConnectInfo
-    object Loading : StayDetailConnectInfo
-    data class Available(val data: StayDetailData) : StayDetailConnectInfo
-    data class Error(val message: String? = null) : StayDetailConnectInfo
 }

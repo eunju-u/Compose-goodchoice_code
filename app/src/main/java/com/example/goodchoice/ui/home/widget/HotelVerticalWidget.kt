@@ -24,8 +24,8 @@ import com.example.common.R
 import com.example.common.components.ImageButtonWidget
 import com.example.common.theme.Theme
 import com.example.common.theme.*
-import com.example.goodchoice.data.dto.OverseaSpecialItem
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.OverseaSpecialItem
+import com.example.domain.model.StayItem
 import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
 
 @Composable

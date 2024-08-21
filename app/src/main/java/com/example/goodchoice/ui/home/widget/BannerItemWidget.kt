@@ -25,7 +25,7 @@ import com.example.common.Const
 import com.example.common.R
 import com.example.common.theme.Theme
 import com.example.common.theme.*
-import com.example.goodchoice.data.dto.BannerData
+import com.example.domain.model.BannerData
 import com.example.goodchoice.ui.webview.WebViewActivity
 
 @Composable

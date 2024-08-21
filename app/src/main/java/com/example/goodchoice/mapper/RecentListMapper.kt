@@ -1,12 +1,12 @@
 package com.example.goodchoice.mapper
 
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.StayItem
 import com.example.goodchoice.db.recent.RecentDbItem
 
-fun RecentDbItem.generateData(): StayItem {
+fun RecentDbItem.generateData(): com.example.domain.model.StayItem {
     val item = this@generateData
 
-    return StayItem(
+    return com.example.domain.model.StayItem(
         id = item.id,
         label = item.label,
         name = item.name,
@@ -21,7 +21,7 @@ fun RecentDbItem.generateData(): StayItem {
     )
 }
 
-fun StayItem.generateData(): RecentDbItem {
+fun com.example.domain.model.StayItem.generateData(): RecentDbItem {
     val item = this@generateData
 
     return RecentDbItem(

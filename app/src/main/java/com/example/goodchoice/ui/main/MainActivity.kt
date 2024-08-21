@@ -10,7 +10,7 @@ import com.example.common.Const
 import com.example.common.ServerConst
 import com.example.common.theme.TestTheme
 import com.example.goodchoice.domain.model.AroundFilterItem
-import com.example.goodchoice.ui.search.data.KoreaSearchData
+import com.example.domain.model.KoreaSearchData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

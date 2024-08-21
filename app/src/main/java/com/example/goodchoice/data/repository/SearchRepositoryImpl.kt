@@ -1,9 +1,9 @@
 package com.example.goodchoice.data.repository
 
 import com.example.goodchoice.data.dataSource.SearchDataSource
-import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.data.dto.RecommendAreaData
-import com.example.goodchoice.domain.repository.SearchRepository
+import com.example.domain.model.FilterItem
+import com.example.domain.model.RecommendAreaData
+import com.example.domain.repository.SearchRepository
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(

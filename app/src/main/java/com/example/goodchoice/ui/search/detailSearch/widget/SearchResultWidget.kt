@@ -15,7 +15,7 @@ import com.example.common.components.TextWidget
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.utils.StringUtil
-import com.example.goodchoice.ui.search.data.KoreaSearchData
+import com.example.domain.model.KoreaSearchData
 
 @Composable
 fun SearchResultWidget(
@@ -57,7 +57,7 @@ fun SearchResultWidget(
             Spacer(modifier = Modifier.height(dp5))
             if (!item.location.isNullOrEmpty()) {
                 TextWidget(
-                    text = item.location,
+                    text = item.location ?: "",
                     style = MaterialTheme.typography.labelMedium,
                     color = Theme.colorScheme.gray
                 )

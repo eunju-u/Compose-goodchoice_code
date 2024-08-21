@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.goodchoice.ConnectInfo
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.MainViewModel
 import java.time.LocalDate
@@ -22,6 +21,7 @@ import com.example.common.data.TabData
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
+import com.example.domain.info.ConnectInfo
 
 private val menus = listOf(
     TabData.KOREA_STAY, TabData.OVERSEA_STAY, TabData.LEISURE

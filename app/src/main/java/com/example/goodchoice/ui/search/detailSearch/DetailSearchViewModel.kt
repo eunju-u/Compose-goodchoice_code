@@ -2,9 +2,9 @@ package com.example.goodchoice.ui.search.detailSearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.domain.usecase.DetailSearchUseCase
-import com.example.goodchoice.ui.search.data.KoreaSearchData
+import com.example.domain.model.FilterItem
+import com.example.domain.usecase.DetailSearchUseCase
+import com.example.domain.model.KoreaSearchData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

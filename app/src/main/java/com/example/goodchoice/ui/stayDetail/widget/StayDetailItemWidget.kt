@@ -24,7 +24,7 @@ import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
 import com.example.common.utils.StringUtil
-import com.example.goodchoice.data.dto.RoomItem
+import com.example.domain.model.RoomItem
 
 @Composable
 fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {

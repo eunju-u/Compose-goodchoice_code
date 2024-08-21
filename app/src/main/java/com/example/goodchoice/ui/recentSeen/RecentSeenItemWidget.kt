@@ -17,7 +17,7 @@ import com.example.common.R
 import com.example.common.components.RoundImageWidget
 import com.example.common.theme.Theme
 import com.example.common.theme.*
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.StayItem
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 
 /**

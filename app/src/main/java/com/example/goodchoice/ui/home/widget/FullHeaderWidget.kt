@@ -20,7 +20,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.common.components.*
-import com.example.goodchoice.data.dto.CategoryItem
+import com.example.domain.model.CategoryItem
 import com.example.common.R
 import com.example.common.theme.Theme
 import com.example.common.theme.*

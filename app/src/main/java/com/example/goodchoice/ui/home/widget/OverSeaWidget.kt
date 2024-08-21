@@ -12,7 +12,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.common.components.*
 import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
-import com.example.goodchoice.data.dto.OverSeaCityItem
+import com.example.domain.model.OverSeaCityItem
 
 /**
  * 홈 > 해외 도시

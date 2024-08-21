@@ -1,5 +1,7 @@
 package com.example.goodchoice.data.dto
 
+import com.example.domain.model.StayItem
+
 val S_1 = StayItem(
     id = "s_1",
     label = "호텔.리조트",

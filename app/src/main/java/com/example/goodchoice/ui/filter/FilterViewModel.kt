@@ -6,11 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.ServerConst
-import com.example.goodchoice.ConnectInfo
-import com.example.goodchoice.data.dto.FilterItem
+import com.example.domain.info.ConnectInfo
+import com.example.domain.model.FilterItem
+import com.example.domain.usecase.FilterUseCase
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.domain.model.AroundFilterSelectedModel
-import com.example.goodchoice.domain.usecase.FilterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -70,7 +70,8 @@ class FilterViewModel @Inject constructor(
 
             //숙소 유형 체크 표시 하도록 함
             if (roomData.subType != null && roomData.subType!!.isNotEmpty()) {
-                clickStayType.value = FilterItem(roomData.subType, roomData.text)
+                clickStayType.value =
+                    FilterItem(roomData.subType, roomData.text)
                 val selectRoomItem = AroundFilterItem(
                     roomData.mainType,
                     roomData.subType,
@@ -89,7 +90,10 @@ class FilterViewModel @Inject constructor(
 
             if (priceData.subType != null && priceData.subType!!.isNotEmpty()) {
                 val filterItem =
-                    FilterItem(filterType = priceData.subType, filterTitle = priceData.text)
+                    FilterItem(
+                        filterType = priceData.subType,
+                        filterTitle = priceData.text
+                    )
 
                 val selectPriceItem =
                     AroundFilterItem(priceData.mainType, priceData.subType, priceData.text)

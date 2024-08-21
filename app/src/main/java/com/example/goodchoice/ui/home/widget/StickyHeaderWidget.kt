@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.goodchoice.data.dto.CategoryItem
+import com.example.domain.model.CategoryItem
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.R
@@ -80,6 +80,12 @@ fun StickyHeaderWidget(
 @Composable
 fun PreviewStickyHeaderWidget() {
     StickyHeaderWidget(
-        categoryItem = listOf(CategoryItem("", "캠핑*글램핑", R.drawable.ic_airplane))
+        categoryItem = listOf(
+            CategoryItem(
+                "",
+                "캠핑*글램핑",
+                R.drawable.ic_airplane
+            )
+        )
     ) {}
 }

@@ -3,8 +3,8 @@ package com.example.goodchoice.ui.alarm
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goodchoice.data.dto.AlarmItem
-import com.example.goodchoice.domain.usecase.AlarmUseCase
+import com.example.domain.info.AlarmConnectInfo
+import com.example.domain.usecase.AlarmUseCase
 import com.example.goodchoice.preference.GoodChoicePreference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -30,11 +30,4 @@ class AlarmViewModel @Inject constructor(private val useCase: AlarmUseCase) : Vi
         val data = useCase.getAlarmData()
         alarmUiState.value = data
     }
-}
-
-sealed interface AlarmConnectInfo {
-    object Init : AlarmConnectInfo
-    object Loading : AlarmConnectInfo
-    data class Available(val data: List<AlarmItem>) : AlarmConnectInfo
-    data class Error(val message: String? = null) : AlarmConnectInfo
 }

@@ -22,7 +22,7 @@ import com.example.common.theme.*
 import com.example.common.R
 import com.example.common.components.*
 import com.example.common.utils.ConvertUtil
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.StayItem
 
 @Composable
 fun KoreaStayItemWidget(
@@ -114,7 +114,7 @@ fun KoreaStayItemWidget(
                             contentDescription = "별점"
                         )
                         Text(
-                            text = stayItem.star,
+                            text = stayItem.star ?: "",
                             color = Theme.colorScheme.gray,
                             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                         )
@@ -128,7 +128,7 @@ fun KoreaStayItemWidget(
 
                     if (!stayItem.location.isNullOrEmpty()) {
                         Text(
-                            text = stayItem.location,
+                            text = stayItem.location ?: "",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             color = Theme.colorScheme.gray,

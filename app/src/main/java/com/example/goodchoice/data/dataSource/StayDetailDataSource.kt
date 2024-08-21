@@ -2,7 +2,11 @@ package com.example.goodchoice.data.dataSource
 
 import com.example.common.Const
 import com.example.common.ServerConst
-import com.example.goodchoice.data.dto.*
+import com.example.domain.model.PayData
+import com.example.domain.model.PayItem
+import com.example.domain.model.RoomItem
+import com.example.domain.model.ServiceData
+import com.example.domain.model.StayDetailData
 import javax.inject.Inject
 
 class StayDetailDataSource @Inject constructor() {
@@ -209,17 +213,41 @@ class StayDetailDataSource @Inject constructor() {
                 service = arrayListOf(
                     ServiceData(type = ServerConst.MINIBAR, name = "미니바"),
                     ServiceData(type = ServerConst.WIFI, name = "와이파이"),
-                    ServiceData(type = ServerConst.BATHROOM_SUPPLIES, name = "욕실용품"),
-                    ServiceData(type = ServerConst.RESTAURANT, name = "레스토랑"),
+                    ServiceData(
+                        type = ServerConst.BATHROOM_SUPPLIES,
+                        name = "욕실용품"
+                    ),
+                    ServiceData(
+                        type = ServerConst.RESTAURANT,
+                        name = "레스토랑"
+                    ),
                     ServiceData(type = ServerConst.TV, name = "TV"),
-                    ServiceData(type = ServerConst.NO_SMOKING, name = "금연"),
-                    ServiceData(type = ServerConst.AIR_CONDITIONER, name = "에어컨"),
-                    ServiceData(type = ServerConst.REFRIGERATOR, name = "냉장고"),
-                    ServiceData(type = ServerConst.SHOWER_ROOM, name = "객실샤워실"),
+                    ServiceData(
+                        type = ServerConst.NO_SMOKING,
+                        name = "금연"
+                    ),
+                    ServiceData(
+                        type = ServerConst.AIR_CONDITIONER,
+                        name = "에어컨"
+                    ),
+                    ServiceData(
+                        type = ServerConst.REFRIGERATOR,
+                        name = "냉장고"
+                    ),
+                    ServiceData(
+                        type = ServerConst.SHOWER_ROOM,
+                        name = "객실샤워실"
+                    ),
                     ServiceData(type = ServerConst.DRYER, name = "드라이기"),
                     ServiceData(type = ServerConst.CAFE, name = "카페"),
-                    ServiceData(type = ServerConst.FREE_PARKING, name = "무료주차"),
-                    ServiceData(type = ServerConst.PARKING_LOT, name = "주차장")
+                    ServiceData(
+                        type = ServerConst.FREE_PARKING,
+                        name = "무료주차"
+                    ),
+                    ServiceData(
+                        type = ServerConst.PARKING_LOT,
+                        name = "주차장"
+                    )
                 )
             )
         }

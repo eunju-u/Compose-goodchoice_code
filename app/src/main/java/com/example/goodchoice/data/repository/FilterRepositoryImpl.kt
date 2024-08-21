@@ -1,9 +1,9 @@
 package com.example.goodchoice.data.repository
 
 import com.example.goodchoice.data.dataSource.FilterDataSource
-import com.example.goodchoice.data.dto.FilterData
-import com.example.goodchoice.data.dto.FilterItem
-import com.example.goodchoice.domain.repository.FilterRepository
+import com.example.domain.model.FilterData
+import com.example.domain.model.FilterItem
+import com.example.domain.repository.FilterRepository
 import javax.inject.Inject
 
 class FilterRepositoryImpl @Inject constructor(

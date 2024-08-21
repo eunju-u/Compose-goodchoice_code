@@ -1,8 +1,8 @@
 package com.example.goodchoice.data.repository
 
 import com.example.goodchoice.data.dataSource.AroundDataSource
-import com.example.goodchoice.data.dto.AroundFilterData
-import com.example.goodchoice.domain.repository.AroundRepository
+import com.example.domain.model.AroundFilterData
+import com.example.domain.repository.AroundRepository
 import javax.inject.Inject
 
 class AroundRepositoryImpl @Inject constructor(

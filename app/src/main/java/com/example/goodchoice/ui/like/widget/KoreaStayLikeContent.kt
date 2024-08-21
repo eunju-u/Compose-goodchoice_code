@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.common.Const
 import com.example.common.theme.Theme
 import com.example.common.components.*
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.StayItem
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.goodchoice.ui.calendar.CalendarType

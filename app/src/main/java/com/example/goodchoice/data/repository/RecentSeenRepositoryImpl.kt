@@ -1,8 +1,8 @@
 package com.example.goodchoice.data.repository
 
 import com.example.goodchoice.data.dataSource.RecentSeenDataSource
-import com.example.goodchoice.data.dto.StayItem
-import com.example.goodchoice.domain.repository.RecentSeenRepository
+import com.example.domain.model.StayItem
+import com.example.domain.repository.RecentSeenRepository
 import com.example.goodchoice.mapper.generateData
 import javax.inject.Inject
 

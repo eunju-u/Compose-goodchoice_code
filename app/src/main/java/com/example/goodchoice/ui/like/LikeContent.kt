@@ -15,11 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.R
 import com.example.common.data.TabData
-import com.example.goodchoice.ConnectInfo
 import com.example.common.Const
 import com.example.common.components.GoToWidget
 import com.example.common.components.TabWidget
 import com.example.common.theme.Theme
+import com.example.domain.info.ConnectInfo
 import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent

@@ -23,7 +23,7 @@ import com.example.common.theme.*
 import com.example.common.R
 import com.example.common.components.RoundImageWidget
 import com.example.common.components.*
-import com.example.goodchoice.data.dto.StayItem
+import com.example.domain.model.StayItem
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 
 /**
@@ -67,7 +67,7 @@ fun RecentSeenWidget(stayItem: StayItem) {
                             .padding(start = dp8, end = dp8, top = dp5, bottom = dp5)
                     ) {
                         Text(
-                            text = stayItem.label,
+                            text = stayItem.label ?: "",
                             style = MaterialTheme.typography.bodySmall,
                             color = Color.Transparent
                         )
@@ -79,7 +79,7 @@ fun RecentSeenWidget(stayItem: StayItem) {
                             top = dp5,
                             bottom = dp5
                         ),
-                        text = stayItem.label,
+                        text = stayItem.label ?: "",
                         style = MaterialTheme.typography.bodySmall,
                         color = Theme.colorScheme.white
                     )

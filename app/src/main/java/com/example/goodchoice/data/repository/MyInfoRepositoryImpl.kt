@@ -1,8 +1,8 @@
 package com.example.goodchoice.data.repository
 
 import com.example.goodchoice.data.dataSource.MyInfoDataSource
-import com.example.goodchoice.data.dto.MyInfoData
-import com.example.goodchoice.domain.repository.MyInfoRepository
+import com.example.domain.model.MyInfoData
+import com.example.domain.repository.MyInfoRepository
 import javax.inject.Inject
 
 class MyInfoRepositoryImpl @Inject constructor(

@@ -1,8 +1,8 @@
 package com.example.goodchoice.di
 
+import com.example.domain.repository.*
 import com.example.goodchoice.data.dataSource.*
 import com.example.goodchoice.data.repository.*
-import com.example.goodchoice.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

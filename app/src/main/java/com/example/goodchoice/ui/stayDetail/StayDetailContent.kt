@@ -41,6 +41,7 @@ import com.example.goodchoice.ui.stayDetail.service.ServiceActivity
 import com.example.goodchoice.ui.stayDetail.widget.PayWidget
 import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
 import com.example.common.utils.ToastUtil
+import com.example.domain.info.StayDetailConnectInfo
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -98,12 +99,15 @@ fun StayDetailContent(
                                 .height(dp300)
                                 .clickable {},
                             contentScale = ContentScale.FillHeight,
-                            painter = if (item.imageList.isNotEmpty())
-                                rememberAsyncImagePainter(
-                                    model = item.imageList[0],
+                            painter = item.imageList?.let {
+                                if (it.isNotEmpty()) {
+                                    rememberAsyncImagePainter(
+                                        model = it[0], painterResource(id = R.drawable.bg_white)
+                                    )
+                                } else {
                                     painterResource(id = R.drawable.bg_white)
-                                )
-                            else painterResource(id = R.drawable.bg_white),
+                                }
+                            } ?: painterResource(id = R.drawable.bg_white),
                             contentDescription = "이미지",
                         )
                     }
@@ -150,7 +154,7 @@ fun StayDetailContent(
                                     contentDescription = "위치"
                                 )
                                 Text(
-                                    text = item.location,
+                                    text = item.location ?: "",
                                     color = Theme.colorScheme.darkGray,
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis,
@@ -182,7 +186,7 @@ fun StayDetailContent(
                                 contentDescription = "별점"
                             )
                             Text(
-                                text = item.star,
+                                text = item.star ?: "",
                                 color = Theme.colorScheme.gray,
                                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                             )
@@ -213,8 +217,10 @@ fun StayDetailContent(
                             text = StringUtil.setTextColor(
                                 originText = stringResource(
                                     id = R.string.str_max_add_discount,
-                                    item.coupon
-                                ), targetText = item.coupon, targetColor = Theme.colorScheme.red
+                                    item.coupon ?: ""
+                                ),
+                                targetText = item.coupon ?: "",
+                                targetColor = Theme.colorScheme.red
                             ), textColor = Theme.colorScheme.darkGray,
                             textStyle = MaterialTheme.typography.labelMedium,
                             content = {
@@ -239,107 +245,112 @@ fun StayDetailContent(
                     }
                     HorizontalDivider(thickness = dp10, color = Theme.colorScheme.pureGray)
 
-                    if (!item.payList.isNullOrEmpty()) {
-                        Column(modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                rememberScope.launch {
-                                    sheetState.show()
+                    item.payList?.let {
+                        if (it.isNotEmpty()) {
+                            Column(modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    rememberScope.launch {
+                                        sheetState.show()
+                                    }
                                 }
-                            }
-                            .padding(padding)
-                            .padding(top = dp20, bottom = dp20)
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                .padding(padding)
+                                .padding(top = dp20, bottom = dp20)
                             ) {
-                                Row(modifier = Modifier.weight(1f, false)) {
-                                    RoundImageWidget(
-                                        imageModifier = Modifier
-                                            .size(dp20),
-                                        painter = painterResource(id = R.drawable.bg_gray),
-                                        roundShape = dp30,
-                                        boxAlignment = Alignment.Center,
-                                        content = {
-                                            Image(
-                                                modifier = Modifier.size(dp15),
-                                                painter = painterResource(id = R.drawable.ic_won),
-                                                contentDescription = null
-                                            )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Row(modifier = Modifier.weight(1f, false)) {
+                                        RoundImageWidget(
+                                            imageModifier = Modifier
+                                                .size(dp20),
+                                            painter = painterResource(id = R.drawable.bg_gray),
+                                            roundShape = dp30,
+                                            boxAlignment = Alignment.Center,
+                                            content = {
+                                                Image(
+                                                    modifier = Modifier.size(dp15),
+                                                    painter = painterResource(id = R.drawable.ic_won),
+                                                    contentDescription = null
+                                                )
 
-                                        }
+                                            }
+                                        )
+                                        Text(
+                                            modifier = Modifier.padding(start = dp10),
+                                            text = stringResource(id = R.string.str_pay_benefit),
+                                            color = Theme.colorScheme.darkGray,
+                                            style = MaterialTheme.typography.labelLarge
+                                        )
+                                    }
+                                    Text(
+                                        text = stringResource(id = R.string.str_more),
+                                        color = Theme.colorScheme.blue,
+                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                    )
+                                }
+                                Spacer(modifier = Modifier.heightIn(dp15))
+                                val firstPayType =
+                                    ConvertUtil.convertPayImage(it.first().payType ?: "")
+                                Row {
+                                    Image(
+                                        modifier = Modifier
+                                            .width(dp60)
+                                            .padding(end = dp10),
+                                        painter = painterResource(id = firstPayType),
+                                        contentDescription = null
                                     )
                                     Text(
-                                        modifier = Modifier.padding(start = dp10),
-                                        text = stringResource(id = R.string.str_pay_benefit),
+                                        text = it.first().payName ?: "",
                                         color = Theme.colorScheme.darkGray,
-                                        style = MaterialTheme.typography.labelLarge
+                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                                     )
                                 }
-                                Text(
-                                    text = stringResource(id = R.string.str_more),
-                                    color = Theme.colorScheme.blue,
-                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
-                                )
-                            }
-                            Spacer(modifier = Modifier.heightIn(dp15))
-                            val firstPayType =
-                                ConvertUtil.convertPayImage(item.payList.first().payType ?: "")
-                            Row {
-                                Image(
-                                    modifier = Modifier
-                                        .width(dp60)
-                                        .padding(end = dp10),
-                                    painter = painterResource(id = firstPayType),
-                                    contentDescription = null
-                                )
-                                Text(
-                                    text = item.payList.first().payName ?: "",
-                                    color = Theme.colorScheme.darkGray,
-                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
-                                )
-                            }
-                            Spacer(modifier = Modifier.heightIn(dp5))
+                                Spacer(modifier = Modifier.heightIn(dp5))
 
-                            item.payList[0].payInfoList?.run {
-                                this.forEachIndexed { index, item ->
-                                    val infoPadding =
-                                        if (index == 0 || index == this.lastIndex) dp0 else dp3
-                                    RowTwoWidget(
-                                        modifier = Modifier.padding(
-                                            top = infoPadding,
-                                            bottom = infoPadding
-                                        ),
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
-                                        isCenter = true,
-                                        leftColor = Theme.colorScheme.gray,
-                                        rightColor = Theme.colorScheme.gray,
-                                        leftStyle = MaterialTheme.typography.labelMedium,
-                                        rightStyle = MaterialTheme.typography.labelMedium,
-                                        leftText = "*", rightText = StringUtil.setTextLine(
-                                            originText = item.payInfo ?: "",
-                                            targetText = item.payLineTest ?: ""
+                                it[0].payInfoList?.run {
+                                    this.forEachIndexed { index, item ->
+                                        val infoPadding =
+                                            if (index == 0 || index == this.lastIndex) dp0 else dp3
+                                        RowTwoWidget(
+                                            modifier = Modifier.padding(
+                                                top = infoPadding,
+                                                bottom = infoPadding
+                                            ),
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis,
+                                            isCenter = true,
+                                            leftColor = Theme.colorScheme.gray,
+                                            rightColor = Theme.colorScheme.gray,
+                                            leftStyle = MaterialTheme.typography.labelMedium,
+                                            rightStyle = MaterialTheme.typography.labelMedium,
+                                            leftText = "*", rightText = StringUtil.setTextLine(
+                                                originText = item.payInfo ?: "",
+                                                targetText = item.payLineTest ?: ""
+                                            )
                                         )
-                                    )
+                                    }
                                 }
                             }
                         }
                     }
 
-                    if (!item.roomList.isNullOrEmpty()) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(color = Theme.colorScheme.pureGray)
-                        ) {
-                            item.roomList.forEach { item ->
-                                StayDetailItemWidget(item)
+                    item.roomList?.let {
+                        if (it.isNotEmpty()) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(color = Theme.colorScheme.pureGray)
+                            ) {
+                                it.forEach { item ->
+                                    StayDetailItemWidget(item)
+                                }
                             }
                         }
                     }
+
                     if (!item.message.isNullOrEmpty()) {
                         Column(
                             modifier = Modifier
@@ -354,7 +365,7 @@ fun StayDetailContent(
                             )
                             Text(
                                 modifier = Modifier.padding(top = dp15, bottom = dp15),
-                                text = item.message,
+                                text = item.message ?: "",
                                 color = Theme.colorScheme.gray,
                                 style = MaterialTheme.typography.labelMedium
                             )
@@ -368,73 +379,77 @@ fun StayDetailContent(
                         }
                     }
 
-                    if (!item.service.isNullOrEmpty()) {
-                        HorizontalDivider(thickness = dp10, color = Theme.colorScheme.pureGray)
+                    item.service?.let {
+                        if (it.isNotEmpty()) {
+                            HorizontalDivider(thickness = dp10, color = Theme.colorScheme.pureGray)
 
-                        Column(modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                context.startActivity(
-                                    Intent(context, ServiceActivity::class.java).apply {
-                                        putExtra(Const.DATA, item.service)
-                                    }
-                                )
-                            }
-                            .padding(padding)
-                            .padding(top = dp20, bottom = dp20)
-                        ) {
-                            SpaceBetweenRowWidget(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = stringResource(id = R.string.str_convenience_service),
-                                content = {
-                                    Text(
-                                        text = stringResource(id = R.string.str_detail_more),
-                                        color = Theme.colorScheme.blue,
-                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                            Column(modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    context.startActivity(
+                                        Intent(context, ServiceActivity::class.java).apply {
+                                            putExtra(Const.DATA, item.service)
+                                        }
                                     )
-                                })
-
-                            //(가로길이 - start padding 20 - end padding 20) / 아이템 width 70
-                            val count = (fullWith - 40) / 70
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = dp20),
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                }
+                                .padding(padding)
+                                .padding(top = dp20, bottom = dp20)
                             ) {
-                                if (item.service.size > count) {
-                                    for (i in 0 until count) {
-                                        val serviceData = item.service[i]
-                                        CategoryItemWidget(
-                                            width = dp70,
-                                            imageSize = dp45,
-                                            bottomPadding = dp15,
-                                            textStyle = MaterialTheme.typography.labelMedium,
-                                            colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                                            painter =
-                                            painterResource(
-                                                id = ConvertUtil.convertServiceImage(
-                                                    serviceData.type ?: ""
-                                                )
-                                            ),
-                                            name = serviceData.name ?: ""
+                                SpaceBetweenRowWidget(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = stringResource(id = R.string.str_convenience_service),
+                                    content = {
+                                        Text(
+                                            text = stringResource(id = R.string.str_detail_more),
+                                            color = Theme.colorScheme.blue,
+                                            style = MaterialTheme.typography.labelMedium.copy(
+                                                fontWeight = FontWeight.Bold
+                                            )
                                         )
-                                    }
-                                } else {
-                                    item.service.forEach { serviceData ->
-                                        CategoryItemWidget(
-                                            imageSize = dp60,
-                                            bottomPadding = dp15,
-                                            textStyle = MaterialTheme.typography.labelMedium,
-                                            colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
-                                            painter =
-                                            painterResource(
-                                                id = ConvertUtil.convertServiceImage(
-                                                    serviceData.type ?: ""
-                                                )
-                                            ),
-                                            name = serviceData.name ?: ""
-                                        )
+                                    })
+
+                                //(가로길이 - start padding 20 - end padding 20) / 아이템 width 70
+                                val count = (fullWith - 40) / 70
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = dp20),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    if (it.size > count) {
+                                        for (i in 0 until count) {
+                                            val serviceData = it[i]
+                                            CategoryItemWidget(
+                                                width = dp70,
+                                                imageSize = dp45,
+                                                bottomPadding = dp15,
+                                                textStyle = MaterialTheme.typography.labelMedium,
+                                                colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
+                                                painter =
+                                                painterResource(
+                                                    id = ConvertUtil.convertServiceImage(
+                                                        serviceData.type ?: ""
+                                                    )
+                                                ),
+                                                name = serviceData.name ?: ""
+                                            )
+                                        }
+                                    } else {
+                                        it.forEach { serviceData ->
+                                            CategoryItemWidget(
+                                                imageSize = dp60,
+                                                bottomPadding = dp15,
+                                                textStyle = MaterialTheme.typography.labelMedium,
+                                                colorFilter = ColorFilter.tint(Theme.colorScheme.gray),
+                                                painter =
+                                                painterResource(
+                                                    id = ConvertUtil.convertServiceImage(
+                                                        serviceData.type ?: ""
+                                                    )
+                                                ),
+                                                name = serviceData.name ?: ""
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -541,6 +556,7 @@ fun StayDetailContent(
                         },
                     )
                 }
+
                 else -> {}
             }
         }

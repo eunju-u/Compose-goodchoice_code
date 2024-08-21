@@ -2,6 +2,13 @@ package com.example.goodchoice.data.dataSource
 
 import com.example.common.Const
 import com.example.common.R
+import com.example.domain.model.BannerData
+import com.example.domain.model.CategoryData
+import com.example.domain.model.CategoryItem
+import com.example.domain.model.HomeData
+import com.example.domain.model.OverSeaCityItem
+import com.example.domain.model.OverseaSpecialItem
+import com.example.domain.model.StayData
 import com.example.goodchoice.data.dto.*
 import javax.inject.Inject
 
@@ -140,12 +147,36 @@ class HomeDataSource @Inject constructor() {
                     )
                 )
             ), overSeaCityList = listOf(
-                OverSeaCityItem(id = "o_1_1", cityName = "오사카", code = Const.OSAKA),
-                OverSeaCityItem(id = "o_1_2", cityName = "후쿠오카", code = Const.FUKUOKA),
-                OverSeaCityItem(id = "o_1_3", cityName = "도쿄", code = Const.TOKYO),
-                OverSeaCityItem(id = "o_1_4", cityName = "다낭", code = Const.DANANG),
-                OverSeaCityItem(id = "o_1_5", cityName = "교토", code = Const.KYOTO),
-                OverSeaCityItem(id = "o_1_6", cityName = "싱가포르", code = Const.SINGAPORE)
+                OverSeaCityItem(
+                    id = "o_1_1",
+                    cityName = "오사카",
+                    code = Const.OSAKA
+                ),
+                OverSeaCityItem(
+                    id = "o_1_2",
+                    cityName = "후쿠오카",
+                    code = Const.FUKUOKA
+                ),
+                OverSeaCityItem(
+                    id = "o_1_3",
+                    cityName = "도쿄",
+                    code = Const.TOKYO
+                ),
+                OverSeaCityItem(
+                    id = "o_1_4",
+                    cityName = "다낭",
+                    code = Const.DANANG
+                ),
+                OverSeaCityItem(
+                    id = "o_1_5",
+                    cityName = "교토",
+                    code = Const.KYOTO
+                ),
+                OverSeaCityItem(
+                    id = "o_1_6",
+                    cityName = "싱가포르",
+                    code = Const.SINGAPORE
+                )
             ),
             overseaSpecialList = listOf(
                 OverseaSpecialItem(

@@ -1,6 +1,6 @@
 package com.example.goodchoice.data.dataSource
 
-import com.example.goodchoice.data.dto.AlarmItem
+import com.example.domain.model.AlarmItem
 import javax.inject.Inject
 
 class AlarmDataSource @Inject constructor() {

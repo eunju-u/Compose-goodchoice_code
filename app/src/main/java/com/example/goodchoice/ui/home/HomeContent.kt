@@ -29,7 +29,7 @@ import com.example.common.theme.*
 import com.example.common.R
 import com.example.common.components.*
 import com.example.common.utils.StringUtil
-import com.example.goodchoice.ConnectInfo
+import com.example.domain.info.ConnectInfo
 import com.example.goodchoice.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.home.model.RefreshData
 import com.example.goodchoice.ui.home.widget.*
