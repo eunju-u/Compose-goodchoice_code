@@ -1,16 +1,16 @@
-package com.example.goodchoice.utils
+package com.example.common.utils
 
+import android.content.Context
 import android.widget.Toast
-import com.example.goodchoice.GoodChoiceApplication
 
-object ToastUtils {
+object ToastUtil {
     private var toast: Toast? = null
 
-    fun showToast(str: String) {
+    fun showToast(context: Context, str: String) {
         toast?.cancel()
         if (toast == null) {
             toast = Toast.makeText(
-                GoodChoiceApplication.instance, str, Toast.LENGTH_LONG
+                context, str, Toast.LENGTH_LONG
             )
         } else {
             toast?.setText(str)
@@ -18,16 +18,16 @@ object ToastUtils {
         toast?.show()
     }
 
-    fun showToast(resource: Int) {
+    fun showToast(context: Context, resource: Int) {
         toast?.cancel()
         if (toast == null) {
             toast = Toast.makeText(
-                GoodChoiceApplication.instance,
-                GoodChoiceApplication.instance.getText(resource),
+                context,
+                context.getText(resource),
                 Toast.LENGTH_LONG
             )
         } else {
-            toast?.setText(GoodChoiceApplication.instance.getText(resource))
+            toast?.setText(context.getText(resource))
         }
         toast?.show()
     }

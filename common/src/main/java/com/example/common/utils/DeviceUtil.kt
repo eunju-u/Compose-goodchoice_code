@@ -1,13 +1,17 @@
-package com.example.goodchoice.utils
+package com.example.common.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import com.example.goodchoice.GoodChoiceApplication
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object DeviceUtil {
+@Singleton
+class DeviceUtil @Inject constructor(
+    @ApplicationContext private val context: Context,
+) {
     fun isNetworkAvailable(): Boolean {
-        val context = GoodChoiceApplication.instance
         val info = getNetworkInfo(context) ?: return false
         return when {
             info.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true

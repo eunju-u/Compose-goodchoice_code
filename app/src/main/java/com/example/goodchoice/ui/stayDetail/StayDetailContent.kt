@@ -31,7 +31,6 @@ import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
 import com.example.common.utils.StringUtil
 import com.example.goodchoice.preference.GoodChoicePreference
-import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetValue
@@ -41,7 +40,7 @@ import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.stayDetail.service.ServiceActivity
 import com.example.goodchoice.ui.stayDetail.widget.PayWidget
 import com.example.goodchoice.ui.stayDetail.widget.StayDetailItemWidget
-import com.example.goodchoice.utils.ToastUtils
+import com.example.common.utils.ToastUtil
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -465,7 +464,7 @@ fun StayDetailContent(
                     IconButton(onClick = {
                         if (pref.isLogin) {
                             viewModel.isLike.value = !viewModel.isLike.value
-                            ToastUtils.showToast(toastStr)
+                            ToastUtil.showToast(context, toastStr)
                         } else {
                             viewModel.isShowDialog.value = true
                             viewModel.dialogType.value = DialogType.NEED_LOGIN

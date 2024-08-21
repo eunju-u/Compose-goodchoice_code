@@ -16,8 +16,9 @@ import com.example.goodchoice.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.goodchoice.ui.search.data.KoreaSearchData
-import com.example.goodchoice.utils.ToastUtils
+import com.example.common.utils.ToastUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.*
@@ -41,7 +42,8 @@ class MainViewModel @Inject constructor(
     private val aroundUseCase: AroundUseCase,
     private val likeUseCase: LikeUseCase,
     private val myInfoUseCase: MyInfoUseCase,
-    private val recentUseCase: RecentUseCase
+    private val recentUseCase: RecentUseCase,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
     var homeUiState = MutableStateFlow<ConnectInfo>(ConnectInfo.Init)
     var homeData = MutableStateFlow(HomeData())
@@ -110,15 +112,19 @@ class MainViewModel @Inject constructor(
                     recentDb()
                 }
             }
+
             NavItem.Search.route -> {
                 requestSearchData()
             }
+
             NavItem.Around.route -> {
                 requestAroundData(true)
             }
+
             NavItem.Like.route -> {
                 requestLikeData(context)
             }
+
             NavItem.MyInfo.route -> {
                 requestMyInfoData()
             }
@@ -234,10 +240,10 @@ class MainViewModel @Inject constructor(
     fun checkLikeData(stayId: String) = viewModelScope.launch {
         if (likeUseCase.hasLikeData(stayId)) {
             likeUseCase.deleteLikeData(stayId)
-            ToastUtils.showToast(R.string.str_remove_like)
+            ToastUtil.showToast(context, R.string.str_remove_like)
         } else {
             likeUseCase.insertLikeData(stayId)
-            ToastUtils.showToast(R.string.str_add_like)
+            ToastUtil.showToast(context, R.string.str_add_like)
         }
     }
 
