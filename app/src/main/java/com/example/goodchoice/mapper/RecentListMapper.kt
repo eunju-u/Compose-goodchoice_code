@@ -1,9 +1,9 @@
 package com.example.goodchoice.mapper
 
 import com.example.domain.model.StayItem
-import com.example.goodchoice.db.recent.RecentDbItem
+import com.example.database.recent.RecentDbItem
 
-fun RecentDbItem.generateData(): com.example.domain.model.StayItem {
+fun com.example.database.recent.RecentDbItem.generateData(): com.example.domain.model.StayItem {
     val item = this@generateData
 
     return com.example.domain.model.StayItem(
@@ -21,20 +21,20 @@ fun RecentDbItem.generateData(): com.example.domain.model.StayItem {
     )
 }
 
-fun com.example.domain.model.StayItem.generateData(): RecentDbItem {
+fun com.example.domain.model.StayItem.generateData(): com.example.database.recent.RecentDbItem {
     val item = this@generateData
 
-    return RecentDbItem(
+    return com.example.database.recent.RecentDbItem(
         id = item.id ?: "",
-        label = item.label?: "",
-        name = item.name?: "",
-        star = item.star?: "",
-        commentCount = item.commentCount?: 0,
-        location = item.location?: "",
-        discountPer = item.discountPer?: 0,
-        defaultPrice = item.defaultPrice?: "",
-        discountPrice = item.discountPrice?: "",
-        mainImage = item.mainImage?: "",
-        level = item.level?: ""
+        label = item.label ?: "",
+        name = item.name ?: "",
+        star = item.star ?: "",
+        commentCount = item.commentCount ?: 0,
+        location = item.location ?: "",
+        discountPer = item.discountPer ?: 0,
+        defaultPrice = item.defaultPrice ?: "",
+        discountPrice = item.discountPrice ?: "",
+        mainImage = item.mainImage ?: "",
+        level = item.level ?: ""
     )
 }

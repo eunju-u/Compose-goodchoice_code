@@ -93,4 +93,5 @@ dependencies {
     //모듈화
     implementation project(':common')
     implementation project(':domain')
+    implementation project(':database')
 }

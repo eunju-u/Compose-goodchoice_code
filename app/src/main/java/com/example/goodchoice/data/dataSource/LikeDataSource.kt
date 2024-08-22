@@ -3,8 +3,8 @@ package com.example.goodchoice.data.dataSource
 import com.example.domain.model.StayItem
 import com.example.goodchoice.GoodChoiceApplication
 import com.example.goodchoice.data.dto.*
-import com.example.goodchoice.db.like.LikeDb
-import com.example.goodchoice.db.like.LikeDbItem
+import com.example.database.like.LikeDb
+import com.example.database.like.LikeDbItem
 import com.example.goodchoice.mapper.generateData
 import kotlinx.coroutines.*
 import javax.inject.Inject

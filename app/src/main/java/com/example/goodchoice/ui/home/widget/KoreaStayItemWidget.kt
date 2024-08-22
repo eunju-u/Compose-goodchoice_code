@@ -28,7 +28,7 @@ import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.R
 import com.example.common.utils.ConvertUtil
-import com.example.goodchoice.db.recent.RecentDb
+import com.example.database.recent.RecentDb
 import com.example.goodchoice.mapper.generateData
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import kotlinx.coroutines.*
@@ -73,7 +73,7 @@ fun KoreaStayItemWidget(
                     }
                 )
 
-                val recentDb = RecentDb.getInstance(context)
+                val recentDb = com.example.database.recent.RecentDb.getInstance(context)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     val isExistId = recentDb

@@ -19,3 +19,4 @@ rootProject.name = "goodchoice"
 include ':app'
 include ':common'
 include ':domain'
+include ':database'

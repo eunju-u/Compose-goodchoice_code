@@ -1,10 +1,10 @@
-package com.example.goodchoice.db.recent
+package com.example.database.like
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class RecentDbItem(
+data class LikeDbItem(
     @PrimaryKey
     val id: String = "",
     val label: String = "", //해외숙소, 국내숙소

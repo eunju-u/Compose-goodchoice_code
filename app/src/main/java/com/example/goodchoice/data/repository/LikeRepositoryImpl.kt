@@ -3,7 +3,7 @@ package com.example.goodchoice.data.repository
 import com.example.domain.model.StayItem
 import com.example.goodchoice.data.dataSource.LikeDataSource
 import com.example.domain.repository.LikeRepository
-import com.example.goodchoice.db.like.LikeDbItem
+import com.example.database.like.LikeDbItem
 import javax.inject.Inject
 
 class LikeRepositoryImpl @Inject constructor(

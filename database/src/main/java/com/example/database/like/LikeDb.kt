@@ -1,4 +1,4 @@
-package com.example.goodchoice.db.like
+package com.example.database.like
 
 import android.content.Context
 import androidx.room.Database
