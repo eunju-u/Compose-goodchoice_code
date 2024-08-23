@@ -15,13 +15,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.MainViewModel
 import java.time.LocalDate
-import com.example.common.R
-import com.example.common.components.TabWidget
+import com.example.ui.R
+import com.example.ui.components.TabWidget
 import com.example.common.data.TabData
-import com.example.common.theme.Theme
-import com.example.common.theme.*
-import com.example.common.utils.ConvertUtil
+import com.example.ui.theme.*
 import com.example.domain.info.ConnectInfo
+import com.example.ui.utils.ConvertUtil
 
 private val menus = listOf(
     TabData.KOREA_STAY, TabData.OVERSEA_STAY, TabData.LEISURE

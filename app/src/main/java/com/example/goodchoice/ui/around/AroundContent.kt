@@ -26,26 +26,20 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
-import com.example.common.components.*
-import com.example.common.R
+import com.example.ui.R
 import com.example.common.ServerConst
 import com.example.domain.model.AroundFilterData
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
-import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
-import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
-import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
-import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
-import com.example.goodchoice.ui.filter.FilterActivity
 import com.example.goodchoice.ui.main.MainActivity
-import com.example.goodchoice.domain.model.AroundFilterItem
-import com.example.goodchoice.domain.model.AroundFilterSelectedModel
-import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetValue
-import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.main.MainViewModel
-import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
-import com.example.common.theme.Theme
-import com.example.common.theme.*
 import com.example.domain.info.ConnectInfo
+import com.example.ui.filter.FilterActivity
+import com.example.goodchoice.ui.main.AroundFilterSelectedData
+import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
+import com.example.ui.components.*
+import com.example.ui.components.bottomSheet.*
+import com.example.ui.theme.Theme
+import com.example.ui.theme.*
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
@@ -352,13 +346,15 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         if (selectFilterData.type == ServerConst.RESERVATION) {
 
                                             if (selectDepthItem.value.subType.isNullOrEmpty()) {
-                                                selectDepthItem.value = AroundFilterItem(
-                                                    mainType = selectFilterData.type,
-                                                    subType = selectFilterData.type,
-                                                    text = selectFilterData.text
-                                                )
+                                                selectDepthItem.value =
+                                                    com.example.ui.model.AroundFilterItem(
+                                                        mainType = selectFilterData.type,
+                                                        subType = selectFilterData.type,
+                                                        text = selectFilterData.text
+                                                    )
                                             } else {
-                                                selectDepthItem.value = AroundFilterItem()
+                                                selectDepthItem.value =
+                                                    com.example.ui.model.AroundFilterItem()
                                             }
                                         } else if (item.type == ServerConst.FILTER) {
                                             (context as MainActivity).activityForFilterResult.launch(
@@ -368,13 +364,14 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 ).apply {
                                                     // viewModel.aroundFilterSelect 의 데이터는 mutable 타입이라 serialize 불가
                                                     val selectedData = viewModel.aroundFilterSelect
-                                                    val data = AroundFilterSelectedModel(
-                                                        selectedData.selectedFilter.value,
-                                                        selectedData.selectedRecommend.value,
-                                                        selectedData.selectedRoom.value,
-                                                        selectedData.selectedReservation.value,
-                                                        selectedData.selectedPrice.value
-                                                    )
+                                                    val data =
+                                                        com.example.ui.model.AroundFilterSelectedModel(
+                                                            selectedData.selectedFilter.value,
+                                                            selectedData.selectedRecommend.value,
+                                                            selectedData.selectedRoom.value,
+                                                            selectedData.selectedReservation.value,
+                                                            selectedData.selectedPrice.value
+                                                        )
                                                     putExtra(Const.DATA, data)
                                                 }
                                             )
@@ -419,7 +416,10 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                 ) {
                                                     Box(
                                                         modifier = Modifier
-                                                            .size(width = dp5, height = dp5)
+                                                            .size(
+                                                                width = dp5,
+                                                                height = dp5
+                                                            )
                                                             .background(
                                                                 color = Theme.colorScheme.red,
                                                                 shape = CircleShape
@@ -453,17 +453,22 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
                             //값이 지워진 경우 초기값 넣어줌
                             if (aroundFilterSelect.selectedRecommend.value.subType.isNullOrEmpty()) {
-                                aroundFilterSelect.selectedRecommend.value = AroundFilterItem(
-                                    subType = ServerConst.RECOMMEND, text = "추천순"
-                                )
+                                aroundFilterSelect.selectedRecommend.value =
+                                    com.example.ui.model.AroundFilterItem(
+                                        subType = ServerConst.RECOMMEND, text = "추천순"
+                                    )
                             }
 
                             val filterDetailList = selectFilterData.filterList ?: listOf()
                             // 필터 depth 뷰
                             FlowRow(
                                 modifier = Modifier.padding(
-                                    start = dp30, end = dp30, top = dp15, bottom = dp5
-                                ), horizontalArrangement = Arrangement.spacedBy(dp20)
+                                    start = dp30,
+                                    end = dp30,
+                                    top = dp15,
+                                    bottom = dp5
+                                ),
+                                horizontalArrangement = Arrangement.spacedBy(dp20)
                             ) {
                                 filterDetailList.forEach {
                                     val isSelect = select.value.subType == it.type
@@ -477,13 +482,15 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                         onItemClick = {
                                             //select 값이 초기값이나 클릭한 type 과 같지 않을 때
                                             if (select.value.subType.isNullOrEmpty() || select.value.subType != it.type) {
-                                                select.value = AroundFilterItem(
-                                                    mainType = selectFilterData.type,
-                                                    subType = it.type,
-                                                    text = it.text
-                                                )
+                                                select.value =
+                                                    com.example.ui.model.AroundFilterItem(
+                                                        mainType = selectFilterData.type,
+                                                        subType = it.type,
+                                                        text = it.text
+                                                    )
                                             } else {
-                                                select.value = AroundFilterItem()
+                                                select.value =
+                                                    com.example.ui.model.AroundFilterItem()
                                             }
                                             //뷰 노출 여부 초기화
                                             selectFilter = ""

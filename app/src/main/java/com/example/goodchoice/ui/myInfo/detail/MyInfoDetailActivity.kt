@@ -3,7 +3,7 @@ package com.example.goodchoice.ui.myInfo.detail
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.common.theme.TestTheme
+import com.example.ui.theme.TestTheme
 
 class MyInfoDetailActivity : ComponentActivity() {
     companion object {

@@ -19,11 +19,12 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.common.components.*
+import com.example.ui.components.*
 import com.example.domain.model.CategoryItem
-import com.example.common.R
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.R
+import com.example.ui.theme.CategoryItemHeight
+import com.example.ui.theme.Theme
+import com.example.ui.theme.*
 
 @SuppressLint("RememberReturnType", "UnusedBoxWithConstraintsScope")
 @Composable

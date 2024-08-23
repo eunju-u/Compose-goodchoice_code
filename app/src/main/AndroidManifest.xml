@@ -23,7 +23,7 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="@string/naver_map_client_id" />
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="com.example.goodchoice.ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,29 +35,29 @@
             android:name=".ui.main.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.recentSeen.RecentSeenActivity"
+            android:name="com.example.ui.recentSeen.RecentSeenActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.example.ui.login.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.alarm.AlarmActivity"
+            android:name="com.example.ui.alarm.AlarmActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.webview.WebViewActivity"
+            android:name="com.example.ui.webview.WebViewActivity"
             android:exported="true"
             android:hardwareAccelerated="true" />
         <activity
-            android:name=".ui.stayDetail.StayDetailActivity"
+            android:name="com.example.ui.stayDetail.StayDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.stayDetail.service.ServiceActivity"
+            android:name="com.example.ui.stayDetail.service.ServiceActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.filter.FilterActivity"
+            android:name="com.example.ui.filter.FilterActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.calendar.CalendarActivity"
+            android:name="com.example.ui.calendar.CalendarActivity"
             android:exported="true" />
         <activity
             android:name=".ui.search.detailSearch.DetailSearchActivity"

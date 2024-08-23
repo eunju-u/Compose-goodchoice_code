@@ -4,10 +4,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
-import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetValue
-import com.example.goodchoice.ui.components.bottomSheet.rememberMyBottomSheetState
-import com.example.goodchoice.ui.main.nav.NavItem
+import com.example.ui.components.bottomSheet.MyBottomSheetState
+import com.example.ui.components.bottomSheet.MyBottomSheetValue
+import com.example.ui.components.bottomSheet.rememberMyBottomSheetState
+import com.example.goodchoice.nav.NavItem
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -15,7 +15,9 @@ import kotlinx.coroutines.CoroutineScope
 fun rememberMainState(
     scope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
-    bottomSheetState: MyBottomSheetState = rememberMyBottomSheetState(initialValue = MyBottomSheetValue.Hidden),
+    bottomSheetState: MyBottomSheetState = rememberMyBottomSheetState(
+        initialValue = MyBottomSheetValue.Hidden
+    ),
     bottomMenus: MutableState<List<NavItem>> = remember {
         mutableStateOf(
             listOf(

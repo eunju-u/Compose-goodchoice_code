@@ -8,9 +8,8 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.mutableStateOf
 import com.example.common.Const
 import com.example.common.ServerConst
-import com.example.common.theme.TestTheme
-import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
+import com.example.ui.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +53,7 @@ class MainActivity : ComponentActivity() {
                 RESULT_OK -> {
                     result.data?.let {
                         val data =
-                            it.getSerializableExtra(Const.DATA) as ArrayList<AroundFilterItem>?
+                            it.getSerializableExtra(Const.DATA) as ArrayList<com.example.ui.model.AroundFilterItem>?
 
                         data?.let { list ->
                             list.forEach { item ->

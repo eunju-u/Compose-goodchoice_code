@@ -13,12 +13,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.common.Const
-import com.example.common.R
-import com.example.common.components.*
-import com.example.common.theme.Theme
-import com.example.common.theme.*
-import com.example.goodchoice.ui.calendar.CalendarActivity
-import com.example.goodchoice.ui.calendar.CalendarType
+import com.example.ui.R
+import com.example.ui.components.*
+import com.example.ui.theme.*
+import com.example.ui.calendar.CalendarActivity
+import com.example.ui.calendar.CalendarType
 
 @Composable
 fun OverSeaContent(

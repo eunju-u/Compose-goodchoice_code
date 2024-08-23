@@ -24,19 +24,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.common.MainBottomSheetType
-import com.example.common.R
-import com.example.common.components.*
-import com.example.common.theme.GMarketSansFamily
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.R
 import com.example.domain.info.ConnectInfo
-import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
-import com.example.goodchoice.ui.components.bottomSheet.SheetWidget
+import com.example.ui.components.bottomSheet.MyBottomSheetLayout
+import com.example.ui.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.main.bottomSheet.ProfileContent
-import com.example.goodchoice.ui.main.nav.NavGraph
-import com.example.goodchoice.ui.main.nav.NavItem
-import com.example.goodchoice.ui.main.nav.navigation
+import com.example.goodchoice.nav.NavGraph
+import com.example.goodchoice.nav.NavItem
+import com.example.goodchoice.nav.navigation
 import com.example.goodchoice.ui.main.state.rememberMainState
+import com.example.ui.components.*
+import com.example.ui.theme.GMarketSansFamily
+import com.example.ui.theme.Theme
+import com.example.ui.theme.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -177,7 +177,10 @@ fun MainContent(viewModel: MainViewModel) {
             sheetContent = {
                 if (bottomSheetType == MainBottomSheetType.PROFILE) {
                     SheetWidget(
-                        shape = RoundedCornerShape(topStart = dp100, topEnd = dp100),
+                        shape = RoundedCornerShape(
+                            topStart = dp100,
+                            topEnd = dp100
+                        ),
                         content = {
                             ProfileContent()
                         })

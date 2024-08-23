@@ -13,19 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.common.R
+import com.example.ui.R
 import com.example.common.data.TabData
 import com.example.common.Const
-import com.example.common.components.GoToWidget
-import com.example.common.components.TabWidget
-import com.example.common.theme.Theme
+import com.example.ui.components.GoToWidget
+import com.example.ui.components.TabWidget
 import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
-import com.example.goodchoice.ui.login.LoginActivity
+import com.example.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
-import com.example.goodchoice.ui.stayDetail.StayDetailActivity
+import com.example.ui.stayDetail.StayDetailActivity
+import com.example.ui.theme.Theme
 
 private val menus = listOf(
     TabData.KOREA, TabData.OVERSEA, TabData.RENTAL, TabData.LEISURE

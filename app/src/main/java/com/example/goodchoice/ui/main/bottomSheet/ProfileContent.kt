@@ -9,10 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.common.R
-import com.example.common.components.ButtonWidget
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.R
+import com.example.ui.components.ButtonWidget
+import com.example.ui.theme.*
 
 /**
  * 프로필 사진 선택 바텀 시트

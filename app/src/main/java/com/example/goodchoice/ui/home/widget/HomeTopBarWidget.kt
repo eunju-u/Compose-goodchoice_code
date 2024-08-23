@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.TextStyle
-import com.example.common.theme.*
+import com.example.ui.theme.*
 
 @Composable
 fun HomeTopBarWidget(

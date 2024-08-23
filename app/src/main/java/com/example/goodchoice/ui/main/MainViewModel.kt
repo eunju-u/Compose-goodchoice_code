@@ -8,10 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.MainBottomSheetType
 import com.example.common.RoomType
 import com.example.common.ServerConst
-import com.example.common.R
+import com.example.ui.R
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.goodchoice.ui.main.nav.NavItem
-import com.example.goodchoice.domain.model.AroundFilterItem
+import com.example.goodchoice.nav.NavItem
+import com.example.ui.model.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
 import com.example.common.utils.ToastUtil
 import com.example.domain.info.ConnectInfo
@@ -42,7 +42,9 @@ data class AroundFilterSelectedData(
     //주변 선택한 필터 > 추천순
     var selectedRecommend: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
     var selectedRoom: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
-    var selectedReservation: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
+    var selectedReservation: MutableState<AroundFilterItem> = mutableStateOf(
+        AroundFilterItem()
+    ),
     var selectedPrice: MutableState<AroundFilterItem> = mutableStateOf(AroundFilterItem()),
 )
 

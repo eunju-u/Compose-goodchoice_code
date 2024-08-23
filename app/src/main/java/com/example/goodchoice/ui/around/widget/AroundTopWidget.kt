@@ -12,13 +12,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.common.RoomType
-import com.example.common.R
-import com.example.common.components.*
-import com.example.common.utils.ConvertUtil
+import com.example.ui.R
+import com.example.ui.components.*
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.goodchoice.ui.calendar.CalendarActivity
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.calendar.CalendarActivity
+import com.example.ui.theme.Theme
+import com.example.ui.theme.*
+import com.example.ui.utils.ConvertUtil
 
 @Composable
 fun AroundTopWidget(

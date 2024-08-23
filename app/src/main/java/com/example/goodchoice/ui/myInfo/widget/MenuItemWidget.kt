@@ -11,18 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.common.R
-import com.example.common.components.*
-import com.example.common.theme.*
+import com.example.ui.R
+import com.example.ui.components.*
+import com.example.ui.theme.*
 import com.example.domain.model.MyMenuItem
 
 @Composable
-        /**
-         * 내 정보 >> LazyColumn Custom Item
-         *
-         * "질문 있어요!"
-         *
-         * */
 fun MenuItemWidget(
     menuItem: MyMenuItem, isOnlyText: Boolean = false, onItemClick: () -> Unit = {},
 ) {

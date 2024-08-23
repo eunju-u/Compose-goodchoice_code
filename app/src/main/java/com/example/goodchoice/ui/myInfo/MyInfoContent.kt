@@ -23,41 +23,26 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
-import com.example.common.R
+import com.example.ui.R
 import com.example.common.MainBottomSheetType
-import com.example.common.components.*
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.components.*
+import com.example.ui.theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.CategoryItem
 import com.example.domain.model.MyMenuData
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.goodchoice.ui.components.*
-import com.example.goodchoice.ui.login.LoginActivity
+import com.example.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
-import com.example.goodchoice.ui.recentSeen.RecentSeenActivity
+import com.example.ui.recentSeen.RecentSeenActivity
 
 /**
  * 내 정보 화면
  */
 
-/*
-* 0. @Composable Android compose 앱의 UI를 구성할 때 사용
-* 1. Column : LinearLayout , 수직 아이템 나열, 아이템 너비 Column 너비
-* 2. Row : 가로방향 나열
-* 3. Box : 겹쳐서 배치하는 레이아웃, z축
-* 4. Scaffold : 기초적인 meteria 디자인 레이아웃 구조 , topbar bottombar snackbar, floatingActionbutton, drwaer 슬롯
-* 5. BottomNavigation :
-* 6. BottomNavigationItem :
-* 7. Icon :
-* 8. BackHandler :
-* 9. NavGraph :
-*
-* */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {

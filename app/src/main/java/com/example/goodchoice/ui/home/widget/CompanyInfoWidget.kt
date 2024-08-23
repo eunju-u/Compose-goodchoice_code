@@ -15,10 +15,9 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import com.example.common.components.*
-import com.example.common.theme.Theme
-import com.example.common.theme.*
-import com.example.common.R
+import com.example.ui.components.*
+import com.example.ui.theme.*
+import com.example.ui.R
 
 @Composable
 fun CompanyInfoWidget() {

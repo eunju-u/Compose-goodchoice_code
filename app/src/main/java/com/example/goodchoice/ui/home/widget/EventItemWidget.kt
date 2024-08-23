@@ -9,10 +9,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.common.components.LeftImageButtonWidget
-import com.example.common.R
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.components.LeftImageButtonWidget
+import com.example.ui.R
+import com.example.ui.theme.*
 
 /**
  * 홈 > 이벤트 배너

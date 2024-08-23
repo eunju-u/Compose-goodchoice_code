@@ -17,12 +17,11 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.common.theme.Theme
-import com.example.common.theme.*
-import com.example.common.R
-import com.example.common.components.*
-import com.example.common.utils.ConvertUtil
+import com.example.ui.theme.*
+import com.example.ui.R
+import com.example.ui.components.*
 import com.example.domain.model.StayItem
+import com.example.ui.utils.ConvertUtil
 
 @Composable
 fun KoreaStayItemWidget(

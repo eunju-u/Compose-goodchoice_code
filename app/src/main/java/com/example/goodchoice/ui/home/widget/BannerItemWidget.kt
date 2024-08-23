@@ -22,11 +22,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
-import com.example.common.R
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.R
+import com.example.ui.theme.*
 import com.example.domain.model.BannerData
-import com.example.goodchoice.ui.webview.WebViewActivity
+import com.example.ui.webview.WebViewActivity
 
 @Composable
 fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {

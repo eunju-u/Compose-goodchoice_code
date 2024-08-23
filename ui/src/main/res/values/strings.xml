@@ -1,0 +1,177 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">ui</string>
+
+    <string name="navi_home">홈</string>
+    <string name="navi_search">검색</string>
+    <string name="navi_around">주변</string>
+    <string name="navi_like">찜</string>
+    <string name="navi_my_Info">내 정보</string>
+
+    <!--  홈  -->
+    <string name="str_app_name">여기 어때</string>
+    <string name="str_go_oversea">해외 여행 갈때</string>
+    <string name="str_today_hotel_more">호텔 특가 더보기</string>
+    <string name="str_hot_hotel_more">인기 호텔 특가 더보기</string>
+    <string name="str_oversea_airplane_stay_more">항공 + 숙소 특가 더보기</string>
+    <string name="str_over_sea_row_price">최저가 숙소로 누리는 해외 인기 도시</string>
+    <string name="str_more">더보기</string>
+    <string name="str_row_price">최저가 숙소</string>
+    <string name="str_over_sea_week_special">해외 항공 + 숙소 이번 주 특가</string>
+
+    <string name="str_coupon">쿠폰</string>
+    <string name="str_advance_select">도전뽑기</string>
+    <string name="str_event">이벤트</string>
+
+    <string name="str_banner_sign_up">지금 신규가입하면 혜택 * 쿠폰이 와르르!</string>
+    <string name="str_banner_3_sign_up_receive_coupon">3초 가입하고 쿠폰 받기</string>
+
+    <string name="str_recent_seen_item">최근 본 상품</string>
+    <string name="str_business_info">사업자 정보</string>
+    <string name="str_terms_of_use">이용약관</string>
+    <string name="str_privacy_policy">개인정보 처리방침</string>
+    <string name="str_consumer_dispute_standards">소비자 분쟁해결 기준</string>
+    <string name="str_check_business_info">사업자 정보확인</string>
+    <string name="str_content_business">콘텐츠산업진흥법에 의한 표시</string>
+    <string name="str_business_info_responsibility">(주)여기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</string>
+    <string name="str_business_info_detail">주소: 서울특별시 강남구 봉은사로 479, 479타워 11층\n대표이사: 정명훈 | 사업자등록번호: 742-86-00224\n통신판매번호: 2017-서울강남-01779\n\n전화번호: 1670-6250\n전자우편주소: hep@goodchoice.kr\n호스팅서비스제공자의 상호 표시: (주)여기어때컴퍼니</string>
+    <string name="str_oversea_special_info">망설이는 순간 마감!</string>
+
+    <!--  검색  -->
+
+    <!--  주변  -->
+
+    <!--  찜  -->
+    <string name="str_no_see_like_list">찜 목록을 볼 수 없어요</string>
+    <string name="str_check_like_list_after_login">로그인 후 찜한 상품을 확인하세요</string>
+    <string name="str_no_like_list">아직 찜한 <xliff:g id="name">%s</xliff:g>이 없어요</string>
+    <string name="str_search_like">마음에 드는 <xliff:g id="name">%s</xliff:g> 찜 해두면\n빠르게 다시 찾아볼 수 있어요.</string>
+    <string name="str_go_to_like"><xliff:g id="name">%s</xliff:g> 둘러보기</string>
+    <string name="str_stay">숙소</string>
+    <string name="str_space">공간</string>
+    <string name="str_ticket">티켓</string>
+
+
+    <!--  내 정보  -->
+    <string name="str_join_and_login">회원가입 / 로그인</string>
+    <string name="str_join_and_login_sub">여기 어때 회원가입하고 엘리트 혜택 받으세요!</string>
+    <string name="str_point">포인트</string>
+    <string name="str_logout">로그아웃</string>
+    <string name="str_logout_check">로그아웃할까요?</string>
+    <string name="str_my_info_manager">내 정보 관리</string>
+    <string name="str_login_kakao">KAKAO 로그인</string>
+    <string name="str_login_naver">네이버 로그인</string>
+    <string name="str_login_facebook">페이스북 로그인</string>
+    <string name="str_login_google">구글 로그인</string>
+    <string name="str_login_email">이메일로 로그인</string>
+    <string name="str_profile_register">프로필 사진 등록</string>
+    <string name="str_profile_register_sub">프로필 사진은\'내 정보>리뷰\'에서 등록한 리뷰별로 비공개할 수 있어요.</string>
+    <string name="str_select_picture">사진 선택</string>
+
+    <!--  최근 본 상품  -->
+    <string name="str_empty_recent_seen_item_title">최근 본 상품이 없어요</string>
+    <string name="str_empty_recent_seen_item_sub">내정보 > 앱 설정에서 최근 본 상품이 보이도록 설정할 수 있어요.</string>
+    <string name="str_see_item">상품 둘러보기</string>
+
+    <!--  로그인  -->
+    <string name="str_login_and_join">로그인/회원가입</string>
+    <string name="str_start_login_kakao">카카오로 시작하기</string>
+    <string name="str_start_login_naver">네이버로 시작하기</string>
+    <string name="str_start_login_facebook">페이스북으로 시작하기</string>
+    <string name="str_start_login_google">구글로 시작하기</string>
+    <string name="str_start_login_email">이메일로 시작하기</string>
+    <string name="str_login_business">비즈니스 로그인/회원가입</string>
+    <string name="str_login_recent">최근에 로그인했어요</string>
+    <string name="str_need_login">먼저 로그인 하세요.</string>
+
+    <!--  알림  -->
+    <string name="str_alarm">알림함</string>
+    <string name="str_no_see_alarm">알림을 볼 수 없어요</string>
+    <string name="str_check_alarm_after_login">로그인 후 알림함을 확인하세요.</string>
+    <string name="str_save_alarm_max">받은 알림은 최대 31일 동안 보관돼요.</string>
+    <string name="str_no_alarm">알림이 없어요.</string>
+
+    <!--  달력  -->
+    <string name="str_select"><xliff:g id="select">%s</xliff:g> 선택</string>
+    <string name="str_date">날짜</string>
+    <string name="str_monday">월</string>
+    <string name="str_tuesday">화</string>
+    <string name="str_wednesday">수</string>
+    <string name="str_thursday">목</string>
+    <string name="str_friday">금</string>
+    <string name="str_saturday">토</string>
+    <string name="str_sunday">일</string>
+    <string name="str_year_month"><xliff:g id="year">%s</xliff:g>년 <xliff:g id="month">%s</xliff:g>월</string>
+    <string name="str_day_apply"><xliff:g id="day">%s</xliff:g>박 적용</string>
+    <string name="str_person_count"><xliff:g id="count">%s</xliff:g>명</string>
+    <string name="str_person">인원</string>
+    <string name="str_person_sub">유아 및 아동도 인원수에\n포함해 주세요.</string>
+    <string name="str_guest_room_count">객실 <xliff:g id="count">%s</xliff:g>개</string>
+    <string name="str_adult_count">성인 <xliff:g id="count">%s</xliff:g>명</string>
+    <string name="str_kid_count">아동 <xliff:g id="count">%s</xliff:g>명</string>
+    <string name="str_schedule">일정</string>
+    <string name="str_person_and_guest_room">인원 및 객실</string>
+    <string name="str_guest_room">객실</string>
+    <string name="str_guest_room_one_person_select">객실마다 1명 이상 필수 선택</string>
+    <string name="str_adult">성인</string>
+    <string name="str_kid">아동</string>
+    <string name="str_oversea_add_day">+ <xliff:g id="count">%s</xliff:g>박</string>
+
+    <!--  숙소 상세  -->
+    <string name="str_see_review">리뷰 <xliff:g id="count">%s</xliff:g>개 보기</string>
+    <string name="str_inTime_outTime">입실 <xliff:g id="inTime">%s</xliff:g>*퇴실 <xliff:g id="outTime">%s</xliff:g></string>
+    <string name="str_left_count"><xliff:g id="count">%s</xliff:g>개 남음</string>
+    <string name="str_coupon_discount"><xliff:g id="coupon">%s</xliff:g>할인 적용가</string>
+    <string name="str_max_add_discount">최대 <xliff:g id="coupon">%s</xliff:g> 추가 할인</string>
+    <string name="str_pay_benefit">결제 혜택</string>
+    <string name="str_convenience_service">편의시설 및 서비스</string>
+    <string name="str_detail_more">자세히보기</string>
+    <string name="str_pay_benefit_information">결제 혜택 안내</string>
+    <string name="str_benefit">혜택</string>
+    <string name="str_add_like">찜 목록에 추가하였습니다.\n찜에서 확인해주세요.</string>
+    <string name="str_remove_like">찜을 해제하였습니다.</string>
+
+    <!--  필터  -->
+    <string name="str_filter">필터</string>
+    <string name="str_reservation_available">예약가능만 보기</string>
+    <string name="str_filter_reset">필터 재설정</string>
+    <string name="str_filter_stay_count"><xliff:g id="count">%s</xliff:g>개의 숙소보기</string>
+    <string name="str_filter_reset_dialog">선택한 필터항목이 초기화됩니다.</string>
+
+    <!--  버튼 text  -->
+    <string name="str_all_remove">전체 삭제</string>
+    <string name="str_close">닫기</string>
+    <string name="str_login">로그인</string>
+    <string name="str_sleep_room">숙박</string>
+    <string name="str_rental_room">대실</string>
+    <string name="str_show_list">목록보기</string>
+    <string name="str_show_map">지도보기</string>
+    <string name="str_search_local_stay">지역, 숙소 검색</string>
+    <string name="str_download_coupon">쿠폰 받기</string>
+    <string name="str_cancel">취소</string>
+    <string name="str_ok">확인</string>
+    <string name="str_reset">초기화</string>
+    <string name="str_count">개</string>
+    <string name="str_per_person">명</string>
+    <string name="str_set_permission">접근권한 설정</string>
+
+    <!--  검색  -->
+    <string name="str_search_korea_area">지역, 지하철역, 숙소</string>
+    <string name="str_search_oversea_area">여행지, 숙소</string>
+    <string name="str_search_reisure_area">여행지, 액티비티, 티켓</string>
+    <string name="str_search_recommend_word">추천 검색어</string>
+    <string name="str_search_my_arround">내 주변에서 검색</string>
+    <string name="str_search_rank">여기어때 검색 순위</string>
+    <string name="str_search_recommend_area">추천 지역</string>
+    <string name="str_search_area_stay">지역이나 숙소를 검색해보세요</string>
+    <string name="str_search_a_lot">지금 많이 찾고 있어요</string>
+
+    <!--  다이얼로그  -->
+    <string name="str_dialog_more_two_word">정확한 검색을 위해\n두 글자 이상 검색어를 입력해 주세요</string>
+    <string name="str_dialog_network_not_connect">네트워크 연결이 원할하지 않습니다.\n잠시 후 다시 이용해주세요.</string>
+    <string name="str_allow_permission">주변 정보를 확인하기 위해 위치 권한을 허용해주세요.</string>
+
+    <!--  최근 본 상품   -->
+    <string name="str_recent_seen_all_remove">최근 본 상품이 모두 삭제되었습니다.</string>
+    <string name="str_recent_seen_all_remove_not_list">삭제할 내용이 없습니다.</string>
+
+</resources>

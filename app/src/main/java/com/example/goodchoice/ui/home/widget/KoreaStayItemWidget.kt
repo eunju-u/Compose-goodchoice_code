@@ -24,13 +24,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
 import com.example.domain.model.StayItem
-import com.example.common.theme.Theme
-import com.example.common.theme.*
-import com.example.common.R
-import com.example.common.utils.ConvertUtil
-import com.example.database.recent.RecentDb
+import com.example.ui.theme.*
+import com.example.ui.R
 import com.example.data.mapper.generateData
-import com.example.goodchoice.ui.stayDetail.StayDetailActivity
+import com.example.ui.stayDetail.StayDetailActivity
+import com.example.ui.theme.dp400
+import com.example.ui.utils.ConvertUtil
 import kotlinx.coroutines.*
 
 /**
@@ -62,7 +61,9 @@ fun KoreaStayItemWidget(
             .width(itemWidth.dp)
             .height(IntrinsicSize.Min)
             .border(
-                width = dp1, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(dp10)
+                width = dp1, color = Theme.colorScheme.pureGray, shape = RoundedCornerShape(
+                    dp10
+                )
             )
             .clip(RoundedCornerShape(dp10))
             .clickable {

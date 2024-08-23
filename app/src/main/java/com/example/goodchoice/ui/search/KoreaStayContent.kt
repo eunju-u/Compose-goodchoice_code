@@ -16,16 +16,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.common.Const
-import com.example.common.R
-import com.example.common.components.KoreaDateWidget
-import com.example.common.components.LeftImageButtonWidget
-import com.example.common.components.RowTwoWidget
-import com.example.common.theme.Theme
-import com.example.common.theme.*
+import com.example.ui.R
+import com.example.ui.components.KoreaDateWidget
+import com.example.ui.components.LeftImageButtonWidget
+import com.example.ui.components.RowTwoWidget
+import com.example.ui.theme.*
 import com.example.domain.model.FilterItem
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.goodchoice.ui.calendar.CalendarActivity
-import com.example.goodchoice.ui.calendar.CalendarType
+import com.example.ui.calendar.CalendarActivity
+import com.example.ui.calendar.CalendarType
 
 @Composable
 fun KoreaStayContent(
