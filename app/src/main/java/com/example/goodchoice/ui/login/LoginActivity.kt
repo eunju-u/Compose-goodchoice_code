@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.common.theme.TestTheme
 import com.example.common.utils.StringUtil
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 
 class LoginActivity : ComponentActivity() {
     companion object {

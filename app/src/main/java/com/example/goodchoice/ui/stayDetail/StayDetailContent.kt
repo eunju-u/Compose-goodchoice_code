@@ -30,7 +30,7 @@ import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
 import com.example.common.utils.StringUtil
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetLayout
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetState
 import com.example.goodchoice.ui.components.bottomSheet.MyBottomSheetValue

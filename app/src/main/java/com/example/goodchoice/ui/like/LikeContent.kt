@@ -20,7 +20,7 @@ import com.example.common.components.GoToWidget
 import com.example.common.components.TabWidget
 import com.example.common.theme.Theme
 import com.example.domain.info.ConnectInfo
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
 import com.example.goodchoice.ui.login.LoginActivity

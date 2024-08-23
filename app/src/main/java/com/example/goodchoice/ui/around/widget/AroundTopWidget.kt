@@ -15,7 +15,7 @@ import com.example.common.RoomType
 import com.example.common.R
 import com.example.common.components.*
 import com.example.common.utils.ConvertUtil
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.common.theme.Theme
 import com.example.common.theme.*

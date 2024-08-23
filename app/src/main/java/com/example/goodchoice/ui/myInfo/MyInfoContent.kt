@@ -31,7 +31,7 @@ import com.example.common.theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.CategoryItem
 import com.example.domain.model.MyMenuData
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.components.*
 import com.example.goodchoice.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainActivity

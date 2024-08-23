@@ -9,7 +9,7 @@ import com.example.common.MainBottomSheetType
 import com.example.common.RoomType
 import com.example.common.ServerConst
 import com.example.common.R
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.nav.NavItem
 import com.example.goodchoice.domain.model.AroundFilterItem
 import com.example.domain.model.KoreaSearchData

@@ -23,7 +23,7 @@ import com.example.common.components.RowTwoWidget
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.domain.model.FilterItem
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.CalendarActivity
 import com.example.goodchoice.ui.calendar.CalendarType
 

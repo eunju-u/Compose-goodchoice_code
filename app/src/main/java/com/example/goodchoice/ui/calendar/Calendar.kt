@@ -26,7 +26,7 @@ import com.example.common.utils.ConvertUtil
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.R
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.model.CalendarState
 import com.example.goodchoice.ui.calendar.widget.*
 import java.time.LocalDate

@@ -2,7 +2,7 @@ package com.example.goodchoice.ui.calendar.model
 
 import androidx.compose.runtime.mutableStateOf
 import com.example.goodchoice.GoodChoiceApplication
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.calendar.widget.getNumberWeeks
 import java.time.LocalDate
 import java.time.Period
@@ -10,7 +10,8 @@ import java.time.YearMonth
 
 class CalendarState(isKoreaCalendar: Boolean = true) {
 
-    val pref = GoodChoicePreference(GoodChoiceApplication.context())
+    val pref =
+        GoodChoicePreference(GoodChoiceApplication.context())
 
     val calendarUiState = mutableStateOf(
         CalendarUiState(

@@ -17,7 +17,7 @@ import com.example.common.components.*
 import com.example.common.theme.Theme
 import com.example.common.theme.*
 import com.example.common.utils.ConvertUtil
-import com.example.goodchoice.preference.GoodChoicePreference
+import com.example.data.local.preference.GoodChoicePreference
 
 @Composable
 fun MyInfoDetailContent(onFinish: () -> Unit = {}) {

@@ -8,7 +8,6 @@ import com.example.domain.info.StayDetailConnectInfo
 import com.example.domain.model.PayData
 import com.example.domain.usecase.LikeUseCase
 import com.example.domain.usecase.StayDetailUseCase
-import com.example.goodchoice.data.dto.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

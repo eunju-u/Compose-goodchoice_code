@@ -29,7 +29,7 @@ import com.example.common.theme.*
 import com.example.common.R
 import com.example.common.utils.ConvertUtil
 import com.example.database.recent.RecentDb
-import com.example.goodchoice.mapper.generateData
+import com.example.data.mapper.generateData
 import com.example.goodchoice.ui.stayDetail.StayDetailActivity
 import kotlinx.coroutines.*
 
