@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -48,50 +48,47 @@ android {
 
 dependencies {
 
-    implementation ("androidx.core:core-ktx:1.13.1")
-    implementation ("androidx.appcompat:appcompat:1.7.0")
-    implementation ("com.google.android.material:material:1.12.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 
     // Compose
-    implementation ("androidx.compose.material3:material3:1.2.1")
-    implementation ("androidx.compose.material:material:1.6.8")
-    implementation ("androidx.compose.foundation:foundation:1.6.8")
-    implementation ("androidx.compose.ui:ui:1.6.8")
-    debugImplementation ("androidx.compose.ui:ui-tooling:1.6.8")
-    debugImplementation ("androidx.compose.ui:ui-tooling:1.6.8")
-    implementation ("androidx.activity:activity-compose:1.9.1")
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui)
 
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.activity.compose)
+
+    implementation(libs.androidx.hilt.navigation.compose)
 
     //image load library
-    implementation ("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil)
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.androidx.lifecycle.viewmodelCompose)
+    implementation(libs.androidx.lifecycle.viewmodelKtx)
 
-    implementation ("com.google.accompanist:accompanist-swiperefresh:0.26.5-rc")
+    implementation(libs.google.accompanist.swiperefresh)
 
     //compose 용 웹뷰
-    implementation ("com.google.accompanist:accompanist-webview:0.30.0")
+    implementation(libs.com.google.accompanist.webview)
 
     //room db
-    implementation ("androidx.room:room-runtime:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation(libs.room.runtime)
 
     //Hilt
-    implementation ("com.google.dagger:hilt-android:2.49")
-    kapt ("com.google.dagger:hilt-compiler:2.48.1")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     // 네이버 지도 SDK
-    implementation("com.naver.maps:map-sdk:3.18.0")
-    implementation("io.github.fornewid:naver-map-compose:1.7.2")
-    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation(libs.naver.map)
+    implementation(libs.naver.map.compose)
+    implementation(libs.google.play.services.location)
 
     //모듈화
     implementation(project(":common"))
