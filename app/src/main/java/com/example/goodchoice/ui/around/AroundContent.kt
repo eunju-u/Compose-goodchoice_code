@@ -49,6 +49,7 @@ import com.naver.maps.map.compose.LocationTrackingMode
 import com.naver.maps.map.compose.MapProperties
 import com.naver.maps.map.compose.NaverMap
 import com.naver.maps.map.compose.rememberCameraPositionState
+import com.naver.maps.map.compose.rememberFusedLocationSource
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -118,6 +119,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
         NaverMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState, //현재 위치 표시
+            locationSource = rememberFusedLocationSource(isCompassEnabled = true),
             properties = MapProperties(
                 locationTrackingMode = LocationTrackingMode.Follow,
             ),
