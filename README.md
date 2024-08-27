@@ -7,10 +7,12 @@
 * Kotlin
 * Compose
 * Coroutine
-* Flow
-* DI
+* Flow (StateFlow)
+* DI (Hilt)
 * Clean Architecture
 * MVVM
+* RoomDB
+* Naver Map
 * 모듈화
   
 # UI
