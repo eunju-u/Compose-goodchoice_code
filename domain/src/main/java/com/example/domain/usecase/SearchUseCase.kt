@@ -3,10 +3,7 @@ package com.example.domain.usecase
 import com.example.domain.model.FilterItem
 import com.example.domain.model.RecommendAreaData
 import com.example.domain.repository.SearchRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchUseCase @Inject constructor(
@@ -14,14 +11,8 @@ class SearchUseCase @Inject constructor(
 ) {
     suspend fun getKoreaRankData(): List<FilterItem> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getKoreaRankData()
-                }
-                delay(100)
-                val data = resultDeferred.await()
-                data
-            }
+            delay(100)
+            repository.getKoreaRankData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()
@@ -30,13 +21,7 @@ class SearchUseCase @Inject constructor(
 
     suspend fun getRecommendWordData(): List<FilterItem> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getRecommendWordData()
-                }
-                val data = resultDeferred.await()
-                data
-            }
+            repository.getRecommendWordData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()
@@ -45,13 +30,7 @@ class SearchUseCase @Inject constructor(
 
     suspend fun getAreaData(): List<RecommendAreaData> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getAreaData()
-                }
-                val data = resultDeferred.await()
-                data
-            }
+            repository.getAreaData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()

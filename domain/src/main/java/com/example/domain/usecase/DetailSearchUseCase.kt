@@ -3,10 +3,7 @@ package com.example.domain.usecase
 import com.example.domain.model.FilterItem
 import com.example.domain.model.KoreaSearchData
 import com.example.domain.repository.DetailSearchRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DetailSearchUseCase @Inject constructor(
@@ -14,13 +11,7 @@ class DetailSearchUseCase @Inject constructor(
 ) {
     suspend fun getSearchData(): List<KoreaSearchData> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getSearchData()
-                }
-                val data = resultDeferred.await()
-                data
-            }
+            repository.getSearchData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()
@@ -29,14 +20,8 @@ class DetailSearchUseCase @Inject constructor(
 
     suspend fun getRankData(): List<FilterItem> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getRankData()
-                }
-                delay (200)
-                val data = resultDeferred.await()
-                data
-            }
+            delay (200)
+            repository.getRankData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()

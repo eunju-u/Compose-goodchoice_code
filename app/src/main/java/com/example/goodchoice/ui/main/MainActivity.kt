@@ -11,9 +11,6 @@ import com.example.common.ServerConst
 import com.example.domain.model.KoreaSearchData
 import com.example.ui.theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -36,14 +33,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        CoroutineScope(Dispatchers.IO).launch {
-            //홈 -> 최근 본 상품 -> 전체 삭제 -> 홈 이동시 최근 본 상품 갱신하기 위함.
-            viewModel.recentDb()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
+        //홈 -> 최근 본 상품 -> 전체 삭제 -> 홈 이동시 최근 본 상품 갱신하기 위함.
+        viewModel.recentDb()
     }
 
     //주변 화면에서 필터 상세 > 주변화면 돌아올 경우 호출되는 콜백

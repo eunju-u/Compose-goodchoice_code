@@ -3,10 +3,7 @@ package com.example.domain.usecase
 import com.example.common.utils.DeviceUtil
 import com.example.domain.info.AlarmConnectInfo
 import com.example.domain.repository.AlarmRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AlarmUseCase @Inject constructor(private val repository: AlarmRepository) {
@@ -15,17 +12,10 @@ class AlarmUseCase @Inject constructor(private val repository: AlarmRepository) 
 
     suspend fun getAlarmData(): AlarmConnectInfo {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getAlarmData()
-                }
-                delay(200)
-
-                if (!deviceUtil.isNetworkAvailable()) throw Exception("network is not connected")
-
-                val data = resultDeferred.await()
-                AlarmConnectInfo.Available(data)
-            }
+            //!! async는 동시에 여러 비동기 작업을 수행할 때 유용하지만, 네트워크 호출 내부에서 IO 처리하고 여긴 suspend 함수로 동작하니까 async 필요 없다.
+            delay(200)
+            if (!deviceUtil.isNetworkAvailable()) throw Exception("network is not connected")
+            AlarmConnectInfo.Available(repository.getAlarmData())
         } catch (e: Exception) {
             AlarmConnectInfo.Error(e.message)
         }

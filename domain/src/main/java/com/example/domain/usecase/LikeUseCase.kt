@@ -3,24 +3,18 @@ package com.example.domain.usecase
 import com.example.domain.model.StayItem
 import com.example.domain.repository.LikeRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-//TODO eunju : IO 두번 호출하는거 수정 필요,,
 class LikeUseCase @Inject constructor(
     private val repository: LikeRepository,
 ) {
     suspend fun getLikeData(): List<StayItem> {
         return try {
             withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getLikeData()
-                }
                 delay(100)
-                val data = resultDeferred.await()
-                data
+                repository.getLikeData()
             }
         } catch (e: Exception) {
             //TODO 예외처리
@@ -31,11 +25,7 @@ class LikeUseCase @Inject constructor(
     suspend fun hasLikeData(stayItemId: String): Boolean {
         return try {
             withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.hasLikeData(stayItemId)
-                }
-                val data = resultDeferred.await()
-                data
+                repository.hasLikeData(stayItemId)
             }
         } catch (e: Exception) {
             //TODO 예외처리

@@ -17,22 +17,16 @@ import com.example.data.remote.mock.S_9
 import com.example.database.like.LikeDb
 import com.example.database.like.LikeDbItem
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class LikeDataSource @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    suspend fun getLikeData(): List<StayItemDto> {
-        val list = CoroutineScope(Dispatchers.IO).async {
-            val likeDb = LikeDb.getInstance(context)
-            likeDb?.userDao()?.getAll()?.map {
-                it.generateData()
-            }
-        }
-        val likeList = list.await() ?: listOf()
+    fun getLikeData(): List<StayItemDto> {
         return getStayAllData().filter { stayItem ->
-            likeList.any { likeItem ->
+            (LikeDb.getInstance(context)?.userDao()?.getAll()?.map {
+                it.generateData()
+            } ?: emptyList()).any { likeItem ->
                 stayItem.id == likeItem.id
             }
         }
@@ -69,15 +63,5 @@ class LikeDataSource @Inject constructor(
     fun deleteLikeData(stayId: String) {
         val likeDb = LikeDb.getInstance(context)
         likeDb?.userDao()?.deleteLikeId(stayId)
-
-//        val resultDeferred =
-//            CoroutineScope(Dispatchers.IO).async {
-//                withTimeout(5000L) {
-//                    val likeDb = LikeDb.getInstance(GoodChoiceApplication.instance)
-//                    likeDb?.userDao()?.deleteLikeId(stayId)
-//                    true
-//                }
-//            }
-//        return resultDeferred.await()
     }
 }

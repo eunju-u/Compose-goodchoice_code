@@ -13,11 +13,7 @@ class RecentUseCase @Inject constructor(
     suspend fun getList(): List<StayItem> {
         return try {
             withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getList()
-                }
-                val data = resultDeferred.await()
-                data
+                repository.getList()
             }
         } catch (e: Exception) {
             //TODO 예외처리
@@ -28,10 +24,7 @@ class RecentUseCase @Inject constructor(
     suspend fun deleteList() {
         return try {
             withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.deleteList()
-                }
-                resultDeferred.await()
+                repository.deleteList()
             }
         } catch (e: Exception) {
             //TODO 예외처리

@@ -120,10 +120,8 @@ class MainViewModel @Inject constructor(
     fun getCurrentViewData(context: Context) {
         when (currentRoute.value) {
             NavItem.Home.route -> {
-                CoroutineScope(Dispatchers.IO).launch {
-                    requestHomeData()
-                    recentDb()
-                }
+                requestHomeData()
+                recentDb()
             }
 
             NavItem.Search.route -> {
@@ -144,9 +142,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    suspend fun requestHomeData(isRefresh: Boolean = false) =
-        withContext(viewModelScope.coroutineContext) {
-
+    fun requestHomeData(isRefresh: Boolean = false) = viewModelScope.launch {
             // SwipeRefresh 할 경우 1초 딜레이 줘서 상단 리스트 보여지게 함.
             // SwipeRefresh 할 경우 로딩 화면 나오지 않게 함.(상단 리스트가 노출 되어야 함.)
             if (isRefresh) {

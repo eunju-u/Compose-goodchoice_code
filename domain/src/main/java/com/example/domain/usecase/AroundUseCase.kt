@@ -2,9 +2,6 @@ package com.example.domain.usecase
 
 import com.example.domain.model.AroundFilterData
 import com.example.domain.repository.AroundRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AroundUseCase @Inject constructor(
@@ -12,13 +9,8 @@ class AroundUseCase @Inject constructor(
 ) {
     suspend fun getSleepData(): List<AroundFilterData> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getSleepData()
-                }
-                val data = resultDeferred.await()
-                data
-            }
+            //!! async는 동시에 여러 비동기 작업을 수행할 때 유용하지만, 네트워크 호출 내부에서 IO 처리하고 여긴 suspend 함수로 동작하니까 async 필요 없다.
+            repository.getSleepData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()
@@ -27,13 +19,7 @@ class AroundUseCase @Inject constructor(
 
     suspend fun getRentalData(): List<AroundFilterData> {
         return try {
-            withContext(Dispatchers.IO) {
-                val resultDeferred = async {
-                    repository.getRentalData()
-                }
-                val data = resultDeferred.await()
-                data
-            }
+            repository.getRentalData()
         } catch (e: Exception) {
             //TODO 예외처리
             listOf()
