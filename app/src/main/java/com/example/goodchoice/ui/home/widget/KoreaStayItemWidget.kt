@@ -27,6 +27,7 @@ import com.example.domain.model.StayItem
 import com.example.ui.theme.*
 import com.example.ui.R
 import com.example.data.mapper.generateData
+import com.example.database.recent.RecentDb
 import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui.theme.dp400
 import com.example.ui.utils.ConvertUtil
@@ -74,7 +75,7 @@ fun KoreaStayItemWidget(
                     }
                 )
 
-                val recentDb = com.example.database.recent.RecentDb.getInstance(context)
+                val recentDb = RecentDb.getInstance(context)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     val isExistId = recentDb

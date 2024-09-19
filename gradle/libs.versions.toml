@@ -29,6 +29,7 @@ googlePlayServicesLocation = "21.3.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompat" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 google-android-material = { group = "com.google.android.material", name = "material", version.ref = "googleMaterial" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

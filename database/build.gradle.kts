@@ -40,4 +40,5 @@ dependencies {
 
     //room db
     implementation(libs.room.runtime)
+    kapt (libs.androidx.room.compiler)
 }
