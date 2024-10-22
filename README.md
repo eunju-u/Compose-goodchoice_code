@@ -13,7 +13,7 @@
 * MVVM
 * RoomDB
 * Naver Map
-* 모듈화
+* Multi Module
   
 # UI
 
