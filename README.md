@@ -22,7 +22,7 @@
 
    폴드폰 전체 화면    |       폴드폰 부분 화면        |
 :-------------------------:|:-------------------------:
-![](https://github.com/eunju-u/dddddd/assets/55544506/4c7ce3c7-9037-4889-8ee1-7891466b2af6)  |  ![](https://github.com/eunju-u/dddddd/assets/55544506/7c5a9238-1634-406d-91e3-58afb3f230d7)
+![image](https://github.com/user-attachments/assets/2bf0dbac-937b-40d0-a082-3428ff169a68)  |  ![image](https://github.com/user-attachments/assets/db592783-e5a0-45cb-9d62-1b37ccbffd76)
 
 --------
  
@@ -33,21 +33,20 @@
 
    국내 캘린더    |       해외 캘린더        |
 :-------------------------:|:-------------------------:
-![](https://github.com/eunju-u/dddddd/assets/55544506/f32013a5-2310-484e-8e66-070f8103cded)  |  ![](https://github.com/eunju-u/dddddd/assets/55544506/9d87df38-d9ad-49dc-8797-358072770227)
+![image](https://github.com/user-attachments/assets/db442dc3-0188-4d07-b7b9-69aeb44dea97)  |  ![image](https://github.com/user-attachments/assets/a8107299-9963-4dcd-92e0-0c00abdf9e27)
 
   > 캘린더 영상
 
-  https://github.com/eunju-u/dddddd/assets/55544506/ef6b1359-f204-43e0-89d0-ff38acbcd68a
+  https://github.com/user-attachments/assets/49ad7342-164c-499f-b5e5-69bf576fb057
 
 --------
  
-3. Refresh UI, StickyHeader UI
-  * 위로 끌어올리는 제스처 할 경우 Refresh UI 노출
+3. StickyHeader UI
   * 아래로 스크롤 시 StickyHeader UI 노출
 
-  > Refresh UI, StickyHeader UI 영상
+  > StickyHeader UI 영상
 
-  https://github.com/eunju-u/dddddd/assets/55544506/03edd643-4c52-40a8-982c-1c27e3c67871
+  https://github.com/user-attachments/assets/e9b7f7c4-2cd1-484f-9b22-0309af0fed47
 
 --------
 
@@ -58,7 +57,7 @@
 
   > Naver 지도 영상
 
-  https://github.com/user-attachments/assets/1ac79d90-7cc2-4ee5-8edc-ea45c3e1fde3
+  https://github.com/user-attachments/assets/28ef1c5d-2369-46d3-8462-059908e12cbe
 
 --------
 
@@ -69,7 +68,7 @@
 
   > 필터 영상
 
-  https://github.com/user-attachments/assets/527b4827-1be6-47ed-b296-37eb66966509
+  https://github.com/user-attachments/assets/56087f5d-2142-47bb-8a75-108b23945f83
   
 --------
 
@@ -80,7 +79,7 @@
 
   > 검색 영상
 
-  https://github.com/user-attachments/assets/3e9daed5-0879-434b-a888-5514cb95ebac
+  https://github.com/user-attachments/assets/1174c501-b487-4314-924f-947bc74f0861
 
 --------
 
@@ -90,8 +89,7 @@
 
   > 상세화면 영상
   
-  https://github.com/eunju-u/dddddd/assets/55544506/f8abd86f-7a51-475e-82fa-92ab561a1871
-
+  https://github.com/user-attachments/assets/31323283-a2ca-4b79-b6a5-102bb2f0397b
 
 --------
 
@@ -100,8 +98,7 @@
 
   > 로그인 영상
   
-  https://github.com/eunju-u/dddddd/assets/55544506/2fc14d44-9c41-43b8-b088-ea8a42c90d01
-
+  https://github.com/user-attachments/assets/1ae86668-133d-49d8-abbe-cace1b087c06
 
 --------
 
@@ -111,8 +108,7 @@
 
   > 최근 본 상품 영상
   
-  https://github.com/eunju-u/Compose-goodchoice/assets/55544506/e730e37c-9a8e-4082-8738-d000d3ad7e45
-
+  https://github.com/user-attachments/assets/d7c10fdb-8f7f-48c2-94ae-14add9819aa7
 
 --------
 
@@ -124,8 +120,7 @@
 
   > 찜 영상
   
-  https://github.com/eunju-u/Compose-goodchoice/assets/55544506/9afdb4ef-799a-4687-9191-49b137c1204b
-
+  https://github.com/user-attachments/assets/efbbfce4-7160-4a71-bc46-7a5dd1acab7d
 
 --------
 
