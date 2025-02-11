@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.ui.theme.TestTheme
+import com.example.ui_theme.TestTheme
 import com.example.ui.utils.StringUtil
 
 class LoginActivity : ComponentActivity() {

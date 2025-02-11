@@ -8,7 +8,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import com.example.ui.theme.Theme
+import com.example.ui_theme.Theme
 
 object StringUtil {
 
@@ -95,7 +95,7 @@ object StringUtil {
     fun setTextLine(
         originText: String,
         targetText: String,
-        color: Color = com.example.ui.theme.Theme.colorScheme.darkGray
+        color: Color = Theme.colorScheme.darkGray
     ): AnnotatedString {
         return buildAnnotatedString {
             // for 문으로 하려고 했지만 oom 나서 수정함

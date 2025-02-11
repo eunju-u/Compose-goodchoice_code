@@ -18,8 +18,8 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import com.example.ui.components.*
 import com.example.ui.calendar.model.CalendarUiState
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.Theme
+import com.example.ui_theme.*
 import java.time.LocalDate
 
 @Composable

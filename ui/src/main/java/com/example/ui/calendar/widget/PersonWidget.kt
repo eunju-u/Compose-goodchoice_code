@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.Theme
+import com.example.ui_theme.*
 import com.example.ui.components.ShapeButton
 
 @Composable
@@ -52,11 +52,11 @@ fun PersonWidget(
                 size = dp40,
                 isChecked = count > min,
                 checkedColor = if (count > min) Theme.colorScheme.pureBlue else Theme.colorScheme.pureGray,
-                borderColor = if (count > min) com.example.ui.theme.Theme.colorScheme.blue1 else com.example.ui.theme.Theme.colorScheme.gray,
+                borderColor = if (count > min) Theme.colorScheme.blue1 else Theme.colorScheme.gray,
                 content = {
                     Image(
                         painter = painterResource(id = R.drawable.ic_round_remove),
-                        colorFilter = ColorFilter.tint(if (count > min) com.example.ui.theme.Theme.colorScheme.blue1 else com.example.ui.theme.Theme.colorScheme.gray),
+                        colorFilter = ColorFilter.tint(if (count > min) Theme.colorScheme.blue1 else Theme.colorScheme.gray),
                         contentDescription = "빼기",
                     )
                 },
@@ -67,14 +67,14 @@ fun PersonWidget(
                 style = MaterialTheme.typography.labelLarge
             )
             ShapeButton(
-                size = com.example.ui.theme.dp40,
+                size = dp40,
                 isChecked = count <= max,
-                checkedColor = if (count < max) com.example.ui.theme.Theme.colorScheme.pureBlue else com.example.ui.theme.Theme.colorScheme.pureGray,
-                borderColor = if (count < max) com.example.ui.theme.Theme.colorScheme.blue1 else com.example.ui.theme.Theme.colorScheme.gray,
+                checkedColor = if (count < max) Theme.colorScheme.pureBlue else Theme.colorScheme.pureGray,
+                borderColor = if (count < max) Theme.colorScheme.blue1 else Theme.colorScheme.gray,
                 content = {
                     Image(
                         painter = painterResource(id = R.drawable.ic_round_add),
-                        colorFilter = ColorFilter.tint(if (count < max) com.example.ui.theme.Theme.colorScheme.blue1 else com.example.ui.theme.Theme.colorScheme.gray),
+                        colorFilter = ColorFilter.tint(if (count < max) Theme.colorScheme.blue1 else Theme.colorScheme.gray),
                         contentDescription = "더하기",
                     )
                 },

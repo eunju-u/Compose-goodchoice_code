@@ -9,7 +9,7 @@ import com.example.ui.R
 import java.time.LocalDate
 import com.example.ui.calendar.model.CalendarState
 import com.example.ui.components.TopAppBarWidget
-import com.example.ui.theme.Theme
+import com.example.ui_theme.Theme
 
 
 @Composable

@@ -25,7 +25,7 @@ import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
 import com.example.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.ui.stayDetail.StayDetailActivity
-import com.example.ui.theme.Theme
+import com.example.ui_theme.*
 
 private val menus = listOf(
     TabData.KOREA, TabData.OVERSEA, TabData.RENTAL, TabData.LEISURE

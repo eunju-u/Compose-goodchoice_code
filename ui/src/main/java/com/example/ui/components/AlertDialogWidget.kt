@@ -10,9 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
-
+import com.example.ui_theme.Theme
+import com.example.ui_theme.*
 
 @Composable
 fun AlertDialogWidget(

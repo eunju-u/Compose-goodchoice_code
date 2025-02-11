@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.example.common.Const
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 @Composable
 fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit = {}) {
@@ -34,7 +34,7 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
     val iconModifier = Modifier.size(dp15)
     val endPadding = dp10
     val outsidePadding = PaddingValues(bottom = dp12)
-    val innerPadding = PaddingValues(horizontal = com.example.ui.theme.dp15, vertical = com.example.ui.theme.dp15)
+    val innerPadding = PaddingValues(horizontal = dp15, vertical = dp15)
     val widgetSize = Modifier
         .fillMaxWidth()
 
@@ -53,7 +53,7 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                 if (style.fontSize < 14.sp) {
                     (plusPadding.value * 0.97).dp
                 } else {
-                    (plusPadding.value * com.example.ui.theme.fontSmallSizeRaio).dp
+                    (plusPadding.value * fontSmallSizeRaio).dp
                 }
             } else {
                 plusPadding
@@ -64,20 +64,20 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
     Box(
         Modifier
             .fillMaxSize()
-            .background(com.example.ui.theme.Theme.colorScheme.white)
+            .background(Theme.colorScheme.white)
     ) {
         Column {
             TopAppBarWidget(isCloseButton = true, onFinish = { onFinish("") }) {}
             LazyColumn(
-                Modifier.padding(start = com.example.ui.theme.dp20, end = com.example.ui.theme.dp20),
+                Modifier.padding(start = dp20, end = dp20),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 item {
                     Image(
                         modifier = Modifier
-                            .size(com.example.ui.theme.dp130)
-                            .padding(top = com.example.ui.theme.dp25),
+                            .size(dp130)
+                            .padding(top = dp25),
                         painter = painterResource(id = R.drawable.img_goodchoice),
                         contentDescription = stringResource(id = R.string.str_app_name)
                     )
@@ -85,23 +85,23 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = com.example.ui.theme.dp25, bottom = com.example.ui.theme.dp25),
+                            .padding(top = dp25, bottom = dp25),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         HorizontalDivider(
                             modifier = Modifier.weight(1f, fill = false),
-                            thickness = com.example.ui.theme.dp1,
-                            color = com.example.ui.theme.Theme.colorScheme.pureGray
+                            thickness = dp1,
+                            color = Theme.colorScheme.pureGray
                         )
                         Text(
                             text = stringResource(id = R.string.str_login_and_join),
-                            color = com.example.ui.theme.Theme.colorScheme.gray,
+                            color = Theme.colorScheme.gray,
                             style = MaterialTheme.typography.labelMedium
                         )
                         HorizontalDivider(
                             modifier = Modifier.weight(1f, fill = false),
-                            thickness = com.example.ui.theme.dp1,
-                            color = com.example.ui.theme.Theme.colorScheme.pureGray
+                            thickness = dp1,
+                            color = Theme.colorScheme.pureGray
                         )
                     }
 
@@ -110,15 +110,15 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_start_login_kakao),
-                        containerColor = com.example.ui.theme.Theme.colorScheme.yellow,
-                        contentColor = com.example.ui.theme.Theme.colorScheme.darkGray,
+                        containerColor = Theme.colorScheme.yellow,
+                        contentColor = Theme.colorScheme.darkGray,
                         style = style,
                         endPadding = endPadding,
                         content = {
                             Image(
                                 modifier = iconModifier,
                                 painter = painterResource(id = R.drawable.ic_kakao),
-                                colorFilter = ColorFilter.tint(com.example.ui.theme.Theme.colorScheme.darkGray),
+                                colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
                                 contentDescription = null
                             )
                         },
@@ -130,15 +130,15 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_start_login_naver),
-                        containerColor = com.example.ui.theme.Theme.colorScheme.green,
-                        contentColor = com.example.ui.theme.Theme.colorScheme.white,
+                        containerColor = Theme.colorScheme.green,
+                        contentColor = Theme.colorScheme.white,
                         style = style,
                         endPadding = endPadding,
                         content = {
                             Image(
                                 modifier = iconModifier,
                                 painter = painterResource(id = R.drawable.ic_naver),
-                                colorFilter = ColorFilter.tint(com.example.ui.theme.Theme.colorScheme.white),
+                                colorFilter = ColorFilter.tint(Theme.colorScheme.white),
                                 contentDescription = null
                             )
                         },
@@ -150,8 +150,8 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_start_login_facebook),
-                        containerColor = com.example.ui.theme.Theme.colorScheme.blue,
-                        contentColor = com.example.ui.theme.Theme.colorScheme.white,
+                        containerColor = Theme.colorScheme.blue,
+                        contentColor = Theme.colorScheme.white,
                         style = style,
                         endPadding = endPadding,
                         content = {
@@ -169,8 +169,8 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_start_login_google),
-                        contentColor = com.example.ui.theme.Theme.colorScheme.darkGray,
-                        borderColor = com.example.ui.theme.Theme.colorScheme.pureGray,
+                        contentColor = Theme.colorScheme.darkGray,
+                        borderColor = Theme.colorScheme.pureGray,
                         style = style,
                         endPadding = endPadding,
                         content = {
@@ -188,15 +188,15 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
                         outerPadding = outsidePadding,
                         innerPadding = innerPadding,
                         title = stringResource(id = R.string.str_start_login_email),
-                        containerColor = com.example.ui.theme.Theme.colorScheme.pureBlue,
-                        contentColor = com.example.ui.theme.Theme.colorScheme.blue1,
+                        containerColor = Theme.colorScheme.pureBlue,
+                        contentColor = Theme.colorScheme.blue1,
                         style = style,
                         endPadding = endPadding,
                         content = {
                             Image(
                                 modifier = iconModifier,
                                 painter = painterResource(id = R.drawable.ic_email),
-                                colorFilter = ColorFilter.tint(com.example.ui.theme.Theme.colorScheme.blue),
+                                colorFilter = ColorFilter.tint(Theme.colorScheme.blue),
                                 contentDescription = null
                             )
                         },
@@ -210,10 +210,10 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
         Text(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(com.example.ui.theme.dp30)
+                .padding(dp30)
                 .clickable { },
             text = stringResource(id = R.string.str_login_business),
-            color = com.example.ui.theme.Theme.colorScheme.darkGray,
+            color = Theme.colorScheme.darkGray,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.labelLarge.copy(
                 fontWeight = FontWeight.Bold
@@ -235,26 +235,26 @@ fun LoginContent(isLoginWay: String = "", onFinish: (loginWay: String) -> Unit =
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = recentViewTopPadding, start = com.example.ui.theme.dp15, end = com.example.ui.theme.dp15),
+                    .padding(top = recentViewTopPadding, start = dp15, end = dp15),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
                     modifier = Modifier
                         .offset(y = (10).dp)
-                        .clip(RoundedCornerShape(com.example.ui.theme.dp20))
-                        .background(color = com.example.ui.theme.Theme.colorScheme.darkGray)
+                        .clip(RoundedCornerShape(dp20))
+                        .background(color = Theme.colorScheme.darkGray)
                 ) {
                     Text(
                         modifier = Modifier
-                            .padding(com.example.ui.theme.dp8),
+                            .padding(dp8),
                         text = stringResource(R.string.str_login_recent),
-                        style = MaterialTheme.typography.labelMedium.copy(color = com.example.ui.theme.Theme.colorScheme.pureGray)
+                        style = MaterialTheme.typography.labelMedium.copy(color = Theme.colorScheme.pureGray)
                     )
                 }
 
                 Image(
                     painter = painterResource(id = R.drawable.ic_arrow_drop_down),
-                    colorFilter = ColorFilter.tint(com.example.ui.theme.Theme.colorScheme.darkGray),
+                    colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
                     contentDescription = null
                 )
             }

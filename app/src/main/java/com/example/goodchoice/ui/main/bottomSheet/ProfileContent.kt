@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ui.R
 import com.example.ui.components.ButtonWidget
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 /**
  * 프로필 사진 선택 바텀 시트

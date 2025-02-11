@@ -14,8 +14,7 @@ import androidx.compose.ui.UiComposable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 enum class ShapeType {
     RECTANGLE, CIRCLE

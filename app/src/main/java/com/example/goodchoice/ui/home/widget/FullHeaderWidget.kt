@@ -22,9 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.example.ui.components.*
 import com.example.domain.model.CategoryItem
 import com.example.ui.R
-import com.example.ui.theme.CategoryItemHeight
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.Theme
+import com.example.ui_theme.*
 
 @SuppressLint("RememberReturnType", "UnusedBoxWithConstraintsScope")
 @Composable

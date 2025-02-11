@@ -7,8 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.ui.components.TagWidget
 import com.example.domain.model.FilterItem
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -33,11 +32,11 @@ fun FilterItemWidget(
         list.forEach {
             TagWidget(
                 outerPadding = PaddingValues(dp5),
-                containerColor = if (selectList.contains(it)) Theme.colorScheme.pureBlue else com.example.ui.theme.Theme.colorScheme.white,
-                borderColor = if (selectList.contains(it)) com.example.ui.theme.Theme.colorScheme.blue else com.example.ui.theme.Theme.colorScheme.pureGray,
+                containerColor = if (selectList.contains(it)) Theme.colorScheme.pureBlue else Theme.colorScheme.white,
+                borderColor = if (selectList.contains(it)) Theme.colorScheme.blue else Theme.colorScheme.pureGray,
                 onItemClick = { onItemClick(it) },
                 title = it.filterTitle ?: "", style = MaterialTheme.typography.labelMedium,
-                contentColor = if (selectList.contains(it)) com.example.ui.theme.Theme.colorScheme.blue else com.example.ui.theme.Theme.colorScheme.darkGray,
+                contentColor = if (selectList.contains(it)) Theme.colorScheme.blue else Theme.colorScheme.darkGray,
             )
         }
     }

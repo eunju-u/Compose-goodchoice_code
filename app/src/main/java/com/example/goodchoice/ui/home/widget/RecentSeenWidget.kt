@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.R
 import com.example.ui.components.RoundImageWidget
 import com.example.ui.components.*

@@ -24,12 +24,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
 import com.example.domain.model.StayItem
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.R
 import com.example.data.mapper.generateData
 import com.example.database.recent.RecentDb
 import com.example.ui.stayDetail.StayDetailActivity
-import com.example.ui.theme.dp400
 import com.example.ui.utils.ConvertUtil
 import kotlinx.coroutines.*
 

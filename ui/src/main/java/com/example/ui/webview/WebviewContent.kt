@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.dp20
+import com.example.ui_theme.Theme
+import com.example.ui_theme.dp20
 import com.example.ui.webview.widget.TopWebViewBarWidget
 import com.google.accompanist.web.*
 

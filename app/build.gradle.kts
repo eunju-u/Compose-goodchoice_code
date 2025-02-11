@@ -96,4 +96,5 @@ dependencies {
     implementation(project(":database"))
     implementation(project(":data"))
     implementation(project(":ui"))
+    implementation(project(":ui-theme"))
 }

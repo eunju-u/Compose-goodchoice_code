@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.example.common.Const
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.ui.calendar.model.CalendarState
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

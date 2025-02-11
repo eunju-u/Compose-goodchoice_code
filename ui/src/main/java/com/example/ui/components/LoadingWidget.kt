@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import com.example.ui.theme.Theme
+import com.example.ui_theme.*
 
 @Composable
 fun LoadingWidget() {

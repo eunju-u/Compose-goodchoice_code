@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.ui.R
+import com.example.ui_theme.Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +37,7 @@ fun TopWebViewBarWidget(
                 IconButton(onClick = onBack) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
-                        tint = com.example.ui.theme.Theme.colorScheme.gray,
+                        tint = Theme.colorScheme.gray,
                         contentDescription = null
                     )
                 }
@@ -81,7 +82,7 @@ fun TopWebViewBarWidget(
                         IconButton(enabled = false, onClick = {}) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_back),
-                                tint = com.example.ui.theme.Theme.colorScheme.white,
+                                tint = Theme.colorScheme.white,
                                 contentDescription = null
                             )
                         }
@@ -95,10 +96,10 @@ fun TopWebViewBarWidget(
         actions = {
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = com.example.ui.theme.Theme.colorScheme.white,
-            titleContentColor = com.example.ui.theme.Theme.colorScheme.darkGray,
-            navigationIconContentColor = com.example.ui.theme.Theme.colorScheme.darkGray,
-            actionIconContentColor = com.example.ui.theme.Theme.colorScheme.darkGray,
+            containerColor = Theme.colorScheme.white,
+            titleContentColor = Theme.colorScheme.darkGray,
+            navigationIconContentColor = Theme.colorScheme.darkGray,
+            actionIconContentColor = Theme.colorScheme.darkGray,
         )
     )
 }

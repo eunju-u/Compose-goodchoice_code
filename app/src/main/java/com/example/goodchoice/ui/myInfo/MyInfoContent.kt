@@ -26,7 +26,7 @@ import com.example.common.Const
 import com.example.ui.R
 import com.example.common.MainBottomSheetType
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.CategoryItem
 import com.example.domain.model.MyMenuData

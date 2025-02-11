@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.ui.R
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 //기존 여기어때 앱은 인원 선택 뷰에서 해상도 고려 하지 않고 있다!
 /**

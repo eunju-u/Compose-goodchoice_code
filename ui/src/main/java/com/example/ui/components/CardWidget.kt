@@ -19,8 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 // 뷰의 width 값만 정해주고 height 값을 정하지 않는게 좋음
 // 기존에 ButtonWidget 사용했는데 CardWidget 으로 바꾼 이유 :

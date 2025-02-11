@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.example.common.Const
 import com.example.common.ServerConst
 import com.example.domain.model.KoreaSearchData
-import com.example.ui.theme.TestTheme
+import com.example.ui_theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

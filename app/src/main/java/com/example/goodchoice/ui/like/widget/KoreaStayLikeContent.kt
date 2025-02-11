@@ -14,7 +14,7 @@ import com.example.data.local.preference.GoodChoicePreference
 import com.example.domain.model.StayItem
 import com.example.ui.calendar.CalendarActivity
 import com.example.ui.calendar.CalendarType
-import com.example.ui.theme.Theme
+import com.example.ui_theme.*
 
 @Composable
 fun KoreaStayLikeContent(

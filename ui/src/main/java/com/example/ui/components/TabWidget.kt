@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.common.data.TabData
-import com.example.ui.theme.Theme
+import com.example.ui_theme.*
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)

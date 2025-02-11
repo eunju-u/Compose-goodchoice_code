@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.R
 import com.example.ui.components.*
 import com.example.domain.info.ConnectInfo

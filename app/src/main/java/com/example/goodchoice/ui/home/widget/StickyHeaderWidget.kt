@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.domain.model.CategoryItem
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.R
 import androidx.compose.ui.graphics.ColorFilter
 import com.example.ui.components.CategoryItemWidget

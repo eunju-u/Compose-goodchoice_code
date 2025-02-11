@@ -16,8 +16,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.dp15
+import com.example.ui_theme.Theme
+import com.example.ui_theme.dp15
 
 @Composable
 fun SpaceBetweenRowWidget(

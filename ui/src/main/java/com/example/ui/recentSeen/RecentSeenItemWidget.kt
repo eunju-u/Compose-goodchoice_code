@@ -17,7 +17,7 @@ import com.example.ui.R
 import com.example.ui.components.RoundImageWidget
 import com.example.domain.model.StayItem
 import com.example.ui.stayDetail.StayDetailActivity
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 /**
  * 최근 본 상품 상세 페이지 각 아이템

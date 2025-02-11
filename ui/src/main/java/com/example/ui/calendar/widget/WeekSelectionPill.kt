@@ -16,7 +16,7 @@ import com.example.ui.calendar.model.CalendarState
 import com.example.ui.calendar.model.CalendarUiState
 import com.example.ui.calendar.model.Week
 import java.time.LocalDate
-import com.example.ui.theme.Theme
+import com.example.ui_theme.Theme
 
 /**
  * 날짜 선택시 위에 표시되는 뷰

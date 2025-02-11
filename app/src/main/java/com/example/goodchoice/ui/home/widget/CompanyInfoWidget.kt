@@ -16,7 +16,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.R
 
 @Composable

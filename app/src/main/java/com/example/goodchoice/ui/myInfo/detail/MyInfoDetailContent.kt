@@ -14,7 +14,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.ui.components.TopAppBarWidget
 import com.example.ui.utils.ConvertUtil

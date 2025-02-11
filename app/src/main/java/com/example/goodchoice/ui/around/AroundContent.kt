@@ -38,8 +38,7 @@ import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
 import com.example.ui.components.*
 import com.example.ui.components.bottomSheet.*
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition

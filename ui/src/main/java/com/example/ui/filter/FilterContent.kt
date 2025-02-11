@@ -22,8 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.ServerConst
 import com.example.ui.components.*
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.FilterData
 import com.example.domain.model.FilterItem
@@ -81,13 +80,13 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = dp20, end = dp20, bottom = com.example.ui.theme.dp70),
+                            .padding(start = dp20, end = dp20, bottom = dp70),
                         state = scrollState
                     ) {
                         item {
                             SpaceBetweenRowWidget(modifier = Modifier
                                 .fillMaxWidth()
-                                .height(com.example.ui.theme.dp40),
+                                .height(dp40),
                                 text = stringResource(id = R.string.str_reservation_available),
                                 textStyle = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                                 content = {
@@ -97,12 +96,12 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                             checkReservation = it
                                         },
                                         colors = SwitchDefaults.colors(
-                                            checkedTrackColor = com.example.ui.theme.Theme.colorScheme.blue,
-                                            uncheckedTrackColor = com.example.ui.theme.Theme.colorScheme.pureGray,
+                                            checkedTrackColor = Theme.colorScheme.blue,
+                                            uncheckedTrackColor = Theme.colorScheme.pureGray,
                                         )
                                     )
                                 })
-                            Spacer(modifier = Modifier.height(com.example.ui.theme.dp20))
+                            Spacer(modifier = Modifier.height(dp20))
                         }
 
                         if (stayTypeList.isNotEmpty()) {
@@ -112,7 +111,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                     text = "숙소유형",
                                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                                 )
-                                Spacer(modifier = Modifier.height(com.example.ui.theme.dp20))
+                                Spacer(modifier = Modifier.height(dp20))
 
                                 val height =
                                     ((stayTypeList.size / 2) + (if (stayTypeList.size % 2 > 0) 1 else 0)) * 50
@@ -122,14 +121,14 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                     userScrollEnabled = false
                                 ) {
                                     items(items = stayTypeList) { item ->
-                                        LeftImageButtonWidget(modifier = Modifier.height(com.example.ui.theme.dp50),
+                                        LeftImageButtonWidget(modifier = Modifier.height(dp50),
                                             title = item.filterTitle,
                                             style = MaterialTheme.typography.labelMedium,
                                             isCenterHorizontalArrangement = false,
                                             content = {
                                                 ShapeButton(
                                                     isChecked = clickStayType.value.filterType == item.filterType,
-                                                    checkedColor = com.example.ui.theme.Theme.colorScheme.blue,
+                                                    checkedColor = Theme.colorScheme.blue,
                                                 )
                                             },
                                             onItemClick = {
@@ -147,7 +146,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                     }
                                 }
                             }
-                            item { Spacer(modifier = Modifier.height(com.example.ui.theme.dp20)) }
+                            item { Spacer(modifier = Modifier.height(dp20)) }
                         }
 
                         if (list.isNotEmpty()) {
@@ -156,7 +155,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                     Text(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(top = com.example.ui.theme.dp10, bottom = com.example.ui.theme.dp10),
+                                            .padding(top = dp10, bottom = dp10),
                                         text = it,
                                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                                     )
@@ -204,7 +203,7 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                                         })
                                 }
 
-                                Spacer(modifier = Modifier.height(com.example.ui.theme.dp20))
+                                Spacer(modifier = Modifier.height(dp20))
                             }
                         }
                     }
@@ -213,14 +212,14 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
         }
 
         CardWidget(modifier = Modifier.align(Alignment.BottomEnd),
-            containerColor = com.example.ui.theme.Theme.colorScheme.white,
+            containerColor = Theme.colorScheme.white,
             isVisibleShadow = true,
-            shadowOffsetY = -com.example.ui.theme.dp5,
+            shadowOffsetY = -dp5,
             content = {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(com.example.ui.theme.dp50)
+                        .height(dp50)
                 ) {
                     val isChecked =
                         selectFilterMap.values.isNotEmpty() || clickStayType.value.filterType != ServerConst.ALL
@@ -228,11 +227,11 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                         .weight(0.3f)
                         .fillMaxHeight(),
                         title = stringResource(id = R.string.str_filter_reset),
-                        innerPadding = PaddingValues(horizontal = com.example.ui.theme.dp5),
-                        shape = com.example.ui.theme.dp0,
-                        contentColor = if (isChecked) com.example.ui.theme.Theme.colorScheme.darkGray else com.example.ui.theme.Theme.colorScheme.gray,
+                        innerPadding = PaddingValues(horizontal = dp5),
+                        shape = dp0,
+                        contentColor = if (isChecked) Theme.colorScheme.darkGray else Theme.colorScheme.gray,
                         style = MaterialTheme.typography.labelMedium,
-                        endPadding = com.example.ui.theme.dp10,
+                        endPadding = dp10,
                         onItemClick = {
                             viewModel.checkReservation.value = false
                             selectFilterMap.clear()
@@ -247,22 +246,22 @@ fun FilterContent(viewModel: FilterViewModel, onFinish: () -> Unit = {}) {
                         },
                         content = {
                             Icon(
-                                modifier = Modifier.size(com.example.ui.theme.dp15),
+                                modifier = Modifier.size(dp15),
                                 painter = painterResource(id = R.drawable.ic_refresh),
-                                tint = if (isChecked) com.example.ui.theme.Theme.colorScheme.darkGray else com.example.ui.theme.Theme.colorScheme.gray,
+                                tint = if (isChecked) Theme.colorScheme.darkGray else Theme.colorScheme.gray,
                                 contentDescription = null
                             )
                         })
                     ButtonWidget(
                         modifier = Modifier.weight(0.7f),
-                        containerColor = com.example.ui.theme.Theme.colorScheme.pureGray,
+                        containerColor = Theme.colorScheme.pureGray,
                         content = {
                             Text(
                                 text = stringResource(
                                     id = R.string.str_filter_stay_count, stayCount
                                 ),
                                 style = MaterialTheme.typography.labelLarge,
-                                color = if (stayCount == 0) com.example.ui.theme.Theme.colorScheme.gray else com.example.ui.theme.Theme.colorScheme.white
+                                color = if (stayCount == 0) Theme.colorScheme.gray else Theme.colorScheme.white
                             )
                         }, onItemClick = {
                             (context as FilterActivity).apply {

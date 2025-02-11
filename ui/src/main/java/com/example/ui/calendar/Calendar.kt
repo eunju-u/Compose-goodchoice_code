@@ -30,8 +30,7 @@ import com.example.ui.calendar.widget.DURATION_MILLIS_PER_DAY
 import com.example.ui.calendar.widget.KoreaPersonWidget
 import com.example.ui.calendar.widget.OverseaPersonWidget
 import com.example.ui.calendar.widget.PersonButtonWidget
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.utils.ConvertUtil
 import java.time.LocalDate
 import java.time.temporal.WeekFields

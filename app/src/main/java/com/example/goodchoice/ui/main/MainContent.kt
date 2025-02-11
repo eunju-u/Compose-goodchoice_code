@@ -34,9 +34,7 @@ import com.example.goodchoice.nav.NavItem
 import com.example.goodchoice.nav.navigation
 import com.example.goodchoice.ui.main.state.rememberMainState
 import com.example.ui.components.*
-import com.example.ui.theme.GMarketSansFamily
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

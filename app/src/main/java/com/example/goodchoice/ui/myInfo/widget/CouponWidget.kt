@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 @Composable
 fun CouponWidget(

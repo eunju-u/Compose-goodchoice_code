@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.ui.theme.*
 import com.example.ui.R
 import com.example.ui.components.GoToWidget
+import com.example.ui_theme.*
 
 @Composable
 fun EmptyDataWidget(value: String = "", onClick: () -> Unit = {}) {

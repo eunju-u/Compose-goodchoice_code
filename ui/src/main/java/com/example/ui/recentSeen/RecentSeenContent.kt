@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 /**
  * 최근 본 상품 화면
@@ -65,7 +65,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
                         .wrapContentHeight(Alignment.CenterVertically),
                     text = stringResource(id = R.string.str_all_remove),
                     style = MaterialTheme.typography.labelSmall,
-                    color = com.example.ui.theme.Theme.colorScheme.darkGray,
+                    color = Theme.colorScheme.darkGray,
                     textAlign = TextAlign.Center
                 )
             }
@@ -73,7 +73,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
 
         val modifier = Modifier
             .fillMaxSize()
-            .background(com.example.ui.theme.Theme.colorScheme.white)
+            .background(Theme.colorScheme.white)
         if (stayList.value.isNotEmpty()) {
             LazyColumn(
                 modifier = modifier,
@@ -83,7 +83,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = com.example.ui.theme.dp20, top = com.example.ui.theme.dp20, bottom = com.example.ui.theme.dp15),
+                            .padding(start = dp20, top = dp20, bottom = dp15),
                         text = context.getString(R.string.str_recent_seen_item),
                         style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
                     )
@@ -94,30 +94,30 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
             }
         } else {
             Column(
-                modifier = modifier.padding(com.example.ui.theme.dp30),
+                modifier = modifier.padding(dp30),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.str_empty_recent_seen_item_title),
-                    color = com.example.ui.theme.Theme.colorScheme.darkGray,
+                    color = Theme.colorScheme.darkGray,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.labelLarge
                 )
 
-                Spacer(modifier = Modifier.height(com.example.ui.theme.dp10))
+                Spacer(modifier = Modifier.height(dp10))
                 Text(
                     text = stringResource(id = R.string.str_empty_recent_seen_item_sub),
-                    color = com.example.ui.theme.Theme.colorScheme.gray,
+                    color = Theme.colorScheme.gray,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.labelMedium
                 )
 
-                Spacer(modifier = Modifier.height(com.example.ui.theme.dp10))
+                Spacer(modifier = Modifier.height(dp10))
                 CardWidget(content = {
                     Text(
                         text = stringResource(id = R.string.str_see_item),
-                        color = com.example.ui.theme.Theme.colorScheme.panoramaBlue,
+                        color = Theme.colorScheme.panoramaBlue,
                         style = MaterialTheme.typography.labelSmall
                     )
                 }, onItemClick = {

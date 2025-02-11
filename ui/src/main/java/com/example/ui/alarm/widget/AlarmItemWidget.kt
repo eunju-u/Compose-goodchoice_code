@@ -16,7 +16,7 @@ import com.example.ui.R
 import com.example.domain.model.AlarmItem
 import com.example.ui.components.CardWidget
 import com.example.ui.components.TextWidget
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 @Composable
 fun AlarmItemWidget(item: AlarmItem) {

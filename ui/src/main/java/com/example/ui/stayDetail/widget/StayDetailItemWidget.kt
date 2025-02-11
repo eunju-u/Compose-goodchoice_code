@@ -23,6 +23,7 @@ import com.example.ui.components.*
 import com.example.domain.model.RoomItem
 import com.example.ui.utils.ConvertUtil
 import com.example.ui.utils.StringUtil
+import com.example.ui_theme.*
 
 @Composable
 fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
@@ -45,18 +46,18 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
 
     CardWidget(
         isVisibleShadow = true,
-        outerPadding = PaddingValues(com.example.ui.theme.dp10),
-        innerPadding = PaddingValues(top = com.example.ui.theme.dp15, start = com.example.ui.theme.dp10, end = com.example.ui.theme.dp10, bottom = com.example.ui.theme.dp7),
-        cornerShape = RoundedCornerShape(com.example.ui.theme.dp15),
-        containerColor = com.example.ui.theme.Theme.colorScheme.white,
-        shadowColor = com.example.ui.theme.Theme.colorScheme.gray
+        outerPadding = PaddingValues(dp10),
+        innerPadding = PaddingValues(top = dp15, start = dp10, end = dp10, bottom = dp7),
+        cornerShape = RoundedCornerShape(dp15),
+        containerColor = Theme.colorScheme.white,
+        shadowColor = Theme.colorScheme.gray
     ) {
         Column {
             Text(
                 text = roomItem.name ?: "",
                 style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
             )
-            Spacer(modifier = Modifier.height(com.example.ui.theme.dp20))
+            Spacer(modifier = Modifier.height(dp20))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -64,13 +65,13 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
             ) {
                 Image(
                     modifier = Modifier
-                        .width(com.example.ui.theme.dp120)
-                        .height(com.example.ui.theme.dp150)
+                        .width(dp120)
+                        .height(dp150)
                         .background(
-                            shape = RoundedCornerShape(com.example.ui.theme.dp10),
-                            color = com.example.ui.theme.Theme.colorScheme.white
+                            shape = RoundedCornerShape(dp10),
+                            color = Theme.colorScheme.white
                         )
-                        .clip(RoundedCornerShape(com.example.ui.theme.dp10)),
+                        .clip(RoundedCornerShape(dp10)),
                     contentScale = ContentScale.FillHeight,
                     painter = rememberAsyncImagePainter(
                         model = roomItem.image,
@@ -87,18 +88,18 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                         Box(
                             modifier = Modifier
                                 .width(IntrinsicSize.Max)
-                                .padding(bottom = com.example.ui.theme.dp3)
+                                .padding(bottom = dp3)
                         ) {
                             HorizontalDivider(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .align(Alignment.BottomEnd),
-                                thickness = com.example.ui.theme.dp5,
-                                color = com.example.ui.theme.Theme.colorScheme.yellow
+                                thickness = dp5,
+                                color = Theme.colorScheme.yellow
                             )
                             Text(
                                 text = stringResource(id = R.string.str_left_count, count),
-                                color = com.example.ui.theme.Theme.colorScheme.darkGray,
+                                color = Theme.colorScheme.darkGray,
                                 style = MaterialTheme.typography.labelSmall
                             )
                         }
@@ -110,89 +111,89 @@ fun StayDetailItemWidget(roomItem: RoomItem = RoomItem()) {
                         if (discountPer > 0) {
                             Text(
                                 text = "${discountPer}%",
-                                color = com.example.ui.theme.Theme.colorScheme.red,
+                                color = Theme.colorScheme.red,
                                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
                             )
-                            Spacer(modifier = Modifier.width(com.example.ui.theme.dp10))
+                            Spacer(modifier = Modifier.width(dp10))
                         }
                         if (isDiscountPriceNumber) {
                             if (discountPrice != "" && convertDefaultPrice != "") {
                                 Text(
                                     text = convertDefaultPrice,
-                                    color = com.example.ui.theme.Theme.colorScheme.gray,
+                                    color = Theme.colorScheme.gray,
                                     textDecoration = TextDecoration.LineThrough, //취소선
                                     style = MaterialTheme.typography.labelSmall
                                 )
                             } else {
                                 Text(
                                     text = convertDefaultPrice,
-                                    color = com.example.ui.theme.Theme.colorScheme.gray,
+                                    color = Theme.colorScheme.gray,
                                     style = MaterialTheme.typography.labelSmall
                                 )
                             }
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(com.example.ui.theme.dp5))
+                    Spacer(modifier = Modifier.height(dp5))
                     Text(
                         text = StringUtil.setTextBold(
                             originText = "${convertDiscountPrice}원",
                             targetText = convertDiscountPrice
                         ),
-                        color = com.example.ui.theme.Theme.colorScheme.darkGray,
+                        color = Theme.colorScheme.darkGray,
                         style = MaterialTheme.typography.labelLarge
                     )
 
-                    Spacer(modifier = Modifier.height(com.example.ui.theme.dp5))
+                    Spacer(modifier = Modifier.height(dp5))
                     CardWidget(
-                        containerColor = com.example.ui.theme.Theme.colorScheme.pureGray,
-                        cornerShape = RoundedCornerShape(com.example.ui.theme.dp5),
-                        innerPadding = PaddingValues(com.example.ui.theme.dp5)
+                        containerColor = Theme.colorScheme.pureGray,
+                        cornerShape = RoundedCornerShape(dp5),
+                        innerPadding = PaddingValues(dp5)
                     ) {
                         Text(
                             text = stringResource(id = R.string.str_coupon_discount, coupon),
-                            color = com.example.ui.theme.Theme.colorScheme.darkGray,
+                            color = Theme.colorScheme.darkGray,
                             style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
                         )
                     }
 
 
-                    Spacer(modifier = Modifier.height(com.example.ui.theme.dp5))
+                    Spacer(modifier = Modifier.height(dp5))
                     Text(
                         text = stringResource(id = R.string.str_inTime_outTime, inTime, outTime),
-                        color = com.example.ui.theme.Theme.colorScheme.gray,
+                        color = Theme.colorScheme.gray,
                         style = MaterialTheme.typography.labelSmall
                     )
                 }
             }
 
             if (info.isNotEmpty() || addInfo.isNotEmpty()) {
-                Spacer(modifier = Modifier.height(com.example.ui.theme.dp20))
+                Spacer(modifier = Modifier.height(dp20))
 
                 CardWidget(
                     modifier = Modifier.fillMaxWidth(),
-                    innerPadding = PaddingValues(com.example.ui.theme.dp10),
-                    containerColor = com.example.ui.theme.Theme.colorScheme.pureGray,
-                    cornerShape = RoundedCornerShape(com.example.ui.theme.dp8)
+                    innerPadding = PaddingValues(dp10),
+                    containerColor = Theme.colorScheme.pureGray,
+                    cornerShape = RoundedCornerShape(dp8)
                 ) {
                     Column {
                         if (info.isNotEmpty()) {
                             RowTwoWidget(
                                 leftText = "객실정보",
                                 rightText = info,
-                                leftColor = com.example.ui.theme.Theme.colorScheme.gray,
-                                rightColor = com.example.ui.theme.Theme.colorScheme.darkGray,
-                                endPadding = com.example.ui.theme.dp15
+                                leftColor = Theme.colorScheme.gray,
+                                rightColor = Theme.colorScheme.darkGray,
+                                endPadding = dp15
                             )
                         }
                         if (addInfo.isNotEmpty()) {
                             RowTwoWidget(
-                                modifier = Modifier.padding(top = com.example.ui.theme.dp5),
+                                modifier = Modifier.padding(top = dp5),
                                 leftText = "추가정보",
                                 rightText = addInfo,
-                                leftColor = com.example.ui.theme.Theme.colorScheme.gray,
-                                rightColor = com.example.ui.theme.Theme.colorScheme.darkGray,
-                                endPadding = com.example.ui.theme.dp15
+                                leftColor = Theme.colorScheme.gray,
+                                rightColor = Theme.colorScheme.darkGray,
+                                endPadding = dp15
                             )
                         }
                     }

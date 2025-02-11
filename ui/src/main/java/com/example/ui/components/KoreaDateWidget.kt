@@ -11,8 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import java.time.LocalDate
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.utils.ConvertUtil
 
 //국내 숙소 캘린더, 인원수 선택 Widget

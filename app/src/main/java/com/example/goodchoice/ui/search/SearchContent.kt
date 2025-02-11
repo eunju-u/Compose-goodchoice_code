@@ -18,7 +18,7 @@ import java.time.LocalDate
 import com.example.ui.R
 import com.example.ui.components.TabWidget
 import com.example.common.data.TabData
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.ui.utils.ConvertUtil
 

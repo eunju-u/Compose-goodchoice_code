@@ -12,9 +12,9 @@ import androidx.compose.ui.UiComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.ui.theme.Theme
-import com.example.ui.theme.dp0
-import com.example.ui.theme.dp10
+import com.example.ui_theme.Theme
+import com.example.ui_theme.dp0
+import com.example.ui_theme.dp10
 
 @Composable
 fun ButtonWidget(

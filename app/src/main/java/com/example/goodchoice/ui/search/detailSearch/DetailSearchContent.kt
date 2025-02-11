@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.domain.model.KoreaSearchData
 import com.example.goodchoice.ui.search.detailSearch.widget.SearchResultWidget
 

@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ui.components.LeftImageButtonWidget
 import com.example.ui.R
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 
 /**
  * 홈 > 이벤트 배너

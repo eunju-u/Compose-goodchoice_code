@@ -16,10 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.ui.theme.Theme
-import com.example.ui.theme.dp400
-import com.example.ui.theme.fontLargeSizeRatio
-import com.example.ui.theme.fontSmallSizeRaio
+import com.example.ui_theme.Theme
+import com.example.ui_theme.dp400
+import com.example.ui_theme.fontLargeSizeRatio
+import com.example.ui_theme.fontSmallSizeRaio
 
 @Composable
 fun TextWidget(

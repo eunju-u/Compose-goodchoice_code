@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.ui.components.*
 import com.example.ui.R
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.Theme
+import com.example.ui_theme.*
 
 /**
  * 해외 여행 캘린더

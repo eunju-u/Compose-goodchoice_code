@@ -21,7 +21,7 @@ import com.example.common.Const
 import com.example.ui.components.TextWidget
 import com.example.ui.R
 import com.example.ui.components.ImageButtonWidget
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.domain.model.OverseaSpecialItem
 import com.example.domain.model.StayItem
 import com.example.ui.recentSeen.RecentSeenActivity

@@ -26,7 +26,7 @@ import com.example.common.Const
 import com.example.common.DialogType
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.ui.login.LoginActivity
 import com.example.ui.stayDetail.service.ServiceActivity

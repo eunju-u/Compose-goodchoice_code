@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 import com.example.ui.calendar.model.CalendarState
 import com.example.ui.calendar.model.CalendarUiState
 import com.example.ui.calendar.model.Month
-import com.example.ui.theme.Theme
-import com.example.ui.theme.*
+import com.example.ui_theme.Theme
+import com.example.ui_theme.*
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters

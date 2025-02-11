@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.example.common.Const
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.calendar.CalendarActivity
 import com.example.ui.calendar.CalendarType
 

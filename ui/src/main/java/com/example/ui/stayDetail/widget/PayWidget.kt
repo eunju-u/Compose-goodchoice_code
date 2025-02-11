@@ -16,34 +16,35 @@ import com.example.domain.model.PayData
 import com.example.domain.model.PayItem
 import com.example.ui.components.TagWidget
 import com.example.ui.utils.StringUtil
+import com.example.ui_theme.*
 
 @Composable
 fun PayWidget(data: PayData = PayData()) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = com.example.ui.theme.dp10, bottom = com.example.ui.theme.dp10)
+            .padding(top = dp10, bottom = dp10)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             TagWidget(
                 title = stringResource(id = R.string.str_benefit),
-                containerColor = com.example.ui.theme.Theme.colorScheme.lightPink,
-                contentColor = com.example.ui.theme.Theme.colorScheme.red,
-                shape = com.example.ui.theme.dp5,
-                innerPadding = PaddingValues(com.example.ui.theme.dp5)
+                containerColor = Theme.colorScheme.lightPink,
+                contentColor = Theme.colorScheme.red,
+                shape = dp5,
+                innerPadding = PaddingValues(dp5)
             )
             Text(
-                modifier = Modifier.padding(start = com.example.ui.theme.dp10),
+                modifier = Modifier.padding(start = dp10),
                 text = data.payName ?: "",
-                color = com.example.ui.theme.Theme.colorScheme.darkGray,
+                color = Theme.colorScheme.darkGray,
                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
             )
         }
-        Spacer(modifier = Modifier.height(com.example.ui.theme.dp10))
+        Spacer(modifier = Modifier.height(dp10))
         CardWidget(modifier = Modifier.fillMaxWidth(),
-            innerPadding = PaddingValues(com.example.ui.theme.dp15),
-            cornerShape = RoundedCornerShape(com.example.ui.theme.dp8),
-            containerColor = com.example.ui.theme.Theme.colorScheme.pureGray,
+            innerPadding = PaddingValues(dp15),
+            cornerShape = RoundedCornerShape(dp8),
+            containerColor = Theme.colorScheme.pureGray,
             content = {
                 data.payInfoList?.let { list ->
                     Column {
@@ -53,7 +54,7 @@ fun PayWidget(data: PayData = PayData()) {
                                     originText = item.payInfo ?: "",
                                     targetText = item.payLineTest ?: ""
                                 ),
-                                color = com.example.ui.theme.Theme.colorScheme.gray,
+                                color = Theme.colorScheme.gray,
                                 style = MaterialTheme.typography.labelMedium
                             )
                         }

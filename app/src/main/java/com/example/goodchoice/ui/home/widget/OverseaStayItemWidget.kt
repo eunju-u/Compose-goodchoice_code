@@ -23,10 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.domain.model.OverseaSpecialItem
-import com.example.ui.theme.*
+import com.example.ui_theme.*
 import com.example.ui.R
 import com.example.ui.components.*
-import com.example.ui.theme.dp400
 import com.example.ui.utils.ConvertUtil
 
 /**
