@@ -1,4 +1,4 @@
-package com.example.ui.alarm.widget
+package com.example.alarm.ui.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.ui_common.R
-import com.example.domain.model.AlarmItem
+import com.example.alarm.domain.model.AlarmItem
 import com.example.ui_common.components.CardWidget
 import com.example.ui_common.components.TextWidget
 import com.example.ui_theme.*

@@ -1,8 +1,8 @@
-package com.example.domain.usecase
+package com.example.alarm.domain.usecase
 
+import com.example.alarm.domain.info.AlarmConnectInfo
+import com.example.alarm.domain.repository.AlarmRepository
 import com.example.common.utils.DeviceUtil
-import com.example.domain.info.AlarmConnectInfo
-import com.example.domain.repository.AlarmRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 

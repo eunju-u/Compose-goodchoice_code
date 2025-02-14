@@ -2,6 +2,7 @@ package com.example.goodchoice.ui.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +28,6 @@ import com.example.common.Const
 import com.example.ui_theme.*
 import com.example.ui_common.R
 import com.example.domain.info.ConnectInfo
-import com.example.ui.alarm.AlarmActivity
 import com.example.goodchoice.ui.home.model.RefreshData
 import com.example.goodchoice.ui.home.widget.*
 import com.example.goodchoice.ui.main.MainViewModel
@@ -130,9 +130,9 @@ fun HomeContent(
                                 modifier = Modifier
                                     .padding(end = dp20)
                                     .clickable {
-                                        context.startActivity(
-                                            Intent(context, AlarmActivity::class.java)
-                                        )
+                                        context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                            data = Uri.parse("feature://alarm")
+                                        })
                                     },
                                 painter = painterResource(id = R.drawable.ic_notification),
                                 tint = Theme.colorScheme.darkGray,

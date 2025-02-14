@@ -37,9 +37,6 @@
             android:name="com.example.ui.recentSeen.RecentSeenActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.ui.alarm.AlarmActivity"
-            android:exported="true" />
-        <activity
             android:name="com.example.ui.webview.WebViewActivity"
             android:exported="true"
             android:hardwareAccelerated="true" />

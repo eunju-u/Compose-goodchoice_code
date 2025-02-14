@@ -1,6 +1,6 @@
-package com.example.data.dataSource
+package com.example.alarm.data.dataSource
 
-import com.example.data.remote.dto.AlarmItemDto
+import com.example.alarm.data.remote.dto.AlarmItemDto
 import javax.inject.Inject
 
 class AlarmDataSource @Inject constructor() {

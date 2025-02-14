@@ -1,4 +1,4 @@
-package com.example.ui.alarm
+package com.example.alarm.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

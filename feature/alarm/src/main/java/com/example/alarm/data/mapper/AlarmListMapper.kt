@@ -1,7 +1,7 @@
-package com.example.data.mapper
+package com.example.alarm.data.mapper
 
-import com.example.data.remote.dto.AlarmItemDto
-import com.example.domain.model.AlarmItem
+import com.example.alarm.data.remote.dto.AlarmItemDto
+import com.example.alarm.domain.model.AlarmItem
 
 fun AlarmItemDto.generateAlarmItem(): AlarmItem {
     val item = this@generateAlarmItem

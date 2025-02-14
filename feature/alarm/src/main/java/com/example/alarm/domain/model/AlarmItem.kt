@@ -1,6 +1,6 @@
-package com.example.data.remote.dto
+package com.example.alarm.domain.model
 
-data class AlarmItemDto(
+data class AlarmItem(
     val alarmIdx: Int? = 0,
     val title: String? = "",
     val content: String? = "",

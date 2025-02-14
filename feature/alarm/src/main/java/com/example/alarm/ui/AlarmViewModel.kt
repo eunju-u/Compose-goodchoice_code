@@ -1,10 +1,10 @@
-package com.example.ui.alarm
+package com.example.alarm.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.info.AlarmConnectInfo
-import com.example.domain.usecase.AlarmUseCase
+import com.example.alarm.domain.info.AlarmConnectInfo
+import com.example.alarm.domain.usecase.AlarmUseCase
 import com.example.data.local.preference.GoodChoicePreference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

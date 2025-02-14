@@ -1,6 +1,6 @@
-package com.example.domain.info
+package com.example.alarm.domain.info
 
-import com.example.domain.model.AlarmItem
+import com.example.alarm.domain.model.AlarmItem
 
 sealed interface AlarmConnectInfo {
     object Init : AlarmConnectInfo
