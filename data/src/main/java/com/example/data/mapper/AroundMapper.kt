@@ -4,8 +4,8 @@ import com.example.data.remote.dto.AroundFilterDto
 import com.example.domain.model.AroundFilterData
 import com.example.domain.model.AroundFilterItem
 
-fun AroundFilterDto.generateData(): AroundFilterData {
-    val item = this@generateData
+fun AroundFilterDto.generateAroundFilterData(): AroundFilterData {
+    val item = this@generateAroundFilterData
 
     return AroundFilterData(
         type = item.type,

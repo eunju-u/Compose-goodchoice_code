@@ -7,30 +7,30 @@ import com.example.domain.model.MyInfoData
 import com.example.domain.model.MyMenuData
 import com.example.domain.model.MyMenuItem
 
-fun MyInfoDto.generateData(): MyInfoData {
-    val item = this@generateData
+fun MyInfoDto.generateMyInfoData(): MyInfoData {
+    val item = this@generateMyInfoData
 
     return MyInfoData(
-        topMenuList = item.topMenuList?.map { it.generateData() },
-        menuList = item.menuList?.map { it.generateData() }
+        topMenuList = item.topMenuList?.map { it.generateCategoryItem() },
+        menuList = item.menuList?.map { it.generateMyMenuData() }
     )
 }
 
-fun MyMenuDto.generateData(): MyMenuData {
-    val item = this@generateData
+fun MyMenuDto.generateMyMenuData(): MyMenuData {
+    val item = this@generateMyMenuData
 
     return MyMenuData(
         id = item.id,
         title = item.title,
         path = item.path,
         list = item.list?.map {
-            it.generateData()
+            it.generateMyMenuItem()
         }
     )
 }
 
-fun MyMenuItemDto.generateData(): MyMenuItem {
-    val item = this@generateData
+fun MyMenuItemDto.generateMyMenuItem(): MyMenuItem {
+    val item = this@generateMyMenuItem
 
     return MyMenuItem(
         id = item.id,

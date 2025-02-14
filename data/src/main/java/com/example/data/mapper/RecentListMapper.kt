@@ -3,8 +3,8 @@ package com.example.data.mapper
 import com.example.database.recent.RecentDbItem
 import com.example.domain.model.StayItem
 
-fun RecentDbItem.generateData(): StayItem {
-    val item = this@generateData
+fun RecentDbItem.generateStayItem(): StayItem {
+    val item = this@generateStayItem
 
     return StayItem(
         id = item.id,
@@ -21,8 +21,8 @@ fun RecentDbItem.generateData(): StayItem {
     )
 }
 
-fun StayItem.generateData(): RecentDbItem {
-    val item = this@generateData
+fun StayItem.generateRecentDbItem(): RecentDbItem {
+    val item = this@generateRecentDbItem
 
     return RecentDbItem(
         id = item.id ?: "",

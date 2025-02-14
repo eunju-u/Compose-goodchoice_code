@@ -17,29 +17,29 @@ import com.example.domain.model.OverseaSpecialItem
 import com.example.domain.model.StayData
 import com.example.domain.model.StayItem
 
-fun HomeDto.generateData(): HomeData {
-    val item = this@generateData
+fun HomeDto.generateHomeData(): HomeData {
+    val item = this@generateHomeData
 
     return HomeData(
-        categoryList = item.categoryList?.map { it.generateData() },
-        bannerList = item.bannerList?.map { it.generateData() },
-        stayList = item.stayList?.map { it.generateData() },
-        overSeaCityList = item.overSeaCityList?.map { it.generateData() },
-        overseaSpecialList = item.overseaSpecialList?.map { it.generateData() },
+        categoryList = item.categoryList?.map { it.generateCategoryData() },
+        bannerList = item.bannerList?.map { it.generateBannerData() },
+        stayList = item.stayList?.map { it.generateStayData() },
+        overSeaCityList = item.overSeaCityList?.map { it.generateOverSeaCityItem() },
+        overseaSpecialList = item.overseaSpecialList?.map { it.generateOverseaSpecialItem() },
     )
 }
 
-fun CategoryDto.generateData(): CategoryData {
-    val item = this@generateData
+fun CategoryDto.generateCategoryData(): CategoryData {
+    val item = this@generateCategoryData
 
     return CategoryData(
         countryType = item.countryType,
-        categoryList = item.categoryList?.map { it.generateData() })
+        categoryList = item.categoryList?.map { it.generateCategoryItem() })
 
 }
 
-fun CategoryItemDto.generateData(): CategoryItem {
-    val item = this@generateData
+fun CategoryItemDto.generateCategoryItem(): CategoryItem {
+    val item = this@generateCategoryItem
 
     return CategoryItem(
         id = item.id,
@@ -49,8 +49,8 @@ fun CategoryItemDto.generateData(): CategoryItem {
     )
 }
 
-fun BannerDto.generateData(): BannerData {
-    val item = this@generateData
+fun BannerDto.generateBannerData(): BannerData {
+    val item = this@generateBannerData
 
     return BannerData(
         title = item.title,
@@ -59,18 +59,18 @@ fun BannerDto.generateData(): BannerData {
     )
 }
 
-fun StayDto.generateData(): StayData {
-    val item = this@generateData
+fun StayDto.generateStayData(): StayData {
+    val item = this@generateStayData
 
     return StayData(
         type = item.type,
         title = item.title,
-        stayList = item.stayList?.map { it.generateData() },
+        stayList = item.stayList?.map { it.generateStayItem() },
     )
 }
 
-fun StayItemDto.generateData(): StayItem {
-    val item = this@generateData
+fun StayItemDto.generateStayItem(): StayItem {
+    val item = this@generateStayItem
 
     return StayItem(
         id = item.id,
@@ -87,8 +87,8 @@ fun StayItemDto.generateData(): StayItem {
     )
 }
 
-fun OverSeaCityItemDto.generateData(): OverSeaCityItem {
-    val item = this@generateData
+fun OverSeaCityItemDto.generateOverSeaCityItem(): OverSeaCityItem {
+    val item = this@generateOverSeaCityItem
 
     return OverSeaCityItem(
         id = item.id,
@@ -98,8 +98,8 @@ fun OverSeaCityItemDto.generateData(): OverSeaCityItem {
     )
 }
 
-fun OverseaSpecialItemDto.generateData(): OverseaSpecialItem {
-    val item = this@generateData
+fun OverseaSpecialItemDto.generateOverseaSpecialItem(): OverseaSpecialItem {
+    val item = this@generateOverseaSpecialItem
 
     return OverseaSpecialItem(
         id = item.id,

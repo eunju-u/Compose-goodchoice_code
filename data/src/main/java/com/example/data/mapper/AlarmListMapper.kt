@@ -3,8 +3,8 @@ package com.example.data.mapper
 import com.example.data.remote.dto.AlarmItemDto
 import com.example.domain.model.AlarmItem
 
-fun AlarmItemDto.generateData(): AlarmItem {
-    val item = this@generateData
+fun AlarmItemDto.generateAlarmItem(): AlarmItem {
+    val item = this@generateAlarmItem
 
     return AlarmItem(
         alarmIdx = item.alarmIdx,

@@ -1,7 +1,7 @@
 package com.example.data.repository
 
 import com.example.data.dataSource.AroundDataSource
-import com.example.data.mapper.generateData
+import com.example.data.mapper.generateAroundFilterData
 import com.example.domain.model.AroundFilterData
 import com.example.domain.repository.AroundRepository
 import javax.inject.Inject
@@ -12,13 +12,13 @@ class AroundRepositoryImpl @Inject constructor(
 
     override suspend fun getSleepData(): List<AroundFilterData> {
         return dataSource.getSleepData().map {
-            it.generateData()
+            it.generateAroundFilterData()
         }
     }
 
     override suspend fun getRentalData(): List<AroundFilterData> {
         return dataSource.getRentalData().map {
-            it.generateData()
+            it.generateAroundFilterData()
         }
     }
 }

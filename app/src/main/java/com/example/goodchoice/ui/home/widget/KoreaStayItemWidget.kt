@@ -26,7 +26,7 @@ import com.example.common.Const
 import com.example.domain.model.StayItem
 import com.example.ui_theme.*
 import com.example.ui_common.R
-import com.example.data.mapper.generateData
+import com.example.data.mapper.generateRecentDbItem
 import com.example.database.recent.RecentDb
 import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui_common.utils.ConvertUtil
@@ -81,7 +81,7 @@ fun KoreaStayItemWidget(
                         ?.userDao()
                         ?.isExistId(stayItem.id ?: "") ?: false
                     if (isExistId) {
-                        val item = stayItem.generateData()
+                        val item = stayItem.generateRecentDbItem()
                         recentDb
                             ?.userDao()
                             ?.delete(item)
@@ -94,7 +94,7 @@ fun KoreaStayItemWidget(
                     recentDb
                         ?.userDao()
                         ?.deleteAll()
-                    val item = stayItem.generateData()
+                    val item = stayItem.generateRecentDbItem()
                     recentDb
                         ?.userDao()
                         ?.insert(item)

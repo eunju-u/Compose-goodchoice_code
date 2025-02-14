@@ -12,8 +12,8 @@ import com.example.domain.model.ServiceData
 import com.example.domain.model.StayDetailData
 import java.util.ArrayList
 
-fun StayDetailDto.generateData(): StayDetailData {
-    val item = this@generateData
+fun StayDetailDto.generateStayDetailData(): StayDetailData {
+    val item = this@generateStayDetailData
 
     return StayDetailData(
         id = item.id,
@@ -28,17 +28,17 @@ fun StayDetailDto.generateData(): StayDetailData {
         imageList = item.imageList,
         level = item.level,
         coupon = item.coupon,
-        payList = item.payList?.map { it.generateData() },
-        roomList = item.roomList?.map { it.generateData() },
+        payList = item.payList?.map { it.generatePayData() },
+        roomList = item.roomList?.map { it.generateRoomItem() },
         message = item.message,
         defaultMessage = item.defaultMessage,
         aroundInfo = item.aroundInfo,
-        service = item.service?.map { it.generateData() }?.let { ArrayList(it) }
+        service = item.service?.map { it.generateServiceData() }?.let { ArrayList(it) }
     )
 }
 
-fun ServiceDto.generateData(): ServiceData {
-    val item = this@generateData
+fun ServiceDto.generateServiceData(): ServiceData {
+    val item = this@generateServiceData
 
     return ServiceData(
         type = item.type,
@@ -46,8 +46,8 @@ fun ServiceDto.generateData(): ServiceData {
     )
 }
 
-fun RoomItemDto.generateData(): RoomItem {
-    val item = this@generateData
+fun RoomItemDto.generateRoomItem(): RoomItem {
+    val item = this@generateRoomItem
 
     return RoomItem(
         id = item.id,
@@ -65,18 +65,18 @@ fun RoomItemDto.generateData(): RoomItem {
     )
 }
 
-fun PayDto.generateData(): PayData {
-    val item = this@generateData
+fun PayDto.generatePayData(): PayData {
+    val item = this@generatePayData
 
     return PayData(
         payType = item.payType,
         payName = item.payName,
-        payInfoList = item.payInfoList?.map { it.generateData() }
+        payInfoList = item.payInfoList?.map { it.generatePayItem() }
     )
 }
 
-fun PayItemDto.generateData(): PayItem {
-    val item = this@generateData
+fun PayItemDto.generatePayItem(): PayItem {
+    val item = this@generatePayItem
 
     return PayItem(
         payInfo = item.payInfo,

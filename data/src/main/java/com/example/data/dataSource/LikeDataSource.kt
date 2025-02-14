@@ -1,7 +1,7 @@
 package com.example.data.dataSource
 
 import android.content.Context
-import com.example.data.mapper.generateData
+import com.example.data.mapper.generateLikeItem
 import com.example.data.remote.dto.StayItemDto
 import com.example.data.remote.mock.S_1
 import com.example.data.remote.mock.S_10
@@ -25,7 +25,7 @@ class LikeDataSource @Inject constructor(
     fun getLikeData(): List<StayItemDto> {
         return getStayAllData().filter { stayItem ->
             (LikeDb.getInstance(context)?.userDao()?.getAll()?.map {
-                it.generateData()
+                it.generateLikeItem()
             } ?: emptyList()).any { likeItem ->
                 stayItem.id == likeItem.id
             }

@@ -3,8 +3,8 @@ package com.example.data.mapper
 import com.example.data.remote.dto.KoreaSearchDto
 import com.example.domain.model.KoreaSearchData
 
-fun KoreaSearchDto.generateData(): KoreaSearchData {
-    val item = this@generateData
+fun KoreaSearchDto.generateKoreaSearchData(): KoreaSearchData {
+    val item = this@generateKoreaSearchData
 
     return KoreaSearchData(
         id = item.id,
