@@ -61,15 +61,15 @@ class DetailSearchDataSource @Inject constructor() {
 
     // 국내숙소 > 검색 순위
     fun getRankData() = listOf(
-        FilterItemDto(filterType = "l1_1_1", filterTitle = "경주"),
-        FilterItemDto(filterType = "l1_1_2", filterTitle = "여수"),
-        FilterItemDto(filterType = "l1_1_3", filterTitle = "속초"),
-        FilterItemDto(filterType = "l1_1_4", filterTitle = "전주"),
-        FilterItemDto(filterType = "l1_1_5", filterTitle = "부산"),
-        FilterItemDto(filterType = "l1_1_6", filterTitle = "제주도"),
-        FilterItemDto(filterType = "l1_1_7", filterTitle = "강릉"),
-        FilterItemDto(filterType = "l1_1_8", filterTitle = "순천"),
-        FilterItemDto(filterType = "l1_1_9", filterTitle = "서울"),
-        FilterItemDto(filterType = "l1_1_10", filterTitle = "춘천")
+        SearchItemDto(searchType = "l1_1_1", searchTitle = "경주"),
+        SearchItemDto(searchType = "l1_1_2", searchTitle = "여수"),
+        SearchItemDto(searchType = "l1_1_3", searchTitle = "속초"),
+        SearchItemDto(searchType = "l1_1_4", searchTitle = "전주"),
+        SearchItemDto(searchType = "l1_1_5", searchTitle = "부산"),
+        SearchItemDto(searchType = "l1_1_6", searchTitle = "제주도"),
+        SearchItemDto(searchType = "l1_1_7", searchTitle = "강릉"),
+        SearchItemDto(searchType = "l1_1_8", searchTitle = "순천"),
+        SearchItemDto(searchType = "l1_1_9", searchTitle = "서울"),
+        SearchItemDto(searchType = "l1_1_10", searchTitle = "춘천")
     )
 }

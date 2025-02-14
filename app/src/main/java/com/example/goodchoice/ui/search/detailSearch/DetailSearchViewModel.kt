@@ -2,9 +2,9 @@ package com.example.goodchoice.ui.search.detailSearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.FilterItem
 import com.example.domain.usecase.DetailSearchUseCase
 import com.example.domain.model.KoreaSearchData
+import com.example.domain.model.SearchItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -64,6 +64,6 @@ class DetailSearchViewModel @Inject constructor(
 sealed interface DetailSearchConnectInfo {
     object Init : DetailSearchConnectInfo
     object Loading : DetailSearchConnectInfo
-    data class Available(val data: List<FilterItem>) : DetailSearchConnectInfo
+    data class Available(val data: List<SearchItem>) : DetailSearchConnectInfo
     data class Error(val message: String? = null) : DetailSearchConnectInfo
 }

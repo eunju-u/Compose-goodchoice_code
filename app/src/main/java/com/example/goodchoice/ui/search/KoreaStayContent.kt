@@ -21,15 +21,15 @@ import com.example.ui_common.components.KoreaDateWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 import com.example.ui_common.components.RowTwoWidget
 import com.example.ui_theme.*
-import com.example.domain.model.FilterItem
 import com.example.data.local.preference.GoodChoicePreference
+import com.example.domain.model.SearchItem
 import com.example.ui.calendar.CalendarActivity
 import com.example.ui.calendar.CalendarType
 
 @Composable
 fun KoreaStayContent(
     modifier: Modifier = Modifier,
-    rankList: List<FilterItem> = emptyList(),
+    rankList: List<SearchItem> = emptyList(),
 ) {
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
@@ -119,7 +119,7 @@ fun KoreaStayContent(
                 innerPadding = PaddingValues(top = dp10, bottom = dp10, start = dp20, end = dp20),
                 leftModifier = Modifier.width(dp25),
                 leftText = (idx + 1).toString(),
-                rightText = item.filterTitle,
+                rightText = item.searchTitle,
                 leftStyle = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
                 rightStyle = MaterialTheme.typography.labelLarge,
                 endPadding = dp20,

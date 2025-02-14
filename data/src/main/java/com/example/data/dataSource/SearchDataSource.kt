@@ -1,33 +1,33 @@
 package com.example.data.dataSource
 
-import com.example.data.remote.dto.FilterItemDto
 import com.example.data.remote.dto.RecommendAreaDto
+import com.example.data.remote.dto.SearchItemDto
 import javax.inject.Inject
 
 class SearchDataSource @Inject constructor() {
     fun getKoreaRankData() = listOf(
-        FilterItemDto(filterType = "l1_1_1", filterTitle = "경주"),
-        FilterItemDto(filterType = "l1_1_2", filterTitle = "여수"),
-        FilterItemDto(filterType = "l1_1_3", filterTitle = "속초"),
-        FilterItemDto(filterType = "l1_1_4", filterTitle = "전주"),
-        FilterItemDto(filterType = "l1_1_5", filterTitle = "부산"),
-        FilterItemDto(filterType = "l1_1_6", filterTitle = "제주도"),
-        FilterItemDto(filterType = "l1_1_7", filterTitle = "강릉"),
-        FilterItemDto(filterType = "l1_1_8", filterTitle = "순천"),
-        FilterItemDto(filterType = "l1_1_9", filterTitle = "서울"),
-        FilterItemDto(filterType = "l1_1_10", filterTitle = "춘천")
+        SearchItemDto(searchType = "l1_1_1", searchTitle = "경주"),
+        SearchItemDto(searchType = "l1_1_2", searchTitle = "여수"),
+        SearchItemDto(searchType = "l1_1_3", searchTitle = "속초"),
+        SearchItemDto(searchType = "l1_1_4", searchTitle = "전주"),
+        SearchItemDto(searchType = "l1_1_5", searchTitle = "부산"),
+        SearchItemDto(searchType = "l1_1_6", searchTitle = "제주도"),
+        SearchItemDto(searchType = "l1_1_7", searchTitle = "강릉"),
+        SearchItemDto(searchType = "l1_1_8", searchTitle = "순천"),
+        SearchItemDto(searchType = "l1_1_9", searchTitle = "서울"),
+        SearchItemDto(searchType = "l1_1_10", searchTitle = "춘천")
     )
 
     fun getRecommendWordData() = listOf(
-        FilterItemDto(filterType = "l3_1_1", filterTitle = "웰니스 페스타"),
-        FilterItemDto(filterType = "l3_1_2", filterTitle = "특가"),
-        FilterItemDto(filterType = "l3_1_3", filterTitle = "테마파크"),
-        FilterItemDto(filterType = "l3_1_4", filterTitle = "에버랜드"),
-        FilterItemDto(filterType = "l3_1_5", filterTitle = "롯데월드"),
-        FilterItemDto(filterType = "l3_1_6", filterTitle = "경주월드"),
-        FilterItemDto(filterType = "l3_1_7", filterTitle = "아쿠아필드"),
-        FilterItemDto(filterType = "l3_1_8", filterTitle = "패러글라이딩"),
-        FilterItemDto(filterType = "l3_1_9", filterTitle = "유니버셜 스튜디오 재팬")
+        SearchItemDto(searchType = "l3_1_1", searchTitle = "웰니스 페스타"),
+        SearchItemDto(searchType = "l3_1_2", searchTitle = "특가"),
+        SearchItemDto(searchType = "l3_1_3", searchTitle = "테마파크"),
+        SearchItemDto(searchType = "l3_1_4", searchTitle = "에버랜드"),
+        SearchItemDto(searchType = "l3_1_5", searchTitle = "롯데월드"),
+        SearchItemDto(searchType = "l3_1_6", searchTitle = "경주월드"),
+        SearchItemDto(searchType = "l3_1_7", searchTitle = "아쿠아필드"),
+        SearchItemDto(searchType = "l3_1_8", searchTitle = "패러글라이딩"),
+        SearchItemDto(searchType = "l3_1_9", searchTitle = "유니버셜 스튜디오 재팬")
     )
 
     fun getAreaData() = listOf(
@@ -50,11 +50,6 @@ class SearchDataSource @Inject constructor() {
             code = "l3_2_4",
             title = "강원",
             image = "https://images.freeimages.com/images/large-previews/15b/lamb-1578074.jpg"
-        ),
-        RecommendAreaDto(
-            code = "l3_2_5",
-            title = "경기",
-            image = "https://i.namu.wiki/i/q1zaFVkL-53KLWf9oPdhJLIEuxeKS99k6SWK9ZAqy8l4tHjrwQiUmqFZVw9R-m0rfjZ6i8fYgWxCe_CQDupqeGdjMgEJwdzj-OsgOWVcd6b0tR9O5FDdJKdwXlKd3uD4GTltJadcE8sfBdVL6rAjSw.webp"
         ),
         RecommendAreaDto(
             code = "l3_2_6",

@@ -17,10 +17,10 @@ import com.example.common.utils.ToastUtil
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.AroundFilterData
 import com.example.domain.model.CategoryItem
-import com.example.domain.model.FilterItem
 import com.example.domain.model.HomeData
 import com.example.domain.model.MyInfoData
 import com.example.domain.model.RecommendAreaData
+import com.example.domain.model.SearchItem
 import com.example.domain.model.StayItem
 import com.example.domain.usecase.AroundUseCase
 import com.example.domain.usecase.HomeUseCase
@@ -93,10 +93,10 @@ class MainViewModel @Inject constructor(
 
     /** 검색 화면 **/
     // 검색 > 국내 숙소 (검색 순위)
-    var koreaSearchRankData: List<FilterItem> = listOf()
+    var koreaSearchRankData: List<SearchItem> = listOf()
 
     // 검색 > 레저 티켓 (추천 검색어)
-    var leisureSearchWordData: List<FilterItem> = listOf()
+    var leisureSearchWordData: List<SearchItem> = listOf()
 
     // 검색 > 레저 티켓 (추천 지역)
     var leisureSearchAreaData: List<RecommendAreaData> = listOf()

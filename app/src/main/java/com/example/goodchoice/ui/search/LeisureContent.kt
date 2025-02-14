@@ -18,8 +18,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
 import com.example.ui_common.R
 import com.example.ui_theme.*
-import com.example.domain.model.FilterItem
 import com.example.domain.model.RecommendAreaData
+import com.example.domain.model.SearchItem
 import com.example.ui_common.components.CategoryItemWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 import com.example.ui_common.components.TagWidget
@@ -28,7 +28,7 @@ import com.example.ui_common.components.TagWidget
 @Composable
 fun LeisureContent(
     modifier: Modifier = Modifier,
-    wordList: List<FilterItem> = emptyList(),
+    wordList: List<SearchItem> = emptyList(),
     areaList: List<RecommendAreaData> = emptyList(),
     onItemClick: () -> Unit = {}
 ) {
@@ -75,7 +75,7 @@ fun LeisureContent(
                         containerColor = Theme.colorScheme.white,
                         borderColor = Theme.colorScheme.pureGray,
                         onItemClick = { },
-                        title = it.filterTitle ?: "", style = MaterialTheme.typography.labelMedium,
+                        title = it.searchTitle ?: "", style = MaterialTheme.typography.labelMedium,
                         contentColor = Theme.colorScheme.darkGray,
                     )
                 }

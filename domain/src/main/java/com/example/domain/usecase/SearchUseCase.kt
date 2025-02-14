@@ -1,7 +1,7 @@
 package com.example.domain.usecase
 
-import com.example.domain.model.FilterItem
 import com.example.domain.model.RecommendAreaData
+import com.example.domain.model.SearchItem
 import com.example.domain.repository.SearchRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SearchUseCase @Inject constructor(
     private val repository: SearchRepository,
 ) {
-    suspend fun getKoreaRankData(): List<FilterItem> {
+    suspend fun getKoreaRankData(): List<SearchItem> {
         return try {
             delay(100)
             repository.getKoreaRankData()
@@ -19,7 +19,7 @@ class SearchUseCase @Inject constructor(
         }
     }
 
-    suspend fun getRecommendWordData(): List<FilterItem> {
+    suspend fun getRecommendWordData(): List<SearchItem> {
         return try {
             repository.getRecommendWordData()
         } catch (e: Exception) {

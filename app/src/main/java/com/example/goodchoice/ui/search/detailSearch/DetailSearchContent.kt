@@ -118,7 +118,7 @@ fun DetailSearchContent(
                             ),
                             leftModifier = Modifier.width(dp25),
                             leftText = (idx + 1).toString(),
-                            rightText = item.filterTitle,
+                            rightText = item.searchTitle,
                             leftStyle = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
                             rightStyle = MaterialTheme.typography.labelLarge,
                             endPadding = dp20,
