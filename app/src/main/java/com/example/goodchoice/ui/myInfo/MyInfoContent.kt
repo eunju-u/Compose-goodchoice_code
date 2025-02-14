@@ -2,6 +2,7 @@ package com.example.goodchoice.ui.myInfo
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -30,7 +31,6 @@ import com.example.domain.info.ConnectInfo
 import com.example.domain.model.CategoryItem
 import com.example.domain.model.MyMenuData
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
@@ -135,12 +135,9 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                         )
                                                     )
                                                 } else {
-                                                    (context as MainActivity).startActivity(
-                                                        Intent(
-                                                            context,
-                                                            LoginActivity::class.java
-                                                        )
-                                                    )
+                                                    (context as MainActivity).startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                                        data = Uri.parse("feature://login")
+                                                    })
                                                 }
                                             },
                                         content = {

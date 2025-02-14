@@ -1,4 +1,4 @@
-package com.example.ui.login
+package com.example.login.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image

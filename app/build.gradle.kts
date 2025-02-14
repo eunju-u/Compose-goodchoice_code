@@ -98,4 +98,5 @@ dependencies {
     implementation(project(":ui"))
     implementation(project(":ui-theme"))
     implementation(project(":ui-common"))
+    implementation(project(":feature:login"))
 }

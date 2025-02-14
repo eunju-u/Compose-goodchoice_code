@@ -1,6 +1,7 @@
 package com.example.ui.stayDetail
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +28,6 @@ import com.example.common.DialogType
 import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.ui.login.LoginActivity
 import com.example.ui.stayDetail.service.ServiceActivity
 import com.example.ui.stayDetail.widget.PayWidget
 import com.example.ui.stayDetail.widget.StayDetailItemWidget
@@ -552,7 +552,9 @@ fun StayDetailContent(
                         },
                         onConfirm = {
                             viewModel.isShowDialog.value = false
-                            context.startActivity(Intent(context, LoginActivity::class.java))
+                            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse("feature://login")
+                            })
                         })
                 }
 

@@ -1,6 +1,7 @@
 package com.example.ui.alarm
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,7 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui_common.R
 import com.example.ui.alarm.widget.AlarmItemWidget
-import com.example.ui.login.LoginActivity
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.domain.info.AlarmConnectInfo
 import com.example.ui_common.components.AlertDialogWidget
@@ -48,12 +48,9 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                         secondText = stringResource(id = R.string.str_check_alarm_after_login),
                         thirdText = stringResource(id = R.string.str_login),
                         onClick = {
-                            context.startActivity(
-                                Intent(
-                                    context,
-                                    LoginActivity::class.java
-                                )
-                            )
+                            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse("feature://login")
+                            })
                         }
                     )
                 } else {

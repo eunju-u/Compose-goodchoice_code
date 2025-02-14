@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.like
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,7 +23,6 @@ import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
-import com.example.ui.login.LoginActivity
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui_theme.*
@@ -78,7 +78,9 @@ fun LikeContent(
                             secondText = stringResource(id = R.string.str_check_like_list_after_login),
                             thirdText = stringResource(id = R.string.str_login),
                             onClick = {
-                                context.startActivity(Intent(context, LoginActivity::class.java))
+                                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                    data = Uri.parse("feature://login")
+                                })
                             }
                         )
                     } else {
