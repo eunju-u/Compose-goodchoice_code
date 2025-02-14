@@ -16,8 +16,8 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
-import com.example.ui.components.*
 import com.example.ui.calendar.model.CalendarUiState
+import com.example.ui_common.components.ShapeButton
 import com.example.ui_theme.Theme
 import com.example.ui_theme.*
 import java.time.LocalDate

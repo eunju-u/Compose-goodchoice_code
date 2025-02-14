@@ -15,11 +15,14 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.domain.model.KoreaSearchData
 import com.example.goodchoice.ui.search.detailSearch.widget.SearchResultWidget
+import com.example.ui_common.components.AlertDialogWidget
+import com.example.ui_common.components.LeftImageEditTextWidget
+import com.example.ui_common.components.RowTwoWidget
+import com.example.ui_common.components.TopAppBarWidget
 
 @Composable
 fun DetailSearchContent(

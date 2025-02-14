@@ -23,9 +23,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.common.MainBottomSheetType
-import com.example.ui.components.*
 import com.example.ui_theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.CategoryItem
@@ -38,6 +37,11 @@ import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
 import com.example.ui.recentSeen.RecentSeenActivity
+import com.example.ui_common.components.AlertDialogWidget
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.CategoryItemWidget
+import com.example.ui_common.components.SpaceBetweenRowWidget
+import com.example.ui_common.components.TextWidget
 
 /**
  * 내 정보 화면

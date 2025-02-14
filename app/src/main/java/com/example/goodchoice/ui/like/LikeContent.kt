@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.common.data.TabData
 import com.example.common.Const
-import com.example.ui.components.GoToWidget
-import com.example.ui.components.TabWidget
+import com.example.ui_common.components.GoToWidget
+import com.example.ui_common.components.TabWidget
 import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget

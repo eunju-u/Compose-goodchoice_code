@@ -56,4 +56,5 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":database"))
     implementation(project(":domain"))
+    implementation(project(":ui-common"))
 }

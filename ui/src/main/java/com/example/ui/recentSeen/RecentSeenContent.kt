@@ -18,8 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.TopAppBarWidget
 import com.example.ui_theme.*
 
 /**

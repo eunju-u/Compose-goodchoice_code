@@ -9,11 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.common.Const
-import com.example.ui.components.*
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.domain.model.StayItem
 import com.example.ui.calendar.CalendarActivity
 import com.example.ui.calendar.CalendarType
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.KoreaDateWidget
 import com.example.ui_theme.*
 
 @Composable

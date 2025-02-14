@@ -10,11 +10,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.common.Const
-import com.example.ui.R
-import com.example.ui.components.TextWidget
+import com.example.ui_common.R
+import com.example.ui_common.components.TextWidget
 import com.example.ui_theme.*
 import com.example.domain.model.KoreaSearchData
-import com.example.ui.utils.StringUtil
+import com.example.ui_common.utils.StringUtil
 
 @Composable
 fun SearchResultWidget(

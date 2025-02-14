@@ -3,7 +3,7 @@ package com.example.goodchoice.nav
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.common.Const
-import com.example.ui.R
+import com.example.ui_common.R
 
 sealed class NavItem(
     @StringRes val title: Int,

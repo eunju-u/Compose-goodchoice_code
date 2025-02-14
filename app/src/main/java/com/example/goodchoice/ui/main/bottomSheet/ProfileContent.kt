@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.ui.R
-import com.example.ui.components.ButtonWidget
+import com.example.ui_common.R
+import com.example.ui_common.components.ButtonWidget
 import com.example.ui_theme.*
 
 /**

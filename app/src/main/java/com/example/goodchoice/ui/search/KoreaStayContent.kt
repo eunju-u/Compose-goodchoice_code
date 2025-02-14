@@ -16,10 +16,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.common.Const
-import com.example.ui.R
-import com.example.ui.components.KoreaDateWidget
-import com.example.ui.components.LeftImageButtonWidget
-import com.example.ui.components.RowTwoWidget
+import com.example.ui_common.R
+import com.example.ui_common.components.KoreaDateWidget
+import com.example.ui_common.components.LeftImageButtonWidget
+import com.example.ui_common.components.RowTwoWidget
 import com.example.ui_theme.*
 import com.example.domain.model.FilterItem
 import com.example.data.local.preference.GoodChoicePreference

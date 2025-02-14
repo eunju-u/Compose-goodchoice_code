@@ -5,7 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.ui.components.TagWidget
+import com.example.ui_common.components.TagWidget
 import com.example.domain.model.FilterItem
 import com.example.ui_theme.*
 

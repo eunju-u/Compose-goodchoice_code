@@ -20,14 +20,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.ServerConst
-import com.example.ui.components.*
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.FilterData
 import com.example.domain.model.FilterItem
 import com.example.ui.model.AroundFilterItem
 import com.example.ui.filter.widget.FilterItemWidget
+import com.example.ui_common.components.AlertDialogWidget
+import com.example.ui_common.components.ButtonWidget
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.LeftImageButtonWidget
+import com.example.ui_common.components.LoadingWidget
+import com.example.ui_common.components.ShapeButton
+import com.example.ui_common.components.SpaceBetweenRowWidget
+import com.example.ui_common.components.TopAppBarWidget
 import java.util.LinkedList
 
 @SuppressLint("MutableCollectionMutableState")

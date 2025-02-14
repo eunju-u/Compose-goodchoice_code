@@ -4,9 +4,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.ui.components.bottomSheet.MyBottomSheetState
-import com.example.ui.components.bottomSheet.MyBottomSheetValue
-import com.example.ui.components.bottomSheet.rememberMyBottomSheetState
+import com.example.ui_common.components.bottomSheet.MyBottomSheetState
+import com.example.ui_common.components.bottomSheet.MyBottomSheetValue
+import com.example.ui_common.components.bottomSheet.rememberMyBottomSheetState
 import com.example.goodchoice.nav.NavItem
 import kotlinx.coroutines.CoroutineScope
 

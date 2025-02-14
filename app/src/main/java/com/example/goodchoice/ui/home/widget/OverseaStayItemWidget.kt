@@ -24,9 +24,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.domain.model.OverseaSpecialItem
 import com.example.ui_theme.*
-import com.example.ui.R
-import com.example.ui.components.*
-import com.example.ui.utils.ConvertUtil
+import com.example.ui_common.R
+import com.example.ui_common.components.RoundImageWidget
+import com.example.ui_common.components.TextWidget
+import com.example.ui_common.utils.ConvertUtil
 
 /**
  * 홈의 해외 숙소 item 뷰

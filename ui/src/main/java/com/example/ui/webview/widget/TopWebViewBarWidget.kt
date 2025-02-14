@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.ui_theme.Theme
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -11,10 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.domain.model.MyMenuItem
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.SpaceBetweenRowWidget
+import com.example.ui_common.components.TextWidget
 
 @Composable
 fun MenuItemWidget(

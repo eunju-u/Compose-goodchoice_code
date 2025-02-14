@@ -19,9 +19,9 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.ui.components.*
 import com.example.domain.model.CategoryItem
-import com.example.ui.R
+import com.example.ui_common.R
+import com.example.ui_common.components.CategoryItemWidget
 import com.example.ui_theme.Theme
 import com.example.ui_theme.*
 

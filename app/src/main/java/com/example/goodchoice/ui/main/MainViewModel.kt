@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.MainBottomSheetType
 import com.example.common.RoomType
 import com.example.common.ServerConst
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.nav.NavItem
 import com.example.ui.model.AroundFilterItem

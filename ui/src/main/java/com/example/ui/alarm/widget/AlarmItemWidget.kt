@@ -12,10 +12,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.domain.model.AlarmItem
-import com.example.ui.components.CardWidget
-import com.example.ui.components.TextWidget
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.TextWidget
 import com.example.ui_theme.*
 
 @Composable

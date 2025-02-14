@@ -10,12 +10,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.common.Const
-import com.example.ui.R
-import com.example.ui.components.CardWidget
+import com.example.ui_common.R
+import com.example.ui_common.components.CardWidget
 import com.example.domain.model.PayData
 import com.example.domain.model.PayItem
-import com.example.ui.components.TagWidget
-import com.example.ui.utils.StringUtil
+import com.example.ui_common.components.TagWidget
+import com.example.ui_common.utils.StringUtil
 import com.example.ui_theme.*
 
 @Composable

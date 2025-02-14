@@ -13,11 +13,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.common.Const
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.ui.calendar.CalendarActivity
 import com.example.ui.calendar.CalendarType
+import com.example.ui_common.components.ButtonWidget
+import com.example.ui_common.components.LeftImageButtonWidget
 
 @Composable
 fun OverSeaContent(

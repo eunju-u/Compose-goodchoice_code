@@ -11,9 +11,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.domain.model.CategoryItem
 import com.example.ui_theme.*
-import com.example.ui.R
+import com.example.ui_common.R
 import androidx.compose.ui.graphics.ColorFilter
-import com.example.ui.components.CategoryItemWidget
+import com.example.ui_common.components.CategoryItemWidget
 
 /**
  * 홈 스크롤시 상단에 노출되는 뷰

@@ -9,10 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import com.example.ui.R
+import com.example.ui_common.R
+import com.example.ui_common.components.ShapeButton
 import com.example.ui_theme.Theme
 import com.example.ui_theme.*
-import com.example.ui.components.ShapeButton
 
 @Composable
 fun PersonWidget(

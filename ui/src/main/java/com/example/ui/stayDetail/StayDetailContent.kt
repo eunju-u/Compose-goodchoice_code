@@ -24,8 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
 import com.example.common.DialogType
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.ui.login.LoginActivity
@@ -34,13 +33,21 @@ import com.example.ui.stayDetail.widget.PayWidget
 import com.example.ui.stayDetail.widget.StayDetailItemWidget
 import com.example.common.utils.ToastUtil
 import com.example.domain.info.StayDetailConnectInfo
-import com.example.ui.components.bottomSheet.MyBottomSheetLayout
-import com.example.ui.components.bottomSheet.MyBottomSheetState
-import com.example.ui.components.bottomSheet.MyBottomSheetValue
-import com.example.ui.components.bottomSheet.SheetWidget
-import com.example.ui.components.bottomSheet.rememberMyBottomSheetState
-import com.example.ui.utils.ConvertUtil
-import com.example.ui.utils.StringUtil
+import com.example.ui_common.components.AlertDialogWidget
+import com.example.ui_common.components.CategoryItemWidget
+import com.example.ui_common.components.LoadingWidget
+import com.example.ui_common.components.RightImageButtonWidget
+import com.example.ui_common.components.RoundImageWidget
+import com.example.ui_common.components.RowTwoWidget
+import com.example.ui_common.components.SpaceBetweenRowWidget
+import com.example.ui_common.components.TopAppBarWidget
+import com.example.ui_common.components.bottomSheet.MyBottomSheetLayout
+import com.example.ui_common.components.bottomSheet.MyBottomSheetState
+import com.example.ui_common.components.bottomSheet.MyBottomSheetValue
+import com.example.ui_common.components.bottomSheet.SheetWidget
+import com.example.ui_common.components.bottomSheet.rememberMyBottomSheetState
+import com.example.ui_common.utils.ConvertUtil
+import com.example.ui_common.utils.StringUtil
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)

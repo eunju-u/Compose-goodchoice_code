@@ -15,11 +15,12 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.common.Const
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
 import com.example.domain.model.ServiceData
+import com.example.ui_common.components.CategoryItemWidget
 import com.example.ui_theme.*
-import com.example.ui.utils.ConvertUtil
+import com.example.ui_common.components.TopAppBarWidget
+import com.example.ui_common.utils.ConvertUtil
 
 class ServiceActivity : ComponentActivity() {
 

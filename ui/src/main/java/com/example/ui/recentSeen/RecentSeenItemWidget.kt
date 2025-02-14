@@ -13,10 +13,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
-import com.example.ui.R
-import com.example.ui.components.RoundImageWidget
 import com.example.domain.model.StayItem
+import com.example.ui_common.R
 import com.example.ui.stayDetail.StayDetailActivity
+import com.example.ui_common.components.RoundImageWidget
 import com.example.ui_theme.*
 
 /**

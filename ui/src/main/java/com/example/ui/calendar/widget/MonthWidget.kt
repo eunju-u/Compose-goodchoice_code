@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.ui.R
+import com.example.ui_common.R
+import com.example.ui_common.utils.ConvertUtil.convertMonth
 import com.example.ui_theme.Theme
-import com.example.ui.utils.ConvertUtil.convertMonth
 
 @Composable
 internal fun MonthHeader(modifier: Modifier = Modifier, month: String, year: String) {

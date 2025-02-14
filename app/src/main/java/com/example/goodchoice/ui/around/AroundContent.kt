@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.common.ServerConst
 import com.example.domain.model.AroundFilterData
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
@@ -36,8 +36,14 @@ import com.example.domain.info.ConnectInfo
 import com.example.ui.filter.FilterActivity
 import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
-import com.example.ui.components.*
-import com.example.ui.components.bottomSheet.*
+import com.example.ui_common.components.ImageButtonWidget
+import com.example.ui_common.components.LeftImageButtonWidget
+import com.example.ui_common.components.RoundImageWidget
+import com.example.ui_common.components.bottomSheet.MyBottomSheetLayout
+import com.example.ui_common.components.bottomSheet.MyBottomSheetState
+import com.example.ui_common.components.bottomSheet.MyBottomSheetValue
+import com.example.ui_common.components.bottomSheet.SheetWidget
+import com.example.ui_common.components.bottomSheet.rememberMyBottomSheetState
 import com.example.ui_theme.*
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng

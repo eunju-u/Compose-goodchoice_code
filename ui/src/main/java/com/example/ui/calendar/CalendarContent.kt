@@ -5,10 +5,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.ui.R
+import com.example.ui_common.R
 import java.time.LocalDate
 import com.example.ui.calendar.model.CalendarState
-import com.example.ui.components.TopAppBarWidget
+import com.example.ui_common.components.TopAppBarWidget
 import com.example.ui_theme.Theme
 
 

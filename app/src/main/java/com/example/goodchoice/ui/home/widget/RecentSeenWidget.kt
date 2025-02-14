@@ -19,11 +19,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
 import com.example.ui_theme.*
-import com.example.ui.R
-import com.example.ui.components.RoundImageWidget
-import com.example.ui.components.*
+import com.example.ui_common.R
+import com.example.ui_common.components.RoundImageWidget
 import com.example.domain.model.StayItem
 import com.example.ui.stayDetail.StayDetailActivity
+import com.example.ui_common.components.TextWidget
 
 /**
  * 홈 > 최근 본 상품

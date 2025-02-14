@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.domain.model.BannerData
 import com.example.ui.webview.WebViewActivity

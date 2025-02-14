@@ -1,7 +1,7 @@
 package com.example.data.dataSource
 
 import com.example.common.Const
-import com.example.data.R
+import com.example.ui_common.R
 import com.example.data.remote.dto.CategoryItemDto
 import com.example.data.remote.dto.MyInfoDto
 import com.example.data.remote.dto.MyMenuDto

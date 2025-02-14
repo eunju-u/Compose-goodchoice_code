@@ -13,12 +13,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.ui.alarm.widget.AlarmItemWidget
 import com.example.ui.login.LoginActivity
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.domain.info.AlarmConnectInfo
-import com.example.ui.components.*
+import com.example.ui_common.components.AlertDialogWidget
+import com.example.ui_common.components.GoToWidget
+import com.example.ui_common.components.LoadingWidget
+import com.example.ui_common.components.TextWidget
+import com.example.ui_common.components.TopAppBarWidget
 import com.example.ui_theme.*
 
 @Composable

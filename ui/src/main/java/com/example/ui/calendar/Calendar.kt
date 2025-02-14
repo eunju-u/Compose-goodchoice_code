@@ -21,8 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.common.CalendarPersonType
-import com.example.ui.components.*
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.ui.calendar.model.CalendarState
 import com.example.ui.calendar.widget.CalendarWidget
@@ -30,10 +29,13 @@ import com.example.ui.calendar.widget.DURATION_MILLIS_PER_DAY
 import com.example.ui.calendar.widget.KoreaPersonWidget
 import com.example.ui.calendar.widget.OverseaPersonWidget
 import com.example.ui.calendar.widget.PersonButtonWidget
+import com.example.ui_common.components.ButtonWidget
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.utils.ConvertUtil
 import com.example.ui_theme.*
-import com.example.ui.utils.ConvertUtil
 import java.time.LocalDate
 import java.time.temporal.WeekFields
+import com.example.ui_common.components.LeftImageButtonWidget as LeftImageButtonWidget1
 
 @Composable
 fun Calendar(
@@ -138,7 +140,7 @@ fun Calendar(
                             )
                         ) else ""
 
-                LeftImageButtonWidget(
+                LeftImageButtonWidget1(
                     modifier = Modifier.weight(1f),
                     title = "$startTitle - $endTitle",
                     borderColor = calendarBorderColor,
@@ -163,7 +165,7 @@ fun Calendar(
                 if (isKoreaTravel) {
                     val person =
                         if (koreaPersonCount == 10) "$koreaPersonCount+" else koreaPersonCount.toString()
-                    LeftImageButtonWidget(
+                    LeftImageButtonWidget1(
                         title = stringResource(id = R.string.str_person_count, person),
                         borderColor = personBorderColor,
                         contentColor = personContentColor,
@@ -304,7 +306,7 @@ fun Calendar(
                             .height(dp50)
                     ) {
 
-                        LeftImageButtonWidget(
+                        LeftImageButtonWidget1(
                             modifier = Modifier
                                 .weight(0.3f)
                                 .fillMaxHeight(),

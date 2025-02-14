@@ -18,11 +18,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
 import com.example.domain.model.RoomItem
-import com.example.ui.utils.ConvertUtil
-import com.example.ui.utils.StringUtil
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.RowTwoWidget
+import com.example.ui_common.utils.ConvertUtil
+import com.example.ui_common.utils.StringUtil
 import com.example.ui_theme.*
 
 @Composable

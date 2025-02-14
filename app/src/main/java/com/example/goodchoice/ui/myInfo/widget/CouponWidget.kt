@@ -10,8 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.ui.R
-import com.example.ui.components.*
+import com.example.ui_common.R
+import com.example.ui_common.components.CardWidget
+import com.example.ui_common.components.TextWidget
 import com.example.ui_theme.*
 
 @Composable

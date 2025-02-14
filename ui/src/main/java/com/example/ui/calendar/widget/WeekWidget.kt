@@ -7,7 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.ui.calendar.model.CalendarUiState
 import com.example.ui.calendar.model.Week
-import com.example.ui.utils.ConvertUtil.convertDayOfWeek
+import com.example.ui_common.utils.ConvertUtil.convertDayOfWeek
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters

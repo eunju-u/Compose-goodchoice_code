@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.ui.components.LeftImageButtonWidget
-import com.example.ui.R
+import com.example.ui_common.components.LeftImageButtonWidget
+import com.example.ui_common.R
 import com.example.ui_theme.*
 
 /**

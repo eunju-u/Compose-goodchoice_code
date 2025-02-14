@@ -12,7 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import com.example.ui.R
+import com.example.ui_common.R
 import com.example.ui_theme.Theme
 import com.example.ui_theme.dp20
 import com.example.ui.webview.widget.TopWebViewBarWidget
