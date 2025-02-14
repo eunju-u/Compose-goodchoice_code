@@ -37,10 +37,6 @@
             android:name="com.example.ui.recentSeen.RecentSeenActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.ui.webview.WebViewActivity"
-            android:exported="true"
-            android:hardwareAccelerated="true" />
-        <activity
             android:name="com.example.ui.stayDetail.StayDetailActivity"
             android:exported="true" />
         <activity

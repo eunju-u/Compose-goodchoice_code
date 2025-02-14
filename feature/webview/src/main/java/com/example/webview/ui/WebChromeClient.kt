@@ -1,4 +1,4 @@
-package com.example.ui.webview
+package com.example.webview.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -8,8 +8,8 @@ import android.view.KeyEvent
 import android.webkit.*
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AlertDialog
+import com.example.webview.R
 import com.google.accompanist.web.AccompanistWebChromeClient
-import com.example.ui.R
 
 class WebChromeClient(
     var activity: WebViewActivity,

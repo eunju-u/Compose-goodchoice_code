@@ -32,6 +32,9 @@
             <SelectionState runConfigName="feature.alarm">
                 <option name="selectionMode" value="DROPDOWN" />
             </SelectionState>
+            <SelectionState runConfigName="feature.webview">
+                <option name="selectionMode" value="DROPDOWN" />
+            </SelectionState>
         </selectionStates>
     </component>
 </project>

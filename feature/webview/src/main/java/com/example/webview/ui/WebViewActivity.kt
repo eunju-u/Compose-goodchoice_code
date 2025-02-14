@@ -1,4 +1,4 @@
-package com.example.ui.webview
+package com.example.webview.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -19,8 +19,8 @@ class WebViewActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        webViewTitle = intent.getStringExtra(Const.WEBVIEW_TITLE) ?: ""
-        currentWebViewUrl = intent.getStringExtra(Const.WEBVIEW_URL) ?: ""
+        webViewTitle = intent?.data?.getQueryParameter(Const.WEBVIEW_TITLE) ?: ""
+        currentWebViewUrl = intent?.data?.getQueryParameter(Const.WEBVIEW_URL) ?: ""
 
         setContent {
             TestTheme {

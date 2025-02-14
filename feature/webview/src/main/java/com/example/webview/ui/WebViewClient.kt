@@ -1,4 +1,4 @@
-package com.example.ui.webview
+package com.example.webview.ui
 
 import android.net.Uri
 import android.webkit.WebResourceRequest

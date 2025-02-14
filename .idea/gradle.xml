@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/alarm" />
+            <option value="$PROJECT_DIR$/feature/webview" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

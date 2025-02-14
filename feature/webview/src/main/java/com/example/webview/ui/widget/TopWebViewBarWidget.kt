@@ -1,4 +1,4 @@
-package com.example.ui.webview.widget
+package com.example.webview.ui.widget
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

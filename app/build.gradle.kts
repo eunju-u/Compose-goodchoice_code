@@ -100,4 +100,5 @@ dependencies {
     implementation(project(":ui-common"))
     implementation(project(":feature:login"))
     implementation(project(":feature:alarm"))
+    implementation(project(":feature:webview"))
 }

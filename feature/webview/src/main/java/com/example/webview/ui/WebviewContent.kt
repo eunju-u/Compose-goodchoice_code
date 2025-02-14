@@ -1,4 +1,4 @@
-package com.example.ui.webview
+package com.example.webview.ui
 
 import android.annotation.SuppressLint
 import android.webkit.WebBackForwardList
@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import com.example.ui_common.R
 import com.example.ui_theme.Theme
 import com.example.ui_theme.dp20
-import com.example.ui.webview.widget.TopWebViewBarWidget
+import com.example.webview.ui.widget.TopWebViewBarWidget
 import com.google.accompanist.web.*
 
 @SuppressLint("SetJavaScriptEnabled")

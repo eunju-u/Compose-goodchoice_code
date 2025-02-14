@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.home.widget
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,7 +26,6 @@ import com.example.common.Const
 import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.domain.model.BannerData
-import com.example.ui.webview.WebViewActivity
 
 @Composable
 fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = emptyList()) {
@@ -49,11 +49,10 @@ fun BannerWidget(modifier: Modifier = Modifier, bannerList: List<BannerData> = e
                 modifier = Modifier
                     .fillMaxSize()
                     .clickable {
-                        val intent = Intent(context, WebViewActivity::class.java).apply {
-                            putExtra(Const.WEBVIEW_TITLE, item.title)
-                            putExtra(Const.WEBVIEW_URL, item.url)
-                        }
-                        context.startActivity(intent)
+                        context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                            data =
+                                Uri.parse("feature://webview?${Const.WEBVIEW_TITLE}=${item.title}&${Const.WEBVIEW_URL}=${item.url}")
+                        })
                     },
                 painter =
                 if (item.image?.isNotEmpty() == true)
