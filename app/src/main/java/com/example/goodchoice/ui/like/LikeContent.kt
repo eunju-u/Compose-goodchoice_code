@@ -23,7 +23,6 @@ import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
-import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui_theme.*
 
 private val menus = listOf(
@@ -100,18 +99,10 @@ fun LikeContent(
                                                     viewModel.checkLikeData(it)
                                                 },
                                                 onItemClick = { stayItem ->
-                                                    context.startActivity(
-                                                        Intent(
-                                                            context,
-                                                            StayDetailActivity::class.java
-                                                        ).apply {
-                                                            putExtra(Const.ITEM_ID, stayItem.id)
-                                                            putExtra(
-                                                                Const.ITEM_TITLE,
-                                                                stayItem.name
-                                                            )
-                                                        }
-                                                    )
+                                                    context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                                        data =
+                                                            Uri.parse("feature://stay_detail?${Const.ITEM_ID}=${stayItem.id}&${Const.ITEM_TITLE}=${stayItem.name}")
+                                                    })
                                                 })
                                         }
                                     }

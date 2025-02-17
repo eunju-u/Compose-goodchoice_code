@@ -38,6 +38,9 @@
             <SelectionState runConfigName="feature.filter">
                 <option name="selectionMode" value="DROPDOWN" />
             </SelectionState>
+            <SelectionState runConfigName="feature.stay_detail">
+                <option name="selectionMode" value="DROPDOWN" />
+            </SelectionState>
         </selectionStates>
     </component>
 </project>

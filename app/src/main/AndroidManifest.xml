@@ -37,12 +37,6 @@
             android:name="com.example.ui.recentSeen.RecentSeenActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.ui.stayDetail.StayDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.example.ui.stayDetail.service.ServiceActivity"
-            android:exported="true" />
-        <activity
             android:name="com.example.ui.calendar.CalendarActivity"
             android:exported="true" />
         <activity

@@ -2,6 +2,7 @@ package com.example.goodchoice.ui.home.widget
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,7 +29,6 @@ import com.example.ui_theme.*
 import com.example.ui_common.R
 import com.example.data.mapper.generateRecentDbItem
 import com.example.database.recent.RecentDb
-import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui_common.utils.ConvertUtil
 import kotlinx.coroutines.*
 
@@ -67,12 +67,10 @@ fun KoreaStayItemWidget(
             )
             .clip(RoundedCornerShape(dp10))
             .clickable {
-                context.startActivity(
-                    Intent(context, StayDetailActivity::class.java).apply {
-                        putExtra(Const.ITEM_ID, stayItem.id)
-                        putExtra(Const.ITEM_TITLE, stayItem.name)
-                    }
-                )
+                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data =
+                        Uri.parse("feature://stay_detail?${Const.ITEM_ID}=${stayItem.id}&${Const.ITEM_TITLE}=${stayItem.name}")
+                })
 
                 val recentDb = RecentDb.getInstance(context)
 

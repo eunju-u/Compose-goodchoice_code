@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.home.widget
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,7 +23,6 @@ import com.example.ui_theme.*
 import com.example.ui_common.R
 import com.example.ui_common.components.RoundImageWidget
 import com.example.domain.model.StayItem
-import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui_common.components.TextWidget
 
 /**
@@ -42,12 +42,10 @@ fun RecentSeenWidget(stayItem: StayItem) {
             .width(dp120)
             .clip(RoundedCornerShape(dp10))
             .clickable {
-                context.startActivity(
-                    Intent(context, StayDetailActivity::class.java).apply {
-                        putExtra(Const.ITEM_ID, stayItem.id)
-                        putExtra(Const.ITEM_TITLE, stayItem.name)
-                    }
-                )
+                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data =
+                        Uri.parse("feature://stay_detail?${Const.ITEM_ID}=${stayItem.id}&${Const.ITEM_TITLE}=${stayItem.name}")
+                })
             }
             .padding(bottom = dp20),
         verticalArrangement = Arrangement.Center,
