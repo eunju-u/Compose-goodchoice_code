@@ -98,3 +98,7 @@ enum class DialogType {
     NETWORK_ERROR,
     NEED_LOGIN
 }
+
+enum class CalendarType {
+    CALENDAR, PERSON
+}

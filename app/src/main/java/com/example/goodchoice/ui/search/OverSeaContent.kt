@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.search
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -12,11 +13,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import com.example.common.CalendarType
 import com.example.common.Const
 import com.example.ui_common.R
 import com.example.ui_theme.*
-import com.example.ui.calendar.CalendarActivity
-import com.example.ui.calendar.CalendarType
 import com.example.ui_common.components.ButtonWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 
@@ -76,15 +76,10 @@ fun OverSeaContent(
                 )
             },
             onItemClick = {
-                context.startActivity(
-                    Intent(
-                        context,
-                        CalendarActivity::class.java
-                    ).apply {
-                        putExtra(Const.TYPE, CalendarType.CALENDAR)
-                        putExtra(Const.DATA, Const.OVERSEA)
-                    }
-                )
+                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data =
+                        Uri.parse("feature://calendar?${Const.TYPE}=${CalendarType.CALENDAR}&${Const.DATA}=${Const.OVERSEA}")
+                })
             }
         )
         LeftImageButtonWidget(
@@ -106,15 +101,10 @@ fun OverSeaContent(
                 )
             },
             onItemClick = {
-                context.startActivity(
-                    Intent(
-                        context,
-                        CalendarActivity::class.java
-                    ).apply {
-                        putExtra(Const.TYPE, CalendarType.PERSON)
-                        putExtra(Const.DATA, Const.OVERSEA)
-                    }
-                )
+                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data =
+                        Uri.parse("feature://calendar?${Const.TYPE}=${CalendarType.PERSON}&${Const.DATA}=${Const.OVERSEA}")
+                })
             }
         )
 

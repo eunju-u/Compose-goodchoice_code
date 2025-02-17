@@ -41,6 +41,9 @@
             <SelectionState runConfigName="feature.stay_detail">
                 <option name="selectionMode" value="DROPDOWN" />
             </SelectionState>
+            <SelectionState runConfigName="feature.calendar">
+                <option name="selectionMode" value="DROPDOWN" />
+            </SelectionState>
         </selectionStates>
     </component>
 </project>
