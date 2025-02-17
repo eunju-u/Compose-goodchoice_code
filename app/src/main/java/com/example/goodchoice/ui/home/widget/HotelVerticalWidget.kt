@@ -1,6 +1,7 @@
 package com.example.goodchoice.ui.home.widget
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,7 +25,7 @@ import com.example.ui_common.components.ImageButtonWidget
 import com.example.ui_theme.*
 import com.example.domain.model.OverseaSpecialItem
 import com.example.domain.model.StayItem
-import com.example.ui.recentSeen.RecentSeenActivity
+import com.example.recent_seen.ui.RecentSeenActivity
 import com.example.ui_common.utils.StringUtil
 
 @Composable
@@ -128,12 +129,9 @@ fun HotelVerticalWidget(
                     innerPadding = PaddingValues(horizontal = dp10, vertical = dp8),
                     onItemClick = {
                         if (type == Const.RECENT_HOTEL) {
-                            context.startActivity(
-                                Intent(
-                                    context,
-                                    RecentSeenActivity::class.java
-                                )
-                            )
+                            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse("feature://recent_seen")
+                            })
                         }
                     }, content = {
                         Image(

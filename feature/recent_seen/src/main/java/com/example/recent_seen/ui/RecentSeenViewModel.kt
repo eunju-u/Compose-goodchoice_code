@@ -1,4 +1,4 @@
-package com.example.ui.recentSeen
+package com.example.recent_seen.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

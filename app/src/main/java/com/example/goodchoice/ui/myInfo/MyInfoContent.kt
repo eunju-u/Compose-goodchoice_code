@@ -32,11 +32,10 @@ import com.example.domain.model.CategoryItem
 import com.example.domain.model.MyMenuData
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.main.MainActivity
-import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.detail.MyInfoDetailActivity
 import com.example.goodchoice.ui.myInfo.widget.CouponWidget
 import com.example.goodchoice.ui.myInfo.widget.MenuItemWidget
-import com.example.ui.recentSeen.RecentSeenActivity
+import com.example.recent_seen.ui.RecentSeenActivity
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.CardWidget
 import com.example.ui_common.components.CategoryItemWidget
@@ -211,12 +210,9 @@ fun MyInfoContent(
                                                     colorFilter = ColorFilter.tint(Theme.colorScheme.darkGray),
                                                     onItemClick = {
                                                         if (item.code == Const.RECENT_HOTEL) {
-                                                            context.startActivity(
-                                                                Intent(
-                                                                    context,
-                                                                    RecentSeenActivity::class.java
-                                                                )
-                                                            )
+                                                            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                                                data = Uri.parse("feature://recent_seen")
+                                                            })
                                                         }
                                                     }
                                                 )

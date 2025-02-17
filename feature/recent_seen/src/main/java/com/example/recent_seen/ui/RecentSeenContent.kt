@@ -1,4 +1,4 @@
-package com.example.ui.recentSeen
+package com.example.recent_seen.ui
 
 import android.annotation.SuppressLint
 import android.widget.Toast

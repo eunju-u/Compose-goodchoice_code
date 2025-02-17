@@ -1,4 +1,4 @@
-package com.example.data.dataSource
+package com.example.recent_seen.data.dataSource
 
 import android.content.Context
 import com.example.database.recent.RecentDb

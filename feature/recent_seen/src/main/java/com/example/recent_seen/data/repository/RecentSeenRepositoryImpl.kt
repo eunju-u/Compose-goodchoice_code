@@ -1,9 +1,9 @@
-package com.example.data.repository
+package com.example.recent_seen.data.repository
 
-import com.example.data.dataSource.RecentSeenDataSource
 import com.example.data.mapper.generateStayItem
 import com.example.domain.model.StayItem
 import com.example.domain.repository.RecentSeenRepository
+import com.example.recent_seen.data.dataSource.RecentSeenDataSource
 import javax.inject.Inject
 
 class RecentSeenRepositoryImpl @Inject constructor(

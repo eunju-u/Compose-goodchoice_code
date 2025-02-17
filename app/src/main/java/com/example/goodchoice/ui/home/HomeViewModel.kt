@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.StayItem
-import com.example.domain.usecase.RecentUseCase
 import com.example.domain.model.CategoryItem
 import com.example.domain.model.HomeData
 import com.example.domain.usecase.HomeUseCase
+import com.example.domain.usecase.RecentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

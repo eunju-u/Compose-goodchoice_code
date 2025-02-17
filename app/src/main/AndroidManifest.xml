@@ -34,12 +34,6 @@
             android:name=".ui.main.MainActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.ui.recentSeen.RecentSeenActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.example.ui.calendar.CalendarActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.search.detailSearch.DetailSearchActivity"
             android:exported="true" />
         <activity

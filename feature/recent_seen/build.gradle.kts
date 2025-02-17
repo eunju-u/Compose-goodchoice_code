@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.calendar"
+    namespace = "com.example.recent_seen"
     compileSdk = 35
 
     defaultConfig {
@@ -45,8 +45,15 @@ android {
 dependencies {
     // Compose
     implementation(libs.androidx.compose.material3)
-    debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.activity.compose)
+
+    //image load library
+    implementation(libs.coil)
+
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+
+    //room db
+    implementation(libs.room.runtime)
 
     //Hilt
     implementation(libs.hilt.android)
