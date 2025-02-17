@@ -43,9 +43,6 @@
             android:name="com.example.ui.stayDetail.service.ServiceActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.ui.filter.FilterActivity"
-            android:exported="true" />
-        <activity
             android:name="com.example.ui.calendar.CalendarActivity"
             android:exported="true" />
         <activity

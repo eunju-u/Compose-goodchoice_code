@@ -2,6 +2,7 @@
 app = "8.5.0"
 kotlin = "1.8.0"
 kotlinKapt = "2.0.10"
+gson = "2.10.1"
 
 coreKtx = "1.13.1"
 appCompat = "1.7.0"
@@ -31,6 +32,8 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompat" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 google-android-material = { group = "com.google.android.material", name = "material", version.ref = "googleMaterial" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

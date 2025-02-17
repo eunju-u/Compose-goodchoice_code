@@ -24,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.common.Const
 import com.example.common.MainBottomSheetType
+import com.example.common.ui_data.AroundFilterSelectedModel
 import com.example.ui_common.R
 import com.example.domain.info.ConnectInfo
 import com.example.ui_common.components.bottomSheet.MyBottomSheetLayout
@@ -42,6 +44,7 @@ import com.example.goodchoice.ui.search.SearchViewModel
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.LoadingWidget
 import com.example.ui_theme.*
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -213,6 +216,30 @@ fun MainContent(
                     with(mainState) {
                         scope.launch { mainState.bottomSheetState.show() }
                     }
+                },
+                showFilter = {
+                    // viewModel.aroundFilterSelect 의 데이터는 mutable 타입이라 serialize 불가
+                    val selectedData = aroundViewModel.aroundFilterSelect
+                    val model =
+                        AroundFilterSelectedModel(
+                            selectedData.selectedFilter.value,
+                            selectedData.selectedRecommend.value,
+                            selectedData.selectedRoom.value,
+                            selectedData.selectedReservation.value,
+                            selectedData.selectedPrice.value
+                        )
+
+                    val gson = Gson()
+                    val jsonData = gson.toJson(model)
+                    val deepLinkUri = Uri.Builder()
+                        .scheme("feature")
+                        .authority("filter")
+                        .appendQueryParameter(Const.DATA, jsonData)
+                        .build()
+
+                    (context as MainActivity).activityForFilterResult.launch(
+                        Intent(Intent.ACTION_VIEW, deepLinkUri)
+                    )
                 }
             )
         }

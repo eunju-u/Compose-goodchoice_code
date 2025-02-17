@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui_common.R
 import com.example.common.Const
-import com.example.common.data.TabData
+import com.example.common.ui_data.TabData
 import com.example.ui_common.components.GoToWidget
 import com.example.ui_common.components.TabWidget
 import com.example.domain.info.ConnectInfo

@@ -1,8 +1,6 @@
 package com.example.goodchoice.ui.main
 
-import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
-import com.example.ui.model.AroundFilterItem
 import com.example.domain.info.ConnectInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,7 +2,7 @@ package com.example.goodchoice.ui.around.model
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.example.ui.model.AroundFilterItem
+import com.example.common.ui_data.AroundFilterItem
 
 //(Map으로 관리 하려 했지만, 서버에서 받아오는 내용이 아니기 때문에 select 된 아이템을 유지하기 어려워 사용 하지 않음.)
 data class AroundFilterSelectedData(

@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.common.data.TabData
+import com.example.common.ui_data.TabData
 import com.example.data.local.preference.GoodChoicePreference
 import java.time.LocalDate
 import com.example.ui_common.R

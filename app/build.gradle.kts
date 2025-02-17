@@ -101,4 +101,5 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:alarm"))
     implementation(project(":feature:webview"))
+    implementation(project(":feature:filter"))
 }

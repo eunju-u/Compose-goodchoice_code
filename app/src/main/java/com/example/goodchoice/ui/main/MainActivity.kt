@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.mutableStateOf
 import com.example.common.Const
 import com.example.common.ServerConst
+import com.example.common.ui_data.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
 import com.example.goodchoice.ui.around.AroundViewModel
 import com.example.goodchoice.ui.home.HomeViewModel
@@ -61,7 +62,7 @@ class MainActivity : ComponentActivity() {
                 RESULT_OK -> {
                     result.data?.let {
                         val data =
-                            it.getSerializableExtra(Const.DATA) as ArrayList<com.example.ui.model.AroundFilterItem>?
+                            it.getSerializableExtra(Const.DATA) as ArrayList<AroundFilterItem>?
 
                         data?.let { list ->
                             list.forEach { item ->

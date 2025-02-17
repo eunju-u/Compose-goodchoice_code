@@ -37,12 +37,6 @@ object RepositoryModule {
     ): MyInfoRepository = MyInfoRepositoryImpl(dataSource = dataSource)
 
     @Provides
-    fun provideFilterRepository(
-        dataSource: FilterDataSource
-    ): FilterRepository = FilterRepositoryImpl(dataSource = dataSource)
-
-
-    @Provides
     fun provideRecentSeenRepository(
         dataSource: RecentSeenDataSource
     ): RecentSeenRepository = RecentSeenRepositoryImpl(dataSource = dataSource)

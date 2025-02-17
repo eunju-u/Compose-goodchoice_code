@@ -25,17 +25,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.common.Const
 import com.example.ui_common.R
 import com.example.common.ServerConst
+import com.example.common.ui_data.AroundFilterItem
 import com.example.domain.model.AroundFilterData
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.domain.info.ConnectInfo
 import com.example.goodchoice.ui.around.model.AroundFilterSelectedData
-import com.example.ui.filter.FilterActivity
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
-import com.example.ui.model.AroundFilterSelectedModel
 import com.example.ui_common.components.ImageButtonWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 import com.example.ui_common.components.RoundImageWidget
@@ -61,7 +59,9 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class, ExperimentalNaverMapApi::class)
 @Composable
-fun AroundContent(modifier: Modifier = Modifier, viewModel: AroundViewModel) {
+fun AroundContent(
+    modifier: Modifier = Modifier, viewModel: AroundViewModel, showFilter: () -> Unit = {},
+) {
     val context = LocalContext.current
     val selectRoomType = viewModel.selectRoomType
     val scope = rememberCoroutineScope()
@@ -354,34 +354,17 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: AroundViewModel) {
 
                                             if (selectDepthItem.value.subType.isNullOrEmpty()) {
                                                 selectDepthItem.value =
-                                                    com.example.ui.model.AroundFilterItem(
+                                                    AroundFilterItem(
                                                         mainType = selectFilterData.type,
                                                         subType = selectFilterData.type,
                                                         text = selectFilterData.text
                                                     )
                                             } else {
                                                 selectDepthItem.value =
-                                                    com.example.ui.model.AroundFilterItem()
+                                                    AroundFilterItem()
                                             }
                                         } else if (item.type == ServerConst.FILTER) {
-                                            (context as MainActivity).activityForFilterResult.launch(
-                                                Intent(
-                                                    context,
-                                                    FilterActivity::class.java
-                                                ).apply {
-                                                    // viewModel.aroundFilterSelect 의 데이터는 mutable 타입이라 serialize 불가
-                                                    val selectedData = viewModel.aroundFilterSelect
-                                                    val data =
-                                                        AroundFilterSelectedModel(
-                                                            selectedData.selectedFilter.value,
-                                                            selectedData.selectedRecommend.value,
-                                                            selectedData.selectedRoom.value,
-                                                            selectedData.selectedReservation.value,
-                                                            selectedData.selectedPrice.value
-                                                        )
-                                                    putExtra(Const.DATA, data)
-                                                }
-                                            )
+                                            showFilter()
                                         }
                                     },
                                     content = when (item.type) {
@@ -461,7 +444,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: AroundViewModel) {
                             //값이 지워진 경우 초기값 넣어줌
                             if (aroundFilterSelect.selectedRecommend.value.subType.isNullOrEmpty()) {
                                 aroundFilterSelect.selectedRecommend.value =
-                                    com.example.ui.model.AroundFilterItem(
+                                    AroundFilterItem(
                                         subType = ServerConst.RECOMMEND, text = "추천순"
                                     )
                             }
@@ -490,14 +473,14 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: AroundViewModel) {
                                             //select 값이 초기값이나 클릭한 type 과 같지 않을 때
                                             if (select.value.subType.isNullOrEmpty() || select.value.subType != it.type) {
                                                 select.value =
-                                                    com.example.ui.model.AroundFilterItem(
+                                                    AroundFilterItem(
                                                         mainType = selectFilterData.type,
                                                         subType = it.type,
                                                         text = it.text
                                                     )
                                             } else {
                                                 select.value =
-                                                    com.example.ui.model.AroundFilterItem()
+                                                    AroundFilterItem()
                                             }
                                             //뷰 노출 여부 초기화
                                             selectFilter = ""

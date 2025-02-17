@@ -32,6 +32,7 @@ fun NavGraph(
     likeViewModel: LikeViewModel,
     myInfoViewModel: MyInfoViewModel,
     showBottomSheet: (type: MainBottomSheetType) -> Unit = {},
+    showFilter: ()  -> Unit = {},
 ) {
     NavHost(
         modifier = Modifier,
@@ -45,7 +46,7 @@ fun NavGraph(
             SearchContent(modifier, searchViewModel)
         }
         composable(NavItem.Around.route) {
-            AroundContent(modifier, aroundViewModel)
+            AroundContent(modifier, aroundViewModel, showFilter)
         }
         composable(NavItem.Like.route) {
             LikeContent(modifier, likeViewModel)

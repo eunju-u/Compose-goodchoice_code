@@ -11,7 +11,7 @@ import com.example.domain.model.KoreaSearchData
 import com.example.domain.model.StayItem
 import com.example.domain.usecase.AroundUseCase
 import com.example.goodchoice.ui.around.model.AroundFilterSelectedData
-import com.example.ui.model.AroundFilterItem
+import com.example.common.ui_data.AroundFilterItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
