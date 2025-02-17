@@ -12,12 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.common.data.TabData
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.goodchoice.ui.main.MainViewModel
 import java.time.LocalDate
 import com.example.ui_common.R
 import com.example.ui_common.components.TabWidget
-import com.example.common.data.TabData
 import com.example.ui_theme.*
 import com.example.domain.info.ConnectInfo
 import com.example.ui_common.utils.ConvertUtil
@@ -32,7 +31,7 @@ private val menus = listOf(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchContent(
-    modifier: Modifier = Modifier, viewModel: MainViewModel
+    modifier: Modifier = Modifier, viewModel: SearchViewModel
 ) {
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)

@@ -15,15 +15,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui_common.R
-import com.example.common.data.TabData
 import com.example.common.Const
+import com.example.common.data.TabData
 import com.example.ui_common.components.GoToWidget
 import com.example.ui_common.components.TabWidget
 import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.goodchoice.ui.like.widget.EmptyDataWidget
 import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
-import com.example.goodchoice.ui.main.MainViewModel
 import com.example.ui.stayDetail.StayDetailActivity
 import com.example.ui_theme.*
 
@@ -37,7 +36,7 @@ private val menus = listOf(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LikeContent(
-    modifier: Modifier = Modifier, viewModel: MainViewModel
+    modifier: Modifier = Modifier, viewModel: LikeViewModel
 ) {
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)

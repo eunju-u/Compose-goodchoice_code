@@ -7,6 +7,7 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.common.Const
+import com.example.ui.model.AroundFilterSelectedModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.ui_theme.*
 
@@ -20,9 +21,9 @@ class FilterActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var data = com.example.ui.model.AroundFilterSelectedModel()
+        var data = AroundFilterSelectedModel()
         if (intent.hasExtra(Const.DATA)) {
-            data = intent.getSerializableExtra(Const.DATA) as com.example.ui.model.AroundFilterSelectedModel
+            data = intent.getSerializableExtra(Const.DATA) as AroundFilterSelectedModel
         }
         viewModel.aroundSelectedData = data
         viewModel.requestFilterData(true)

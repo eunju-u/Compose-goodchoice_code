@@ -31,11 +31,11 @@ import com.example.common.ServerConst
 import com.example.domain.model.AroundFilterData
 import com.example.goodchoice.ui.around.widget.AroundTopWidget
 import com.example.goodchoice.ui.main.MainActivity
-import com.example.goodchoice.ui.main.MainViewModel
 import com.example.domain.info.ConnectInfo
+import com.example.goodchoice.ui.around.model.AroundFilterSelectedData
 import com.example.ui.filter.FilterActivity
-import com.example.goodchoice.ui.main.AroundFilterSelectedData
 import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
+import com.example.ui.model.AroundFilterSelectedModel
 import com.example.ui_common.components.ImageButtonWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 import com.example.ui_common.components.RoundImageWidget
@@ -61,7 +61,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class, ExperimentalNaverMapApi::class)
 @Composable
-fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
+fun AroundContent(modifier: Modifier = Modifier, viewModel: AroundViewModel) {
     val context = LocalContext.current
     val selectRoomType = viewModel.selectRoomType
     val scope = rememberCoroutineScope()
@@ -372,7 +372,7 @@ fun AroundContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                     // viewModel.aroundFilterSelect 의 데이터는 mutable 타입이라 serialize 불가
                                                     val selectedData = viewModel.aroundFilterSelect
                                                     val data =
-                                                        com.example.ui.model.AroundFilterSelectedModel(
+                                                        AroundFilterSelectedModel(
                                                             selectedData.selectedFilter.value,
                                                             selectedData.selectedRecommend.value,
                                                             selectedData.selectedRoom.value,

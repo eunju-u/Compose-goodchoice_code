@@ -48,7 +48,7 @@ val refreshDataList = listOf(
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
 fun HomeContent(
-    modifier: Modifier = Modifier, viewModel: MainViewModel
+    modifier: Modifier = Modifier, viewModel: HomeViewModel
 ) {
     val context = LocalContext.current
     val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()

@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.material.*
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.UiComposable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -32,7 +33,12 @@ import com.example.goodchoice.ui.main.bottomSheet.ProfileContent
 import com.example.goodchoice.nav.NavGraph
 import com.example.goodchoice.nav.NavItem
 import com.example.goodchoice.nav.navigation
+import com.example.goodchoice.ui.around.AroundViewModel
+import com.example.goodchoice.ui.home.HomeViewModel
+import com.example.goodchoice.ui.like.LikeViewModel
 import com.example.goodchoice.ui.main.state.rememberMainState
+import com.example.goodchoice.ui.myInfo.MyInfoViewModel
+import com.example.goodchoice.ui.search.SearchViewModel
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.LoadingWidget
 import com.example.ui_theme.*
@@ -42,7 +48,14 @@ import kotlinx.coroutines.launch
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MainContent(viewModel: MainViewModel) {
+fun MainContent(
+    mainViewModel: MainViewModel,
+    homeViewModel: HomeViewModel,
+    searchViewModel: SearchViewModel,
+    aroundViewModel: AroundViewModel,
+    likeViewModel: LikeViewModel,
+    myInfoViewModel: MyInfoViewModel,
+) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -51,7 +64,7 @@ fun MainContent(viewModel: MainViewModel) {
     val navBackStackEntry by mainState.navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
+    val homeUiState = mainViewModel.homeUiState.collectAsStateWithLifecycle()
 
     val style = TextStyle(
         fontSize = 9.sp,
@@ -61,27 +74,52 @@ fun MainContent(viewModel: MainViewModel) {
     )
     var textStyle by remember { mutableStateOf(style) }
 
-    var bottomSheetType by remember { mutableStateOf(MainBottomSheetType.NONE) }
+    var bottomSheetType by remember { mutableStateOf(MainBottomSheetType.PROFILE) }
 
-    var isShowDialog = viewModel.isShowDialog.collectAsStateWithLifecycle()
+    var isShowDialog = mainViewModel.isShowDialog.collectAsStateWithLifecycle()
 
     /** route 값이 변경되면 데이터 조회함  **/
     LaunchedEffect(Unit) {
-        viewModel.currentRoute.collectLatest {
+        mainViewModel.currentRoute.collectLatest {
             if (it.isNotEmpty()) {
-                viewModel.getCurrentViewData(context)
+                when (mainViewModel.currentRoute.value) {
+                    NavItem.Home.route -> {
+                        homeViewModel.requestHomeData()
+                        homeViewModel.recentDb()
+                    }
+
+                    NavItem.Search.route -> {
+                        searchViewModel.requestSearchData()
+                    }
+
+                    NavItem.Around.route -> {
+                        aroundViewModel.requestAroundData(true)
+                    }
+
+                    NavItem.Like.route -> {
+                        likeViewModel.requestLikeData(context)
+                    }
+
+                    NavItem.MyInfo.route -> {
+                        myInfoViewModel.requestMyInfoData()
+                    }
+                }
             }
         }
     }
 
-    /** 바텀 시트 상태값이 변경되면 노출됨. **/
-    LaunchedEffect(Unit) {
-        viewModel.bottomSheetType.collectLatest {
-            bottomSheetType = it
-            if (it != MainBottomSheetType.NONE) {
-                with(mainState) {
-                    scope.launch { bottomSheetState.show() }
-                }
+    /** 바텀시트에 노출되는 UI  **/
+    val sheet: @Composable @UiComposable ColumnScope.() -> Unit = when (bottomSheetType) {
+        MainBottomSheetType.PROFILE -> {
+            {
+                SheetWidget(
+                    shape = RoundedCornerShape(
+                        topStart = dp100,
+                        topEnd = dp100
+                    ),
+                    content = {
+                        ProfileContent()
+                    })
             }
         }
     }
@@ -145,12 +183,11 @@ fun MainContent(viewModel: MainViewModel) {
             contentColor = Theme.colorScheme.darkGray
         ) { paddingValues ->
             //현재 navigation 값 viewModel 에 저장
-            viewModel.currentRoute.value = currentRoute ?: NavItem.Home.route
+            mainViewModel.currentRoute.value = currentRoute ?: NavItem.Home.route
 
             BackHandler {
                 if (mainState.bottomSheetState.isVisible) {
                     mainState.scope.launch {
-                        viewModel.bottomSheetType.value = MainBottomSheetType.NONE
                         mainState.bottomSheetState.hide()
                     }
                 } else {
@@ -166,28 +203,25 @@ fun MainContent(viewModel: MainViewModel) {
                 modifier = Modifier.padding(paddingValues),
                 navController = mainState.navController,
                 startDestination = NavItem.Home.route,
-                viewModel = viewModel
+                homeViewModel = homeViewModel,
+                searchViewModel = searchViewModel,
+                aroundViewModel = aroundViewModel,
+                likeViewModel = likeViewModel,
+                myInfoViewModel = myInfoViewModel,
+                showBottomSheet = { type ->
+                    bottomSheetType = type
+                    with(mainState) {
+                        scope.launch { mainState.bottomSheetState.show() }
+                    }
+                }
             )
         }
 
         //바텀시트 노출
         MyBottomSheetLayout(
             sheetState = mainState.bottomSheetState,
-            sheetContent = {
-                if (bottomSheetType == MainBottomSheetType.PROFILE) {
-                    SheetWidget(
-                        shape = RoundedCornerShape(
-                            topStart = dp100,
-                            topEnd = dp100
-                        ),
-                        content = {
-                            ProfileContent()
-                        })
-                }
-            },
-            onDismiss = {
-                viewModel.bottomSheetType.value = MainBottomSheetType.NONE
-            })
+            sheetContent = sheet
+        )
 
         if (homeUiState.value is ConnectInfo.Loading) {
             LoadingWidget()
@@ -200,10 +234,10 @@ fun MainContent(viewModel: MainViewModel) {
             oneButtonText = stringResource(id = R.string.str_close),
             twoButtonText = stringResource(id = R.string.str_set_permission),
             onDismiss = {
-                viewModel.isShowDialog.value = false
+                mainViewModel.isShowDialog.value = false
             },
             onConfirm = {
-                viewModel.isShowDialog.value = false
+                mainViewModel.isShowDialog.value = false
                 //시스템 권한 설정으로 이동
                 context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.fromParts("package", context.packageName, null)

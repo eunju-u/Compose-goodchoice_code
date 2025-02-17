@@ -90,7 +90,6 @@ enum class CalendarPersonType {
 }
 
 enum class MainBottomSheetType {
-    NONE,
     PROFILE // 내 정보 -> 프로필 사진 변경
 }
 

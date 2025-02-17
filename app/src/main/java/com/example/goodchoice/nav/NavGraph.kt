@@ -7,12 +7,18 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.common.MainBottomSheetType
 import com.example.goodchoice.ui.around.AroundContent
+import com.example.goodchoice.ui.around.AroundViewModel
 import com.example.goodchoice.ui.home.HomeContent
+import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeContent
+import com.example.goodchoice.ui.like.LikeViewModel
 import com.example.goodchoice.ui.main.MainViewModel
 import com.example.goodchoice.ui.myInfo.MyInfoContent
+import com.example.goodchoice.ui.myInfo.MyInfoViewModel
 import com.example.goodchoice.ui.search.SearchContent
+import com.example.goodchoice.ui.search.SearchViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
@@ -20,7 +26,12 @@ fun NavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: String,
-    viewModel: MainViewModel,
+    homeViewModel: HomeViewModel,
+    searchViewModel: SearchViewModel,
+    aroundViewModel: AroundViewModel,
+    likeViewModel: LikeViewModel,
+    myInfoViewModel: MyInfoViewModel,
+    showBottomSheet: (type: MainBottomSheetType) -> Unit = {},
 ) {
     NavHost(
         modifier = Modifier,
@@ -28,19 +39,19 @@ fun NavGraph(
         startDestination = startDestination,
     ) {
         composable(NavItem.Home.route) {
-            HomeContent(modifier, viewModel)
+            HomeContent(modifier, homeViewModel)
         }
         composable(NavItem.Search.route) {
-            SearchContent(modifier, viewModel)
+            SearchContent(modifier, searchViewModel)
         }
         composable(NavItem.Around.route) {
-            AroundContent(modifier, viewModel)
+            AroundContent(modifier, aroundViewModel)
         }
         composable(NavItem.Like.route) {
-            LikeContent(modifier, viewModel)
+            LikeContent(modifier, likeViewModel)
         }
         composable(NavItem.MyInfo.route) {
-            MyInfoContent(modifier, viewModel)
+            MyInfoContent(modifier, myInfoViewModel, showBottomSheet)
         }
     }
 }

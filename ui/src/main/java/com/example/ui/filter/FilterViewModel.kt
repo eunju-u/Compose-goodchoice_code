@@ -9,6 +9,7 @@ import com.example.common.ServerConst
 import com.example.domain.info.ConnectInfo
 import com.example.domain.model.FilterItem
 import com.example.domain.usecase.FilterUseCase
+import com.example.ui.model.AroundFilterSelectedModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -36,7 +37,7 @@ class FilterViewModel @Inject constructor(
     val selectFilterMap = mutableStateMapOf<String, LinkedList<FilterItem>>()
 
     //주변 화면에서 선택되어 넘겨져 온 데이터
-    var aroundSelectedData = com.example.ui.model.AroundFilterSelectedModel()
+    var aroundSelectedData = AroundFilterSelectedModel()
     var checkReservation = mutableStateOf(false)
 
     private suspend fun requestRoomTypeData() = withContext(viewModelScope.coroutineContext) {

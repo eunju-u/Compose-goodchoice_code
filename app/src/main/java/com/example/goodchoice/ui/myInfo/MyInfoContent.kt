@@ -49,7 +49,11 @@ import com.example.ui_common.components.TextWidget
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
+fun MyInfoContent(
+    modifier: Modifier = Modifier,
+    viewModel: MyInfoViewModel,
+    showBottomSheet: (type: MainBottomSheetType) -> Unit = {},
+) {
 
     //액티비티 호출
     val context = LocalContext.current
@@ -114,7 +118,7 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                             .then(iconModifier)
                                             .clickable {
                                                 if (isLogin) {
-                                                    viewModel.bottomSheetType.value = MainBottomSheetType.PROFILE
+                                                    showBottomSheet(MainBottomSheetType.PROFILE)
                                                 }
                                             },
                                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_smile),
@@ -135,9 +139,12 @@ fun MyInfoContent(modifier: Modifier = Modifier, viewModel: MainViewModel) {
                                                         )
                                                     )
                                                 } else {
-                                                    (context as MainActivity).startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                                        data = Uri.parse("feature://login")
-                                                    })
+                                                    (context as MainActivity).startActivity(
+                                                        Intent(
+                                                            Intent.ACTION_VIEW
+                                                        ).apply {
+                                                            data = Uri.parse("feature://login")
+                                                        })
                                                 }
                                             },
                                         content = {

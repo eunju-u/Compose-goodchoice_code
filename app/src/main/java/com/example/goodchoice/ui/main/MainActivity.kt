@@ -9,6 +9,11 @@ import androidx.compose.runtime.mutableStateOf
 import com.example.common.Const
 import com.example.common.ServerConst
 import com.example.domain.model.KoreaSearchData
+import com.example.goodchoice.ui.around.AroundViewModel
+import com.example.goodchoice.ui.home.HomeViewModel
+import com.example.goodchoice.ui.like.LikeViewModel
+import com.example.goodchoice.ui.myInfo.MyInfoViewModel
+import com.example.goodchoice.ui.search.SearchViewModel
 import com.example.ui_theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,15 +23,27 @@ class MainActivity : ComponentActivity() {
         val TAG: String = MainActivity::class.java.simpleName
     }
 
-    private val viewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val aroundViewModel: AroundViewModel by viewModels()
+    private val likeViewModel: LikeViewModel by viewModels()
+    private val myInfoViewModel: MyInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.firstSplash = intent.getBooleanExtra(Const.FIRST_SPLASH, false)
+        homeViewModel.firstSplash = intent.getBooleanExtra(Const.FIRST_SPLASH, false)
 
         setContent {
             TestTheme {
-                MainContent(viewModel = viewModel)
+                MainContent(
+                    mainViewModel = mainViewModel,
+                    homeViewModel = homeViewModel,
+                    searchViewModel = searchViewModel,
+                    aroundViewModel = aroundViewModel,
+                    likeViewModel = likeViewModel,
+                    myInfoViewModel = myInfoViewModel
+                )
             }
         }
     }
@@ -34,7 +51,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         //홈 -> 최근 본 상품 -> 전체 삭제 -> 홈 이동시 최근 본 상품 갱신하기 위함.
-        viewModel.recentDb()
+        homeViewModel.recentDb()
     }
 
     //주변 화면에서 필터 상세 > 주변화면 돌아올 경우 호출되는 콜백
@@ -52,16 +69,16 @@ class MainActivity : ComponentActivity() {
 
                                 when (item.mainType) {
                                     ServerConst.RESERVATION -> {
-                                        viewModel.aroundFilterSelect.selectedReservation =
+                                        aroundViewModel.aroundFilterSelect.selectedReservation =
                                             mutableItem
                                     }
 
                                     ServerConst.PRICE -> {
-                                        viewModel.aroundFilterSelect.selectedPrice = mutableItem
+                                        aroundViewModel.aroundFilterSelect.selectedPrice = mutableItem
                                     }
 
                                     ServerConst.ROOM -> {
-                                        viewModel.aroundFilterSelect.selectedRoom = mutableItem
+                                        aroundViewModel.aroundFilterSelect.selectedRoom = mutableItem
                                     }
                                 }
                             }
@@ -81,7 +98,7 @@ class MainActivity : ComponentActivity() {
                         if (data != null) {
                             val searchItem = data as KoreaSearchData
                             searchItem.let { item ->
-                                viewModel.selectSearchItem.value = item
+                                aroundViewModel.selectSearchItem.value = item
                             }
                         }
                     }
@@ -100,7 +117,7 @@ class MainActivity : ComponentActivity() {
         }
         if (isDenied) {
             // 팝업 노출
-            viewModel.isShowDialog.value = true
+            mainViewModel.isShowDialog.value = true
         }
     }
 }
