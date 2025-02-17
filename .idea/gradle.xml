@@ -22,7 +22,6 @@
             <option value="$PROJECT_DIR$/feature/recent_seen" />
             <option value="$PROJECT_DIR$/feature/stay_detail" />
             <option value="$PROJECT_DIR$/feature/webview" />
-            <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui-common" />
             <option value="$PROJECT_DIR$/ui-theme" />
           </set>

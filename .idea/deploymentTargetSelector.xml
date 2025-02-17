@@ -17,9 +17,6 @@
             <SelectionState runConfigName="data">
                 <option name="selectionMode" value="DROPDOWN" />
             </SelectionState>
-            <SelectionState runConfigName="ui">
-                <option name="selectionMode" value="DROPDOWN" />
-            </SelectionState>
             <SelectionState runConfigName="ui-theme">
                 <option name="selectionMode" value="DROPDOWN" />
             </SelectionState>

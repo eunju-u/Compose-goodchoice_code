@@ -95,7 +95,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":database"))
     implementation(project(":data"))
-    implementation(project(":ui"))
     implementation(project(":ui-theme"))
     implementation(project(":ui-common"))
     implementation(project(":feature:login"))
