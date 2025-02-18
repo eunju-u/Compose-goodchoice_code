@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,7 +34,7 @@ import com.example.goodchoice.ui.around.widget.AroundTopWidget
 import com.example.goodchoice.ui.main.MainActivity
 import com.example.domain.info.ConnectInfo
 import com.example.goodchoice.ui.around.model.AroundFilterSelectedData
-import com.example.goodchoice.ui.search.detailSearch.DetailSearchActivity
+import com.example.search.ui.detailSearch.DetailSearchActivity
 import com.example.ui_common.components.ImageButtonWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 import com.example.ui_common.components.RoundImageWidget
@@ -147,10 +148,9 @@ fun AroundContent(
                 selectedSearchText = selectSearchItem.value.name ?: "",
                 onSearchClick = {
                     (context as MainActivity).activityForSearchResult.launch(
-                        Intent(
-                            context,
-                            DetailSearchActivity::class.java
-                        )
+                        Intent(Intent.ACTION_VIEW).apply {
+                            data = Uri.parse("feature://detail_search")
+                        }
                     )
                 })
         }

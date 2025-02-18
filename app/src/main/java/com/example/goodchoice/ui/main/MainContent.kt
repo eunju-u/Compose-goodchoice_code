@@ -40,7 +40,7 @@ import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeViewModel
 import com.example.goodchoice.ui.main.state.rememberMainState
 import com.example.my_info.ui.MyInfoViewModel
-import com.example.goodchoice.ui.search.SearchViewModel
+import com.example.search.ui.SearchViewModel
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.LoadingWidget
 import com.example.ui_theme.*
@@ -57,7 +57,7 @@ fun MainContent(
     searchViewModel: SearchViewModel,
     aroundViewModel: AroundViewModel,
     likeViewModel: LikeViewModel,
-    myInfoViewModel: com.example.my_info.ui.MyInfoViewModel,
+    myInfoViewModel: MyInfoViewModel,
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current

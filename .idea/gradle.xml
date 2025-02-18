@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/my_info" />
             <option value="$PROJECT_DIR$/feature/recent_seen" />
+            <option value="$PROJECT_DIR$/feature/search" />
             <option value="$PROJECT_DIR$/feature/stay_detail" />
             <option value="$PROJECT_DIR$/feature/webview" />
             <option value="$PROJECT_DIR$/ui-common" />

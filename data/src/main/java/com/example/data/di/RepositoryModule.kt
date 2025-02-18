@@ -17,11 +17,6 @@ object RepositoryModule {
     ): HomeRepository = HomeRepositoryImpl(dataSource = dataSource)
 
     @Provides
-    fun provideSearchRepository(
-        dataSource: SearchDataSource
-    ): SearchRepository = SearchRepositoryImpl(dataSource = dataSource)
-
-    @Provides
     fun provideAroundRepository(
         dataSource: AroundDataSource
     ): AroundRepository = AroundRepositoryImpl(dataSource = dataSource)
@@ -30,9 +25,4 @@ object RepositoryModule {
     fun provideLikeRepository(
         dataSource: LikeDataSource
     ): LikeRepository = LikeRepositoryImpl(dataSource = dataSource)
-
-    @Provides
-    fun provideDetailSearchRepository(
-        dataSource: DetailSearchDataSource
-    ): DetailSearchRepository = DetailSearchRepositoryImpl(dataSource = dataSource)
 }

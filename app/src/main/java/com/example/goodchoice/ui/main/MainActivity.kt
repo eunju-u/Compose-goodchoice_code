@@ -13,8 +13,7 @@ import com.example.domain.model.KoreaSearchData
 import com.example.goodchoice.ui.around.AroundViewModel
 import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeViewModel
-import com.example.my_info.ui.MyInfoViewModel
-import com.example.goodchoice.ui.search.SearchViewModel
+import com.example.search.ui.SearchViewModel
 import com.example.ui_theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
