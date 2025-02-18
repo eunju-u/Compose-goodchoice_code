@@ -32,11 +32,6 @@ object RepositoryModule {
     ): LikeRepository = LikeRepositoryImpl(dataSource = dataSource)
 
     @Provides
-    fun provideMyInfoRepository(
-        dataSource: MyInfoDataSource
-    ): MyInfoRepository = MyInfoRepositoryImpl(dataSource = dataSource)
-
-    @Provides
     fun provideDetailSearchRepository(
         dataSource: DetailSearchDataSource
     ): DetailSearchRepository = DetailSearchRepositoryImpl(dataSource = dataSource)

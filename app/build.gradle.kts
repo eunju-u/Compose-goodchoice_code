@@ -104,4 +104,5 @@ dependencies {
     implementation(project(":feature:stay_detail"))
     implementation(project(":feature:calendar"))
     implementation(project(":feature:recent_seen"))
+    implementation(project(":feature:my_info"))
 }

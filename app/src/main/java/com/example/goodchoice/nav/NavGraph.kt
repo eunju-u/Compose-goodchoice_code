@@ -14,9 +14,8 @@ import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeContent
 import com.example.goodchoice.ui.like.LikeViewModel
-import com.example.goodchoice.ui.main.MainViewModel
-import com.example.goodchoice.ui.myInfo.MyInfoContent
-import com.example.goodchoice.ui.myInfo.MyInfoViewModel
+import com.example.my_info.ui.MyInfoContent
+import com.example.my_info.ui.MyInfoViewModel
 import com.example.goodchoice.ui.search.SearchContent
 import com.example.goodchoice.ui.search.SearchViewModel
 
@@ -30,7 +29,7 @@ fun NavGraph(
     searchViewModel: SearchViewModel,
     aroundViewModel: AroundViewModel,
     likeViewModel: LikeViewModel,
-    myInfoViewModel: MyInfoViewModel,
+    myInfoViewModel: com.example.my_info.ui.MyInfoViewModel,
     showBottomSheet: (type: MainBottomSheetType) -> Unit = {},
     showFilter: ()  -> Unit = {},
 ) {
@@ -52,7 +51,7 @@ fun NavGraph(
             LikeContent(modifier, likeViewModel)
         }
         composable(NavItem.MyInfo.route) {
-            MyInfoContent(modifier, myInfoViewModel, showBottomSheet)
+            com.example.my_info.ui.MyInfoContent(modifier, myInfoViewModel, showBottomSheet)
         }
     }
 }

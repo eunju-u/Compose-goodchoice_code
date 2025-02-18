@@ -44,6 +44,9 @@
             <SelectionState runConfigName="feature.recent_seen">
                 <option name="selectionMode" value="DROPDOWN" />
             </SelectionState>
+            <SelectionState runConfigName="feature.my_info">
+                <option name="selectionMode" value="DROPDOWN" />
+            </SelectionState>
         </selectionStates>
     </component>
 </project>

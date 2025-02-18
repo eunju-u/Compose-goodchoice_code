@@ -36,9 +36,6 @@
         <activity
             android:name=".ui.search.detailSearch.DetailSearchActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.myInfo.detail.MyInfoDetailActivity"
-            android:exported="true" />
     </application>
 
 </manifest>
