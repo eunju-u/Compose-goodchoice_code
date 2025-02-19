@@ -8,8 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.common.MainBottomSheetType
-import com.example.goodchoice.ui.around.AroundContent
-import com.example.goodchoice.ui.around.AroundViewModel
+import com.example.around.ui.AroundContent
+import com.example.around.ui.AroundViewModel
 import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeContent
@@ -29,7 +29,9 @@ fun NavGraph(
     likeViewModel: LikeViewModel,
     myInfoViewModel: com.example.my_info.ui.MyInfoViewModel,
     showBottomSheet: (type: MainBottomSheetType) -> Unit = {},
-    showFilter: ()  -> Unit = {},
+    showFilter: () -> Unit = {},
+    onSearchClick: () -> Unit = {},
+    requestLocation: () -> Unit = {},
 ) {
     NavHost(
         modifier = Modifier,
@@ -43,7 +45,7 @@ fun NavGraph(
             com.example.search.ui.SearchContent(modifier, searchViewModel)
         }
         composable(NavItem.Around.route) {
-            AroundContent(modifier, aroundViewModel, showFilter)
+            AroundContent(modifier, aroundViewModel, showFilter, onSearchClick, requestLocation)
         }
         composable(NavItem.Like.route) {
             LikeContent(modifier, likeViewModel)

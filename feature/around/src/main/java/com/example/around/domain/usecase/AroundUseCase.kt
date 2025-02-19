@@ -1,7 +1,7 @@
-package com.example.domain.usecase
+package com.example.around.domain.usecase
 
-import com.example.domain.model.AroundFilterData
-import com.example.domain.repository.AroundRepository
+import com.example.around.domain.model.AroundFilterData
+import com.example.around.domain.repository.AroundRepository
 import javax.inject.Inject
 
 class AroundUseCase @Inject constructor(

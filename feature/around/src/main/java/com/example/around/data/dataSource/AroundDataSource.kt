@@ -1,8 +1,8 @@
-package com.example.data.dataSource
+package com.example.around.data.dataSource
 
+import com.example.around.data.remote.dto.AroundFilterDto
+import com.example.around.data.remote.dto.AroundFilterItemDto
 import com.example.common.ServerConst
-import com.example.data.remote.dto.AroundFilterDto
-import com.example.data.remote.dto.AroundFilterItemDto
 import javax.inject.Inject
 
 class AroundDataSource @Inject constructor() {
@@ -44,7 +44,10 @@ class AroundDataSource @Inject constructor() {
 
         AroundFilterDto(
             type = ServerConst.ROOM, text = "숙소유형", filterList = listOf(
-                AroundFilterItemDto(type = ServerConst.MOTEL, text = "모텔"),
+                AroundFilterItemDto(
+                    type = ServerConst.MOTEL,
+                    text = "모텔"
+                ),
                 AroundFilterItemDto(
                     type = ServerConst.HOTEL_AND_RESORT,
                     text = "호텔*리조트"

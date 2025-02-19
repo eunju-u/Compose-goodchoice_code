@@ -1,16 +1,16 @@
-package com.example.goodchoice.ui.around
+package com.example.around.ui
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.around.domain.model.AroundFilterData
+import com.example.around.domain.usecase.AroundUseCase
 import com.example.common.RoomType
 import com.example.common.ServerConst
 import com.example.domain.info.ConnectInfo
-import com.example.domain.model.AroundFilterData
 import com.example.domain.model.KoreaSearchData
 import com.example.domain.model.StayItem
-import com.example.domain.usecase.AroundUseCase
-import com.example.goodchoice.ui.around.model.AroundFilterSelectedData
+import com.example.around.ui.model.AroundFilterSelectedData
 import com.example.common.ui_data.AroundFilterItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

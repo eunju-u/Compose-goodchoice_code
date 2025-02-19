@@ -1,5 +1,6 @@
 package com.example.goodchoice.ui.main
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
@@ -35,7 +36,7 @@ import com.example.goodchoice.ui.main.bottomSheet.ProfileContent
 import com.example.goodchoice.nav.NavGraph
 import com.example.goodchoice.nav.NavItem
 import com.example.goodchoice.nav.navigation
-import com.example.goodchoice.ui.around.AroundViewModel
+import com.example.around.ui.AroundViewModel
 import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeViewModel
 import com.example.goodchoice.ui.main.state.rememberMainState
@@ -240,7 +241,24 @@ fun MainContent(
                     (context as MainActivity).activityForFilterResult.launch(
                         Intent(Intent.ACTION_VIEW, deepLinkUri)
                     )
-                }
+                },
+                onSearchClick = {
+                    (context as MainActivity).activityForSearchResult.launch(
+                        Intent(Intent.ACTION_VIEW).apply {
+                            data = Uri.parse("feature://detail_search")
+                        }
+                    )
+                },
+                requestLocation = {
+                    //위치 권한 없을 경우 권한 요청
+                    val activity = context as MainActivity
+                    activity.aroundRequestPermission.launch(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+                    )
+                },
             )
         }
 

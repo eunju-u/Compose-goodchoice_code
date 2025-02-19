@@ -106,4 +106,5 @@ dependencies {
     implementation(project(":feature:recent_seen"))
     implementation(project(":feature:my_info"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:around"))
 }

@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.around.model
+package com.example.around.ui.model
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

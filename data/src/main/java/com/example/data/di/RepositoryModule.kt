@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
+
 @Module
 @InstallIn(ViewModelComponent::class)
 object RepositoryModule {
@@ -15,11 +16,6 @@ object RepositoryModule {
     fun provideHomeRepository(
         dataSource: HomeDataSource
     ): HomeRepository = HomeRepositoryImpl(dataSource = dataSource)
-
-    @Provides
-    fun provideAroundRepository(
-        dataSource: AroundDataSource
-    ): AroundRepository = AroundRepositoryImpl(dataSource = dataSource)
 
     @Provides
     fun provideLikeRepository(

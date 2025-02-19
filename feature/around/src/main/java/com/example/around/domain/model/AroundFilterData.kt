@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.example.around.domain.model
 
 // 주변 화면에서 사용되는 필터, 추천순, 숙소유형 ...
 data class AroundFilterData(

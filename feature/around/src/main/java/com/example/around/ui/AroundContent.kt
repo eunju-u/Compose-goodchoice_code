@@ -1,10 +1,8 @@
-package com.example.goodchoice.ui.around
+package com.example.around.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,12 +27,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui_common.R
 import com.example.common.ServerConst
 import com.example.common.ui_data.AroundFilterItem
-import com.example.domain.model.AroundFilterData
-import com.example.goodchoice.ui.around.widget.AroundTopWidget
-import com.example.goodchoice.ui.main.MainActivity
+import com.example.around.domain.model.AroundFilterData
+import com.example.around.ui.widget.AroundTopWidget
 import com.example.domain.info.ConnectInfo
-import com.example.goodchoice.ui.around.model.AroundFilterSelectedData
-import com.example.search.ui.detailSearch.DetailSearchActivity
+import com.example.around.ui.model.AroundFilterSelectedData
 import com.example.ui_common.components.ImageButtonWidget
 import com.example.ui_common.components.LeftImageButtonWidget
 import com.example.ui_common.components.RoundImageWidget
@@ -61,7 +57,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class, ExperimentalNaverMapApi::class)
 @Composable
 fun AroundContent(
-    modifier: Modifier = Modifier, viewModel: AroundViewModel, showFilter: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    viewModel: AroundViewModel,
+    showFilter: () -> Unit = {},
+    onSearchClick: () -> Unit = {},
+    requestLocation: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val selectRoomType = viewModel.selectRoomType
@@ -146,13 +146,8 @@ fun AroundContent(
                     viewModel.requestAroundData()
                 },
                 selectedSearchText = selectSearchItem.value.name ?: "",
-                onSearchClick = {
-                    (context as MainActivity).activityForSearchResult.launch(
-                        Intent(Intent.ACTION_VIEW).apply {
-                            data = Uri.parse("feature://detail_search")
-                        }
-                    )
-                })
+                onSearchClick = onSearchClick
+            )
         }
 
         // 목록보기 버튼 (Hidden 상태에서만 보여지도록 함.)
@@ -217,14 +212,7 @@ fun AroundContent(
                                                 )
                                             )
                                         } else {
-                                            //위치 권한 없을 경우 권한 요청
-                                            val activity = context as MainActivity
-                                            activity.aroundRequestPermission.launch(
-                                                arrayOf(
-                                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                                    Manifest.permission.ACCESS_COARSE_LOCATION
-                                                )
-                                            )
+                                            requestLocation()
                                         }
                                     },
                                 painter = painterResource(R.drawable.bg_white),

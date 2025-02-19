@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.search"
+    namespace = "com.example.around"
     compileSdk = 35
 
     defaultConfig {
@@ -46,6 +46,7 @@ dependencies {
 
     // Compose
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.activity.compose)
 

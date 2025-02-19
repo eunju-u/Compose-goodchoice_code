@@ -1,8 +1,8 @@
-package com.example.data.mapper
+package com.example.around.data.mapper
 
-import com.example.data.remote.dto.AroundFilterDto
-import com.example.domain.model.AroundFilterData
-import com.example.domain.model.AroundFilterItem
+import com.example.around.data.remote.dto.AroundFilterDto
+import com.example.around.domain.model.AroundFilterData
+import com.example.around.domain.model.AroundFilterItem
 
 fun AroundFilterDto.generateAroundFilterData(): AroundFilterData {
     val item = this@generateAroundFilterData

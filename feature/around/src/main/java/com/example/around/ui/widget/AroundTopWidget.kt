@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.around.widget
+package com.example.around.ui.widget
 
 import android.content.Intent
 import android.net.Uri

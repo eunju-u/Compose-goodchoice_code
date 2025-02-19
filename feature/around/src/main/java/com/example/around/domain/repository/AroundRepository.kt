@@ -1,6 +1,6 @@
-package com.example.domain.repository
+package com.example.around.domain.repository
 
-import com.example.domain.model.AroundFilterData
+import com.example.around.domain.model.AroundFilterData
 
 interface AroundRepository {
     suspend fun getSleepData(): List<AroundFilterData>

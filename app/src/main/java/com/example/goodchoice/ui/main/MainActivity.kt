@@ -10,7 +10,7 @@ import com.example.common.Const
 import com.example.common.ServerConst
 import com.example.common.ui_data.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
-import com.example.goodchoice.ui.around.AroundViewModel
+import com.example.around.ui.AroundViewModel
 import com.example.goodchoice.ui.home.HomeViewModel
 import com.example.goodchoice.ui.like.LikeViewModel
 import com.example.search.ui.SearchViewModel

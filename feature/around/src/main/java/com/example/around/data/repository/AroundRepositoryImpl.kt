@@ -1,9 +1,9 @@
-package com.example.data.repository
+package com.example.around.data.repository
 
-import com.example.data.dataSource.AroundDataSource
-import com.example.data.mapper.generateAroundFilterData
-import com.example.domain.model.AroundFilterData
-import com.example.domain.repository.AroundRepository
+import com.example.around.data.dataSource.AroundDataSource
+import com.example.around.data.mapper.generateAroundFilterData
+import com.example.around.domain.model.AroundFilterData
+import com.example.around.domain.repository.AroundRepository
 import javax.inject.Inject
 
 class AroundRepositoryImpl @Inject constructor(
