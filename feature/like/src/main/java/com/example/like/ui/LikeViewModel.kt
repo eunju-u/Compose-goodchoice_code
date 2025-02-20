@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.like
+package com.example.like.ui
 
 import android.content.Context
 import androidx.compose.runtime.mutableStateListOf

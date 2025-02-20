@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.like
+package com.example.like.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -21,8 +21,8 @@ import com.example.ui_common.components.GoToWidget
 import com.example.ui_common.components.TabWidget
 import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.goodchoice.ui.like.widget.EmptyDataWidget
-import com.example.goodchoice.ui.like.widget.KoreaStayLikeContent
+import com.example.like.ui.widget.EmptyDataWidget
+import com.example.like.ui.widget.KoreaStayLikeContent
 import com.example.ui_theme.*
 
 private val menus = listOf(

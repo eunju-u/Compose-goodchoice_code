@@ -38,7 +38,7 @@ import com.example.goodchoice.nav.NavItem
 import com.example.goodchoice.nav.navigation
 import com.example.around.ui.AroundViewModel
 import com.example.goodchoice.ui.home.HomeViewModel
-import com.example.goodchoice.ui.like.LikeViewModel
+import com.example.like.ui.LikeViewModel
 import com.example.goodchoice.ui.main.state.rememberMainState
 import com.example.my_info.ui.MyInfoViewModel
 import com.example.search.ui.SearchViewModel

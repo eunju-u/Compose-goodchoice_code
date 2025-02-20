@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.like.widget
+package com.example.like.ui.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -15,6 +15,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.ui_theme.*
@@ -27,24 +28,13 @@ import com.example.ui_common.utils.ConvertUtil
 @Composable
 fun KoreaStayItemWidget(
     stayItem: StayItem,
+    itemWidthModifier: Modifier,
+    itemWidth: Dp,
+    itemHeight: Dp,
     clickLike: () -> Unit = {},
     onItemClick: () -> Unit = {},
 ) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
-
-    val modifier = Modifier.fillMaxWidth()
-    var itemWidthModifier by remember { mutableStateOf(modifier) }
     var isLike by remember { mutableStateOf(true) }
-
-    //해상도에 따라 호텔 item view 가로 조정
-    LaunchedEffect(key1 = screenWidth) {
-        itemWidthModifier = if (screenWidth > dp550) {
-            Modifier.width(screenWidth / 1.5f)
-        } else {
-            modifier
-        }
-    }
 
     val painter =
         if (stayItem.mainImage?.isNotEmpty() == true)
@@ -147,8 +137,8 @@ fun KoreaStayItemWidget(
             ) {
                 RoundImageWidget(
                     imageModifier = Modifier
-                        .width(screenWidth / 3)
-                        .height(screenWidth / 2.6f),
+                        .width(itemWidth)
+                        .height(itemHeight),
                     roundShape = dp10,
                     painter = painter,
                     contentScale = ContentScale.FillHeight,

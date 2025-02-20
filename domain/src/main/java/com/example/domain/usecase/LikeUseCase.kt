@@ -13,7 +13,6 @@ class LikeUseCase @Inject constructor(
     suspend fun getLikeData(): List<StayItem> {
         return try {
             withContext(Dispatchers.IO) {
-                delay(100)
                 repository.getLikeData()
             }
         } catch (e: Exception) {

@@ -12,7 +12,8 @@ import com.example.common.ui_data.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
 import com.example.around.ui.AroundViewModel
 import com.example.goodchoice.ui.home.HomeViewModel
-import com.example.goodchoice.ui.like.LikeViewModel
+import com.example.like.ui.LikeViewModel
+import com.example.my_info.ui.MyInfoViewModel
 import com.example.search.ui.SearchViewModel
 import com.example.ui_theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
     private val searchViewModel: SearchViewModel by viewModels()
     private val aroundViewModel: AroundViewModel by viewModels()
     private val likeViewModel: LikeViewModel by viewModels()
-    private val myInfoViewModel: com.example.my_info.ui.MyInfoViewModel by viewModels()
+    private val myInfoViewModel: MyInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

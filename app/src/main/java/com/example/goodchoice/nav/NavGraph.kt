@@ -12,9 +12,10 @@ import com.example.around.ui.AroundContent
 import com.example.around.ui.AroundViewModel
 import com.example.goodchoice.ui.home.HomeContent
 import com.example.goodchoice.ui.home.HomeViewModel
-import com.example.goodchoice.ui.like.LikeContent
-import com.example.goodchoice.ui.like.LikeViewModel
+import com.example.like.ui.LikeContent
+import com.example.like.ui.LikeViewModel
 import com.example.my_info.ui.MyInfoContent
+import com.example.my_info.ui.MyInfoViewModel
 import com.example.search.ui.SearchViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
@@ -27,7 +28,7 @@ fun NavGraph(
     searchViewModel: SearchViewModel,
     aroundViewModel: AroundViewModel,
     likeViewModel: LikeViewModel,
-    myInfoViewModel: com.example.my_info.ui.MyInfoViewModel,
+    myInfoViewModel: MyInfoViewModel,
     showBottomSheet: (type: MainBottomSheetType) -> Unit = {},
     showFilter: () -> Unit = {},
     onSearchClick: () -> Unit = {},

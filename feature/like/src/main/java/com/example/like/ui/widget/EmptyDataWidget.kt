@@ -1,4 +1,4 @@
-package com.example.goodchoice.ui.like.widget
+package com.example.like.ui.widget
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
