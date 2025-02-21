@@ -3,7 +3,6 @@ package com.example.domain.usecase
 import com.example.domain.model.StayItem
 import com.example.domain.repository.RecentSeenRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

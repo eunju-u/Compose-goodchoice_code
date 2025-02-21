@@ -1,21 +1,16 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id(libs.plugins.kotlin.kapt.get().pluginId)
     alias(libs.plugins.hilt)
 }
 
 android {
-    namespace = "com.example.goodchoice"
+    namespace = "com.example.home"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.goodchoice"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,6 +23,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
@@ -47,12 +43,6 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
 
     // Compose
     implementation(libs.androidx.compose.material3)
@@ -90,23 +80,16 @@ dependencies {
     implementation(libs.naver.map.compose)
     implementation(libs.google.play.services.location)
 
-    //모듈화
+    //test
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+
+    //모듈
     implementation(project(":common"))
+    implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":database"))
-    implementation(project(":data"))
     implementation(project(":ui-theme"))
     implementation(project(":ui-common"))
-    implementation(project(":feature:login"))
-    implementation(project(":feature:alarm"))
-    implementation(project(":feature:webview"))
-    implementation(project(":feature:filter"))
-    implementation(project(":feature:stay_detail"))
-    implementation(project(":feature:calendar"))
-    implementation(project(":feature:recent_seen"))
-    implementation(project(":feature:my_info"))
-    implementation(project(":feature:search"))
-    implementation(project(":feature:around"))
-    implementation(project(":feature:like"))
-    implementation(project(":feature:home"))
 }

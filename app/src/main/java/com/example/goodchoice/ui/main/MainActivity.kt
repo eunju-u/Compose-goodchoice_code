@@ -11,7 +11,7 @@ import com.example.common.ServerConst
 import com.example.common.ui_data.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
 import com.example.around.ui.AroundViewModel
-import com.example.goodchoice.ui.home.HomeViewModel
+import com.example.home.ui.HomeViewModel
 import com.example.like.ui.LikeViewModel
 import com.example.my_info.ui.MyInfoViewModel
 import com.example.search.ui.SearchViewModel
