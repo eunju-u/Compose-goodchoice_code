@@ -4,12 +4,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.DialogType
+import com.example.common.intent.CommonIntent
 import com.example.domain.usecase.LikeUseCase
-import com.example.stay_detail.domain.info.StayDetailConnectInfo
 import com.example.stay_detail.domain.model.PayData
 import com.example.stay_detail.domain.usecase.StayDetailUseCase
+import com.example.stay_detail.ui.state.StayDetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,29 +38,55 @@ class StayDetailViewModel @Inject constructor(
 
     var payList: List<PayData> = emptyList()
 
-    var detailUiState = MutableStateFlow<StayDetailConnectInfo>(
-        StayDetailConnectInfo.Init)
-
     var isLike = mutableStateOf(false)
 
     var isShowDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
     var dialogType: MutableStateFlow<DialogType> = MutableStateFlow(DialogType.NONE)
 
-    fun requestStayDetail() = viewModelScope.launch {
-        detailUiState.value = StayDetailConnectInfo.Loading
+    private val _stayDetailState: MutableStateFlow<StayDetailUiState> =
+        MutableStateFlow(StayDetailUiState.Loading)
+    val stayDetailUiState: StateFlow<StayDetailUiState> get() = _stayDetailState
 
-        val data = useCase.getDetailData(stayItemId)
-        isLike.value = likeUseCase.hasLikeData(stayItemId)
+    private val _intent = MutableSharedFlow<CommonIntent>()
+    private val intent: SharedFlow<CommonIntent> get() = _intent
 
-        when (data) {
-            is StayDetailConnectInfo.Available -> payList = data.data.payList ?: emptyList()
-            is StayDetailConnectInfo.Error -> {
-                isShowDialog.value = true
-                dialogType.value = DialogType.NETWORK_ERROR
+    init {
+        handleIntents()
+    }
+
+    private fun handleIntents() {
+        viewModelScope.launch {
+            intent.distinctUntilChanged() // 동일한 Intent 무시
+            intent.collect { myInfoIntent ->
+                when (myInfoIntent) {
+                    is CommonIntent.LoadMyInfo -> loadMyInfo()
+                    is CommonIntent.Retry -> loadMyInfo()
+                }
             }
-            else -> {}
         }
-        detailUiState.value = data
+    }
+
+    private suspend fun loadMyInfo() {
+        useCase.getDetailData(stayItemId)
+            .onStart {
+                _stayDetailState.value = StayDetailUiState.Loading // 로딩
+            }
+            .catch { exception ->
+                _stayDetailState.value = StayDetailUiState.Error(exception.message ?: "Unknown error") //에러
+            }
+            .collect { stayItems ->
+                _stayDetailState.value = StayDetailUiState.Success(stayItems) // 성공
+            }
+    }
+
+    fun sendIntent(intent: CommonIntent) {
+        viewModelScope.launch {
+            _intent.emit(intent)
+        }
+    }
+
+    fun requestStayDetail() = viewModelScope.launch {
+        isLike.value = likeUseCase.hasLikeData(stayItemId)
     }
 
     fun saveLike() = viewModelScope.launch {

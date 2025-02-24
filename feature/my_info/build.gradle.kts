@@ -63,8 +63,6 @@ dependencies {
     //모듈
     implementation(project(":common"))
     implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":database"))
     implementation(project(":ui-theme"))
     implementation(project(":ui-common"))
 }

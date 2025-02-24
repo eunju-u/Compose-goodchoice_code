@@ -1,6 +1,8 @@
 package com.example.data.dataSource
 
 import android.content.Context
+import com.example.common.network.Dispatcher
+import com.example.common.network.Dispatchers
 import com.example.data.mapper.generateLikeItem
 import com.example.data.remote.dto.StayItemDto
 import com.example.data.remote.mock.S_1
@@ -17,17 +19,22 @@ import com.example.data.remote.mock.S_9
 import com.example.database.like.LikeDb
 import com.example.database.like.LikeDbItem
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LikeDataSource @Inject constructor(
     @ApplicationContext private val context: Context,
+    @Dispatcher(Dispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
 ) {
-    fun getLikeData(): List<StayItemDto> {
-        return getStayAllData().filter { stayItem ->
-            (LikeDb.getInstance(context)?.userDao()?.getAll()?.map {
-                it.generateLikeItem()
-            } ?: emptyList()).any { likeItem ->
-                stayItem.id == likeItem.id
+    suspend fun getLikeData(): List<StayItemDto> {
+        return withContext(ioDispatcher) {
+            getStayAllData().filter { stayItem ->
+                (LikeDb.getInstance(context)?.userDao()?.getAll()?.map {
+                    it.generateLikeItem()
+                } ?: emptyList()).any { likeItem ->
+                    stayItem.id == likeItem.id
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.stay_detail.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -25,6 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.example.common.Const
 import com.example.common.DialogType
+import com.example.common.intent.CommonIntent
 import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.data.local.preference.GoodChoicePreference
@@ -32,7 +34,7 @@ import com.example.stay_detail.ui.service.ServiceActivity
 import com.example.stay_detail.ui.widget.PayWidget
 import com.example.stay_detail.ui.widget.StayDetailItemWidget
 import com.example.common.utils.ToastUtil
-import com.example.stay_detail.domain.info.StayDetailConnectInfo
+import com.example.stay_detail.ui.state.StayDetailUiState
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.CategoryItemWidget
 import com.example.ui_common.components.LoadingWidget
@@ -50,6 +52,7 @@ import com.example.ui_common.utils.ConvertUtil
 import com.example.ui_common.utils.StringUtil
 import kotlinx.coroutines.launch
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StayDetailContent(
@@ -62,7 +65,7 @@ fun StayDetailContent(
     val fullWith = configuration.screenWidthDp
     val lazyColumnListState = rememberLazyListState()
 
-    val detailUiState = viewModel.detailUiState.collectAsStateWithLifecycle()
+    val stayDetailUiState by viewModel.stayDetailUiState.collectAsState()
 
     val isShowDialog = viewModel.isShowDialog.collectAsStateWithLifecycle()
     val dialogType = viewModel.dialogType.collectAsStateWithLifecycle()
@@ -89,8 +92,8 @@ fun StayDetailContent(
     } else stringResource(id = R.string.str_remove_like)
 
     Box {
-        if (detailUiState.value is StayDetailConnectInfo.Available) {
-            val item = (detailUiState.value as StayDetailConnectInfo.Available).data
+        if (stayDetailUiState is StayDetailUiState.Success) {
+            val item = (stayDetailUiState as StayDetailUiState.Success).data
             val padding = PaddingValues(start = dp20, end = dp20)
             val innerPadding = PaddingValues(horizontal = dp8, vertical = dp8)
             LazyColumn(
@@ -566,7 +569,7 @@ fun StayDetailContent(
                         oneButtonText = stringResource(id = R.string.str_ok),
                         onConfirm = {
                             viewModel.isShowDialog.value = false
-                            onFinish()
+                            viewModel.sendIntent(CommonIntent.Retry("reload"))
                         },
                     )
                 }
@@ -575,9 +578,13 @@ fun StayDetailContent(
             }
         }
 
-        // 로딩바
-        if (detailUiState.value is StayDetailConnectInfo.Loading) {
-            LoadingWidget()
+        when (stayDetailUiState) {
+            is StayDetailUiState.Loading -> LoadingWidget()
+            is StayDetailUiState.Error -> {
+                viewModel.dialogType.value = DialogType.NETWORK_ERROR
+                viewModel.isShowDialog.value = true
+            }
+            else -> {}
         }
     }
 }

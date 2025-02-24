@@ -1,5 +1,8 @@
 package com.example.search.data.dataSource
 
+import com.example.common.network.Dispatcher
+import com.example.common.network.Dispatchers
+import com.example.search.data.remote.dto.KoreaSearchDto
 import com.example.search.data.remote.dto.SearchItemDto
 import com.example.search.data.remote.mock.DAECHEON_BEACH
 import com.example.search.data.remote.mock.DAEJEON
@@ -27,52 +30,65 @@ import com.example.search.data.remote.mock.SEOUL
 import com.example.search.data.remote.mock.SEOUL_STATION
 import com.example.search.data.remote.mock.SESAN
 import com.example.search.data.remote.mock.SINCHON_STATION
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DetailSearchDataSource @Inject constructor() {
-    fun getSearchData() = listOf(
-       SEOUL,
-       SEOGWIPO,
-       SESAN,
-       SEOUL_STATION,
-       HONGIK_UNI_STATION,
-       GANGNAME_STATION,
-       SEOMYEON_STATION,
-       SINCHON_STATION,
-       SEOHYEON_STATION,
-       GYEONGJU,
-       GANGNEUNG,
-       GAPYEONG,
-       GANHWA_ISLAND,
-       KONKUK_UI_STATION,
-       GOEJE_ISLAND,
-       HWANGRIDAN_GIL,
-       GONJIAM,
-       GWANGHWAMUN,
-       GURO_DIGITAL_STATION,
-       NAMHAE,
-       NAMYANGJU,
-       NEST_HOTEL,
-       NONHYEON_STATION,
-       DAEJEON,
-       DAECHEON_BEACH,
-       DAEJEON_STATION
-    )
+class DetailSearchDataSource @Inject constructor(
+    @Dispatcher(Dispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
+) {
+    suspend fun getSearchData(): List<KoreaSearchDto> {
+        return withContext(ioDispatcher) {
+            listOf(
+                SEOUL,
+                SEOGWIPO,
+                SESAN,
+                SEOUL_STATION,
+                HONGIK_UNI_STATION,
+                GANGNAME_STATION,
+                SEOMYEON_STATION,
+                SINCHON_STATION,
+                SEOHYEON_STATION,
+                GYEONGJU,
+                GANGNEUNG,
+                GAPYEONG,
+                GANHWA_ISLAND,
+                KONKUK_UI_STATION,
+                GOEJE_ISLAND,
+                HWANGRIDAN_GIL,
+                GONJIAM,
+                GWANGHWAMUN,
+                GURO_DIGITAL_STATION,
+                NAMHAE,
+                NAMYANGJU,
+                NEST_HOTEL,
+                NONHYEON_STATION,
+                DAEJEON,
+                DAECHEON_BEACH,
+                DAEJEON_STATION
+            )
+        }
+
+    }
 
     // 국내숙소 > 검색 순위
-    fun getRankData() = listOf(
-        SearchItemDto(searchType = "l1_1_1", searchTitle = "경주"),
-        SearchItemDto(searchType = "l1_1_2", searchTitle = "여수"),
-        SearchItemDto(searchType = "l1_1_3", searchTitle = "속초"),
-        SearchItemDto(searchType = "l1_1_4", searchTitle = "전주"),
-        SearchItemDto(searchType = "l1_1_5", searchTitle = "부산"),
-        SearchItemDto(
-            searchType = "l1_1_6",
-            searchTitle = "제주도"
-        ),
-        SearchItemDto(searchType = "l1_1_7", searchTitle = "강릉"),
-        SearchItemDto(searchType = "l1_1_8", searchTitle = "순천"),
-        SearchItemDto(searchType = "l1_1_9", searchTitle = "서울"),
-        SearchItemDto(searchType = "l1_1_10", searchTitle = "춘천")
-    )
+    suspend fun getRankData(): List<SearchItemDto> {
+        return withContext(ioDispatcher) {
+            listOf(
+                SearchItemDto(searchType = "l1_1_1", searchTitle = "경주"),
+                SearchItemDto(searchType = "l1_1_2", searchTitle = "여수"),
+                SearchItemDto(searchType = "l1_1_3", searchTitle = "속초"),
+                SearchItemDto(searchType = "l1_1_4", searchTitle = "전주"),
+                SearchItemDto(searchType = "l1_1_5", searchTitle = "부산"),
+                SearchItemDto(
+                    searchType = "l1_1_6",
+                    searchTitle = "제주도"
+                ),
+                SearchItemDto(searchType = "l1_1_7", searchTitle = "강릉"),
+                SearchItemDto(searchType = "l1_1_8", searchTitle = "순천"),
+                SearchItemDto(searchType = "l1_1_9", searchTitle = "서울"),
+                SearchItemDto(searchType = "l1_1_10", searchTitle = "춘천")
+            )
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.search.ui.detailSearch
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,26 +16,33 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.common.DialogType
+import com.example.common.intent.CommonIntent
 import com.example.ui_common.R
 import com.example.ui_theme.*
 import com.example.domain.model.KoreaSearchData
 import com.example.search.ui.detailSearch.widget.SearchResultWidget
+import com.example.search.ui.state.DetailSearchUiState
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.LeftImageEditTextWidget
+import com.example.ui_common.components.LoadingWidget
 import com.example.ui_common.components.RowTwoWidget
 import com.example.ui_common.components.TopAppBarWidget
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun DetailSearchContent(
     viewModel: DetailSearchViewModel,
     onFinish: () -> Unit = {},
     onSearchClick: (item: KoreaSearchData) -> Unit = {}
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val detailSearchUiState by viewModel.detailSearchUiState.collectAsState()
     val searchData by viewModel.searchData.collectAsStateWithLifecycle()
-    var isShowDialog by remember { mutableStateOf(false) }
     var isShowResult by remember { mutableStateOf(false) }
     val keyWord by viewModel.keyWord.collectAsStateWithLifecycle()
+
+    val isShowDialog = viewModel.isShowDialog.collectAsStateWithLifecycle()
+    val dialogType = viewModel.dialogType.collectAsStateWithLifecycle()
 
     // 키보드 컨트롤
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -76,7 +84,8 @@ fun DetailSearchContent(
             keyboardController = keyboardController,
 //            isVisibleShadow = true, //TODO eunju : index == 0 인 상태에서 스크롤 내릴 경우만 ture 여야 한다.
             isShowDialog = {
-                isShowDialog = it
+                viewModel.dialogType.value = DialogType.MORE_TWO_WORD
+                viewModel.isShowDialog.value = it
             },
             onInputChanged = {
                 viewModel.onWordChanged(it)
@@ -91,9 +100,9 @@ fun DetailSearchContent(
             modifier = Modifier
                 .fillMaxSize(), state = scrollState
         ) {
-            if (uiState is DetailSearchConnectInfo.Available) {
+            if (detailSearchUiState is DetailSearchUiState.Success) {
                 if (!isShowResult) {
-                    val list = (uiState as DetailSearchConnectInfo.Available).data
+                    val list = (detailSearchUiState as DetailSearchUiState.Success).list
                     item {
                         Text(
                             modifier = Modifier.padding(
@@ -141,11 +150,40 @@ fun DetailSearchContent(
         }
     }
 
-    if (isShowDialog) {
-        AlertDialogWidget(
-            title = stringResource(id = R.string.str_dialog_more_two_word),
-            oneButtonText = stringResource(id = R.string.str_ok),
-            onDismiss = { isShowDialog = false },
-            onConfirm = { isShowDialog = false })
+    if (isShowDialog.value) {
+        when (dialogType.value) {
+            DialogType.MORE_TWO_WORD -> {
+                AlertDialogWidget(
+                    title = stringResource(id = R.string.str_dialog_more_two_word),
+                    oneButtonText = stringResource(id = R.string.str_ok),
+                    onDismiss = { viewModel.isShowDialog.value = false },
+                    onConfirm = { viewModel.isShowDialog.value = false })
+            }
+
+            DialogType.NETWORK_ERROR -> {
+                AlertDialogWidget(
+                    onDismiss = { },
+                    title = stringResource(id = R.string.str_dialog_network_not_connect),
+                    onConfirm = {
+                        viewModel.isShowDialog.value = false
+                        viewModel.sendIntent(CommonIntent.Retry("reload"))
+                    },
+                    oneButtonText = stringResource(id = R.string.str_ok),
+                )
+            }
+
+            else -> {}
+        }
+    }
+
+
+
+    when (detailSearchUiState) {
+        is DetailSearchUiState.Loading -> LoadingWidget()
+        is DetailSearchUiState.Error -> {
+            viewModel.dialogType.value = DialogType.NETWORK_ERROR
+            viewModel.isShowDialog.value = true
+        }
+        else -> {}
     }
 }

@@ -96,7 +96,8 @@ enum class MainBottomSheetType {
 enum class DialogType {
     NONE,
     NETWORK_ERROR,
-    NEED_LOGIN
+    NEED_LOGIN,
+    MORE_TWO_WORD
 }
 
 enum class CalendarType {

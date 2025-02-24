@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.common.Const
+import com.example.common.intent.CommonIntent
 import com.example.ui_theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,8 @@ class StayDetailActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-       viewModel.requestStayDetail()
+        viewModel.sendIntent(CommonIntent.LoadMyInfo)
+        viewModel.requestStayDetail()
     }
 
     override fun onStop() {

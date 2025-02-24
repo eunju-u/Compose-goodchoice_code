@@ -38,6 +38,7 @@ import com.example.home.ui.widget.HotelVerticalWidget
 import com.example.home.ui.widget.OverSeaWidget
 import com.example.home.ui.widget.StickyHeaderWidget
 import com.example.ui_common.components.CategoryItemWidget
+import com.example.ui_common.components.LoadingWidget
 import com.example.ui_common.components.TextWidget
 import com.example.ui_common.utils.StringUtil
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -338,6 +339,9 @@ fun HomeContent(
                     }
                 }
             }
+        }
+        if (homeUiState.value is ConnectInfo.Loading) {
+            LoadingWidget()
         }
     }
 

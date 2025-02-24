@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.common.Const
+import com.example.common.intent.CommonIntent
 import com.example.ui_theme.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +20,7 @@ class DetailSearchActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.requestSearchUiData()
+        viewModel.sendIntent(CommonIntent.LoadMyInfo)
 
         setContent {
             TestTheme {

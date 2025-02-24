@@ -29,7 +29,6 @@ import com.example.common.Const
 import com.example.common.MainBottomSheetType
 import com.example.common.ui_data.AroundFilterSelectedModel
 import com.example.ui_common.R
-import com.example.domain.info.ConnectInfo
 import com.example.ui_common.components.bottomSheet.MyBottomSheetLayout
 import com.example.ui_common.components.bottomSheet.SheetWidget
 import com.example.goodchoice.ui.main.bottomSheet.ProfileContent
@@ -37,13 +36,14 @@ import com.example.goodchoice.nav.NavGraph
 import com.example.goodchoice.nav.NavItem
 import com.example.goodchoice.nav.navigation
 import com.example.around.ui.AroundViewModel
+import com.example.common.intent.CommonIntent
+import com.example.domain.intent.LikeIntent
 import com.example.home.ui.HomeViewModel
 import com.example.like.ui.LikeViewModel
 import com.example.goodchoice.ui.main.state.rememberMainState
 import com.example.my_info.ui.MyInfoViewModel
 import com.example.search.ui.SearchViewModel
 import com.example.ui_common.components.AlertDialogWidget
-import com.example.ui_common.components.LoadingWidget
 import com.example.ui_theme.*
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
@@ -68,8 +68,6 @@ fun MainContent(
     val navBackStackEntry by mainState.navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val homeUiState = mainViewModel.homeUiState.collectAsStateWithLifecycle()
-
     val style = TextStyle(
         fontSize = 9.sp,
         lineHeight = 10.sp,
@@ -93,7 +91,7 @@ fun MainContent(
                     }
 
                     NavItem.Search.route -> {
-                        searchViewModel.requestSearchData()
+                        searchViewModel.sendIntent(CommonIntent.LoadMyInfo)
                     }
 
                     NavItem.Around.route -> {
@@ -101,11 +99,11 @@ fun MainContent(
                     }
 
                     NavItem.Like.route -> {
-                        likeViewModel.requestLikeData(context)
+                        likeViewModel.handleIntents(LikeIntent.LoadLikeData)
                     }
 
                     NavItem.MyInfo.route -> {
-                        myInfoViewModel.requestMyInfoData()
+                        myInfoViewModel.sendIntent(CommonIntent.LoadMyInfo)
                     }
                 }
             }
@@ -267,10 +265,6 @@ fun MainContent(
             sheetState = mainState.bottomSheetState,
             sheetContent = sheet
         )
-
-        if (homeUiState.value is ConnectInfo.Loading) {
-            LoadingWidget()
-        }
     }
 
     if (isShowDialog.value) {

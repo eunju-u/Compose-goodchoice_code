@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -24,19 +23,20 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.Const
+import com.example.common.DialogType
 import com.example.ui_common.R
 import com.example.common.MainBottomSheetType
+import com.example.common.intent.CommonIntent
 import com.example.ui_theme.*
-import com.example.domain.info.ConnectInfo
 import com.example.data.local.preference.GoodChoicePreference
-import com.example.my_info.domain.model.MyMenuData
-import com.example.my_info.domain.model.MyTopMenuItem
 import com.example.my_info.ui.detail.MyInfoDetailActivity
+import com.example.my_info.ui.state.MyInfoUiState
 import com.example.my_info.ui.widget.CouponWidget
 import com.example.my_info.ui.widget.MenuItemWidget
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.CardWidget
 import com.example.ui_common.components.CategoryItemWidget
+import com.example.ui_common.components.LoadingWidget
 import com.example.ui_common.components.SpaceBetweenRowWidget
 import com.example.ui_common.components.TextWidget
 
@@ -44,7 +44,7 @@ import com.example.ui_common.components.TextWidget
  * 내 정보 화면
  */
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
 @Composable
 fun MyInfoContent(
     modifier: Modifier = Modifier,
@@ -54,30 +54,29 @@ fun MyInfoContent(
 
     //액티비티 호출
     val context = LocalContext.current
-    val configuration = LocalConfiguration.current
     val pref = GoodChoicePreference(context)
     val isLogin = pref.isLogin
     val userName = pref.userName
 
-    //가져올때
-    val myInfoData = viewModel.myInfoData.collectAsStateWithLifecycle().value
-    val topMenuList: List<MyTopMenuItem> = myInfoData.topMenuList ?: emptyList()
-    val menuList: List<MyMenuData> = myInfoData.menuList ?: emptyList()
+    val myInfoState by viewModel.myInfoState.collectAsState()
 
-    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
     val lazyColumnListState = rememberLazyListState()
-    var isShowDialog by remember { mutableStateOf(false) }
 
-    //미정님 myInfo 에서 설정 화면이 안나오는 이유는 Box의 modifier 을 Modifier로 새로 정의해서 그래요!
-    //MyInfoContent 의 modifier 을 써야 해요
-    //MyInfoContent 의 modifier 는 main 에서 navi bottom 뷰 제외하고 준거라 크기가 맞게 됩니다~
+    val isShowDialog = viewModel.isShowDialog.collectAsStateWithLifecycle()
+    val dialogType = viewModel.dialogType.collectAsStateWithLifecycle()
+
     Box(modifier = modifier) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             state = lazyColumnListState
         ) {
             item {
-                if (homeUiState.value is ConnectInfo.Available) {
+                if (myInfoState is MyInfoUiState.Success) {
+
+                    val myInfoData = (myInfoState as MyInfoUiState.Success).list
+                    val topMenuList = myInfoData.topMenuList ?: emptyList()
+                    val menuList = myInfoData.menuList ?: emptyList()
+
                     CardWidget(
                         isVisibleShadow = true,
                         shadowOffsetY = dp20,
@@ -206,7 +205,8 @@ fun MyInfoContent(
                                                     onItemClick = {
                                                         if (item.code == Const.RECENT_HOTEL) {
                                                             context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                                                data = Uri.parse("feature://recent_seen")
+                                                                data =
+                                                                    Uri.parse("feature://recent_seen")
                                                             })
                                                         }
                                                     }
@@ -262,7 +262,8 @@ fun MyInfoContent(
                                                 isOnlyText = isLogoutMenu,
                                                 onItemClick = {
                                                     if (isLogoutMenu) {
-                                                        isShowDialog = true
+                                                        viewModel.dialogType.value = DialogType.NEED_LOGIN
+                                                        viewModel.isShowDialog.value = true
                                                     }
                                                 }
                                             )
@@ -284,17 +285,46 @@ fun MyInfoContent(
                 }
             }
         }
+
+        if (isShowDialog.value) {
+            when (dialogType.value) {
+                DialogType.NEED_LOGIN -> {
+                    AlertDialogWidget(
+                        title = stringResource(id = R.string.str_logout_check),
+                        oneButtonText = stringResource(id = R.string.str_cancel),
+                        twoButtonText = stringResource(id = R.string.str_logout),
+                        onDismiss = { },
+                        onConfirm = {
+                            pref.isLogin = false
+                            viewModel.isShowDialog.value = false
+                            viewModel.sendIntent(CommonIntent.Retry("logout"))
+                        })
+                }
+
+                DialogType.NETWORK_ERROR -> {
+                    AlertDialogWidget(
+                        onDismiss = { },
+                        title = stringResource(id = R.string.str_dialog_network_not_connect),
+                        onConfirm = {
+                            viewModel.isShowDialog.value = false
+                            viewModel.sendIntent(CommonIntent.Retry("reload"))
+                        },
+                        oneButtonText = stringResource(id = R.string.str_ok),
+                    )
+                }
+
+                else -> {}
+            }
+        }
+
+        when (myInfoState) {
+            is MyInfoUiState.Loading -> LoadingWidget()
+            is MyInfoUiState.Error -> {
+                viewModel.dialogType.value = DialogType.NETWORK_ERROR
+                viewModel.isShowDialog.value = true
+            }
+            else -> {}
+        }
     }
-    if (isShowDialog) {
-        AlertDialogWidget(
-            title = stringResource(id = R.string.str_logout_check),
-            oneButtonText = stringResource(id = R.string.str_cancel),
-            twoButtonText = stringResource(id = R.string.str_logout),
-            onDismiss = { isShowDialog = false },
-            onConfirm = {
-                pref.isLogin = false
-                viewModel.requestMyInfoData()
-                isShowDialog = false
-            })
-    }
+
 }
