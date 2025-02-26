@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.alarm.domain.info.AlarmConnectInfo
+import com.example.alarm.ui.state.AlarmUiState
 import com.example.ui_common.R
 import com.example.alarm.ui.widget.AlarmItemWidget
+import com.example.common.intent.CommonIntent
 import com.example.data.local.preference.GoodChoicePreference
 import com.example.ui_common.components.AlertDialogWidget
 import com.example.ui_common.components.GoToWidget
@@ -29,7 +29,7 @@ import com.example.ui_theme.*
 fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
     val context = LocalContext.current
     val pref = GoodChoicePreference(context)
-    val alarmUiState = viewModel.alarmUiState.collectAsStateWithLifecycle()
+    val alarmUiState by viewModel.alarmUiState.collectAsState()
     var isShowDialog by remember { mutableStateOf(false) }
 
     Box {
@@ -41,7 +41,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                 isCloseButton = false,
                 onFinish = { onFinish() })
 
-            if (alarmUiState.value is AlarmConnectInfo.Available) {
+            if (alarmUiState is AlarmUiState.Success) {
                 if (!pref.isLogin) {
                     GoToWidget(modifier = Modifier.fillMaxSize(),
                         firstText = stringResource(id = R.string.str_no_see_alarm),
@@ -54,6 +54,8 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                         }
                     )
                 } else {
+                    val list = (alarmUiState as AlarmUiState.Success).list
+
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
@@ -61,9 +63,8 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                             .padding(start = dp20, end = dp20),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        val data = (alarmUiState.value as AlarmConnectInfo.Available).data
                         //알림 리스트가 없는 경우
-                        if (data.isEmpty()) {
+                        if (list.isEmpty()) {
                             item {
                                 TextWidget(
                                     text = stringResource(id = R.string.str_no_alarm),
@@ -75,7 +76,7 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
                         }
                         //알림 리스트가 있는 경우
                         else {
-                            items(items = data) { item ->
+                            items(items = list) { item ->
                                 AlarmItemWidget(item)
                             }
                             item {
@@ -93,22 +94,22 @@ fun AlarmContent(viewModel: AlarmViewModel, onFinish: () -> Unit = {}) {
             }
         }
 
+        if (isShowDialog) {
+            AlertDialogWidget(
+                onDismiss = { isShowDialog = false },
+                title = stringResource(id = R.string.str_dialog_network_not_connect),
+                onConfirm = {
+                    isShowDialog = false
+                    viewModel.sendIntent(CommonIntent.Retry("reload"))
+                },
+                oneButtonText = stringResource(id = R.string.str_ok),
+            )
+        }
 
-        when (alarmUiState.value) {
-            is AlarmConnectInfo.Loading -> LoadingWidget()
-            is AlarmConnectInfo.Error -> isShowDialog = true
+        when (alarmUiState) {
+            is AlarmUiState.Loading -> LoadingWidget()
+            is AlarmUiState.Error -> isShowDialog = true
             else -> {}
         }
-    }
-
-    if (isShowDialog) {
-        AlertDialogWidget(
-            onDismiss = { isShowDialog = false },
-            title = stringResource(id = R.string.str_dialog_network_not_connect),
-            onConfirm = {
-                isShowDialog = false
-            },
-            oneButtonText = stringResource(id = R.string.str_ok),
-        )
     }
 }

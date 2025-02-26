@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.example.common.intent.CommonIntent
 import com.example.ui_theme.TestTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,6 @@ class AlarmActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.requestAlarmData(this@AlarmActivity)
+        viewModel.sendIntent(CommonIntent.LoadMyInfo)
     }
 }

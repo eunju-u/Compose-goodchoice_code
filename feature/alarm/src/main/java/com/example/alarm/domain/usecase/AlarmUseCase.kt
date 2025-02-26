@@ -1,23 +1,25 @@
 package com.example.alarm.domain.usecase
 
-import com.example.alarm.domain.info.AlarmConnectInfo
+import com.example.alarm.domain.model.AlarmItem
 import com.example.alarm.domain.repository.AlarmRepository
+import com.example.common.exception.NetworkUnavailableException
 import com.example.common.utils.DeviceUtil
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class AlarmUseCase @Inject constructor(private val repository: AlarmRepository) {
     @Inject
     lateinit var deviceUtil: DeviceUtil
 
-    suspend fun getAlarmData(): AlarmConnectInfo {
-        return try {
-            //!! async는 동시에 여러 비동기 작업을 수행할 때 유용하지만, 네트워크 호출 내부에서 IO 처리하고 여긴 suspend 함수로 동작하니까 async 필요 없다.
-            delay(200)
-            if (!deviceUtil.isNetworkAvailable()) throw Exception("network is not connected")
-            AlarmConnectInfo.Available(repository.getAlarmData())
-        } catch (e: Exception) {
-            AlarmConnectInfo.Error(e.message)
+    suspend fun getAlarmData(): Flow<List<AlarmItem>> = flow {
+        if (!deviceUtil.isNetworkAvailable()) {
+            throw NetworkUnavailableException("Network is not connected") // 사용자 정의 예외
         }
+        emitAll(repository.getAlarmData())
+    }.catch { e ->
+        throw NetworkUnavailableException("Network is not connected")
     }
 }
