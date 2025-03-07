@@ -28,11 +28,12 @@ import com.example.ui_common.R
 import com.example.common.ServerConst
 import com.example.common.ui_data.AroundFilterItem
 import com.example.around.domain.model.AroundFilterData
+import com.example.around.ui.intent.AroundIntent
 import com.example.around.ui.widget.AroundTopWidget
-import com.example.domain.info.ConnectInfo
-import com.example.around.ui.model.AroundFilterSelectedData
+import com.example.around.ui.state.AroundUiState
 import com.example.ui_common.components.ImageButtonWidget
 import com.example.ui_common.components.LeftImageButtonWidget
+import com.example.ui_common.components.LoadingWidget
 import com.example.ui_common.components.RoundImageWidget
 import com.example.ui_common.components.bottomSheet.MyBottomSheetLayout
 import com.example.ui_common.components.bottomSheet.MyBottomSheetState
@@ -64,7 +65,6 @@ fun AroundContent(
     requestLocation: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val selectRoomType = viewModel.selectRoomType
     val scope = rememberCoroutineScope()
     val configuration = LocalConfiguration.current
     val fullHeight = configuration.screenHeightDp
@@ -75,10 +75,15 @@ fun AroundContent(
     var selectFilter by remember { mutableStateOf("") }
     var selectFilterData by remember { mutableStateOf(AroundFilterData()) }
 
-    val homeUiState = viewModel.homeUiState.collectAsStateWithLifecycle()
-    val aroundFilterSelect = viewModel.aroundFilterSelect
-    val filterList = viewModel.filterList.collectAsStateWithLifecycle()
-    val selectSearchItem = viewModel.selectSearchItem
+    val aroundUiState by viewModel.aroundUiState.collectAsStateWithLifecycle()
+
+    // 필요한 데이터 추출
+    val filterList = if (aroundUiState.uiState is AroundUiState.Success) {
+        (aroundUiState.uiState as AroundUiState.Success).list
+    } else {
+        emptyList() // 기본값
+    }
+
     val cameraPositionState = rememberCameraPositionState()
     var currentLatLng by remember { mutableStateOf(LatLng(0.0, 0.0)) } //현재 위치 위도 경도 값
     val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
@@ -136,16 +141,16 @@ fun AroundContent(
             modifier = Modifier.fillMaxSize()
         ) {
             AroundTopWidget(
-                selectedRoomType = selectRoomType.value,
+                selectedRoomType = aroundUiState.selectRoomType,
                 onRoomTypeClick = { roomType ->
-                    viewModel.selectRoomType.value = roomType
+                    viewModel.sendIntent(AroundIntent.SelectRoomType(roomType))
                     // 룸타입이 변경되면 필터값 초기화
                     selectFilter = ""
                     selectFilterData = AroundFilterData()
-                    viewModel.aroundFilterSelect = AroundFilterSelectedData()
-                    viewModel.requestAroundData()
+                    viewModel.sendIntent(AroundIntent.ResetFilter)
+                    viewModel.sendIntent(AroundIntent.LoadData)
                 },
-                selectedSearchText = selectSearchItem.value.name ?: "",
+                selectedSearchText = aroundUiState.selectSearchItem.name ?: "",
                 onSearchClick = onSearchClick
             )
         }
@@ -285,7 +290,8 @@ fun AroundContent(
                                 .height(dp35),
                             horizontalArrangement = Arrangement.spacedBy(dp10),
                         ) {
-                            itemsIndexed(items = filterList.value) { index, item ->
+                            itemsIndexed(items = filterList) { index, item ->
+                                val aroundFilterSelect = aroundUiState.aroundFilterSelect
                                 //선택된 필터 상세
                                 val selectDepthItem = when (item.type) {
                                     ServerConst.FILTER -> aroundFilterSelect.selectedFilter
@@ -304,7 +310,8 @@ fun AroundContent(
                                 //상위 필터 선택한 경우
                                 val isSelectUpper = selectFilter == item.type
                                 //하위 필터 선택한 경우
-                                val isSelectDepth = !selectDepthItem.value.subType.isNullOrEmpty()
+                                val isSelectDepth =
+                                    !selectDepthItem.value.subType.isNullOrEmpty()
                                 //상위 필터와 하위 필터가 같은 type 일 경우
                                 val isSameType = !sameTypeFilterList?.type.isNullOrEmpty()
 
@@ -388,9 +395,9 @@ fun AroundContent(
                                     pointContent = when (item.type) {
                                         ServerConst.FILTER -> {
                                             {
-                                                if (!viewModel.aroundFilterSelect.selectedRoom.value.subType.isNullOrEmpty() ||
-                                                    !viewModel.aroundFilterSelect.selectedReservation.value.subType.isNullOrEmpty() ||
-                                                    !viewModel.aroundFilterSelect.selectedPrice.value.subType.isNullOrEmpty()
+                                                if (!aroundUiState.aroundFilterSelect.selectedRoom.value.subType.isNullOrEmpty() ||
+                                                    !aroundUiState.aroundFilterSelect.selectedReservation.value.subType.isNullOrEmpty() ||
+                                                    !aroundUiState.aroundFilterSelect.selectedPrice.value.subType.isNullOrEmpty()
                                                 ) {
                                                     Box(
                                                         modifier = Modifier
@@ -412,7 +419,11 @@ fun AroundContent(
                                         }
                                     }
                                 )
-                                if (index == filterList.value.lastIndex) Spacer(Modifier.width(15.dp))
+                                if (index == filterList.lastIndex) Spacer(
+                                    Modifier.width(
+                                        15.dp
+                                    )
+                                )
                             }
                         }
                         Spacer(modifier = Modifier.height(dp10))
@@ -420,7 +431,7 @@ fun AroundContent(
 
                         val list = selectFilterData.filterList ?: listOf()
                         if (selectFilter != "" && selectFilter == selectFilterData.type && list.isNotEmpty()) {
-
+                            val aroundFilterSelect = aroundUiState.aroundFilterSelect
                             val select = when (selectFilterData.type) {
                                 ServerConst.FILTER -> aroundFilterSelect.selectedFilter
                                 ServerConst.RECOMMEND -> aroundFilterSelect.selectedRecommend
@@ -430,8 +441,8 @@ fun AroundContent(
                             }
 
                             //값이 지워진 경우 초기값 넣어줌
-                            if (aroundFilterSelect.selectedRecommend.value.subType.isNullOrEmpty()) {
-                                aroundFilterSelect.selectedRecommend.value =
+                            if (aroundUiState.aroundFilterSelect.selectedRecommend.value.subType.isNullOrEmpty()) {
+                                aroundUiState.aroundFilterSelect.selectedRecommend.value =
                                     AroundFilterItem(
                                         subType = ServerConst.RECOMMEND, text = "추천순"
                                     )
@@ -479,9 +490,9 @@ fun AroundContent(
                         }
                     }
 
-                    when (homeUiState.value) {
-                        is ConnectInfo.Available -> {}
-                        is ConnectInfo.Error -> {}
+                    when (aroundUiState.uiState) {
+                        is AroundUiState.Loading -> LoadingWidget()
+                        is AroundUiState.Error -> {}
                         else -> {}
                     }
                 }

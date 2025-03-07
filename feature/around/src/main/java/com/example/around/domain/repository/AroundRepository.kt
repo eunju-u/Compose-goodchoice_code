@@ -1,8 +1,9 @@
 package com.example.around.domain.repository
 
 import com.example.around.domain.model.AroundFilterData
+import kotlinx.coroutines.flow.Flow
 
 interface AroundRepository {
-    suspend fun getSleepData(): List<AroundFilterData>
-    suspend fun getRentalData(): List<AroundFilterData>
+    fun getSleepData(): Flow<List<AroundFilterData>>
+    fun getRentalData(): Flow<List<AroundFilterData>>
 }

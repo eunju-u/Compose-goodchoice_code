@@ -36,6 +36,7 @@ import com.example.goodchoice.nav.NavGraph
 import com.example.goodchoice.nav.NavItem
 import com.example.goodchoice.nav.navigation
 import com.example.around.ui.AroundViewModel
+import com.example.around.ui.intent.AroundIntent
 import com.example.common.intent.CommonIntent
 import com.example.domain.intent.LikeIntent
 import com.example.home.ui.HomeViewModel
@@ -95,7 +96,7 @@ fun MainContent(
                     }
 
                     NavItem.Around.route -> {
-                        aroundViewModel.requestAroundData(true)
+                        aroundViewModel.sendIntent(AroundIntent.LoadData)
                     }
 
                     NavItem.Like.route -> {
@@ -218,7 +219,7 @@ fun MainContent(
                 },
                 showFilter = {
                     // viewModel.aroundFilterSelect 의 데이터는 mutable 타입이라 serialize 불가
-                    val selectedData = aroundViewModel.aroundFilterSelect
+                    val selectedData = aroundViewModel.aroundUiState.value.aroundFilterSelect
                     val model =
                         AroundFilterSelectedModel(
                             selectedData.selectedFilter.value,

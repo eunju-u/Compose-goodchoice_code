@@ -2,27 +2,35 @@ package com.example.around.domain.usecase
 
 import com.example.around.domain.model.AroundFilterData
 import com.example.around.domain.repository.AroundRepository
+import com.example.common.exception.NetworkUnavailableException
+import com.example.common.utils.DeviceUtil
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class AroundUseCase @Inject constructor(
     private val repository: AroundRepository,
 ) {
-    suspend fun getSleepData(): List<AroundFilterData> {
-        return try {
-            //!! async는 동시에 여러 비동기 작업을 수행할 때 유용하지만, 네트워크 호출 내부에서 IO 처리하고 여긴 suspend 함수로 동작하니까 async 필요 없다.
-            repository.getSleepData()
-        } catch (e: Exception) {
-            //TODO 예외처리
-            listOf()
+    @Inject
+    lateinit var deviceUtil: DeviceUtil
+
+    fun getSleepData(): Flow<List<AroundFilterData>> = flow {
+        if (!deviceUtil.isNetworkAvailable()) {
+            throw NetworkUnavailableException("Network is not connected") // 사용자 정의 예외
         }
+        emitAll(repository.getSleepData())
+    }.catch { e ->
+        throw NetworkUnavailableException("Network is not connected")
     }
 
-    suspend fun getRentalData(): List<AroundFilterData> {
-        return try {
-            repository.getRentalData()
-        } catch (e: Exception) {
-            //TODO 예외처리
-            listOf()
+    fun getRentalData(): Flow<List<AroundFilterData>> = flow {
+        if (!deviceUtil.isNetworkAvailable()) {
+            throw NetworkUnavailableException("Network is not connected") // 사용자 정의 예외
         }
+        emitAll(repository.getRentalData())
+    }.catch { e ->
+        throw NetworkUnavailableException("Network is not connected")
     }
 }

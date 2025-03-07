@@ -11,6 +11,7 @@ import com.example.common.ServerConst
 import com.example.common.ui_data.AroundFilterItem
 import com.example.domain.model.KoreaSearchData
 import com.example.around.ui.AroundViewModel
+import com.example.around.ui.intent.AroundIntent
 import com.example.home.ui.HomeViewModel
 import com.example.like.ui.LikeViewModel
 import com.example.my_info.ui.MyInfoViewModel
@@ -67,19 +68,22 @@ class MainActivity : ComponentActivity() {
                         data?.let { list ->
                             list.forEach { item ->
                                 val mutableItem = mutableStateOf(item)
-
+                                val aroundFilterSelect =
+                                    aroundViewModel.aroundUiState.value.aroundFilterSelect
                                 when (item.mainType) {
                                     ServerConst.RESERVATION -> {
-                                        aroundViewModel.aroundFilterSelect.selectedReservation =
+                                        aroundFilterSelect.selectedReservation =
                                             mutableItem
                                     }
 
                                     ServerConst.PRICE -> {
-                                        aroundViewModel.aroundFilterSelect.selectedPrice = mutableItem
+                                        aroundFilterSelect.selectedPrice =
+                                            mutableItem
                                     }
 
                                     ServerConst.ROOM -> {
-                                        aroundViewModel.aroundFilterSelect.selectedRoom = mutableItem
+                                        aroundFilterSelect.selectedRoom =
+                                            mutableItem
                                     }
                                 }
                             }
@@ -99,7 +103,7 @@ class MainActivity : ComponentActivity() {
                         if (data != null) {
                             val searchItem = data as KoreaSearchData
                             searchItem.let { item ->
-                                aroundViewModel.selectSearchItem.value = item
+                                aroundViewModel.sendIntent(AroundIntent.SelectSearchItem(item))
                             }
                         }
                     }
