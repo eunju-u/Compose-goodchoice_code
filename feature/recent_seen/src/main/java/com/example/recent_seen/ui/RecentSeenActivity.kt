@@ -21,7 +21,6 @@ class RecentSeenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.recentDb()
         setContent {
             TestTheme {
                 RecentSeenContent(viewModel = viewModel)

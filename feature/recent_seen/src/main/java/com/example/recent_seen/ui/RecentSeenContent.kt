@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.recent_seen.ui.state.RecentUiState
 import com.example.ui_common.R
 import com.example.ui_common.components.CardWidget
 import com.example.ui_common.components.TopAppBarWidget
@@ -30,7 +30,14 @@ import com.example.ui_theme.*
 @Composable
 fun RecentSeenContent(viewModel: RecentSeenViewModel) {
     val context = LocalContext.current
-    val stayList = viewModel.recentDbList.collectAsStateWithLifecycle()
+    val recentUiState by viewModel.recentUiState.collectAsState()
+
+    val stayList = if (recentUiState is RecentUiState.Success) {
+        (recentUiState as RecentUiState.Success).list
+    } else {
+        emptyList()
+    }
+
     val scrollState = rememberLazyListState()
 
     val isScrolled by remember {
@@ -49,7 +56,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
                         .fillMaxHeight()
                         .clickable {
                             var str = R.string.str_recent_seen_all_remove_not_list
-                            if (stayList.value.isNotEmpty()) {
+                            if (stayList.isNotEmpty()) {
                                 str = R.string.str_recent_seen_all_remove
                                 //최근 본 상품 DB 내용 삭제
                                 viewModel.deleteRecentDb()
@@ -75,7 +82,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
         val modifier = Modifier
             .fillMaxSize()
             .background(Theme.colorScheme.white)
-        if (stayList.value.isNotEmpty()) {
+        if (stayList.isNotEmpty()) {
             LazyColumn(
                 modifier = modifier,
                 state = scrollState
@@ -89,7 +96,7 @@ fun RecentSeenContent(viewModel: RecentSeenViewModel) {
                         style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
                     )
                 }
-                itemsIndexed(items = stayList.value) { index, item ->
+                itemsIndexed(items = stayList) { index, item ->
                     RecentSeenItemWidget(item)
                 }
             }

@@ -12,6 +12,8 @@ import com.example.domain.usecase.RecentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 import javax.inject.Inject
@@ -61,7 +63,14 @@ class HomeViewModel @Inject constructor(
 
     /** DB 에서 가져온 최근 본 상품 리스트 **/
     fun recentDb() = viewModelScope.launch {
-        recentDbData = recentUseCase.getList()
+        recentUseCase.getList()
+            .onStart {
+            }
+            .catch { exception ->
+            }
+            .collect { data ->
+                recentDbData = data // 성공
+            }
     }
 
 }
